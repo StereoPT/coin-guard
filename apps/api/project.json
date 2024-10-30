@@ -1,7 +1,7 @@
 {
-  "name": "coin-guard",
+  "name": "api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/coin-guard/src",
+  "sourceRoot": "apps/api/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -10,15 +10,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "coin-guard:build",
+        "buildTarget": "api:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "coin-guard:build:development"
+          "buildTarget": "api:build:development"
         },
         "production": {
-          "buildTarget": "coin-guard:build:production"
+          "buildTarget": "api:build:production"
         }
       }
     }
