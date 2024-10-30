@@ -1,0 +1,26 @@
+{
+  "name": "coin-guard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/coin-guard/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "coin-guard:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "coin-guard:build:development"
+        },
+        "production": {
+          "buildTarget": "coin-guard:build:production"
+        }
+      }
+    }
+  }
+}
