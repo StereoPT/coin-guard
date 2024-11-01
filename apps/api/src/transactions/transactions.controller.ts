@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
+import { CreateTransactionDTO } from './dto/create-transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -16,8 +17,8 @@ export class TransactionsController {
   }
 
   @Post()
-  createOne() {
-    return this.transactionsService.createOne('Transaction 1');
+  createOne(@Body() createTransactionDTO: CreateTransactionDTO) {
+    return this.transactionsService.createOne(createTransactionDTO);
   }
 
   @Put(':id')
