@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Patch,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
@@ -14,6 +14,7 @@ import {
   GetTransactionParamDTO,
   UpdateTransactionParamDTO,
 } from './dto/transaction-params.dto';
+import { UpdateTransactionDTO } from './dto/update-transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -27,10 +28,7 @@ export class TransactionsController {
   @Get(':id')
   findOne(@Param() getTransactionParamDTO: GetTransactionParamDTO) {
     const { id } = getTransactionParamDTO;
-
-    return {
-      message: `Find Transaction with id: ${id}`,
-    };
+    return this.transactionsService.findOne(id);
   }
 
   @Post()
@@ -38,26 +36,23 @@ export class TransactionsController {
     return this.transactionsService.createOne(createTransactionDTO);
   }
 
-  @Put(':id')
-  updateOne(@Param() updateTransactionParamDTO: UpdateTransactionParamDTO) {
+  @Patch(':id')
+  updateOne(
+    @Param() updateTransactionParamDTO: UpdateTransactionParamDTO,
+    @Body() updateTransactionDTO: UpdateTransactionDTO,
+  ) {
     const { id } = updateTransactionParamDTO;
-
-    return {
-      message: `Update Transaction with id: ${id}`,
-    };
+    return this.transactionsService.updateOne(id, updateTransactionDTO);
   }
 
   @Delete()
   deleteAll() {
-    return { message: 'Delete All Transactions' };
+    return this.transactionsService.deleteAll();
   }
 
   @Delete(':id')
   deleteOne(@Param() deleteTransactionParamDTO: DeleteTransactionParamDTO) {
     const { id } = deleteTransactionParamDTO;
-
-    return {
-      message: `Delete Transaction with id: ${id}`,
-    };
+    return this.transactionsService.deleteOne(id);
   }
 }
