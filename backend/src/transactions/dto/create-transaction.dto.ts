@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  Min,
 } from 'class-validator';
 
 export class CreateTransactionDTO {
@@ -17,10 +18,12 @@ export class CreateTransactionDTO {
 
   @IsNumber()
   @IsOptional()
+  @Min(0)
   readonly debit?: number;
 
   @IsNumber()
   @IsOptional()
+  @Min(0)
   readonly credit?: number;
 
   @IsNumber()

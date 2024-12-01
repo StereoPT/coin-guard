@@ -13,6 +13,7 @@ import { LoggerMiddleware } from '../common/middleware/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig } from 'src/config/app.config';
+import { Transaction } from 'src/transactions/transaction.entity';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { appConfig } from 'src/config/app.config';
       useFactory: (configService: ConfigService) => {
         return {
           type: 'postgres',
-          entities: [],
+          entities: [Transaction],
           synchronize: configService.get('database.synchronize'),
           port: configService.get('database.port'),
           username: configService.get('database.username'),
