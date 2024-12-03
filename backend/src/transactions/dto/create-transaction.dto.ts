@@ -10,23 +10,23 @@ import {
 export class CreateTransactionDTO {
   @IsDateString()
   @IsNotEmpty()
-  readonly date: Date;
+  date: Date;
 
   @IsString()
   @IsNotEmpty()
-  readonly description: string;
+  description: string;
 
   @IsNumber()
   @IsOptional()
   @Min(0)
-  readonly debit?: number;
+  debit?: number | null;
 
   @IsNumber()
   @IsOptional()
   @Min(0)
-  readonly credit?: number;
+  credit?: number | null;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly balance: number;
+  balance: number;
 }

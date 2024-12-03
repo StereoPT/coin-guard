@@ -1,55 +1,69 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
-import { Repository } from 'typeorm';
-import { Transaction } from './transaction.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
+import { NullableType } from 'src/types/nullable.type';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Transaction } from './entities/transaction.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
-    private transactionsRepository: Repository<Transaction>,
+    private readonly transactionsRepository: Repository<Transaction>,
   ) {}
 
-  public async findAll() {
-    const transactions = await this.transactionsRepository.find();
-    return transactions;
+  async findAll(): Promise<Transaction[]> {
+    const foundTransactions = await this.transactionsRepository.find();
+    return foundTransactions;
   }
 
-  public async findOne(id: number) {
-    const transaction = await this.transactionsRepository.findOneBy({ id });
+  async findById(id: Transaction['id']): Promise<NullableType<Transaction>> {
+    const foundTransaction = await this.transactionsRepository.findOneBy({
+      id,
+    });
 
-    if (!transaction) throw new NotFoundException();
+    if (!foundTransaction) return null;
 
-    return transaction;
+    return foundTransaction;
   }
 
-  public async createOne(transaction: CreateTransactionDTO) {
-    let newTransaction = this.transactionsRepository.create(transaction);
-    newTransaction = await this.transactionsRepository.save(newTransaction);
+  async create(transaction: CreateTransactionDTO): Promise<Transaction> {
+    const newTransaction = await this.transactionsRepository.save(
+      this.transactionsRepository.create(transaction),
+    );
 
     return newTransaction;
   }
 
-  public async updateOne(id: number, updateTransaction: UpdateTransactionDTO) {
-    await this.findOne(id);
-    const updatedTransaction = await this.transactionsRepository.save({
+  async update(
+    id: Transaction['id'],
+    updateTransaction: UpdateTransactionDTO,
+  ): Promise<NullableType<Transaction>> {
+    const foundTransaction = await this.transactionsRepository.findOneBy({
       id,
-      ...updateTransaction,
     });
+
+    if (!foundTransaction) {
+      throw new Error('Transaction not found!');
+    }
+
+    const updatedTransaction = await this.transactionsRepository.save(
+      this.transactionsRepository.create({
+        id,
+        ...updateTransaction,
+      }),
+    );
 
     return updatedTransaction;
   }
 
-  public async deleteAll() {
-    const deletedRows = await this.transactionsRepository.delete({});
-    return deletedRows.affected;
+  async deleteAll(): Promise<void> {
+    await this.transactionsRepository.delete({});
   }
 
-  public async deleteOne(id: number) {
-    const deletedRow = await this.transactionsRepository.delete({ id });
-    return deletedRow.affected;
+  async delete(id: Transaction['id']): Promise<void> {
+    await this.transactionsRepository.delete(id);
   }
 }

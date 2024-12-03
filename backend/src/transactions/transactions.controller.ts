@@ -6,53 +6,61 @@ import {
   Param,
   Post,
   Patch,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
-import {
-  DeleteTransactionParamDTO,
-  GetTransactionParamDTO,
-  UpdateTransactionParamDTO,
-} from './dto/transaction-params.dto';
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
+import { NullableType } from 'src/types/nullable.type';
+import { Transaction } from './entities/transaction.entity';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(private transactionsService: TransactionsService) {}
+  constructor(private readonly transactionsService: TransactionsService) {}
 
   @Get()
-  findAll() {
-    return this.transactionsService.findAll();
+  @HttpCode(HttpStatus.OK)
+  findAll(): Promise<Transaction[]> {
+    const transactions = this.transactionsService.findAll();
+    return transactions;
   }
 
   @Get(':id')
-  findOne(@Param() getTransactionParamDTO: GetTransactionParamDTO) {
-    const { id } = getTransactionParamDTO;
-    return this.transactionsService.findOne(id);
+  @HttpCode(HttpStatus.OK)
+  findOne(
+    @Param('id') id: Transaction['id'],
+  ): Promise<NullableType<Transaction>> {
+    const transaction = this.transactionsService.findById(id);
+    return transaction;
   }
 
   @Post()
-  createOne(@Body() createTransactionDTO: CreateTransactionDTO) {
-    return this.transactionsService.createOne(createTransactionDTO);
+  @HttpCode(HttpStatus.CREATED)
+  create(
+    @Body() createTransactionDTO: CreateTransactionDTO,
+  ): Promise<Transaction> {
+    return this.transactionsService.create(createTransactionDTO);
   }
 
   @Patch(':id')
-  updateOne(
-    @Param() updateTransactionParamDTO: UpdateTransactionParamDTO,
+  @HttpCode(HttpStatus.OK)
+  update(
+    @Param('id') id: Transaction['id'],
     @Body() updateTransactionDTO: UpdateTransactionDTO,
-  ) {
-    const { id } = updateTransactionParamDTO;
-    return this.transactionsService.updateOne(id, updateTransactionDTO);
+  ): Promise<NullableType<Transaction>> {
+    return this.transactionsService.update(id, updateTransactionDTO);
   }
 
   @Delete()
+  @HttpCode(HttpStatus.NO_CONTENT)
   deleteAll() {
     return this.transactionsService.deleteAll();
   }
 
   @Delete(':id')
-  deleteOne(@Param() deleteTransactionParamDTO: DeleteTransactionParamDTO) {
-    const { id } = deleteTransactionParamDTO;
-    return this.transactionsService.deleteOne(id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteOne(@Param('id') id: Transaction['id']) {
+    return this.transactionsService.delete(id);
   }
 }

@@ -18,7 +18,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       synchronize: this.configService.get('database.synchronize', {
         infer: true,
       }),
-      entities: [__dirname + '/../**/*.entity.ts'],
-    };
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+    } as TypeOrmModuleOptions;
   }
 }

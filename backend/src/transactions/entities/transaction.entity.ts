@@ -1,7 +1,8 @@
+import { EntityHelper } from 'src/utils/entity-helper';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Transaction {
+export class Transaction extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 
