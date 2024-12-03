@@ -2,7 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module';
 import validationOptions from './utils/validation-options';
 
 async function bootstrap() {
