@@ -1,14 +1,8 @@
-import {
-  IsDateString,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsCurrency, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDateFormat } from 'src/common/validators/custom-date.validator';
 
 export class CreateTransactionDTO {
-  @IsDateString()
+  @IsDateFormat()
   @IsNotEmpty()
   date: Date;
 
@@ -16,17 +10,24 @@ export class CreateTransactionDTO {
   @IsNotEmpty()
   description: string;
 
-  @IsNumber()
+  @IsCurrency({
+    require_symbol: false,
+    allow_decimal: true,
+  })
   @IsOptional()
-  @Min(0)
   debit?: number | null;
 
-  @IsNumber()
+  @IsCurrency({
+    require_symbol: false,
+    allow_decimal: true,
+  })
   @IsOptional()
-  @Min(0)
   credit?: number | null;
 
-  @IsNumber()
+  @IsCurrency({
+    require_symbol: false,
+    allow_decimal: true,
+  })
   @IsNotEmpty()
   balance: number;
 }
