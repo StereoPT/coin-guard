@@ -37,6 +37,16 @@ export class TransactionsService {
     return newTransaction;
   }
 
+  async bulkCreate(
+    transactions: CreateTransactionDTO[],
+  ): Promise<Transaction[]> {
+    const newTransactions = await this.transactionsRepository.save(
+      this.transactionsRepository.create(transactions),
+    );
+
+    return newTransactions;
+  }
+
   async update(
     id: Transaction['id'],
     updateTransaction: UpdateTransactionDTO,

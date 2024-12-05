@@ -8,6 +8,7 @@ import {
   Patch,
   HttpCode,
   HttpStatus,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
@@ -41,6 +42,15 @@ export class TransactionsController {
     @Body() createTransactionDTO: CreateTransactionDTO,
   ): Promise<Transaction> {
     return this.transactionsService.create(createTransactionDTO);
+  }
+
+  @Post('bulk')
+  @HttpCode(HttpStatus.CREATED)
+  bulkCreate(
+    @Body(new ParseArrayPipe({ items: CreateTransactionDTO }))
+    bulkCreateTransactionsDTO: CreateTransactionDTO[],
+  ): Promise<Transaction[]> {
+    return this.transactionsService.bulkCreate(bulkCreateTransactionsDTO);
   }
 
   @Patch(':id')
