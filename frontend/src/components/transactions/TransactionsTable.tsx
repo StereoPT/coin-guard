@@ -1,3 +1,6 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 import {
   Table,
   TableBody,
@@ -7,8 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table';
+import { getTransactions } from '@/services/transactionService';
 
 const TransactionsTable = () => {
+  const { data: transactions } = useQuery({
+    queryKey: ['transactions'],
+    queryFn: getTransactions,
+  });
+
   return (
     <Table>
       <TableCaption>A list with your transactions.</TableCaption>
@@ -22,27 +31,19 @@ const TransactionsTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell>04/01/2024</TableCell>
-          <TableCell>NOS Comunicacoes</TableCell>
-          <TableCell className="text-right">50.21€</TableCell>
-          <TableCell className="text-right" />
-          <TableCell className="text-right">2616.84€</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>04/01/2024</TableCell>
-          <TableCell>COMPRA GOLDPET</TableCell>
-          <TableCell className="text-right">7.57€</TableCell>
-          <TableCell className="text-right" />
-          <TableCell className="text-right">2609.27€</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>05/01/2024</TableCell>
-          <TableCell>TRF CXDAPP</TableCell>
-          <TableCell className="text-right">664.20€</TableCell>
-          <TableCell className="text-right" />
-          <TableCell className="text-right">1945.07€</TableCell>
-        </TableRow>
+        {transactions?.map((transaction) => {
+          return (
+            <TableRow key={transaction.id}>
+              <TableCell>{transaction.date}</TableCell>
+              <TableCell>{transaction.description}</TableCell>
+              <TableCell className="text-right">{transaction.debit}</TableCell>
+              <TableCell className="text-right">{transaction.credit}</TableCell>
+              <TableCell className="text-right">
+                {transaction.balance}
+              </TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );
