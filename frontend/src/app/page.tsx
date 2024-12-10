@@ -1,4 +1,5 @@
 import TransactionsTable from '@/components/transactions/TransactionsTable';
+import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {
   dehydrate,
@@ -10,7 +11,7 @@ const HomePage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['transactions'],
+    queryKey: [TRANSACTIONS_KEY],
     queryFn: getTransactions,
   });
 

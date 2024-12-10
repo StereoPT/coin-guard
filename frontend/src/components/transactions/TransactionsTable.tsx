@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useTransactions } from '@/hooks/useTransactions';
 import {
   Table,
   TableBody,
@@ -10,13 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table';
-import { getTransactions } from '@/services/transactionService';
 
 const TransactionsTable = () => {
-  const { data: transactions } = useQuery({
-    queryKey: ['transactions'],
-    queryFn: getTransactions,
-  });
+  const { data: transactions } = useTransactions();
 
   return (
     <Table>
@@ -34,7 +30,7 @@ const TransactionsTable = () => {
         {transactions?.map((transaction) => {
           return (
             <TableRow key={transaction.id}>
-              <TableCell>{transaction.date}</TableCell>
+              <TableCell>{transaction.date.toString()}</TableCell>
               <TableCell>{transaction.description}</TableCell>
               <TableCell className="text-right">{transaction.debit}</TableCell>
               <TableCell className="text-right">{transaction.credit}</TableCell>

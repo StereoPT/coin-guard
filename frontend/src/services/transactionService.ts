@@ -1,14 +1,7 @@
 import { fetcher, FetcherOptions } from '@/lib/fetcher';
-
-type Transaction = {
-  id: number;
-  date: string;
-  description: string;
-  debit: string;
-  credit: string;
-  balance: string;
-};
+import { TRANSACTIONS_URL } from '@/constants/api-routes';
+import { Transaction } from '@/types/transaction';
 
 export const getTransactions = (options?: FetcherOptions) => {
-  return fetcher<Transaction[]>('transactions', options);
+  return fetcher<Transaction[]>(TRANSACTIONS_URL, options);
 };
