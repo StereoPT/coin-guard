@@ -18,7 +18,7 @@ const HomePage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="grid h-screen justify-center items-center">
-        <main className="min-w-[1140px]">
+        <main className="container min-w-[940px] mx-auto py-10">
           <TransactionsTable />
         </main>
       </div>
