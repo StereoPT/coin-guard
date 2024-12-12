@@ -19,19 +19,19 @@ export class Transaction extends EntityHelper {
   description: string;
 
   @Column({
-    type: 'money',
+    type: 'decimal',
     nullable: true,
   })
   debit?: number;
 
   @Column({
-    type: 'money',
+    type: 'decimal',
     nullable: true,
   })
   credit?: number;
 
   @Column({
-    type: 'money',
+    type: 'decimal',
     nullable: false,
   })
   balance: number;
