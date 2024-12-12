@@ -12,7 +12,7 @@ export const formatCurrentyColumn = <TData extends RowData>(
   }).format(amount);
 
   return (
-    <div className="text-right font-medium">
+    <div className="text-right font-medium float-right">
       {amount ? formattedAmount : null}
     </div>
   );
