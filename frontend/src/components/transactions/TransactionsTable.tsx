@@ -76,7 +76,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
 const TransactionsTable = () => {
   const { data: transactions } = useTransactions();
 
-  return <DataTable data={transactions ?? []} columns={transactionColumns} />;
+  return (
+    <DataTable
+      data={transactions ?? []}
+      columns={transactionColumns}
+      filterBy="description"
+    />
+  );
 };
 
 export default TransactionsTable;

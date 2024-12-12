@@ -17,18 +17,20 @@ import {
   TableHeader,
   TableRow,
 } from './table';
-import { Button } from './button';
 import { useState } from 'react';
-import { Input } from './input';
+import { DataTableFilter } from './data-table-filter';
+import { DataTablePaginator } from './data-table-paginator';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterBy?: Extract<keyof TData, string>;
 }
 
 export const DataTable = <TData, TValue>({
   columns,
   data,
+  filterBy,
 }: DataTableProps<TData, TValue>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -50,18 +52,7 @@ export const DataTable = <TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter transactions..."
-          className="max-w-sm"
-          value={
-            (table.getColumn('description')?.getFilterValue() as string) ?? ''
-          }
-          onChange={(event) =>
-            table.getColumn('description')?.setFilterValue(event.target.value)
-          }
-        />
-      </div>
+      {filterBy && <DataTableFilter table={table} filterBy={filterBy} />}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -110,22 +101,7 @@ export const DataTable = <TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}>
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}>
-          Next
-        </Button>
-      </div>
+      <DataTablePaginator table={table} showPreviousNext />
     </div>
   );
 };
