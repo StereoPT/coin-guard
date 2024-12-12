@@ -5,11 +5,22 @@ import { DataTable } from '../ui/data-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { Transaction } from '@/types/transaction';
 import { formatCurrentyColumn } from '@/lib/column-formatter';
+import { Button } from '../ui/button';
+import { ArrowUpDown } from 'lucide-react';
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'date',
-    header: 'Date',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: 'description',
@@ -17,17 +28,47 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey: 'debit',
-    header: () => <div className="text-right">Debit</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          className="float-right"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Debit
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'debit'),
   },
   {
     accessorKey: 'credit',
-    header: () => <div className="text-right">Credit</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          className="float-right"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Credit
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'credit'),
   },
   {
     accessorKey: 'balance',
-    header: () => <div className="text-right">Balance</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          className="float-right"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Balance
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'balance'),
   },
 ];
