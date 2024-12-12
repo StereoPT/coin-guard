@@ -7,14 +7,9 @@ type GlobalProvidersProps = {
 
 const GlobalProviders = ({ children }: GlobalProvidersProps) => {
   return (
-    <QueryProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        disableTransitionOnChange>
-        {children}
-      </ThemeProvider>
-    </QueryProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <QueryProvider>{children}</QueryProvider>
+    </ThemeProvider>
   );
 };
 

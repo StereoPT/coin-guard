@@ -15,7 +15,9 @@ export class TransactionsService {
   ) {}
 
   async findAll(): Promise<Transaction[]> {
-    const foundTransactions = await this.transactionsRepository.find();
+    const foundTransactions = await this.transactionsRepository.find({
+      order: { date: 'DESC' },
+    });
     return foundTransactions;
   }
 
