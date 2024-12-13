@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsCurrency, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { IsDateFormat } from 'src/common/validators/custom-date.validator';
 
@@ -8,6 +9,7 @@ export class CreateTransactionDTO {
 
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => value.toUpperCase())
   description: string;
 
   @IsCurrency({
