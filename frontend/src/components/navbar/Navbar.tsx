@@ -60,7 +60,7 @@ export const Navbar = () => {
                 const activeNavigation = pathname === item.url;
 
                 return (
-                  <SidebarMenuItem id={item.title}>
+                  <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={activeNavigation}>
                       <Link href={item.url}>
                         <item.icon /> <span>{item.title}</span>
