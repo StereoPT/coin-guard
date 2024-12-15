@@ -27,34 +27,19 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     header: 'Description',
   },
   {
-    accessorKey: 'debit',
+    accessorKey: 'amount',
     header: ({ column }) => {
       return (
         <Button
           className="float-right"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Debit
+          Amount
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'debit'),
-  },
-  {
-    accessorKey: 'credit',
-    header: ({ column }) => {
-      return (
-        <Button
-          className="float-right"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Credit
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'credit'),
+    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'amount'),
   },
   {
     accessorKey: 'balance',
