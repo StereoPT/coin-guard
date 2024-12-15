@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-const DashboardPage = async () => {
+const TransactionsPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -17,7 +17,7 @@ const DashboardPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div>Dashboard</div>
+      <div>Transactions</div>
       <div className="grid h-screen justify-center items-center">
         <div className="container min-w-[940px] mx-auto py-10">
           <TransactionsTable />
@@ -27,4 +27,4 @@ const DashboardPage = async () => {
   );
 };
 
-export default DashboardPage;
+export default TransactionsPage;

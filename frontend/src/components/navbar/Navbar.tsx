@@ -1,3 +1,5 @@
+'use client';
+
 import { LayoutDashboard, Table, Triangle } from 'lucide-react';
 import {
   Sidebar,
@@ -11,28 +13,32 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '../ui/sidebar';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const NAVIGATION_ITEMS = [
   {
     title: 'Dashboard',
-    url: '#',
+    url: '/',
     icon: LayoutDashboard,
   },
   {
     title: 'Transactions',
-    url: '#',
+    url: '/transactions',
     icon: Table,
   },
 ];
 
 export const Navbar = () => {
+  const pathname = usePathname();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Triangle className="size-4" />
                 </div>
@@ -40,7 +46,7 @@ export const Navbar = () => {
                   <span className="font-semibold">CoinGuard</span>
                   <span className="">v2.0.0</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -51,13 +57,14 @@ export const Navbar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {NAVIGATION_ITEMS.map((item) => {
+                const activeNavigation = pathname === item.url;
+
                 return (
                   <SidebarMenuItem id={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
+                    <SidebarMenuButton asChild isActive={activeNavigation}>
+                      <Link href={item.url}>
+                        <item.icon /> <span>{item.title}</span>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
