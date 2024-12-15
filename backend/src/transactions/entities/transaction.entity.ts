@@ -1,6 +1,11 @@
 import { EntityHelper } from 'src/utils/entity-helper';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum TransactionType {
+  CREDIT = 'credit',
+  DEBIT = 'debit',
+}
+
 @Entity()
 export class Transaction extends EntityHelper {
   @PrimaryGeneratedColumn()
@@ -8,31 +13,28 @@ export class Transaction extends EntityHelper {
 
   @Column({
     type: 'date',
-    nullable: false,
   })
   date: Date;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   description: string;
 
   @Column({
-    type: 'decimal',
-    nullable: true,
+    type: 'enum',
+    enum: TransactionType,
+    default: TransactionType.DEBIT,
   })
-  debit?: number;
+  type: TransactionType;
 
   @Column({
     type: 'decimal',
-    nullable: true,
   })
-  credit?: number;
+  amount: number;
 
   @Column({
     type: 'decimal',
-    nullable: false,
   })
   balance: number;
 }
