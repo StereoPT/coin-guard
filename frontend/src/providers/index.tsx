@@ -1,3 +1,4 @@
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { QueryProvider } from './query-provider';
 import { ThemeProvider } from './theme-provider';
 
@@ -8,7 +9,9 @@ type GlobalProvidersProps = {
 const GlobalProviders = ({ children }: GlobalProvidersProps) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <QueryProvider>{children}</QueryProvider>
+      <SidebarProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </SidebarProvider>
     </ThemeProvider>
   );
 };
