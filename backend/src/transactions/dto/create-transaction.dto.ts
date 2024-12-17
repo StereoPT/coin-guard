@@ -1,6 +1,7 @@
 import { Transform } from 'class-transformer';
-import { IsCurrency, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsCurrency, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { IsDateFormat } from 'src/common/validators/custom-date.validator';
+import { TransactionType } from '../entities/transaction.entity';
 
 export class CreateTransactionDTO {
   @IsDateFormat()
@@ -12,19 +13,17 @@ export class CreateTransactionDTO {
   @Transform(({ value }) => value.toUpperCase())
   description: string;
 
-  @IsCurrency({
-    require_symbol: false,
-    allow_decimal: true,
-  })
-  @IsOptional()
-  debit?: number | null;
+  @IsNotEmpty()
+  @Transform(({ value }) => value.toLowerCase())
+  @IsEnum(TransactionType)
+  type: TransactionType;
 
   @IsCurrency({
     require_symbol: false,
     allow_decimal: true,
   })
-  @IsOptional()
-  credit?: number | null;
+  @IsNotEmpty()
+  amount: number;
 
   @IsCurrency({
     require_symbol: false,

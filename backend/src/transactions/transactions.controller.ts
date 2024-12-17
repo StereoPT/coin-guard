@@ -9,12 +9,15 @@ import {
   HttpCode,
   HttpStatus,
   ParseArrayPipe,
+  Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
 import { NullableType } from 'src/types/nullable.type';
 import { Transaction } from './entities/transaction.entity';
+import { GetTransactionsQueryDTO } from './dto/get-transactions-query.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -22,9 +25,14 @@ export class TransactionsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll(): Promise<Transaction[]> {
-    const transactions = this.transactionsService.findAll();
-    return transactions;
+  findAll(@Query() query: GetTransactionsQueryDTO): Promise<Transaction[]> {
+    const { month } = query;
+
+    if (month) {
+      return this.transactionsService.findAllByMonth({ month });
+    }
+
+    return this.transactionsService.findAll();
   }
 
   @Get(':id')
