@@ -5,7 +5,7 @@ import { UpdateTransactionDTO } from './dto/update-transaction.dto';
 import { NullableType } from 'src/types/nullable.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from './entities/transaction.entity';
-import { Repository } from 'typeorm';
+import { Raw, Repository } from 'typeorm';
 
 @Injectable()
 export class TransactionsService {
@@ -16,6 +16,16 @@ export class TransactionsService {
 
   async findAll(): Promise<Transaction[]> {
     const foundTransactions = await this.transactionsRepository.find({
+      order: { date: 'DESC' },
+    });
+    return foundTransactions;
+  }
+
+  async findAllByMonth({ month }: { month: number }): Promise<Transaction[]> {
+    const foundTransactions = await this.transactionsRepository.find({
+      where: {
+        date: Raw((value) => `EXTRACT(MONTH FROM ${value}) = ${month}`),
+      },
       order: { date: 'DESC' },
     });
     return foundTransactions;

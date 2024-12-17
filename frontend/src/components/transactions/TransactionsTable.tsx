@@ -4,72 +4,42 @@ import { useTransactions } from '@/hooks/useTransactions';
 import { DataTable } from '../ui/data-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { Transaction } from '@/types/transaction';
-import { formatCurrentyColumn } from '@/lib/column-formatter';
-import { Button } from '../ui/button';
-import { ArrowUpDown } from 'lucide-react';
+import { formatCurrency } from '@/lib/formatter';
+import { AmountBadge } from './AmountBadge';
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'date',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: 'Date',
   },
   {
     accessorKey: 'description',
     header: 'Description',
   },
   {
-    accessorKey: 'debit',
-    header: ({ column }) => {
+    accessorKey: 'amount',
+    header: () => <div className="text-right">Amount</div>,
+    cell: ({ row }) => {
+      const { type } = row.original;
+      const amount = parseFloat(row.getValue('amount'));
+
       return (
-        <Button
-          className="float-right"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Debit
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <AmountBadge amount={amount} className="float-right" type={type} />
       );
     },
-    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'debit'),
-  },
-  {
-    accessorKey: 'credit',
-    header: ({ column }) => {
-      return (
-        <Button
-          className="float-right"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Credit
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'credit'),
   },
   {
     accessorKey: 'balance',
-    header: ({ column }) => {
+    header: () => <div className="text-right">Balance</div>,
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue('balance'));
+
       return (
-        <Button
-          className="float-right"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Balance
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="text-right font-medium float-right">
+          {formatCurrency(amount)}
+        </div>
       );
     },
-    cell: ({ row }) => formatCurrentyColumn<Transaction>(row, 'balance'),
   },
 ];
 

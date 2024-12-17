@@ -12,7 +12,7 @@ const DashboardPage = async () => {
 
   await queryClient.prefetchQuery({
     queryKey: [TRANSACTIONS_KEY],
-    queryFn: getTransactions,
+    queryFn: () => getTransactions({ month: 11 }),
   });
 
   return (
