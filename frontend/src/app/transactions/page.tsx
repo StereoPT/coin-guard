@@ -12,7 +12,7 @@ const TransactionsPage = async () => {
 
   await queryClient.prefetchQuery({
     queryKey: [TRANSACTIONS_KEY],
-    queryFn: getTransactions,
+    queryFn: () => getTransactions(),
   });
 
   return (
