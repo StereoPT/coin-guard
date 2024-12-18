@@ -7,6 +7,8 @@ import { Transaction } from '@/types/transaction';
 import { formatCurrency } from '@/lib/formatter';
 import { AmountBadge } from './AmountBadge';
 
+import { subMonths, getMonth } from 'date-fns';
+
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'date',
