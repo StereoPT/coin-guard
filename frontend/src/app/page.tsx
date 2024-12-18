@@ -1,3 +1,4 @@
+import { DashboardCards } from '@/components/dashboard/DashboardCards';
 import TransactionsTable from '@/components/transactions/TransactionsTable';
 import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
@@ -19,13 +20,13 @@ const DashboardPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="px-8 py-4">
+      <div className="flex flex-1 flex-col gap-4 p-4">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-      </div>
-
-      <div className="grid justify-center items-center">
-        <div className="container min-w-[940px] mx-auto py-10">
-          <TransactionsTable />
+        <DashboardCards />
+        <div className="grid justify-center items-center">
+          <div className="container min-w-[940px] mx-auto py-10">
+            <TransactionsTable />
+          </div>
         </div>
       </div>
     </HydrationBoundary>
