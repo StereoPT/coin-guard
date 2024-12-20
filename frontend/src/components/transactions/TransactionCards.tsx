@@ -1,7 +1,7 @@
 'use client';
 
 import { useTransactions } from '@/hooks/useTransactions';
-import { DashboardCard } from './DashboardCard';
+import { TransactionCard } from './TransactionCard';
 import { useMemo } from 'react';
 import { Transaction, TransactionType } from '@/types/transaction';
 
@@ -12,7 +12,7 @@ const sumByType = (array: Transaction[], type: TransactionType) => {
   }, 0);
 };
 
-export const DashboardCards = () => {
+export const TransactionCards = () => {
   const { data: transactions } = useTransactions();
 
   const statistics = useMemo(() => {
@@ -25,8 +25,12 @@ export const DashboardCards = () => {
 
   return (
     <div className="grid gap-4 md:grid-cols-4">
-      <DashboardCard title="Income" type="credit" amount={statistics.income} />
-      <DashboardCard
+      <TransactionCard
+        title="Income"
+        type="credit"
+        amount={statistics.income}
+      />
+      <TransactionCard
         title="Expenses"
         type="debit"
         amount={statistics.expenses}

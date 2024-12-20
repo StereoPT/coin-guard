@@ -1,5 +1,5 @@
-import { DashboardCards } from '@/components/dashboard/DashboardCards';
-import { DashboardTable } from '@/components/transactions-table/DashboardTable';
+import { TransactionCards } from '@/components/transactions/TransactionCards';
+import { DashboardTable } from '@/components/transactions/DashboardTable';
 import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {
@@ -24,10 +24,8 @@ const DashboardPage = async () => {
         <h2 className="text-3xl font-bold tracking-tight">
           👋 Welcome, Guido Pereira
         </h2>
-        <DashboardCards />
-        <div className="container mx-auto">
-          <DashboardTable />
-        </div>
+        <TransactionCards />
+        <DashboardTable />
       </div>
     </HydrationBoundary>
   );

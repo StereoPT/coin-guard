@@ -3,13 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { TransactionType } from '@/types/transaction';
 import { formatCurrency } from '@/lib/formatter';
 
-type DashboardCardProps = {
+type TransactionCardProps = {
   title: string;
   type: TransactionType;
   amount: number;
 };
 
-export const DashboardCard = ({ title, type, amount }: DashboardCardProps) => {
+export const TransactionCard = ({
+  title,
+  type,
+  amount,
+}: TransactionCardProps) => {
   return (
     <Card>
       <CardHeader className="flex-row justify-between items-center pb-2 space-y-0">
