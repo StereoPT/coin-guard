@@ -14,7 +14,7 @@ const TransactionsPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [TRANSACTIONS_KEY],
+    queryKey: [TRANSACTIONS_KEY, lastMonth],
     queryFn: () => getTransactions({ month: lastMonth }),
   });
 
@@ -22,7 +22,6 @@ const TransactionsPage = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col gap-4 p-4">
         <h2 className="text-3xl font-bold tracking-tight">Transactions</h2>
-        <TransactionCards />
         <TransactionsTable />
       </div>
     </HydrationBoundary>

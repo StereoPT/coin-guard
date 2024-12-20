@@ -3,9 +3,11 @@
 import { useTransactions } from '@/hooks/useTransactions';
 import { DataTable } from '../ui/data-table';
 import { transactionColumns } from '@/lib/transaction-columns';
+import { getMonth, subMonths } from 'date-fns';
 
 export const DashboardTable = () => {
-  const { data: transactions } = useTransactions();
+  const lastMonth = getMonth(subMonths(new Date(), 1)) + 1;
+  const { data: transactions } = useTransactions({ month: lastMonth });
 
   return (
     <DataTable

@@ -4,6 +4,7 @@ import { useTransactions } from '@/hooks/useTransactions';
 import { TransactionCard } from './TransactionCard';
 import { useMemo } from 'react';
 import { Transaction, TransactionType } from '@/types/transaction';
+import { getMonth, subMonths } from 'date-fns';
 
 const sumByType = (array: Transaction[], type: TransactionType) => {
   return array.reduce((acc, cur) => {
@@ -13,7 +14,8 @@ const sumByType = (array: Transaction[], type: TransactionType) => {
 };
 
 export const TransactionCards = () => {
-  const { data: transactions } = useTransactions();
+  const lastMonth = getMonth(subMonths(new Date(), 1)) + 1;
+  const { data: transactions } = useTransactions({ month: lastMonth });
 
   const statistics = useMemo(() => {
     if (!transactions) return { income: 0, expenses: 0 };

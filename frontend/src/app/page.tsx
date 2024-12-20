@@ -14,7 +14,7 @@ const DashboardPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [TRANSACTIONS_KEY],
+    queryKey: [TRANSACTIONS_KEY, lastMonth],
     queryFn: () => getTransactions({ month: lastMonth }),
   });
 

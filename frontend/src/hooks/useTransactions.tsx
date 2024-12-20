@@ -9,7 +9,7 @@ type UseTransactionsArgs = {
 
 export const useTransactions = ({ month }: UseTransactionsArgs = {}) => {
   return useQuery({
-    queryKey: [TRANSACTIONS_KEY],
+    queryKey: [TRANSACTIONS_KEY, month],
     queryFn: () => getTransactions({ month }),
   });
 };
