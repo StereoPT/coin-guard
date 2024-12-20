@@ -20,7 +20,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <GlobalProviders>
           <Navbar />
           <main className="w-full">{children}</main>
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools
+            buttonPosition="bottom-left"
+            initialIsOpen={false}
+          />
         </GlobalProviders>
       </body>
     </html>

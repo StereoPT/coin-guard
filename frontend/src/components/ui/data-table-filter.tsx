@@ -11,7 +11,7 @@ export const DataTableFilter = <TData,>({
   filterBy,
 }: DataTableFilterProps<TData>) => {
   return (
-    <div className="flex items-center py-4">
+    <div className="flex items-center w-full">
       <Input
         placeholder={`Filter ${filterBy}...`}
         className="max-w-sm"

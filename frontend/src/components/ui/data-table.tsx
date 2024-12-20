@@ -17,22 +17,23 @@ import {
   TableHeader,
   TableRow,
 } from './table';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { DataTableFilter } from './data-table-filter';
 import { DataTablePaginator } from './data-table-paginator';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
+  children?: ReactElement;
   data: TData[];
   filterBy?: Extract<keyof TData, string>;
 }
 
 export const DataTable = <TData, TValue>({
   columns,
+  children,
   data,
   filterBy,
 }: DataTableProps<TData, TValue>) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -43,9 +44,7 @@ export const DataTable = <TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
-    onSortingChange: setSorting,
     state: {
-      sorting,
       columnFilters,
     },
     initialState: {
@@ -56,8 +55,11 @@ export const DataTable = <TData, TValue>({
   });
 
   return (
-    <div>
-      {filterBy && <DataTableFilter table={table} filterBy={filterBy} />}
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-row justify-between items-center">
+        {filterBy && <DataTableFilter table={table} filterBy={filterBy} />}
+        {children}
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -25,7 +25,7 @@ export const DataTablePaginator = <TData,>({
   };
 
   return (
-    <div className="flex items-center justify-end space-x-2 px-2 py-2">
+    <div className="flex items-center justify-end space-x-2 px-2">
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredRowModel().rows.length} row(s)
       </div>

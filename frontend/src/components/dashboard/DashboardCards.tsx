@@ -24,7 +24,7 @@ export const DashboardCards = () => {
   }, [transactions]);
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-4">
       <DashboardCard title="Income" type="credit" amount={statistics.income} />
       <DashboardCard
         title="Expenses"

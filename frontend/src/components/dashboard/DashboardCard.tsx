@@ -1,4 +1,4 @@
-import { DollarSign } from 'lucide-react';
+import { HandCoins, Wallet } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { TransactionType } from '@/types/transaction';
 import { formatCurrency } from '@/lib/formatter';
@@ -14,7 +14,11 @@ export const DashboardCard = ({ title, type, amount }: DashboardCardProps) => {
     <Card>
       <CardHeader className="flex-row justify-between items-center pb-2 space-y-0">
         <CardTitle>{title}</CardTitle>
-        <DollarSign className="h-4 w-4 text-muted-foreground" />
+        {type === 'credit' ? (
+          <Wallet className="h-5 w-5 text-muted-foreground" />
+        ) : (
+          <HandCoins className="h-5 w-5 text-muted-foreground" />
+        )}
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">
