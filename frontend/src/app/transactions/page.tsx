@@ -1,4 +1,4 @@
-import TransactionsTable from '@/components/transactions/TransactionsTable';
+import TransactionsTable from '@/components/transactions-table/TransactionsTable';
 import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {

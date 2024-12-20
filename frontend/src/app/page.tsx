@@ -1,5 +1,5 @@
 import { DashboardCards } from '@/components/dashboard/DashboardCards';
-import { DashboardTable } from '@/components/dashboard/DashboardTable';
+import { DashboardTable } from '@/components/transactions-table/DashboardTable';
 import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {

@@ -1,4 +1,4 @@
-import { AmountBadge } from '@/components/transactions/AmountBadge';
+import { AmountBadge } from '@/components/transactions-table/AmountBadge';
 import { Transaction } from '@/types/transaction';
 import { ColumnDef } from '@tanstack/react-table';
 import { formatCurrency } from './formatter';
