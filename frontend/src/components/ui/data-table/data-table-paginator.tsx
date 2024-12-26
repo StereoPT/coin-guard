@@ -5,18 +5,18 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
-} from '../ui/pagination';
+} from '../pagination';
 import { Table } from '@tanstack/react-table';
 
-type PaginatorProps<TData> = {
-  table: Table<TData>;
+type PaginatorProps<T> = {
+  table: Table<T>;
   showPreviousNext: boolean;
 };
 
-export const DataTablePaginator = <TData,>({
+export const DataTablePaginator = <T,>({
   table,
   showPreviousNext,
-}: PaginatorProps<TData>) => {
+}: PaginatorProps<T>) => {
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 

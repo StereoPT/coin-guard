@@ -1,7 +1,7 @@
 'use client';
 
 import { useTransactions } from '@/hooks/useTransactions';
-import { DataTable } from '../ui/data-table';
+import { DataTable } from '../ui/data-table/index';
 import { transactionColumns } from '@/lib/transaction-columns';
 import { getMonth, subMonths } from 'date-fns';
 
