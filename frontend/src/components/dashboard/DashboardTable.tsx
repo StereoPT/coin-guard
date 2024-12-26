@@ -1,5 +1,5 @@
 import { DataTable } from '../ui/data-table/index';
-import { transactionColumns } from '@/lib/transaction-columns';
+import { transactionColumns } from '@/components/transactions/transaction-columns';
 import { Transaction } from '@/types/transaction';
 
 type DashboardTableProps = {

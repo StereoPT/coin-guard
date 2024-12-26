@@ -5,11 +5,11 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getMonth, subMonths } from 'date-fns';
 import { Dashboard } from '@/components/dashboard';
+import { getLastMonth } from '@/lib/dates';
 
 const DashboardPage = async () => {
-  const lastMonth = getMonth(subMonths(new Date(), 1)) + 1;
+  const lastMonth = getLastMonth();
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

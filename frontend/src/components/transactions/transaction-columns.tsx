@@ -1,7 +1,7 @@
 import { AmountBadge } from '@/components/transactions/AmountBadge';
 import { Transaction } from '@/types/transaction';
 import { ColumnDef } from '@tanstack/react-table';
-import { formatCurrency } from './formatter';
+import { formatCurrency } from '../../lib/formatter';
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {

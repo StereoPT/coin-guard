@@ -2,12 +2,12 @@
 import { useState } from 'react';
 
 import { useTransactions } from '@/hooks/useTransactions';
-import { getMonth, subMonths } from 'date-fns';
 import { TransactionCards } from '../transactions/TransactionCards';
 import { TransactionsTable } from './TransactionsTable';
+import { getLastMonth } from '@/lib/dates';
 
 export const Transactions = () => {
-  const lastMonth = getMonth(subMonths(new Date(), 1)) + 1;
+  const lastMonth = getLastMonth();
   const [selectedMonth, setSelectedMonth] = useState<number>(lastMonth);
   const { data: transactions } = useTransactions({ month: selectedMonth });
 
