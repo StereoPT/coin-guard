@@ -1,5 +1,3 @@
-import { TransactionCards } from '@/components/transactions/TransactionCards';
-import TransactionsTable from '@/components/transactions/TransactionsTable';
 import { TRANSACTIONS_KEY } from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {
@@ -8,6 +6,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { getMonth, subMonths } from 'date-fns';
+import { Transactions } from '@/components/transactions';
 
 const TransactionsPage = async () => {
   const lastMonth = getMonth(subMonths(new Date(), 1)) + 1;
@@ -20,10 +19,7 @@ const TransactionsPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <h2 className="text-3xl font-bold tracking-tight">Transactions</h2>
-        <TransactionsTable />
-      </div>
+      <Transactions />
     </HydrationBoundary>
   );
 };

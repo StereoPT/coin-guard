@@ -24,6 +24,8 @@ export const DataTablePaginator = <T,>({
     table.setPageIndex(pageNumber - 1);
   };
 
+  if (totalPages <= 0) return null;
+
   return (
     <div className="flex items-center justify-end space-x-2 px-2">
       <div className="flex-1 text-sm text-muted-foreground">

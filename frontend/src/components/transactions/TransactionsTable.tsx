@@ -1,18 +1,20 @@
-'use client';
-
-import { useTransactions } from '@/hooks/useTransactions';
 import { DataTable } from '../ui/data-table/index';
 import { transactionColumns } from '@/lib/transaction-columns';
+import { Transaction } from '@/types/transaction';
+
 import { MonthDropdown } from '../month-dropdown/MonthDropdown';
-import { useState } from 'react';
-import { getMonth, subMonths } from 'date-fns';
 
-const TransactionsTable = () => {
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    getMonth(subMonths(new Date(), 1)) + 1,
-  );
-  const { data: transactions } = useTransactions({ month: selectedMonth });
+type TransactionsTableProps = {
+  transactions: Transaction[];
+  selectedMonth: number;
+  setSelectedMonth: (month: number) => void;
+};
 
+export const TransactionsTable = ({
+  transactions,
+  selectedMonth,
+  setSelectedMonth,
+}: TransactionsTableProps) => {
   return (
     <DataTable
       data={transactions ?? []}
@@ -25,5 +27,3 @@ const TransactionsTable = () => {
     </DataTable>
   );
 };
-
-export default TransactionsTable;
