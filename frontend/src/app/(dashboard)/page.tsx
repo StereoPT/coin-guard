@@ -1,4 +1,4 @@
-import { TRANSACTIONS_KEY } from '@/constants/query-keys';
+import KEYS from '@/constants/query-keys';
 import { getTransactions } from '@/services/transactionService';
 import {
   dehydrate,
@@ -13,7 +13,7 @@ const DashboardPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [TRANSACTIONS_KEY, lastMonth],
+    queryKey: KEYS.Transactions(lastMonth),
     queryFn: () => getTransactions({ month: lastMonth }),
   });
 
