@@ -1,17 +1,17 @@
 import { Table } from '@tanstack/react-table';
-import { Input } from './input';
+import { Input } from '../input';
 
-type DataTableFilterProps<TData> = {
-  table: Table<TData>;
+type DataTableFilterProps<T> = {
+  table: Table<T>;
   filterBy: string;
 };
 
-export const DataTableFilter = <TData,>({
+export const DataTableFilter = <T,>({
   table,
   filterBy,
-}: DataTableFilterProps<TData>) => {
+}: DataTableFilterProps<T>) => {
   return (
-    <div className="flex items-center py-4">
+    <div className="flex items-center w-full">
       <Input
         placeholder={`Filter ${filterBy}...`}
         className="max-w-sm"
