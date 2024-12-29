@@ -21,7 +21,7 @@ export class CategoriesService {
     return foundCategories;
   }
 
-  async findById(id: Category['id']): Promise<Category> {
+  async findById(id: Category['id']): Promise<NullableType<Category>> {
     const foundCategory = await this.categoriesRepository.findOneBy({ id });
 
     if (!foundCategory) return null;
