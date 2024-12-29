@@ -5,10 +5,10 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { Transactions } from '@/components/transactions';
+import { Dashboard } from '@/components/dashboard';
 import { getLastMonth } from '@/lib/dates';
 
-const TransactionsPage = async () => {
+const DashboardPage = async () => {
   const lastMonth = getLastMonth();
   const queryClient = new QueryClient();
 
@@ -19,9 +19,9 @@ const TransactionsPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Transactions />
+      <Dashboard />
     </HydrationBoundary>
   );
 };
 
-export default TransactionsPage;
+export default DashboardPage;
