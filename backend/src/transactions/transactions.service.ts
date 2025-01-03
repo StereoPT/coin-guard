@@ -17,6 +17,9 @@ export class TransactionsService {
   async findAll(): Promise<Transaction[]> {
     const foundTransactions = await this.transactionsRepository.find({
       order: { date: 'DESC' },
+      relations: {
+        category: true,
+      },
     });
     return foundTransactions;
   }
@@ -27,13 +30,21 @@ export class TransactionsService {
         date: Raw((value) => `EXTRACT(MONTH FROM ${value}) = ${month}`),
       },
       order: { date: 'DESC' },
+      relations: {
+        category: true,
+      },
     });
     return foundTransactions;
   }
 
   async findById(id: Transaction['id']): Promise<NullableType<Transaction>> {
-    const foundTransaction = await this.transactionsRepository.findOneBy({
-      id,
+    const foundTransaction = await this.transactionsRepository.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        category: true,
+      },
     });
 
     if (!foundTransaction) return null;
