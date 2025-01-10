@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
 
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
@@ -47,7 +47,7 @@ export class TransactionsService {
       },
     });
 
-    if (!foundTransaction) return null;
+    if (!foundTransaction) throw new NotFoundException();
 
     return foundTransaction;
   }
@@ -79,14 +79,11 @@ export class TransactionsService {
     });
 
     if (!foundTransaction) {
-      throw new Error('Transaction not found!');
+      throw new NotFoundException();
     }
 
     const updatedTransaction = await this.transactionsRepository.save(
-      this.transactionsRepository.create({
-        id,
-        ...updateTransaction,
-      }),
+      this.transactionsRepository.merge(foundTransaction, updateTransaction),
     );
 
     return updatedTransaction;

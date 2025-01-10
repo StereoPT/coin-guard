@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoryDTO } from './dto/create-category.dto';
 
 import { UpdateCategoryDTO } from './dto/update-category.dto';
@@ -18,13 +18,14 @@ export class CategoriesService {
     const foundCategories = await this.categoriesRepository.find({
       order: { name: 'DESC' },
     });
+
     return foundCategories;
   }
 
   async findById(id: Category['id']): Promise<NullableType<Category>> {
     const foundCategory = await this.categoriesRepository.findOneBy({ id });
 
-    if (!foundCategory) return null;
+    if (!foundCategory) throw new NotFoundException();
 
     return foundCategory;
   }
@@ -44,11 +45,11 @@ export class CategoriesService {
     const foundCategory = await this.categoriesRepository.findOneBy({ id });
 
     if (!foundCategory) {
-      throw new Error('Category not found!');
+      throw new NotFoundException();
     }
 
     const updatedCategory = await this.categoriesRepository.save(
-      this.categoriesRepository.create({ id, ...updateCategory }),
+      this.categoriesRepository.merge(foundCategory, updateCategory),
     );
 
     return updatedCategory;
