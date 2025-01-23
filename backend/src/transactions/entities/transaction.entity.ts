@@ -1,5 +1,6 @@
+import { Category } from 'src/categories/entities/category.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum TransactionType {
   CREDIT = 'credit',
@@ -37,4 +38,10 @@ export class Transaction extends EntityHelper {
     type: 'decimal',
   })
   balance: number;
+
+  @ManyToOne(() => Category, (category) => category.id, {
+    nullable: true,
+    cascade: true,
+  })
+  category?: Category;
 }

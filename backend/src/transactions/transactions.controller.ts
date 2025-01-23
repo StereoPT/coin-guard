@@ -10,7 +10,6 @@ import {
   HttpStatus,
   ParseArrayPipe,
   Query,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
@@ -72,13 +71,13 @@ export class TransactionsController {
 
   @Delete()
   @HttpCode(HttpStatus.NO_CONTENT)
-  deleteAll() {
+  deleteAll(): Promise<void> {
     return this.transactionsService.deleteAll();
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  deleteOne(@Param('id') id: Transaction['id']) {
+  deleteOne(@Param('id') id: Transaction['id']): Promise<void> {
     return this.transactionsService.delete(id);
   }
 }

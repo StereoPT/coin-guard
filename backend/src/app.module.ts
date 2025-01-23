@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { TypeOrmConfigService } from './config/typeorm-config.service';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { TypeOrmConfigService } from './config/typeorm-config.service';
       ],
     }),
     TransactionsModule,
+    CategoriesModule,
   ],
 })
 export class AppModule implements NestModule {
