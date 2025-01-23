@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTransactionDTO } from './dto/create-transaction.dto';
 
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
@@ -17,6 +17,9 @@ export class TransactionsService {
   async findAll(): Promise<Transaction[]> {
     const foundTransactions = await this.transactionsRepository.find({
       order: { date: 'DESC' },
+      relations: {
+        category: true,
+      },
     });
     return foundTransactions;
   }
@@ -27,16 +30,24 @@ export class TransactionsService {
         date: Raw((value) => `EXTRACT(MONTH FROM ${value}) = ${month}`),
       },
       order: { date: 'DESC' },
+      relations: {
+        category: true,
+      },
     });
     return foundTransactions;
   }
 
   async findById(id: Transaction['id']): Promise<NullableType<Transaction>> {
-    const foundTransaction = await this.transactionsRepository.findOneBy({
-      id,
+    const foundTransaction = await this.transactionsRepository.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        category: true,
+      },
     });
 
-    if (!foundTransaction) return null;
+    if (!foundTransaction) throw new NotFoundException();
 
     return foundTransaction;
   }
@@ -68,14 +79,11 @@ export class TransactionsService {
     });
 
     if (!foundTransaction) {
-      throw new Error('Transaction not found!');
+      throw new NotFoundException();
     }
 
     const updatedTransaction = await this.transactionsRepository.save(
-      this.transactionsRepository.create({
-        id,
-        ...updateTransaction,
-      }),
+      this.transactionsRepository.merge(foundTransaction, updateTransaction),
     );
 
     return updatedTransaction;
