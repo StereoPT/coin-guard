@@ -44,7 +44,7 @@ export const Navbar = () => {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">CoinGuard</span>
-                  <span className="">v2.0.0</span>
+                  <span className="">v3.0.0</span>
                 </div>
               </Link>
             </SidebarMenuButton>
