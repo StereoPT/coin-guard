@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Table, Triangle } from 'lucide-react';
+import { Triangle } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -15,19 +15,7 @@ import {
 } from '../ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const NAVIGATION_ITEMS = [
-  {
-    title: 'Dashboard',
-    url: '/',
-    icon: LayoutDashboard,
-  },
-  {
-    title: 'Transactions',
-    url: '/transactions',
-    icon: Table,
-  },
-];
+import { NAVIGATION_ITEMS } from '@/constants/nav-items';
 
 export const Navbar = () => {
   const pathname = usePathname();
