@@ -18,6 +18,7 @@ const badgeVariants = cva(
         debit: 'border-transparent bg-red-200 text-red-800 hover:bg-red-200/80',
         credit:
           'border-transparent bg-green-200 text-green-800 hover:bg-green-200/80',
+        cyan: 'border-transparent bg-cyan-200 text-cyan-800 hover:bg-cyan-200/80',
       },
     },
     defaultVariants: {

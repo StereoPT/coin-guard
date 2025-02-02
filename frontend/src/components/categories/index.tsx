@@ -1,6 +1,7 @@
 'use client';
 
 import { useCategories } from '@/hooks/useCategories';
+import { CategoriesTable } from './CategoriesTable';
 
 export const Categories = () => {
   const { data: categories } = useCategories();
@@ -11,7 +12,7 @@ export const Categories = () => {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <h2 className="text-3xl font-bold tracking-tight">Categories</h2>
-      {JSON.stringify(categories)}
+      <CategoriesTable categories={categories} />
     </div>
   );
 };
