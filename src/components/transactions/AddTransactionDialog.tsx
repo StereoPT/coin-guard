@@ -19,8 +19,14 @@ import {
 import {
   addTransactionSchema,
   addTransactionSchemaType,
+  addTransactionToastID,
 } from '@/schemas/transactions';
-import { ArrowLeftRightIcon, CalendarIcon, PlusCircle } from 'lucide-react';
+import {
+  ArrowLeftRightIcon,
+  CalendarIcon,
+  Loader2Icon,
+  PlusCircle,
+} from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -40,6 +46,8 @@ import {
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
+import { toast } from 'sonner';
+import { useAddTransaction } from '@/hooks/transactions/useAddTransaction';
 
 export const AddTransactionDialog = () => {
   const [open, setOpen] = useState(false);
@@ -55,11 +63,19 @@ export const AddTransactionDialog = () => {
     },
   });
 
-  const onSubmit = useCallback((values: addTransactionSchemaType) => {
-    alert(JSON.stringify(values, null, 4));
-  }, []);
+  const { mutate, isPending } = useAddTransaction();
+
+  const onSubmit = useCallback(
+    (values: addTransactionSchemaType) => {
+      toast.loading('Creating transaction...', { id: addTransactionToastID });
+      mutate(values);
+      setOpen(false);
+    },
+    [mutate],
+  );
 
   const handleOnOpenChange = (open: boolean) => {
+    form.reset();
     setOpen(open);
   };
 
@@ -180,7 +196,7 @@ export const AddTransactionDialog = () => {
                         Amount
                       </FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Amount" />
+                        <Input {...field} type="number" placeholder="Amount" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -196,7 +212,7 @@ export const AddTransactionDialog = () => {
                         Balance
                       </FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Balance" />
+                        <Input {...field} type="number" placeholder="Balance" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -204,8 +220,9 @@ export const AddTransactionDialog = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full">
-                Add
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {!isPending && 'Add'}
+                {isPending && <Loader2Icon className="animate-spin" />}
               </Button>
             </form>
           </Form>
