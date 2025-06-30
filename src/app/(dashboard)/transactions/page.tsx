@@ -1,8 +1,8 @@
 import { PageHeader } from '@/components/PageHeader';
 import { AddTransactionDialog } from '@/components/transactions/AddTransactionDialog';
-import { Suspense } from 'react';
+import { UserTransactions } from '@/components/transactions/UserTransactions';
 
-const TransactionsPage = () => {
+const TransactionsPage = async () => {
   return (
     <div className="flex flex-1 flex-col h-full">
       <div className="flex justify-between">
@@ -11,7 +11,7 @@ const TransactionsPage = () => {
       </div>
 
       <div className="h-full py-6">
-        <Suspense fallback={<></>}>Transactions Table</Suspense>
+        <UserTransactions />
       </div>
     </div>
   );
