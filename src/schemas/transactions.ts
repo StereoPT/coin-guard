@@ -14,15 +14,14 @@ export const importTransactionsSchema = z.object({
       ? z.any()
       : z
           .instanceof(FileList)
-          .refine((files) => files?.length > 0, 'File is required')
           .refine(
-            (files) => files?.[0]?.size <= 5000000,
+            (files) => files[0]?.size <= 5000000,
             'File size must be less than 5MB',
           )
           .refine(
             (files) =>
-              files?.[0]?.type === 'text/csv' ||
-              files?.[0]?.name.toLowerCase().endsWith('.csv'),
+              files[0].type === 'text/csv' ||
+              files[0].name.toLowerCase().endsWith('.csv'),
             'Only CSV files are allowed',
           ),
 });

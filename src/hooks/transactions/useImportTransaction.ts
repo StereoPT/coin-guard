@@ -7,7 +7,16 @@ export const useImportTransaction = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ImportTransaction,
+    mutationFn: async (file: File) => {
+      toast.loading('Importing transaction...', {
+        id: importTransactionToastID,
+      });
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      return ImportTransaction(formData);
+    },
     onSuccess: () => {
       toast.success('Transactions imported', { id: importTransactionToastID });
       queryClient.invalidateQueries({ queryKey: ['transactions'] });

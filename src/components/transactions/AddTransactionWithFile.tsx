@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -12,13 +13,11 @@ import { useImportTransaction } from '@/hooks/transactions/useImportTransaction'
 import {
   importTransactionSchemaType,
   importTransactionsSchema,
-  importTransactionToastID,
 } from '@/schemas/transactions';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2Icon } from 'lucide-react';
+import { FileText, Loader2Icon } from 'lucide-react';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 type AddTransactionWithFileProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -30,18 +29,20 @@ export const AddTransactionWithFile = ({
   const form = useForm<importTransactionSchemaType>({
     resolver: zodResolver(importTransactionsSchema),
   });
-  const fileRef = form.register('file');
+  const selectedFile = form.watch('file')?.[0];
 
   const { mutateAsync, isPending } = useImportTransaction();
 
   const onSubmit = useCallback(
     async (values: importTransactionSchemaType) => {
-      toast.loading('Importing transaction...', {
-        id: importTransactionToastID,
-      });
-      await mutateAsync(values);
-      form.reset();
-      setOpen(false);
+      const file = values.file[0];
+
+      if (file) {
+        await mutateAsync(file);
+
+        form.reset();
+        setOpen(false);
+      }
     },
     [form, mutateAsync, setOpen],
   );
@@ -52,7 +53,8 @@ export const AddTransactionWithFile = ({
         <FormField
           control={form.control}
           name="file"
-          render={() => (
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          render={({ field: { onChange, value, ...field } }) => (
             <FormItem>
               <FormLabel className="flex items-center">File</FormLabel>
               <FormControl>
@@ -60,9 +62,17 @@ export const AddTransactionWithFile = ({
                   type="file"
                   accept=".csv"
                   placeholder="File"
-                  {...fileRef}
+                  onChange={(e) => onChange(e.target.files)}
+                  {...field}
                 />
               </FormControl>
+              {selectedFile && (
+                <FormDescription className="flex items-center gap-2 ml-2 text-sm text-muted-foreground">
+                  <FileText className="h-4 w-4" />
+                  <span>{selectedFile.name}</span>
+                  <span>({(selectedFile.size / 1024).toFixed(1)} KB)</span>
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
