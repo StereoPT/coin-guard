@@ -29,12 +29,7 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
     header: 'Description',
     size: 250,
   },
-  {
-    accessorKey: 'type',
-    meta: {
-      visible: false,
-    },
-  },
+  { accessorKey: 'type' },
   {
     accessorKey: 'amount',
     header: 'Amount',
@@ -56,7 +51,7 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
     },
   },
   {
-    accessorKey: '',
+    accessorKey: 'actions',
     header: 'Actions',
     size: 50,
     cell: () => {

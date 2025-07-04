@@ -50,5 +50,15 @@ export const UserTransactions = () => {
     return <EmptyUserTransactions />;
   }
 
-  return <DataTable columns={columns} data={transactions} />;
+  return (
+    <DataTable
+      columns={columns}
+      data={transactions}
+      config={{
+        columnVisibility: {
+          type: false,
+        },
+      }}
+    />
+  );
 };

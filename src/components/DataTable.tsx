@@ -21,14 +21,22 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+type ColumnVisibility<TData> = {
+  [K in keyof TData]?: boolean;
+} & Record<string, boolean>;
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  config?: {
+    columnVisibility: ColumnVisibility<TData>;
+  };
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  config,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -36,6 +44,9 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    initialState: {
+      columnVisibility: config?.columnVisibility,
+    },
   });
 
   return (
