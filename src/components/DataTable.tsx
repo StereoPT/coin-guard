@@ -17,9 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { DataTablePagination } from '@/components/DataTablePagination';
+import { DataTableFilters, Filters } from '@/components/DataTableFilters';
 
 type ColumnVisibility<TData> = {
   [K in keyof TData]?: boolean;
@@ -29,7 +28,8 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   config?: {
-    columnVisibility: ColumnVisibility<TData>;
+    filters?: Filters<TData>;
+    columnVisibility?: ColumnVisibility<TData>;
   };
 }
 
@@ -44,6 +44,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: config?.filters?.search?.filterFn,
     initialState: {
       columnVisibility: config?.columnVisibility,
     },
@@ -51,18 +52,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex items-center pb-4">
-        <Input
-          className="max-w-sm"
-          value={
-            (table.getColumn('description')?.getFilterValue() as string) ?? ''
-          }
-          onChange={(event) =>
-            table.getColumn('description')?.setFilterValue(event.target.value)
-          }
-          placeholder="Search transactions..."
-        />
-      </div>
+      <DataTableFilters table={table} filters={config?.filters} />
       <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-muted">
@@ -114,24 +104,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end gap-2 pt-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}>
-          <ChevronLeft />
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}>
-          Next
-          <ChevronRight />
-        </Button>
-      </div>
+      <DataTablePagination table={table} />
     </div>
   );
 }

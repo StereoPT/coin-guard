@@ -6,6 +6,7 @@ import { AddTransactionDialog } from '@/components/transactions/AddTransactionDi
 import { columns } from '@/components/transactions/columns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetTransactions } from '@/hooks/transactions/useGetTransactions';
+import { fuzzyFilterFn } from '@/lib/dataTable';
 import { ArrowLeftRight } from 'lucide-react';
 
 const LoadingUserTransactions = () => {
@@ -55,6 +56,12 @@ export const UserTransactions = () => {
       columns={columns}
       data={transactions}
       config={{
+        filters: {
+          search: {
+            filterFn: fuzzyFilterFn(['description']),
+            placeholder: 'Search transactions...',
+          },
+        },
         columnVisibility: {
           type: false,
         },
