@@ -61,6 +61,12 @@ export const UserTransactions = () => {
             filterFn: fuzzyFilterFn(['description']),
             placeholder: 'Search transactions...',
           },
+          filter: [
+            {
+              column: 'type',
+              type: 'select',
+            },
+          ],
         },
         columnVisibility: {
           type: false,

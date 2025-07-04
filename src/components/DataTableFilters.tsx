@@ -1,3 +1,4 @@
+import { DataTableFilter, Filter } from '@/components/DataTableFilter';
 import { Input } from '@/components/ui/input';
 import { FilterFn, Table } from '@tanstack/react-table';
 
@@ -6,6 +7,7 @@ export type Filters<TData> = {
     filterFn: FilterFn<TData>;
     placeholder: string;
   };
+  filter?: Filter<TData>[];
 };
 
 interface DataTableFiltersProps<TData> {
@@ -23,7 +25,7 @@ export const DataTableFilters = <TData,>({
   if (!filters) return null;
 
   return (
-    <div className="flex items-center pb-4">
+    <div className="flex items-center gap-4 pb-4">
       {filters.search && (
         <Input
           className="max-w-sm"
@@ -32,6 +34,16 @@ export const DataTableFilters = <TData,>({
           placeholder={filters.search?.placeholder}
         />
       )}
+      {filters.filter &&
+        filters.filter.map((filter) => {
+          return (
+            <DataTableFilter
+              key={filter.column.toString()}
+              table={table}
+              filter={filter}
+            />
+          );
+        })}
     </div>
   );
 };
