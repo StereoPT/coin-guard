@@ -30,6 +30,12 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
     size: 250,
   },
   {
+    accessorKey: 'type',
+    meta: {
+      visible: false,
+    },
+  },
+  {
     accessorKey: 'amount',
     header: 'Amount',
     size: 110,
