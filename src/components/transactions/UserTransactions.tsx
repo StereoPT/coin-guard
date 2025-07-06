@@ -65,14 +65,8 @@ export const UserTransactions = () => {
             placeholder: 'Search transactions...',
           },
           filter: [
-            {
-              column: 'date',
-              type: 'date',
-            },
-            {
-              column: 'type',
-              type: 'select',
-            },
+            { column: 'date', type: 'date' },
+            { column: 'type', type: 'select' },
           ],
         },
         columnVisibility: {

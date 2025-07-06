@@ -1,19 +1,13 @@
 'use client';
 
 import { AmountBadge } from '@/components/AmountBadge';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { TransactionActions } from '@/components/transactions/TransactionActions';
+import { Transaction } from '@/generated/prisma';
 import { dateBetweenFilterFn } from '@/lib/dataTable';
 import { formatCurrency } from '@/lib/formatter';
 import { addTransactionSchemaType } from '@/schemas/transactions';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
-import { MoreHorizontal } from 'lucide-react';
 
 export const columns: ColumnDef<addTransactionSchemaType>[] = [
   {
@@ -56,21 +50,10 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
     accessorKey: 'actions',
     header: 'Actions',
     size: 50,
-    cell: () => {
-      // const transaction = row.original;
+    cell: ({ row }) => {
+      const transaction = row.original as Transaction;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <TransactionActions transaction={transaction} />;
     },
   },
 ];

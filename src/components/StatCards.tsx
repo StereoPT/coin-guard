@@ -14,12 +14,8 @@ import {
 const LoadingStats = () => {
   return (
     <div className="grid gap-4 md:grid-cols-4">
-      <div>
-        <Skeleton className="h-32" />
-      </div>
-      <div>
-        <Skeleton className="h-32" />
-      </div>
+      <Skeleton className="h-32" />
+      <Skeleton className="h-32" />
     </div>
   );
 };
