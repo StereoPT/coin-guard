@@ -23,15 +23,24 @@ export const SelectFilter = <TData,>({
   const possibleValues = Array.from(facetedValues?.keys() || []) as string[];
 
   const hasFilter = columnDef?.getFilterValue();
-  const selectText = hasFilter
+  const filterText = hasFilter
     ? (columnDef?.getFilterValue() as string).toLowerCase()
     : column.toString();
+
+  const handleOnChange = (option: string) => {
+    if (columnDef?.getFilterValue() === option) {
+      columnDef?.setFilterValue(undefined);
+      return;
+    }
+
+    columnDef?.setFilterValue(option);
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="capitalize" variant="outline">
-          {selectText}
+          {filterText}
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
@@ -45,7 +54,7 @@ export const SelectFilter = <TData,>({
               className="capitalize"
               key={option}
               checked={columnDef?.getFilterValue() === option}
-              onCheckedChange={() => columnDef?.setFilterValue(option)}>
+              onCheckedChange={() => handleOnChange(option)}>
               {option.toLowerCase()}
             </DropdownMenuCheckboxItem>
           );

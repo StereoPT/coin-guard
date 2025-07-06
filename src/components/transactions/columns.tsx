@@ -8,6 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { dateBetweenFilterFn } from '@/lib/dataTable';
 import { formatCurrency } from '@/lib/formatter';
 import { addTransactionSchemaType } from '@/schemas/transactions';
 import { ColumnDef } from '@tanstack/react-table';
@@ -23,6 +24,7 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
       const { date } = row.original;
       return format(date, 'PPP');
     },
+    filterFn: dateBetweenFilterFn,
   },
   {
     accessorKey: 'description',

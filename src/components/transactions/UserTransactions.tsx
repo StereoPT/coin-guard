@@ -11,10 +11,13 @@ import { ArrowLeftRight } from 'lucide-react';
 
 const LoadingUserTransactions = () => {
   return (
-    <div className="space-y-2">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Skeleton key={i} className="h-16 w-full" />
-      ))}
+    <div className="flex flex-col gap-4">
+      <Skeleton className="h-9 w-1/2" />
+      <div className="space-y-2">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Skeleton key={i} className="h-16 w-full" />
+        ))}
+      </div>
     </div>
   );
 };
@@ -62,6 +65,10 @@ export const UserTransactions = () => {
             placeholder: 'Search transactions...',
           },
           filter: [
+            {
+              column: 'date',
+              type: 'date',
+            },
             {
               column: 'type',
               type: 'select',
