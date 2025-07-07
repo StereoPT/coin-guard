@@ -1,3 +1,4 @@
+import { DeleteTransactionDialog } from '@/components/transactions/DeleteTransactionDialog';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,6 +10,7 @@ import {
 import { Transaction } from '@/generated/prisma';
 import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 type TransactionActionsProps = {
   transaction: Transaction;
@@ -17,8 +19,18 @@ type TransactionActionsProps = {
 export const TransactionActions = ({
   transaction,
 }: TransactionActionsProps) => {
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+
   return (
     <>
+      {showDeleteAlert && (
+        <DeleteTransactionDialog
+          open={showDeleteAlert}
+          onOpenChange={setShowDeleteAlert}
+          transaction={transaction}
+        />
+      )}
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon">
@@ -37,7 +49,9 @@ export const TransactionActions = ({
             <Edit />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            variant="destructive"
+            onClick={() => setShowDeleteAlert(true)}>
             <Trash2 />
             Delete
           </DropdownMenuItem>
