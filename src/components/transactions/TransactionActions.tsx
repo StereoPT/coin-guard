@@ -1,4 +1,5 @@
 import { DeleteTransactionDialog } from '@/components/transactions/DeleteTransactionDialog';
+import { EditTransactionDialog } from '@/components/transactions/EditTransactionDialog';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -20,6 +21,7 @@ export const TransactionActions = ({
   transaction,
 }: TransactionActionsProps) => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
 
   return (
     <>
@@ -27,6 +29,14 @@ export const TransactionActions = ({
         <DeleteTransactionDialog
           open={showDeleteAlert}
           onOpenChange={setShowDeleteAlert}
+          transaction={transaction}
+        />
+      )}
+
+      {showEditDialog && (
+        <EditTransactionDialog
+          open={showEditDialog}
+          onOpenChange={setShowEditDialog}
           transaction={transaction}
         />
       )}
@@ -45,7 +55,7 @@ export const TransactionActions = ({
               Details
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
             <Edit />
             Edit
           </DropdownMenuItem>

@@ -1,15 +1,15 @@
 import { ImportTransaction } from '@/actions/transactions/importTransaction';
-import { importTransactionToastID } from '@/schemas/transactions';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 export const useImportTransaction = () => {
   const queryClient = useQueryClient();
+  const toastId = 'import-transaction';
 
   return useMutation({
     mutationFn: async (file: File) => {
       toast.loading('Importing transaction...', {
-        id: importTransactionToastID,
+        id: toastId,
       });
 
       const formData = new FormData();
@@ -18,12 +18,12 @@ export const useImportTransaction = () => {
       return ImportTransaction(formData);
     },
     onSuccess: () => {
-      toast.success('Transactions imported', { id: importTransactionToastID });
+      toast.success('Transactions imported', { id: toastId });
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
     },
     onError: () => {
       toast.error('Failed to import transactions', {
-        id: importTransactionToastID,
+        id: toastId,
       });
     },
   });

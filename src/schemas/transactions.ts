@@ -8,6 +8,8 @@ export const addTransactionSchema = z.object({
   balance: z.coerce.number(),
 });
 
+export const editTransactionSchema = addTransactionSchema.partial();
+
 export const importTransactionsSchema = z.object({
   file:
     typeof window === 'undefined'
@@ -30,5 +32,4 @@ export type addTransactionSchemaType = z.infer<typeof addTransactionSchema>;
 export type importTransactionSchemaType = z.infer<
   typeof importTransactionsSchema
 >;
-export const addTransactionToastID = 'add-transaction';
-export const importTransactionToastID = 'import-transaction';
+export type editTransactionSchemaType = z.infer<typeof editTransactionSchema>;

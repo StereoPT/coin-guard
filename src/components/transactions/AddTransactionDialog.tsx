@@ -13,8 +13,8 @@ import { ArrowLeftRightIcon, PlusCircle } from 'lucide-react';
 import { useState } from 'react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AddTransactionWithForm } from '@/components/transactions/AddTransactionWithForm';
 import { AddTransactionWithFile } from '@/components/transactions/AddTransactionWithFile';
+import { AddTransactionForm } from '@/components/transactions/AddTransactionForm';
 
 export const AddTransactionDialog = () => {
   const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ export const AddTransactionDialog = () => {
             <AddTransactionWithFile setOpen={setOpen} />
           </TabsContent>
           <TabsContent value="form" className="pt-4">
-            <AddTransactionWithForm setOpen={setOpen} />
+            <AddTransactionForm setOpen={setOpen} />
           </TabsContent>
         </Tabs>
         <DialogDescription />

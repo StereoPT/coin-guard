@@ -21,43 +21,37 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useAddTransaction } from '@/hooks/transactions/useAddTransaction';
+import { Transaction } from '@/generated/prisma';
+import { useEditTransaction } from '@/hooks/transactions/useEditTransaction';
 import { cn } from '@/lib/utils';
 import {
-  addTransactionSchema,
-  addTransactionSchemaType,
-  addTransactionToastID,
+  editTransactionSchema,
+  editTransactionSchemaType,
 } from '@/schemas/transactions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon, Loader2Icon } from 'lucide-react';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
-type AddTransactionWithFormProps = {
+type EditTransactionFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
+  initialValues: Transaction;
 };
 
-export const AddTransactionWithForm = ({
+export const EditTransactionForm = ({
   setOpen,
-}: AddTransactionWithFormProps) => {
-  const form = useForm<addTransactionSchemaType>({
-    resolver: zodResolver(addTransactionSchema),
-    defaultValues: {
-      date: undefined,
-      description: '',
-      type: undefined,
-      amount: 0,
-      balance: 0,
-    },
+  initialValues,
+}: EditTransactionFormProps) => {
+  const form = useForm<editTransactionSchemaType>({
+    resolver: zodResolver(editTransactionSchema),
+    defaultValues: initialValues,
   });
 
-  const { mutateAsync, isPending } = useAddTransaction();
+  const { mutateAsync, isPending } = useEditTransaction(initialValues.id);
 
   const onSubmit = useCallback(
-    async (values: addTransactionSchemaType) => {
-      toast.loading('Creating transaction...', { id: addTransactionToastID });
+    async (values: editTransactionSchemaType) => {
       await mutateAsync(values);
       form.reset();
       setOpen(false);
@@ -81,6 +75,7 @@ export const AddTransactionWithForm = ({
                       <FormControl>
                         <Button
                           variant={'outline'}
+                          disabled
                           className={cn(
                             'pl-3 text-left font-normal',
                             !field.value && 'text-muted-foreground',
@@ -123,7 +118,7 @@ export const AddTransactionWithForm = ({
                     onValueChange={field.onChange}
                     defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full" disabled>
                         <SelectValue placeholder="Transaction Type" />
                       </SelectTrigger>
                     </FormControl>
@@ -156,6 +151,7 @@ export const AddTransactionWithForm = ({
         <div className="flex flex-row gap-2 w-full">
           <FormField
             control={form.control}
+            disabled
             name="amount"
             render={({ field }) => (
               <FormItem className="w-full">
@@ -170,6 +166,7 @@ export const AddTransactionWithForm = ({
 
           <FormField
             control={form.control}
+            disabled
             name="balance"
             render={({ field }) => (
               <FormItem className="w-full">
@@ -182,9 +179,8 @@ export const AddTransactionWithForm = ({
             )}
           />
         </div>
-
         <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending && 'Add'}
+          {!isPending && 'Edit'}
           {isPending && <Loader2Icon className="animate-spin" />}
         </Button>
       </form>
