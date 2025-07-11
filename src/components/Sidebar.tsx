@@ -11,7 +11,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from './ui/sidebar';
-import { LayoutDashboardIcon, Table2Icon, Triangle } from 'lucide-react';
+import {
+  LayoutDashboardIcon,
+  Table2Icon,
+  TagsIcon,
+  Triangle,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
@@ -21,6 +26,11 @@ const routes = [
     href: 'transactions',
     label: 'Transactions',
     icon: Table2Icon,
+  },
+  {
+    href: 'categories',
+    label: 'Categories',
+    icon: TagsIcon,
   },
 ];
 
