@@ -5,11 +5,10 @@ import { TransactionActions } from '@/components/transactions/TransactionActions
 import { Transaction } from '@/generated/prisma';
 import { dateBetweenFilterFn } from '@/lib/dataTable';
 import { formatCurrency } from '@/lib/formatter';
-import { addTransactionSchemaType } from '@/schemas/transactions';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 
-export const columns: ColumnDef<addTransactionSchemaType>[] = [
+export const columns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'date',
     header: 'Date',
@@ -51,7 +50,7 @@ export const columns: ColumnDef<addTransactionSchemaType>[] = [
     header: 'Actions',
     size: 50,
     cell: ({ row }) => {
-      const transaction = row.original as Transaction;
+      const transaction = row.original;
 
       return <TransactionActions transaction={transaction} />;
     },

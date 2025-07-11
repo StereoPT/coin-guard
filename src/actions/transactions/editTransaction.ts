@@ -22,6 +22,6 @@ export const EditTransaction = async (
     data,
   });
   if (!result) {
-    throw new Error('Failed to Add Transaction');
+    throw new Error('Failed to Edit Transaction');
   }
 };
