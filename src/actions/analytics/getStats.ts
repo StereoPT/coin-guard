@@ -2,7 +2,7 @@
 
 import { TransactionType } from '@/generated/prisma';
 import prisma from '@/lib/prisma';
-import { endOfMonth, startOfMonth } from 'date-fns';
+import { endOfMonth, startOfMonth, subMonths } from 'date-fns';
 
 type TransactionSummary = Record<TransactionType, number>;
 
@@ -14,8 +14,8 @@ export const GetStats = async () => {
     },
     where: {
       date: {
-        gte: startOfMonth(new Date()),
-        lte: endOfMonth(new Date()),
+        gte: startOfMonth(subMonths(new Date(), 1)),
+        lte: endOfMonth(subMonths(new Date(), 1)),
       },
     },
   });

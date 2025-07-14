@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/chart';
 import { Transaction } from '@/generated/prisma';
 import { format } from 'date-fns';
-import { pt } from 'date-fns/locale';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
 const chartConfig = {
@@ -35,9 +34,21 @@ type TransactionChartProps = {
 };
 
 export const TransactionChart = ({ transactions }: TransactionChartProps) => {
-  const transactionData = transactions.map((t) => {
-    return { date: t.date, amount: t.amount };
-  });
+  const transactionData = transactions.reduce<
+    Record<string, { date: string; amount: number }>
+  >((acc, t) => {
+    const monthKey = format(t.date, 'yyyy-MM');
+
+    if (!acc[monthKey]) {
+      acc[monthKey] = { date: monthKey, amount: 0 };
+    }
+
+    acc[monthKey].amount += t.amount;
+
+    return acc;
+  }, {});
+
+  const groupedTransactions = Object.values(transactionData);
 
   const sum = transactions.reduce((acc, t) => (acc += t.amount), 0);
   const average = sum / transactions.length;
@@ -72,7 +83,7 @@ export const TransactionChart = ({ transactions }: TransactionChartProps) => {
           className="aspect-auto h-[250px] w-full">
           <AreaChart
             accessibilityLayer
-            data={transactionData}
+            data={groupedTransactions}
             margin={{
               left: 12,
               right: 12,
@@ -83,7 +94,7 @@ export const TransactionChart = ({ transactions }: TransactionChartProps) => {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => format(value, 'P', { locale: pt })}
+              tickFormatter={(value) => format(value, 'yyyy-MM')}
             />
             <ChartTooltip
               cursor={false}
