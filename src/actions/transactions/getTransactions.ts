@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma';
 
 export const GetTransactions = async () => {
   const transactions = await prisma.transaction.findMany({
-    orderBy: { date: 'asc' },
+    orderBy: { date: 'desc' },
   });
 
   return transactions;
