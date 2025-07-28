@@ -6,6 +6,7 @@ import { ErrorAlert } from '@/components/ErrorAlert';
 import { TransactionTable } from '@/components/transaction/TransactionTable';
 import { TransactionChart } from '@/components/transaction/TransactionChart';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
 
 const LoadingUserTransaction = () => {
   return (
@@ -37,9 +38,14 @@ export const UserTransaction = ({ transactionId }: UserTransactionProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-xl">
+      <div className="flex text-xl gap-2 items-center">
         <span className="font-bold">Transaction: </span>
         {transaction.transaction.description}
+        {transaction.transaction.category && (
+          <Badge variant="outline">
+            {transaction.transaction.category.name}
+          </Badge>
+        )}
       </div>
       <TransactionChart transactions={transaction.all} />
       <TransactionTable transactions={transaction.all} />

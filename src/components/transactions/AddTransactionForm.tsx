@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useGetCategories } from '@/hooks/categories/useGetCategories';
 import { useAddTransaction } from '@/hooks/transactions/useAddTransaction';
 import { cn } from '@/lib/utils';
 import {
@@ -38,6 +39,8 @@ type AddTransactionFormProps = {
 };
 
 export const AddTransactionForm = ({ setOpen }: AddTransactionFormProps) => {
+  const { data: categories } = useGetCategories();
+
   const form = useForm<addTransactionSchemaType>({
     resolver: zodResolver(addTransactionSchema),
     defaultValues: {
@@ -46,6 +49,7 @@ export const AddTransactionForm = ({ setOpen }: AddTransactionFormProps) => {
       type: undefined,
       amount: 0,
       balance: 0,
+      categoryId: undefined,
     },
   });
 
@@ -177,6 +181,34 @@ export const AddTransactionForm = ({ setOpen }: AddTransactionFormProps) => {
             )}
           />
         </div>
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="flex items-center">Category</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a Category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories?.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit" className="w-full" disabled={isPending}>
           {!isPending && 'Add'}
           {isPending && <Loader2Icon className="animate-spin" />}

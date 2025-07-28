@@ -1,4 +1,5 @@
 import { AmountBadge } from '@/components/AmountBadge';
+import { Badge } from '@/components/ui/badge';
 import {
   Table,
   TableBody,
@@ -7,11 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Transaction } from '@/generated/prisma';
+import { TransactionWithCategory } from '@/types/transactions';
 import { format } from 'date-fns';
 
 type TransactionTableProps = {
-  transactions: Transaction[];
+  transactions: TransactionWithCategory[];
 };
 
 export const TransactionTable = ({ transactions }: TransactionTableProps) => {
@@ -21,6 +22,7 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
         <TableHeader className="bg-muted">
           <TableRow>
             <TableHead>Date</TableHead>
+            <TableHead>Category</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
@@ -29,6 +31,11 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
             return (
               <TableRow key={t.id}>
                 <TableCell>{format(t.date, 'PPP')}</TableCell>
+                <TableCell>
+                  {t.category && (
+                    <Badge variant="outline">{t.category.name}</Badge>
+                  )}
+                </TableCell>
                 <TableCell className="text-right">
                   <AmountBadge amount={t.amount} type={t.type} />
                 </TableCell>

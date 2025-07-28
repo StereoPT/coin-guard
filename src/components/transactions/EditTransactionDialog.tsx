@@ -5,14 +5,14 @@ import {
   DialogContent,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { Transaction } from '@/generated/prisma';
+import { TransactionWithCategory } from '@/types/transactions';
 import { ArrowLeftRightIcon } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 
 type EditTransactionDialogProps = {
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
-  transaction: Transaction;
+  transaction: TransactionWithCategory;
 };
 
 export const EditTransactionDialog = ({

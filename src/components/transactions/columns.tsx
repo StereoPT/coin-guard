@@ -2,13 +2,14 @@
 
 import { AmountBadge } from '@/components/AmountBadge';
 import { TransactionActions } from '@/components/transactions/TransactionActions';
-import { Transaction } from '@/generated/prisma';
+import { Badge } from '@/components/ui/badge';
 import { dateBetweenFilterFn } from '@/lib/dataTable';
 import { formatCurrency } from '@/lib/formatter';
+import { TransactionWithCategory } from '@/types/transactions';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns: ColumnDef<TransactionWithCategory>[] = [
   {
     accessorKey: 'date',
     header: 'Date',
@@ -43,6 +44,16 @@ export const columns: ColumnDef<Transaction>[] = [
       const { balance } = row.original;
 
       return formatCurrency(balance);
+    },
+  },
+  {
+    accessorKey: 'category.name',
+    header: 'Category',
+    size: 110,
+    cell: ({ row }) => {
+      const { category } = row.original;
+
+      return category && <Badge variant="outline">{category.name}</Badge>;
     },
   },
   {

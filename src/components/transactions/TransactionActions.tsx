@@ -8,13 +8,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Transaction } from '@/generated/prisma';
+import { TransactionWithCategory } from '@/types/transactions';
 import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
 type TransactionActionsProps = {
-  transaction: Transaction;
+  transaction: TransactionWithCategory;
 };
 
 export const TransactionActions = ({

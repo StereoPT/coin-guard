@@ -21,13 +21,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Transaction } from '@/generated/prisma';
+import { useGetCategories } from '@/hooks/categories/useGetCategories';
 import { useEditTransaction } from '@/hooks/transactions/useEditTransaction';
 import { cn } from '@/lib/utils';
 import {
   editTransactionSchema,
   editTransactionSchemaType,
 } from '@/schemas/transactions';
+import { TransactionWithCategory } from '@/types/transactions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon, Loader2Icon } from 'lucide-react';
@@ -36,16 +37,21 @@ import { useForm } from 'react-hook-form';
 
 type EditTransactionFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  initialValues: Transaction;
+  initialValues: TransactionWithCategory;
 };
 
 export const EditTransactionForm = ({
   setOpen,
   initialValues,
 }: EditTransactionFormProps) => {
+  const { data: categories } = useGetCategories();
+
   const form = useForm<editTransactionSchemaType>({
     resolver: zodResolver(editTransactionSchema),
-    defaultValues: initialValues,
+    defaultValues: {
+      ...initialValues,
+      categoryId: initialValues.categoryId ?? '',
+    },
   });
 
   const { mutateAsync, isPending } = useEditTransaction(initialValues.id);
@@ -179,6 +185,36 @@ export const EditTransactionForm = ({
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="flex items-center">Category</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a Category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories?.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit" className="w-full" disabled={isPending}>
           {!isPending && 'Edit'}
           {isPending && <Loader2Icon className="animate-spin" />}
