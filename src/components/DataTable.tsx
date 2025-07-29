@@ -49,6 +49,7 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     globalFilterFn: config?.filters?.search?.filterFn,
+    autoResetPageIndex: false,
     initialState: {
       columnVisibility: config?.columnVisibility,
     },
