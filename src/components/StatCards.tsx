@@ -32,7 +32,7 @@ export const StatCards = () => {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-3">
       <DisplayCard title="Credit" icon={BanknoteArrowUp}>
         <div className="flex gap-2 items-center text-2xl font-bold text-green-600">
           <ArrowBigUp size={32} /> {stats.CREDIT.toFixed(2)}€

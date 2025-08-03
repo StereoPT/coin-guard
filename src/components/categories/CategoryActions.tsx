@@ -9,7 +9,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Category } from '@/generated/prisma';
-import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
+import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 type CategoryActionsProps = {
@@ -46,6 +47,12 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem asChild>
+            <Link href={`/categories/${category.id}`}>
+              <Eye />
+              Details
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
             <Edit />
             Edit

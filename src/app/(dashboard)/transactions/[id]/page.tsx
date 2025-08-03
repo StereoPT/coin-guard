@@ -1,11 +1,13 @@
 import { PageHeader } from '@/components/PageHeader';
 import { UserTransaction } from '@/components/transaction/UserTransaction';
 
-type TransactionDetailsPage = {
+type TransactionDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
 
-const TransactionDetailsPage = async ({ params }: TransactionDetailsPage) => {
+const TransactionDetailsPage = async ({
+  params,
+}: TransactionDetailsPageProps) => {
   const { id } = await params;
 
   return (
