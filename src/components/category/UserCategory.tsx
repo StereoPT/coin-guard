@@ -3,7 +3,7 @@
 import { CategoryTable } from '@/components/category/CategoryTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useGetCategory } from '@/hooks/category/useGetCategory';
+import { useGetCategory } from '@/hooks/categories/useGetCategory';
 
 const LoadingUserCategory = () => {
   return (

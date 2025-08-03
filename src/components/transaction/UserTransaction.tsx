@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetTransaction } from '@/hooks/transaction/useGetTransaction';
+import { useGetTransaction } from '@/hooks/transactions/useGetTransaction';
 import { ErrorAlert } from '@/components/ErrorAlert';
 
 import { TransactionTable } from '@/components/transaction/TransactionTable';
