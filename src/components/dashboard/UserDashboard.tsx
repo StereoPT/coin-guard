@@ -1,0 +1,50 @@
+'use client';
+
+import { DisplayCard } from '@/components/dashboard/DisplayCard';
+import { ErrorAlert } from '@/components/ErrorAlert';
+import { Skeleton } from '@/components/ui/skeleton';
+import { TransactionType } from '@/generated/prisma';
+import { useStatCards } from '@/hooks/analytics/useStatCards';
+import { BanknoteArrowDown, BanknoteArrowUp } from 'lucide-react';
+
+const LoadingUserDashboard = () => {
+  return (
+    <div className="grid grid-cols-12 gap-4">
+      <Skeleton className="col-span-4 row-span-1 h-20" />
+      <Skeleton className="col-span-4 row-span-1 h-20" />
+      <Skeleton className="col-span-4 row-span-2 h-36" />
+      <Skeleton className="col-span-8 row-span-1 h-12" />
+    </div>
+  );
+};
+
+export const UserDashboard = () => {
+  const { data: stats, isLoading } = useStatCards();
+
+  if (isLoading) {
+    return <LoadingUserDashboard />;
+  }
+
+  if (!stats) {
+    return <ErrorAlert />;
+  }
+
+  return (
+    <div className="grid grid-cols-12 gap-4">
+      <DisplayCard
+        className="col-span-4 row-span-1"
+        title="Income"
+        icon={BanknoteArrowUp}
+        type={TransactionType.CREDIT}
+        stat={stats.CREDIT}
+      />
+      <DisplayCard
+        className="col-span-4 row-span-1"
+        title="Debit"
+        icon={BanknoteArrowDown}
+        type={TransactionType.DEBIT}
+        stat={stats.DEBIT}
+      />
+    </div>
+  );
+};
