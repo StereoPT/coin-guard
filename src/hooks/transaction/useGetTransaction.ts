@@ -1,4 +1,4 @@
-import { GetTransaction } from '@/actions/transaction/getTransaction';
+import { GetTransaction } from '@/actions/transactions/getTransaction';
 import { KEYS } from '@/constants/queryKeys';
 import { useQuery } from '@tanstack/react-query';
 
