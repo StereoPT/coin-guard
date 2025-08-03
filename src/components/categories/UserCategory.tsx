@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoryTable } from '@/components/category/CategoryTable';
+import { CategoryTable } from '@/components/categories/CategoryTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetCategory } from '@/hooks/categories/useGetCategory';

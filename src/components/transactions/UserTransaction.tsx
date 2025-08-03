@@ -3,8 +3,8 @@
 import { useGetTransaction } from '@/hooks/transactions/useGetTransaction';
 import { ErrorAlert } from '@/components/ErrorAlert';
 
-import { TransactionTable } from '@/components/transaction/TransactionTable';
-import { TransactionChart } from '@/components/transaction/TransactionChart';
+import { TransactionTable } from '@/components/transactions/TransactionTable';
+import { TransactionChart } from '@/components/transactions/TransactionChart';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 

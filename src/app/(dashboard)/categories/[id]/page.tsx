@@ -1,4 +1,4 @@
-import { UserCategory } from '@/components/category/UserCategory';
+import { UserCategory } from '@/components/categories/UserCategory';
 import { PageHeader } from '@/components/PageHeader';
 
 type CategoryDetailsPageProps = {

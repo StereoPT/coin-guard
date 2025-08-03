@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/PageHeader';
-import { UserTransaction } from '@/components/transaction/UserTransaction';
+import { UserTransaction } from '@/components/transactions/UserTransaction';
 
 type TransactionDetailsPageProps = {
   params: Promise<{ id: string }>;
