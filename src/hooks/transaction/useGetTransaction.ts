@@ -1,9 +1,10 @@
 import { GetTransaction } from '@/actions/transaction/getTransaction';
+import { KEYS } from '@/constants/queryKeys';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetTransaction = (id: string) => {
   return useQuery({
-    queryKey: ['transactions', id],
+    queryKey: KEYS.transaction(id),
     queryFn: () => GetTransaction(id),
   });
 };

@@ -8,6 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ROUTES } from '@/constants/routes';
 import { Category } from '@/generated/prisma';
 import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
 import Link from 'next/link';
@@ -48,7 +49,7 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem asChild>
-            <Link href={`/categories/${category.id}`}>
+            <Link href={ROUTES.category(category.id)}>
               <Eye />
               Details
             </Link>

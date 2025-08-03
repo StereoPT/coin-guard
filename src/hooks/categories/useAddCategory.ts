@@ -1,4 +1,5 @@
 import { AddCategory } from '@/actions/categories/addCategory';
+import { KEYS } from '@/constants/queryKeys';
 import { addCategorySchemaType } from '@/schemas/categories';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -14,7 +15,7 @@ export const useAddCategory = () => {
     },
     onSuccess: () => {
       toast.success('Category added', { id: toastId });
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
     onError: () => {
       toast.error('Failed to add category', { id: toastId });

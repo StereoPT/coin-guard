@@ -1,4 +1,5 @@
 import { ImportTransaction } from '@/actions/transactions/importTransaction';
+import { KEYS } from '@/constants/queryKeys';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -19,7 +20,7 @@ export const useImportTransaction = () => {
     },
     onSuccess: () => {
       toast.success('Transactions imported', { id: toastId });
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
     onError: () => {
       toast.error('Failed to import transactions', {

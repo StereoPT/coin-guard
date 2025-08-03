@@ -8,6 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ROUTES } from '@/constants/routes';
 import { TransactionWithCategory } from '@/types/transactions';
 import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
 import Link from 'next/link';
@@ -50,7 +51,7 @@ export const TransactionActions = ({
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem asChild>
-            <Link href={`/transactions/${transaction.id}`}>
+            <Link href={ROUTES.transaction(transaction.id)}>
               <Eye />
               Details
             </Link>

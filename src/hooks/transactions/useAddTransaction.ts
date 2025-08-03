@@ -1,4 +1,5 @@
 import { AddTransaction } from '@/actions/transactions/addTransaction';
+import { KEYS } from '@/constants/queryKeys';
 import { addTransactionSchemaType } from '@/schemas/transactions';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -14,7 +15,7 @@ export const useAddTransaction = () => {
     },
     onSuccess: () => {
       toast.success('Transaction added', { id: toastId });
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
     onError: () => {
       toast.error('Failed to add transaction', { id: toastId });

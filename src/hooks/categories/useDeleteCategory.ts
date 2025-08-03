@@ -1,4 +1,5 @@
 import { DeleteCategory } from '@/actions/categories/deleteCategory';
+import { KEYS } from '@/constants/queryKeys';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -13,7 +14,7 @@ export const useDeleteCategory = (id: string) => {
     },
     onSuccess: () => {
       toast.success('Category deleted', { id: toastID });
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
     onError: () => {
       toast.error('Failed to delete category', { id: toastID });

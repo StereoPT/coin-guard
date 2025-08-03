@@ -4,7 +4,7 @@ import {
   Sidebar as ShadcnSidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -12,7 +12,8 @@ import {
   SidebarRail,
 } from './ui/sidebar';
 import {
-  LayoutDashboardIcon,
+  LayoutDashboard,
+  LucideIcon,
   Table2Icon,
   TagsIcon,
   Triangle,
@@ -20,26 +21,53 @@ import {
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
+import { ROUTES } from '@/constants/routes';
 
-const routes = [
+type Route = {
+  icon: LucideIcon;
+  title: string;
+  url: string;
+};
+
+type GroupedRoute = {
+  key: string;
+  label?: string;
+  items: Route[];
+};
+
+const groupRoutes: GroupedRoute[] = [
   {
-    href: 'transactions',
-    label: 'Transactions',
-    icon: Table2Icon,
+    key: 'dashboard',
+    items: [{ icon: LayoutDashboard, title: 'Dashboard', url: ROUTES.home }],
   },
   {
-    href: 'categories',
-    label: 'Categories',
-    icon: TagsIcon,
+    key: 'mainMenu',
+    label: 'Main Menu',
+    items: [
+      {
+        icon: Table2Icon,
+        title: 'Transactions',
+        url: ROUTES.transactions,
+      },
+      {
+        icon: TagsIcon,
+        title: 'Categories',
+        url: ROUTES.categories,
+      },
+    ],
   },
 ];
 
+const isActive = (routeUrl: string, currentPath: string) => {
+  if (routeUrl === '/') {
+    return currentPath === '/';
+  }
+
+  return currentPath === routeUrl || currentPath.startsWith(routeUrl + '/');
+};
+
 export const Sidebar = () => {
   const pathname = usePathname();
-  const activeRoute =
-    routes.find(
-      (route) => route.href.length > 0 && pathname.includes(route.href),
-    )?.href || '';
 
   return (
     <ShadcnSidebar variant="sidebar" collapsible="icon">
@@ -61,39 +89,32 @@ export const Sidebar = () => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={activeRoute === ''}>
-                  <Link href="/">
-                    <LayoutDashboardIcon />
-                    Dashboard
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {routes.map((route) => {
-                const isActive = activeRoute === route.href;
-                return (
-                  <SidebarMenuItem key={route.href}>
-                    <SidebarMenuButton asChild isActive={isActive}>
-                      <Link href={`/${route.href}`}>
-                        <route.icon size={20} />
-                        {route.label}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {groupRoutes.map(({ key, label, items }) => {
+          return (
+            <SidebarGroup key={key}>
+              {label && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
+              <SidebarMenu className="gap-2">
+                {items.map(({ icon, title, url }) => {
+                  const Icon = icon;
+
+                  return (
+                    <SidebarMenuItem key={title}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive(url, pathname)}
+                        tooltip={title}>
+                        <Link href={url}>
+                          <Icon />
+                          {title}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroup>
+          );
+        })}
       </SidebarContent>
       <SidebarRail />
     </ShadcnSidebar>
