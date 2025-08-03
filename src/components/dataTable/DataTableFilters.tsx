@@ -1,4 +1,7 @@
-import { DataTableFilter, Filter } from '@/components/DataTableFilter';
+import {
+  DataTableFilter,
+  Filter,
+} from '@/components/dataTable/DataTableFilter';
 import { Input } from '@/components/ui/input';
 import { FilterFn, Table } from '@tanstack/react-table';
 

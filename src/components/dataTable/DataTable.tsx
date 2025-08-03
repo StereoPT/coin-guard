@@ -19,8 +19,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { DataTablePagination } from '@/components/DataTablePagination';
-import { DataTableFilters, Filters } from '@/components/DataTableFilters';
+import { DataTablePagination } from '@/components/dataTable/DataTablePagination';
+import {
+  DataTableFilters,
+  Filters,
+} from '@/components/dataTable/DataTableFilters';
 
 type ColumnVisibility<TData> = {
   [K in keyof TData]?: boolean;

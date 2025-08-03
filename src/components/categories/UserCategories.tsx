@@ -2,7 +2,7 @@
 
 import { AddCategoryDialog } from '@/components/categories/AddCategoryDialog';
 import { columns } from '@/components/categories/columns';
-import { DataTable } from '@/components/DataTable';
+import { DataTable } from '@/components/dataTable/DataTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetCategories } from '@/hooks/categories/useGetCategories';

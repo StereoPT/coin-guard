@@ -1,5 +1,5 @@
-import { DateFilter } from '@/components/filters/DateFilter';
-import { SelectFilter } from '@/components/filters/SelectFilter';
+import { DateFilter } from '@/components/dataTable/filters/DateFilter';
+import { SelectFilter } from '@/components/dataTable/filters/SelectFilter';
 import { Table } from '@tanstack/react-table';
 
 export type Filter<TData> = {

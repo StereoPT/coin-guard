@@ -1,6 +1,6 @@
 'use client';
 
-import { DataTable } from '@/components/DataTable';
+import { DataTable } from '@/components/dataTable/DataTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { AddTransactionDialog } from '@/components/transactions/AddTransactionDialog';
 import { columns } from '@/components/transactions/columns';
