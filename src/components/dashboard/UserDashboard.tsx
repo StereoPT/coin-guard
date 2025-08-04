@@ -1,10 +1,11 @@
 'use client';
 
 import { DisplayCard } from '@/components/dashboard/DisplayCard';
+import { DisplayCategoryGraph } from '@/components/dashboard/DisplayCategoryGraph';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TransactionType } from '@/generated/prisma';
-import { useStatCards } from '@/hooks/analytics/useStatCards';
+import { useDashboardAnalytics } from '@/hooks/analytics/useDashboardAnalytics';
 import { BanknoteArrowDown, BanknoteArrowUp } from 'lucide-react';
 
 const LoadingUserDashboard = () => {
@@ -19,13 +20,13 @@ const LoadingUserDashboard = () => {
 };
 
 export const UserDashboard = () => {
-  const { data: stats, isLoading } = useStatCards();
+  const { data: analytics, isLoading } = useDashboardAnalytics();
 
   if (isLoading) {
     return <LoadingUserDashboard />;
   }
 
-  if (!stats) {
+  if (!analytics) {
     return <ErrorAlert />;
   }
 
@@ -36,14 +37,18 @@ export const UserDashboard = () => {
         title="Income"
         icon={BanknoteArrowUp}
         type={TransactionType.CREDIT}
-        stat={stats.CREDIT}
+        stat={analytics.stats.CREDIT}
       />
       <DisplayCard
         className="col-span-4 row-span-1"
         title="Debit"
         icon={BanknoteArrowDown}
         type={TransactionType.DEBIT}
-        stat={stats.DEBIT}
+        stat={analytics.stats.DEBIT}
+      />
+      <DisplayCategoryGraph
+        className="col-span-4 row-span-2"
+        stats={analytics.categoryStats}
       />
     </div>
   );

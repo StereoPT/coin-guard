@@ -2,6 +2,7 @@ import { TransactionStat } from '@/actions/analytics/getStats';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { TransactionType } from '@/generated/prisma';
+import { formatCurrency } from '@/lib/formatter';
 import { getTypeColor } from '@/lib/typeColors';
 import { cn } from '@/lib/utils';
 import { ClassValue } from 'clsx';
@@ -36,7 +37,9 @@ export const DisplayCard = ({
             {title}
           </div>
           <div className="flex items-center gap-4">
-            <div className="font-bold text-lg">{stat.value.toFixed(2)}€</div>
+            <div className="font-bold text-lg">
+              {formatCurrency(stat.value)}
+            </div>
             <Badge
               className={cn(getTypeColor(type, isNegativePercentage))}
               variant="secondary">
