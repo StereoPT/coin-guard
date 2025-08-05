@@ -8,10 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ROUTES } from '@/constants/routes';
 import { TransactionWithCategory } from '@/types/transactions';
-import { Edit, Eye, MoreHorizontal, Trash2 } from 'lucide-react';
-import Link from 'next/link';
+import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 type TransactionActionsProps = {
@@ -50,12 +48,6 @@ export const TransactionActions = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem asChild>
-            <Link href={ROUTES.transaction(transaction.id)}>
-              <Eye />
-              Details
-            </Link>
-          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
             <Edit />
             Edit
