@@ -12,20 +12,13 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Transaction } from '@/generated/prisma';
+import { formatCurrency } from '@/lib/formatter';
 import { format } from 'date-fns';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
 const chartConfig = {
   date: {
     label: 'Amount',
-  },
-  desktop: {
-    label: 'Desktop',
-    color: 'var(--chart-1)',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: 'var(--chart-2)',
   },
 } satisfies ChartConfig;
 
@@ -66,13 +59,13 @@ export const TransactionChart = ({ transactions }: TransactionChartProps) => {
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Sum</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              {sum.toFixed(2)}€
+              {formatCurrency(sum)}
             </span>
           </div>
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Average</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              {average.toFixed(2)}€
+              {formatCurrency(average)}
             </span>
           </div>
         </div>

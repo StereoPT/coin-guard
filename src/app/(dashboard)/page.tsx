@@ -1,12 +1,15 @@
+import { UserDashboard } from '@/components/dashboard/UserDashboard';
 import { PageHeader } from '@/components/PageHeader';
-import { StatCards } from '@/components/StatCards';
 
 const HomePage = async () => {
   return (
     <div className="flex flex-1 flex-col h-full">
-      <PageHeader title="Dashboard" description="Account overview" />
+      <PageHeader
+        title="Welcome, Guido"
+        description="This is your finance report"
+      />
       <div className="h-full py-6">
-        <StatCards />
+        <UserDashboard />
       </div>
     </div>
   );

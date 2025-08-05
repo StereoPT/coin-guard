@@ -71,6 +71,7 @@ export const UserTransactions = () => {
         },
         columnVisibility: {
           type: false,
+          date: false,
         },
       }}
     />
