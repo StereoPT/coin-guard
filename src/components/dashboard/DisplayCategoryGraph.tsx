@@ -58,7 +58,7 @@ export const DisplayCategoryGraph = ({
       <div>
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]">
+          className="mx-auto aspect-square max-h-[300px]">
           <PieChart>
             <ChartTooltip
               cursor={false}
