@@ -24,11 +24,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type TransactionChartProps = {
+type CategoryChartProps = {
   transactions: Transaction[];
 };
 
-export const TransactionChart = ({ transactions }: TransactionChartProps) => {
+export const CategoryChart = ({ transactions }: CategoryChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 
@@ -62,10 +62,8 @@ export const TransactionChart = ({ transactions }: TransactionChartProps) => {
     <Card className="py-4 sm:py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
-          <CardTitle>Transaction Graph</CardTitle>
-          <CardDescription>
-            Showing transaction amount over time
-          </CardDescription>
+          <CardTitle>Category Graph</CardTitle>
+          <CardDescription>Showing category amount over time</CardDescription>
         </div>
         <div className="flex">
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">

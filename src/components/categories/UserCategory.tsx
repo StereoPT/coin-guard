@@ -1,5 +1,6 @@
 'use client';
 
+import { CategoryChart } from '@/components/categories/CategoryChart';
 import { CategoryTable } from '@/components/categories/CategoryTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -35,6 +36,7 @@ export const UserCategory = ({ categoryId }: UserCategoryProps) => {
         <span className="font-bold">Category: </span>
         {category.name}
       </div>
+      <CategoryChart transactions={category.transactions} />
       <CategoryTable transactions={category.transactions} />
     </div>
   );
