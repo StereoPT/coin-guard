@@ -14,7 +14,7 @@ const TransactionDetailsPage = async ({
   return (
     <div className="flex flex-1 flex-col h-full">
       <div className="flex justify-between">
-        <PageHeader title="Transaction Details" />
+        <PageHeader title="Transaction Details" goBack />
         <EditTransactionDialog trigger id={id} />
       </div>
 

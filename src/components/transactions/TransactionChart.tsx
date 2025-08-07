@@ -1,3 +1,4 @@
+import { CountUpWrapper } from '@/components/CountUpWrapper';
 import {
   Card,
   CardContent,
@@ -13,7 +14,6 @@ import {
 } from '@/components/ui/chart';
 import { Transaction } from '@/generated/prisma';
 import { generateMonthRange } from '@/lib/date';
-import { formatCurrency } from '@/lib/formatter';
 import { format } from 'date-fns';
 import { useMemo } from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
@@ -71,13 +71,13 @@ export const TransactionChart = ({ transactions }: TransactionChartProps) => {
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Sum</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              {formatCurrency(sum)}
+              <CountUpWrapper value={sum} />
             </span>
           </div>
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Average</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              {formatCurrency(average)}
+              <CountUpWrapper value={average} />
             </span>
           </div>
         </div>

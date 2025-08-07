@@ -128,3 +128,8 @@ body {
   margin-inline: auto;
   padding-inline: 2rem;
 }
+
+#nprogress {
+  position: relative;
+  z-index: 9999999;
+}

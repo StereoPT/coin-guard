@@ -1,8 +1,8 @@
 import { TransactionStat } from '@/actions/analytics/getStats';
+import { CountUpWrapper } from '@/components/CountUpWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { TransactionType } from '@/generated/prisma';
-import { formatCurrency } from '@/lib/formatter';
 import { getTypeColor } from '@/lib/typeColors';
 import { cn } from '@/lib/utils';
 import { ClassValue } from 'clsx';
@@ -38,7 +38,7 @@ export const DisplayCard = ({
           </div>
           <div className="flex items-center gap-4">
             <div className="font-bold text-lg">
-              {formatCurrency(stat.value)}
+              <CountUpWrapper value={stat.value} />
             </div>
             <Badge
               className={cn(getTypeColor(type, isNegativePercentage))}

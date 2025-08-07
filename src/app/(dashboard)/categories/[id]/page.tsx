@@ -12,7 +12,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
   return (
     <div className="flex flex-1 flex-col h-full">
       <div className="flex justify-between">
-        <PageHeader title="Category Details" />
+        <PageHeader title="Category Details" goBack />
         <EditCategoryDialog trigger id={id} />
       </div>
       <div className="h-full py-6">
