@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { useGetCategories } from '@/hooks/categories/useGetCategories';
 import { useEditTransaction } from '@/hooks/transactions/useEditTransaction';
 import { cn } from '@/lib/utils';
@@ -50,7 +51,8 @@ export const EditTransactionForm = ({
     resolver: zodResolver(editTransactionSchema),
     defaultValues: {
       ...initialValues,
-      categoryId: initialValues.categoryId ?? '',
+      note: initialValues.note ?? '',
+      categoryId: initialValues.categoryId ?? undefined,
     },
   });
 
@@ -184,31 +186,45 @@ export const EditTransactionForm = ({
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="categoryId"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel className="flex items-center">Category</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a Category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories?.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormField
           control={form.control}
-          name="categoryId"
+          name="note"
           render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel className="flex items-center">Category</FormLabel>
+            <FormItem>
+              <FormLabel className="flex items-center">Notes</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select a Category" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {categories?.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        {category.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <Textarea {...field} placeholder="Notes" className="h-32" />
               </FormControl>
               <FormMessage />
             </FormItem>

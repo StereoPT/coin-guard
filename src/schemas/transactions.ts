@@ -6,6 +6,7 @@ export const addTransactionSchema = z.object({
   type: z.enum(['CREDIT', 'DEBIT']),
   amount: z.coerce.number(),
   balance: z.coerce.number(),
+  note: z.string().trim().optional(),
   categoryId: z.string().trim().optional(),
 });
 

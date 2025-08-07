@@ -22,7 +22,7 @@ export const EditTransactionDialog = ({
 }: EditTransactionDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="px-0 py-4">
+      <DialogContent className="px-0 py-4 !max-w-2xl">
         <DialogHeader
           title="Edit Transaction"
           subtitle="Edit your transaction"
