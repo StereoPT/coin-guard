@@ -1,3 +1,4 @@
+import { EditCategoryDialog } from '@/components/categories/EditCategoryDialog';
 import { UserCategory } from '@/components/categories/UserCategory';
 import { PageHeader } from '@/components/PageHeader';
 
@@ -12,6 +13,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
     <div className="flex flex-1 flex-col h-full">
       <div className="flex justify-between">
         <PageHeader title="Category Details" />
+        <EditCategoryDialog trigger id={id} />
       </div>
       <div className="h-full py-6">
         <UserCategory categoryId={id} />
