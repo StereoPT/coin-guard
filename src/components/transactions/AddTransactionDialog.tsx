@@ -31,7 +31,7 @@ export const AddTransactionDialog = () => {
           Add Transaction
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-0 py-4">
+      <DialogContent className="px-0 py-4 !max-w-2xl">
         <DialogHeader
           title="Create Transactions"
           subtitle="Create or import transactions"

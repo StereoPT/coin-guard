@@ -24,6 +24,7 @@ model Transaction {
   type          TransactionType
   amount        Float
   balance       Float
+  note          String?
 
   categoryId    String?
   category      Category?         @relation(fields: [categoryId], references: [id])
