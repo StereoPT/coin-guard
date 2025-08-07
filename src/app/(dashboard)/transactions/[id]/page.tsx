@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/PageHeader';
+import { EditTransactionDialog } from '@/components/transactions/EditTransactionDialog';
 import { UserTransaction } from '@/components/transactions/UserTransaction';
 
 type TransactionDetailsPageProps = {
@@ -14,6 +15,7 @@ const TransactionDetailsPage = async ({
     <div className="flex flex-1 flex-col h-full">
       <div className="flex justify-between">
         <PageHeader title="Transaction Details" />
+        <EditTransactionDialog trigger id={id} />
       </div>
 
       <div className="h-full py-6">

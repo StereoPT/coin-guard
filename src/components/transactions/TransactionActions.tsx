@@ -36,7 +36,7 @@ export const TransactionActions = ({
         <EditTransactionDialog
           open={showEditDialog}
           onOpenChange={setShowEditDialog}
-          transaction={transaction}
+          id={transaction.id}
         />
       )}
 

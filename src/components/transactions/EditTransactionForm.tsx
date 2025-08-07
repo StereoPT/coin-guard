@@ -33,11 +33,11 @@ import { TransactionWithCategory } from '@/types/transactions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon, Loader2Icon } from 'lucide-react';
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 type EditTransactionFormProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: (prevOpen: boolean) => void;
   initialValues: TransactionWithCategory;
 };
 
