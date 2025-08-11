@@ -15,7 +15,7 @@ import {
   LayoutDashboard,
   LucideIcon,
   Table2Icon,
-  TagsIcon,
+  TagIcon,
   Triangle,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -50,7 +50,7 @@ const groupRoutes: GroupedRoute[] = [
         url: ROUTES.transactions,
       },
       {
-        icon: TagsIcon,
+        icon: TagIcon,
         title: 'Categories',
         url: ROUTES.categories,
       },
@@ -81,7 +81,7 @@ export const Sidebar = () => {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">CoinGuard</span>
-                  <span className="">v1.0.0</span>
+                  <span className="">v5.0.0</span>
                 </div>
               </Link>
             </SidebarMenuButton>
