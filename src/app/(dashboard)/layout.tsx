@@ -4,17 +4,19 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { ReactNode } from 'react';
 
 type DashboardLayoutProps = {
+  breadcrumb: ReactNode;
   children: ReactNode;
 };
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, breadcrumb }: DashboardLayoutProps) => {
   return (
     <div className="flex h-screen w-full">
       <Sidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between pl-2 pr-6 py-4 h-[50px]">
-          <div className="flex w-full">
+          <div className="flex items-center gap-8 w-full">
             <SidebarTrigger />
+            {breadcrumb}
           </div>
         </header>
         <Separator />
