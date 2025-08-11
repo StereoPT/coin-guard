@@ -5,7 +5,6 @@ import { ErrorAlert } from '@/components/ErrorAlert';
 
 import { TransactionTable } from '@/components/transactions/TransactionTable';
 import { TransactionChart } from '@/components/transactions/TransactionChart';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -19,32 +18,12 @@ import { format } from 'date-fns';
 import { Calendar } from 'lucide-react';
 import { AmountBadge } from '@/components/AmountBadge';
 
-const LoadingUserTransaction = () => {
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-4">
-        <Skeleton className="h-36 w-full" />
-        <Skeleton className="h-36 w-full" />
-      </div>
-      <div className="space-y-2">
-        {[1, 2].map((i) => (
-          <Skeleton key={i} className="h-[420px] w-full" />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 type UserTransactionProps = {
   transactionId: string;
 };
 
 export const UserTransaction = ({ transactionId }: UserTransactionProps) => {
-  const { data: transaction, isLoading } = useGetTransaction(transactionId);
-
-  if (isLoading) {
-    return <LoadingUserTransaction />;
-  }
+  const { data: transaction } = useGetTransaction(transactionId);
 
   if (!transaction) {
     return <ErrorAlert />;

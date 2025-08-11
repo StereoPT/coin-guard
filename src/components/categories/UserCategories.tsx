@@ -4,23 +4,9 @@ import { AddCategoryDialog } from '@/components/categories/AddCategoryDialog';
 import { columns } from '@/components/categories/columns';
 import { DataTable } from '@/components/dataTable/DataTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useGetCategories } from '@/hooks/categories/useGetCategories';
 import { fuzzyFilterFn } from '@/lib/dataTable';
 import { TagsIcon } from 'lucide-react';
-
-const LoadingUserCategories = () => {
-  return (
-    <div className="flex flex-col gap-4">
-      <Skeleton className="h-9 w-1/2" />
-      <div className="space-y-2">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Skeleton key={i} className="h-16 w-full" />
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const EmptyUserCategories = () => {
   return (
@@ -40,11 +26,7 @@ const EmptyUserCategories = () => {
 };
 
 export const UserCategories = () => {
-  const { data: categories, isLoading } = useGetCategories();
-
-  if (isLoading) {
-    return <LoadingUserCategories />;
-  }
+  const { data: categories } = useGetCategories();
 
   if (!categories) {
     return <ErrorAlert />;

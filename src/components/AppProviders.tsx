@@ -1,19 +1,18 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { SidebarProvider } from './ui/sidebar';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { getQueryClient } from '@/lib/getQueryClient';
 
 type AppProvidersProps = {
   children: ReactNode;
 };
 
 export const AppProviders = ({ children }: AppProvidersProps) => {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={getQueryClient()}>
       <SidebarProvider>
         {children}
         <ReactQueryDevtools />

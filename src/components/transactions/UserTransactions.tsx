@@ -4,23 +4,9 @@ import { DataTable } from '@/components/dataTable/DataTable';
 import { ErrorAlert } from '@/components/ErrorAlert';
 import { AddTransactionDialog } from '@/components/transactions/AddTransactionDialog';
 import { columns } from '@/components/transactions/columns';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useGetTransactions } from '@/hooks/transactions/useGetTransactions';
 import { fuzzyFilterFn } from '@/lib/dataTable';
 import { ArrowLeftRight } from 'lucide-react';
-
-const LoadingUserTransactions = () => {
-  return (
-    <div className="flex flex-col gap-4">
-      <Skeleton className="h-9 w-1/2" />
-      <div className="space-y-2">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Skeleton key={i} className="h-16 w-full" />
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const EmptyUserTransactions = () => {
   return (
@@ -40,11 +26,7 @@ const EmptyUserTransactions = () => {
 };
 
 export const UserTransactions = () => {
-  const { data: transactions, isLoading } = useGetTransactions();
-
-  if (isLoading) {
-    return <LoadingUserTransactions />;
-  }
+  const { data: transactions } = useGetTransactions();
 
   if (!transactions) {
     return <ErrorAlert />;
