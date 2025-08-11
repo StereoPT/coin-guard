@@ -1,39 +1,130 @@
 'use server';
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { format, isValid, parse } from 'date-fns';
+import Papa from 'papaparse';
 import prisma from '@/lib/prisma';
 
-const handlePython = async (file: File) => {
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  const fileContents = buffer
-    .toString('latin1')
-    .split('\n')
-    .slice(6)
-    .join('\n');
-
-  const filePath = path.join('.', 'transactions', 'transaction.csv');
-  fs.writeFileSync(filePath, fileContents);
-
-  const pythonOut = execSync(`python3 src/lib/main.py`);
-  if (pythonOut.toString().trim() !== 'DONE') {
-    throw new Error('Something went wrong!');
-  }
-
-  fs.rmSync(filePath);
+type RawTransactionData = {
+  'Data mov.': string;
+  'Data valor': string;
+  Descrição: string;
+  Débito: string;
+  Crédito: string;
+  'Saldo contabilístico': string;
+  'Saldo disponível': string;
+  Categoria: string;
+  [key: string]: string | undefined;
 };
 
-const handleJsonImport = async () => {
-  const filePath = path.join('.', 'transactions', 'transaction.json');
+type ProcessedTransaction = {
+  date: string;
+  description: string;
+  amount: number;
+  balance: number;
+  type: 'CREDIT' | 'DEBIT';
+};
 
-  const data = fs.readFileSync(filePath, 'utf8');
-  const transactions = JSON.parse(data);
+const parseNumbers = (value: string) => {
+  const cleanValue = value.replace(/\./g, '').replace(',', '.');
 
-  await prisma.transaction.createMany({ data: transactions });
+  const number = parseFloat(cleanValue);
+  return Math.round(number * 100) / 100;
+};
 
-  fs.rmSync(filePath);
+const parseDates = (dateString: string) => {
+  if (!dateString || typeof dateString !== 'string') return null;
+
+  try {
+    const parsedDate = parse(dateString, 'dd-MM-yyyy', new Date());
+
+    if (!isValid(parsedDate)) return null;
+
+    return format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'");
+  } catch (error) {
+    console.warn('Error parsing date:', dateString, error);
+    return null;
+  }
+};
+
+const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
+  try {
+    const description = row['Descrição']?.trim().toLowerCase() || '';
+    if (!description) return null;
+
+    const creditValue = row['Crédito'] || '';
+    const debitValue = row['Débito'] || '';
+    const amountString = creditValue || debitValue;
+
+    if (!amountString) return null;
+
+    const type: 'CREDIT' | 'DEBIT' = creditValue ? 'CREDIT' : 'DEBIT';
+
+    const amount = parseNumbers(amountString);
+    if (isNaN(amount)) return null;
+
+    // Process balance
+    const balanceString = row['Saldo contabilístico'] || '';
+    if (!balanceString) return null;
+
+    const balance = parseNumbers(balanceString);
+    if (isNaN(balance)) return null;
+
+    // Process date
+    const dateString = row['Data valor'];
+    if (!dateString) return null;
+
+    const date = parseDates(dateString);
+    if (!date) return null;
+
+    return {
+      date,
+      description,
+      amount,
+      balance,
+      type,
+    };
+  } catch (error) {
+    console.warn('Error processing row:', error);
+    return null;
+  }
+};
+
+const processData = (rawData: RawTransactionData[]): ProcessedTransaction[] => {
+  const dataWithoutLastLine =
+    rawData.length > 0 ? rawData.slice(0, -1) : rawData;
+
+  const processedTransactions = dataWithoutLastLine
+    .map(processRow)
+    .filter((transaction) => transaction !== null);
+
+  return processedTransactions;
+};
+
+const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
+  return new Promise((resolve, reject) => {
+    Papa.parse(csvContent, {
+      header: true,
+      delimiter: ';',
+      skipEmptyLines: true,
+      transformHeader: (header: string) => header.trim(),
+      complete: (results) => {
+        if (results.errors.length > 0) {
+          reject(
+            new Error(
+              `CSV Parsing Errors: ${results.errors
+                .map((e) => e.message)
+                .join(', ')}`,
+            ),
+          );
+        } else {
+          resolve(results.data as RawTransactionData[]);
+        }
+      },
+      error: (error: Error) => {
+        reject(new Error(`CSV parsing failed: ${error.message}`));
+      },
+    });
+  });
 };
 
 export const ImportTransaction = async (formValues: FormData) => {
@@ -44,10 +135,18 @@ export const ImportTransaction = async (formValues: FormData) => {
       throw new Error('No file uploaded!');
     }
 
-    await handlePython(file);
-    await handleJsonImport();
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const fileContents = buffer
+      .toString('latin1')
+      .split('\n')
+      .slice(6)
+      .join('\n');
 
-    return true;
+    const rawData = await parseCSV(fileContents);
+    const processedData = processData(rawData);
+
+    await prisma.transaction.createMany({ data: processedData });
   } catch (error) {
     console.error('Failed to process CSV file:', error);
     throw new Error('Failed to process CSV file!');
