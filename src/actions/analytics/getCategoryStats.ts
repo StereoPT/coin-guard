@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { TransactionType } from '@/generated/prisma';
-import prisma from '@/lib/prisma';
-import { endOfMonth, startOfMonth, subMonths } from 'date-fns';
+import { TransactionType } from "@/generated/prisma";
+import prisma from "@/lib/prisma";
+import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
 export type GetCategoryStatsReturnValue = {
   categoryId: string;
@@ -14,7 +14,7 @@ export const GetCategoryStats = async (): Promise<
   GetCategoryStatsReturnValue[]
 > => {
   const categoryTotals = await prisma.transaction.groupBy({
-    by: 'categoryId',
+    by: "categoryId",
     _sum: {
       amount: true,
     },
@@ -46,10 +46,10 @@ export const GetCategoryStats = async (): Promise<
   const categoryMap = new Map(categories.map((cat) => [cat.id, cat.name]));
 
   const result = categoryTotals.map((item) => ({
-    categoryId: item.categoryId ?? '-1',
+    categoryId: item.categoryId ?? "-1",
     categoryName: item.categoryId
-      ? categoryMap.get(item.categoryId) ?? ''
-      : 'Uncategorized',
+      ? (categoryMap.get(item.categoryId) ?? "")
+      : "Uncategorized",
     totalAmount: item._sum.amount ?? 0,
   }));
 

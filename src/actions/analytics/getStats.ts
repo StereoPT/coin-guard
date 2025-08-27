@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { TransactionType } from '@/generated/prisma';
-import prisma from '@/lib/prisma';
-import { endOfMonth, startOfMonth, subMonths } from 'date-fns';
+import { TransactionType } from "@/generated/prisma";
+import prisma from "@/lib/prisma";
+import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
 type TransactionValue = Record<TransactionType, number>;
 
@@ -33,7 +33,7 @@ const getTransactionSummaryForPeriod = async (
   monthsBack: number,
 ): Promise<TransactionValue> => {
   const groupedData = await prisma.transaction.groupBy({
-    by: 'type',
+    by: "type",
     _sum: { amount: true },
     where: { date: getDateRange(monthsBack) },
   });
