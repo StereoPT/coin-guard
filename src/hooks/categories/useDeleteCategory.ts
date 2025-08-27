@@ -1,7 +1,7 @@
-import { DeleteCategory } from '@/actions/categories/deleteCategory';
-import { KEYS } from '@/constants/queryKeys';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { DeleteCategory } from "@/actions/categories/deleteCategory";
+import { KEYS } from "@/constants/queryKeys";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const useDeleteCategory = (id: string) => {
   const queryClient = useQueryClient();
@@ -9,15 +9,15 @@ export const useDeleteCategory = (id: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading('Deleting category...', { id: toastID });
+      toast.loading("Deleting category...", { id: toastID });
       return DeleteCategory(id);
     },
     onSuccess: () => {
-      toast.success('Category deleted', { id: toastID });
+      toast.success("Category deleted", { id: toastID });
       queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
     onError: () => {
-      toast.error('Failed to delete category', { id: toastID });
+      toast.error("Failed to delete category", { id: toastID });
     },
   });
 };

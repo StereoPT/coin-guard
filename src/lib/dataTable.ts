@@ -1,6 +1,6 @@
-import { FilterFn, FilterMeta, Row } from '@tanstack/react-table';
-import { rankItem } from '@tanstack/match-sorter-utils';
-import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
+import type { FilterFn, FilterMeta, Row } from "@tanstack/react-table";
+import { rankItem } from "@tanstack/match-sorter-utils";
+import { endOfDay, isWithinInterval, startOfDay } from "date-fns";
 
 export const fuzzyFilterFn =
   <TData>(searchableColumns?: (keyof TData)[]) =>

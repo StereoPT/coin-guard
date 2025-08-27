@@ -1,7 +1,7 @@
 export const ROUTES = {
-  home: '/',
-  transactions: '/transactions',
+  home: "/",
+  transactions: "/transactions",
   transaction: (id: string) => `/transactions/${id}` as const,
-  categories: '/categories',
+  categories: "/categories",
   category: (id: string) => `/categories/${id}` as const,
 } as const;

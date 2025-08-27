@@ -1,4 +1,4 @@
-import { addMonths, format, isBefore, startOfMonth } from 'date-fns';
+import { addMonths, format, isBefore, startOfMonth } from "date-fns";
 
 export const generateMonthRange = (
   startDate: Date,
@@ -12,7 +12,7 @@ export const generateMonthRange = (
     isBefore(currentDate, end) ||
     currentDate.getTime() === end.getTime()
   ) {
-    months.push(format(currentDate, 'yyyy-MM'));
+    months.push(format(currentDate, "yyyy-MM"));
     currentDate = addMonths(currentDate, 1);
   }
 
