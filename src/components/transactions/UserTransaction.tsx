@@ -1,11 +1,12 @@
 "use client";
 
-import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
-import { TransactionTable } from "@/components/transactions/TransactionTable";
+import { AmountBadge } from "@/components/AmountBadge";
 import { TransactionChart } from "@/components/transactions/TransactionChart";
-import { Badge } from "@/components/ui/badge";
+import { TransactionTable } from "@/components/transactions/TransactionTable";
+import { Badge } from "@/ui/badge";
 import {
   Card,
   CardAction,
@@ -13,10 +14,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/ui/card";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
-import { AmountBadge } from "@/components/AmountBadge";
 
 type UserTransactionProps = {
   transactionId: string;

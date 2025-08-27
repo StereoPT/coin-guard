@@ -2,7 +2,7 @@ import {
   DataTableFilter,
   type Filter,
 } from "@/components/dataTable/DataTableFilter";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/ui/input";
 import type { FilterFn, Table } from "@tanstack/react-table";
 
 export type Filters<TData> = {

@@ -1,14 +1,14 @@
 import { DeleteTransactionDialog } from "@/components/transactions/DeleteTransactionDialog";
 import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
-import { Button } from "@/components/ui/button";
+import type { TransactionWithCategory } from "@/types/transactions";
+import { Button } from "@/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import type { TransactionWithCategory } from "@/types/transactions";
+} from "@/ui/dropdown-menu";
 import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
 import { useState } from "react";
 

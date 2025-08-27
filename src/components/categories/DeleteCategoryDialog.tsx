@@ -1,3 +1,5 @@
+import type { Category } from "@/generated/prisma";
+import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,10 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { buttonVariants } from "@/components/ui/button";
-import type { Category } from "@/generated/prisma";
-import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
+} from "@/ui/alert-dialog";
+import { buttonVariants } from "@/ui/button";
 
 type DeleteCategoryDialogProps = {
   category: Category;

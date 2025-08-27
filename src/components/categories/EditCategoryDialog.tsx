@@ -2,14 +2,14 @@
 
 import { EditCategoryForm } from "@/components/categories/EditCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@/components/ui/button";
+import { useGetCategory } from "@/hooks/categories/useGetCategory";
+import { Button } from "@/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useGetCategory } from "@/hooks/categories/useGetCategory";
+} from "@/ui/dialog";
 import { Edit, Tag } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 

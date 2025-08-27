@@ -2,11 +2,11 @@
 
 import { AmountBadge } from "@/components/AmountBadge";
 import { TransactionActions } from "@/components/transactions/TransactionActions";
-import { Badge } from "@/components/ui/badge";
 import { ROUTES } from "@/constants/routes";
 import { dateBetweenFilterFn } from "@/lib/dataTable";
 import { formatCurrency } from "@/lib/formatter";
 import type { TransactionWithCategory } from "@/types/transactions";
+import { Badge } from "@/ui/badge";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";

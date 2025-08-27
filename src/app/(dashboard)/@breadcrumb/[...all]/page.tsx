@@ -1,3 +1,4 @@
+import { ROUTES } from "@/constants/routes";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,10 +6,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { ROUTES } from "@/constants/routes";
-import React from "react";
+} from "@/ui/breadcrumb";
 import type { ReactElement } from "react";
+import React from "react";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ all: string[] }>;

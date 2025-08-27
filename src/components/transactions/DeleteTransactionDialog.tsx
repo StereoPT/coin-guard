@@ -1,3 +1,5 @@
+import type { Transaction } from "@/generated/prisma";
+import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,10 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { buttonVariants } from "@/components/ui/button";
-import type { Transaction } from "@/generated/prisma";
-import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
+} from "@/ui/alert-dialog";
+import { buttonVariants } from "@/ui/button";
 
 type DeleteTransactionDialogProps = {
   transaction: Transaction;

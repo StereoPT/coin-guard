@@ -1,7 +1,7 @@
-import { Badge } from "@/components/ui/badge";
 import type { TransactionType } from "@/generated/prisma";
 import { formatCurrency } from "@/lib/formatter";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/ui/badge";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 type AmountBadgeProps = {

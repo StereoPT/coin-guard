@@ -1,14 +1,14 @@
 import { DeleteCategoryDialog } from "@/components/categories/DeleteCategoryDialog";
 import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
-import { Button } from "@/components/ui/button";
+import type { Category } from "@/generated/prisma";
+import { Button } from "@/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import type { Category } from "@/generated/prisma";
+} from "@/ui/dropdown-menu";
 import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
 import { useState } from "react";
 

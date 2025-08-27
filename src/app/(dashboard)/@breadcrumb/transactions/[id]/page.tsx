@@ -1,12 +1,12 @@
 import { GetTransaction } from "@/actions/transactions/getTransaction";
+import { ROUTES } from "@/constants/routes";
 import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { ROUTES } from "@/constants/routes";
+} from "@/ui/breadcrumb";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ id: string }>;
