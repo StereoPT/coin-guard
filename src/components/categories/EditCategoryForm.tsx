@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -6,18 +6,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Category } from '@/generated/prisma';
-import { useEditCategory } from '@/hooks/categories/useEditCategory';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import type { Category } from "@/generated/prisma";
+import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import {
   editCategorySchema,
-  editCategorySchemaType,
-} from '@/schemas/categories';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2Icon } from 'lucide-react';
-import { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+  type editCategorySchemaType,
+} from "@/schemas/categories";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 type EditCategoryFormProps = {
   setOpen: (prevOpen: boolean) => void;
@@ -61,8 +61,8 @@ export const EditCategoryForm = ({
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending && 'Edit'}
+        <Button className="w-full" disabled={isPending} type="submit">
+          {!isPending && "Edit"}
           {isPending && <Loader2Icon className="animate-spin" />}
         </Button>
       </form>

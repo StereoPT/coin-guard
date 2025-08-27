@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { LucideIcon } from 'lucide-react';
-import { DialogTitle, DialogHeader as ShadcnDialogHeader } from './ui/dialog';
-import { cn } from '@/lib/utils';
-import { Separator } from './ui/separator';
+import type { LucideIcon } from "lucide-react";
+import { DialogTitle, DialogHeader as ShadcnDialogHeader } from "./ui/dialog";
+import { cn } from "@/lib/utils";
+import { Separator } from "./ui/separator";
 
 type DialogHeaderProps = {
   title?: string;
@@ -30,20 +30,21 @@ export const DialogHeader = ({
       <DialogTitle asChild>
         <div className="flex gap-4 px-4 mb-2 items-center">
           {Icon && (
-            <Icon size={30} className={cn('stroke-primary', iconClassName)} />
+            <Icon className={cn("stroke-primary", iconClassName)} size={30} />
           )}
           <div>
             {title && (
-              <p className={cn('text-xl text-primary', titleClassName)}>
+              <p className={cn("text-xl text-primary", titleClassName)}>
                 {title}
               </p>
             )}
             {subtitle && (
               <p
                 className={cn(
-                  'text-sm text-muted-foreground',
+                  "text-sm text-muted-foreground",
                   subtitleClassName,
-                )}>
+                )}
+              >
                 {subtitle}
               </p>
             )}

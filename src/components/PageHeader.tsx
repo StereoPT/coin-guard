@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type PageHeaderProps = {
   title: string;
@@ -20,7 +20,7 @@ export const PageHeader = ({
   return (
     <div className="flex gap-4">
       {goBack && (
-        <Button size="icon" variant="outline" onClick={() => router.back()}>
+        <Button onClick={() => router.back()} size="icon" variant="outline">
           <ChevronLeft />
         </Button>
       )}

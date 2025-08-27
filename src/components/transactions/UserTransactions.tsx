@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { DataTable } from '@/components/dataTable/DataTable';
-import { ErrorAlert } from '@/components/ErrorAlert';
-import { AddTransactionDialog } from '@/components/transactions/AddTransactionDialog';
-import { columns } from '@/components/transactions/columns';
-import { useGetTransactions } from '@/hooks/transactions/useGetTransactions';
-import { fuzzyFilterFn } from '@/lib/dataTable';
-import { ArrowLeftRight } from 'lucide-react';
+import { DataTable } from "@/components/dataTable/DataTable";
+import { ErrorAlert } from "@/components/ErrorAlert";
+import { AddTransactionDialog } from "@/components/transactions/AddTransactionDialog";
+import { columns } from "@/components/transactions/columns";
+import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
+import { fuzzyFilterFn } from "@/lib/dataTable";
+import { ArrowLeftRight } from "lucide-react";
 
 const EmptyUserTransactions = () => {
   return (
     <div className="flex flex-col gap-4 h-full items-center justify-center">
       <div className="rounded-full bg-accent w-20 h-20 flex items-center justify-center">
-        <ArrowLeftRight size={40} className="stroke-primary" />
+        <ArrowLeftRight className="stroke-primary" size={40} />
       </div>
       <div className="flex flex-col gap-1 text-center">
         <p className="font-bold">No transactions added yet</p>
@@ -39,16 +39,15 @@ export const UserTransactions = () => {
   return (
     <DataTable
       columns={columns}
-      data={transactions}
       config={{
         filters: {
           search: {
-            filterFn: fuzzyFilterFn(['description']),
-            placeholder: 'Search transactions...',
+            filterFn: fuzzyFilterFn(["description"]),
+            placeholder: "Search transactions...",
           },
           filter: [
-            { column: 'date', type: 'date' },
-            { column: 'type', type: 'select' },
+            { column: "date", type: "date" },
+            { column: "type", type: "select" },
           ],
         },
         columnVisibility: {
@@ -56,6 +55,7 @@ export const UserTransactions = () => {
           date: false,
         },
       }}
+      data={transactions}
     />
   );
 };

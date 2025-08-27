@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -7,34 +7,34 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { useGetCategories } from '@/hooks/categories/useGetCategories';
-import { useEditTransaction } from '@/hooks/transactions/useEditTransaction';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useGetCategories } from "@/hooks/categories/useGetCategories";
+import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
+import { cn } from "@/lib/utils";
 import {
   editTransactionSchema,
-  editTransactionSchemaType,
-} from '@/schemas/transactions';
-import { TransactionWithCategory } from '@/types/transactions';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
-import { CalendarIcon, Loader2Icon } from 'lucide-react';
-import { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+  type editTransactionSchemaType,
+} from "@/schemas/transactions";
+import type { TransactionWithCategory } from "@/types/transactions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon, Loader2Icon } from "lucide-react";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 type EditTransactionFormProps = {
   setOpen: (prevOpen: boolean) => void;
@@ -51,7 +51,7 @@ export const EditTransactionForm = ({
     resolver: zodResolver(editTransactionSchema),
     defaultValues: {
       ...initialValues,
-      note: initialValues.note ?? '',
+      note: initialValues.note ?? "",
       categoryId: initialValues.categoryId ?? undefined,
     },
   });
@@ -82,14 +82,15 @@ export const EditTransactionForm = ({
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={'outline'}
-                          disabled
                           className={cn(
-                            'pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground',
-                          )}>
+                            "pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                          disabled
+                          variant={"outline"}
+                        >
                           {field.value ? (
-                            format(field.value, 'PPP')
+                            format(field.value, "PPP")
                           ) : (
                             <span>Transaction date</span>
                           )}
@@ -97,15 +98,15 @@ export const EditTransactionForm = ({
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent align="start" className="w-auto p-0">
                       <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date('1900-01-01')
-                        }
                         captionLayout="dropdown"
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        mode="single"
+                        onSelect={field.onChange}
+                        selected={field.value}
                       />
                     </PopoverContent>
                   </Popover>
@@ -123,8 +124,9 @@ export const EditTransactionForm = ({
                 <FormLabel className="flex items-center">Type</FormLabel>
                 <FormControl>
                   <Select
+                    defaultValue={field.value}
                     onValueChange={field.onChange}
-                    defaultValue={field.value}>
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full" disabled>
                         <SelectValue placeholder="Transaction Type" />
@@ -165,7 +167,7 @@ export const EditTransactionForm = ({
               <FormItem className="w-full">
                 <FormLabel className="flex items-center">Amount</FormLabel>
                 <FormControl>
-                  <Input {...field} type="number" placeholder="Amount" />
+                  <Input {...field} placeholder="Amount" type="number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -180,7 +182,7 @@ export const EditTransactionForm = ({
               <FormItem className="w-full">
                 <FormLabel className="flex items-center">Balance</FormLabel>
                 <FormControl>
-                  <Input {...field} type="number" placeholder="Balance" />
+                  <Input {...field} placeholder="Balance" type="number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -195,8 +197,9 @@ export const EditTransactionForm = ({
                 <FormLabel className="flex items-center">Category</FormLabel>
                 <FormControl>
                   <Select
+                    defaultValue={field.value}
                     onValueChange={field.onChange}
-                    defaultValue={field.value}>
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a Category" />
@@ -224,15 +227,15 @@ export const EditTransactionForm = ({
             <FormItem>
               <FormLabel className="flex items-center">Notes</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Notes" className="h-32" />
+                <Textarea {...field} className="h-32" placeholder="Notes" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending && 'Edit'}
+        <Button className="w-full" disabled={isPending} type="submit">
+          {!isPending && "Edit"}
           {isPending && <Loader2Icon className="animate-spin" />}
         </Button>
       </form>

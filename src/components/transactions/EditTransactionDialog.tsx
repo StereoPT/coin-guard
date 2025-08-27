@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { DialogHeader } from '@/components/DialogHeader';
-import { EditTransactionForm } from '@/components/transactions/EditTransactionForm';
-import { Button } from '@/components/ui/button';
+import { DialogHeader } from "@/components/DialogHeader";
+import { EditTransactionForm } from "@/components/transactions/EditTransactionForm";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { useGetTransaction } from '@/hooks/transactions/useGetTransaction';
-import { ArrowLeftRightIcon, Edit } from 'lucide-react';
-import { Dispatch, SetStateAction, useState } from 'react';
+} from "@/components/ui/dialog";
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
+import { ArrowLeftRightIcon, Edit } from "lucide-react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditTransactionDialogProps = {
   id: string;
@@ -50,7 +50,7 @@ export const EditTransactionDialog = ({
   }
 
   return (
-    <Dialog open={dialogOpen} onOpenChange={handleOpenChange}>
+    <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
         <DialogTrigger asChild>
           <Button>
@@ -61,9 +61,9 @@ export const EditTransactionDialog = ({
       )}
       <DialogContent className="px-0 py-4 !max-w-2xl">
         <DialogHeader
-          title="Edit Transaction"
-          subtitle="Edit your transaction"
           icon={ArrowLeftRightIcon}
+          subtitle="Edit your transaction"
+          title="Edit Transaction"
         />
         <div className="px-4 pt-4">
           {transaction && (

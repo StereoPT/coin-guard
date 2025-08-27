@@ -1,26 +1,26 @@
-import { CountUpWrapper } from '@/components/CountUpWrapper';
+import { CountUpWrapper } from "@/components/CountUpWrapper";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@/components/ui/chart';
-import { Transaction } from '@/generated/prisma';
-import { generateMonthRange } from '@/lib/date';
-import { format } from 'date-fns';
-import { useMemo } from 'react';
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+} from "@/components/ui/chart";
+import type { Transaction } from "@/generated/prisma";
+import { generateMonthRange } from "@/lib/date";
+import { format } from "date-fns";
+import { useMemo } from "react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig = {
   date: {
-    label: 'Amount',
+    label: "Amount",
   },
 } satisfies ChartConfig;
 
@@ -34,7 +34,7 @@ export const CategoryChart = ({ transactions }: CategoryChartProps) => {
 
     const transactionsByMonth = transactions.reduce<Record<string, number>>(
       (acc, t) => {
-        const monthKey = format(t.date, 'yyyy-MM');
+        const monthKey = format(t.date, "yyyy-MM");
         acc[monthKey] = (acc[monthKey] || 0) + t.amount;
         return acc;
       },
@@ -82,28 +82,30 @@ export const CategoryChart = ({ transactions }: CategoryChartProps) => {
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
+          className="aspect-auto h-[250px] w-full"
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full">
+        >
           <AreaChart
             accessibilityLayer
             data={transactionData}
             margin={{
               left: 12,
               right: 12,
-            }}>
+            }}
+          >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="date"
-              tickLine={false}
               axisLine={false}
+              dataKey="date"
+              tickFormatter={(value) => format(value, "yyyy-MM")}
+              tickLine={false}
               tickMargin={8}
-              tickFormatter={(value) => format(value, 'yyyy-MM')}
             />
             <ChartTooltip
-              cursor={false}
               content={<ChartTooltipContent indicator="line" />}
+              cursor={false}
             />
-            <Area dataKey="amount" type="monotone" fillOpacity={0.4} />
+            <Area dataKey="amount" fillOpacity={0.4} type="monotone" />
           </AreaChart>
         </ChartContainer>
       </CardContent>

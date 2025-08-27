@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import {
-  ColumnDef,
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -9,7 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -18,12 +18,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { DataTablePagination } from '@/components/dataTable/DataTablePagination';
+} from "@/components/ui/table";
+import { DataTablePagination } from "@/components/dataTable/DataTablePagination";
 import {
   DataTableFilters,
-  Filters,
-} from '@/components/dataTable/DataTableFilters';
+  type Filters,
+} from "@/components/dataTable/DataTableFilters";
 
 type ColumnVisibility<TData> = {
   [K in keyof TData]?: boolean;
@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <DataTableFilters table={table} filters={config?.filters} />
+      <DataTableFilters filters={config?.filters} table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-muted">
@@ -69,9 +69,10 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
-                      key={header.id}
                       colSpan={header.colSpan}
-                      style={{ width: header.getSize() }}>
+                      key={header.id}
+                      style={{ width: header.getSize() }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -88,10 +89,11 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  data-state={row.getIsSelected() && "selected"}
                   key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}>
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="truncate max-w-0">
+                    <TableCell className="truncate max-w-0" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
@@ -103,8 +105,9 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
+                  className="h-24 text-center"
                   colSpan={columns.length}
-                  className="h-24 text-center">
+                >
                   No results.
                 </TableCell>
               </TableRow>

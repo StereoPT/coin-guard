@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useGetTransaction } from '@/hooks/transactions/useGetTransaction';
-import { ErrorAlert } from '@/components/ErrorAlert';
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
+import { ErrorAlert } from "@/components/ErrorAlert";
 
-import { TransactionTable } from '@/components/transactions/TransactionTable';
-import { TransactionChart } from '@/components/transactions/TransactionChart';
-import { Badge } from '@/components/ui/badge';
+import { TransactionTable } from "@/components/transactions/TransactionTable";
+import { TransactionChart } from "@/components/transactions/TransactionChart";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardAction,
@@ -13,10 +13,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { format } from 'date-fns';
-import { Calendar } from 'lucide-react';
-import { AmountBadge } from '@/components/AmountBadge';
+} from "@/components/ui/card";
+import { format } from "date-fns";
+import { Calendar } from "lucide-react";
+import { AmountBadge } from "@/components/AmountBadge";
 
 type UserTransactionProps = {
   transactionId: string;
@@ -50,13 +50,13 @@ export const UserTransaction = ({ transactionId }: UserTransactionProps) => {
             <div className="flex justify-between">
               <div>
                 <AmountBadge
-                  type={transaction.transaction.type}
                   amount={transaction.transaction.amount}
+                  type={transaction.transaction.type}
                 />
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Calendar size={14} />
-                {format(transaction.transaction.date, 'PPP')}
+                {format(transaction.transaction.date, "PPP")}
               </div>
             </div>
           </CardContent>

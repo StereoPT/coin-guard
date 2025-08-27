@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import CountUp from 'react-countup';
+import { useEffect, useState } from "react";
+import CountUp from "react-countup";
 
 type CountUpWrapperProps = {
   value: number;
@@ -14,9 +14,9 @@ export const CountUpWrapper = ({ value }: CountUpWrapperProps) => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return '-';
+  if (!mounted) return "-";
 
   return (
-    <CountUp duration={1} preserveValue end={value} decimals={2} suffix="€" />
+    <CountUp decimals={2} duration={1} end={value} preserveValue suffix="€" />
   );
 };

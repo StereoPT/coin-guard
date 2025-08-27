@@ -1,9 +1,9 @@
 import {
   DataTableFilter,
-  Filter,
-} from '@/components/dataTable/DataTableFilter';
-import { Input } from '@/components/ui/input';
-import { FilterFn, Table } from '@tanstack/react-table';
+  type Filter,
+} from "@/components/dataTable/DataTableFilter";
+import { Input } from "@/components/ui/input";
+import type { FilterFn, Table } from "@tanstack/react-table";
 
 export type Filters<TData> = {
   search?: {
@@ -22,7 +22,7 @@ export const DataTableFilters = <TData,>({
   table,
   filters,
 }: DataTableFiltersProps<TData>) => {
-  const value = table.getState().globalFilter ?? '';
+  const value = table.getState().globalFilter ?? "";
   const setValue = table.setGlobalFilter;
 
   if (!filters) return null;
@@ -32,18 +32,18 @@ export const DataTableFilters = <TData,>({
       {filters.search && (
         <Input
           className="max-w-sm"
-          value={value}
           onChange={(event) => setValue(() => event.target.value)}
           placeholder={filters.search?.placeholder}
+          value={value}
         />
       )}
       {filters.filter &&
         filters.filter.map((filter) => {
           return (
             <DataTableFilter
+              filter={filter}
               key={filter.column.toString()}
               table={table}
-              filter={filter}
             />
           );
         })}

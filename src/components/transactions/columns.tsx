@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { AmountBadge } from '@/components/AmountBadge';
-import { TransactionActions } from '@/components/transactions/TransactionActions';
-import { Badge } from '@/components/ui/badge';
-import { ROUTES } from '@/constants/routes';
-import { dateBetweenFilterFn } from '@/lib/dataTable';
-import { formatCurrency } from '@/lib/formatter';
-import { TransactionWithCategory } from '@/types/transactions';
-import { ColumnDef } from '@tanstack/react-table';
-import { format } from 'date-fns';
-import Link from 'next/link';
+import { AmountBadge } from "@/components/AmountBadge";
+import { TransactionActions } from "@/components/transactions/TransactionActions";
+import { Badge } from "@/components/ui/badge";
+import { ROUTES } from "@/constants/routes";
+import { dateBetweenFilterFn } from "@/lib/dataTable";
+import { formatCurrency } from "@/lib/formatter";
+import type { TransactionWithCategory } from "@/types/transactions";
+import type { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
+import Link from "next/link";
 
 export const columns: ColumnDef<TransactionWithCategory>[] = [
   {
-    accessorKey: 'date',
+    accessorKey: "date",
     filterFn: dateBetweenFilterFn,
   },
   {
-    accessorKey: 'description',
-    header: 'Description',
+    accessorKey: "description",
+    header: "Description",
     size: 350,
     cell: ({ row }) => {
       const { id, description, date } = row.original;
@@ -28,17 +28,17 @@ export const columns: ColumnDef<TransactionWithCategory>[] = [
           <div className="flex flex-col">
             <div className="font-medium">{description}</div>
             <div className="text-xs text-muted-foreground">
-              {format(date, 'PPP')}
+              {format(date, "PPP")}
             </div>
           </div>
         </Link>
       );
     },
   },
-  { accessorKey: 'type' },
+  { accessorKey: "type" },
   {
-    accessorKey: 'amount',
-    header: 'Amount',
+    accessorKey: "amount",
+    header: "Amount",
     size: 90,
     cell: ({ row }) => {
       const { type, amount } = row.original;
@@ -47,8 +47,8 @@ export const columns: ColumnDef<TransactionWithCategory>[] = [
     },
   },
   {
-    accessorKey: 'balance',
-    header: 'Balance',
+    accessorKey: "balance",
+    header: "Balance",
     size: 90,
     cell: ({ row }) => {
       const { balance } = row.original;
@@ -57,8 +57,8 @@ export const columns: ColumnDef<TransactionWithCategory>[] = [
     },
   },
   {
-    accessorKey: 'category.name',
-    header: 'Category',
+    accessorKey: "category.name",
+    header: "Category",
     size: 90,
     cell: ({ row }) => {
       const { category } = row.original;
@@ -67,8 +67,8 @@ export const columns: ColumnDef<TransactionWithCategory>[] = [
     },
   },
   {
-    accessorKey: 'actions',
-    header: 'Actions',
+    accessorKey: "actions",
+    header: "Actions",
     size: 50,
     cell: ({ row }) => {
       const transaction = row.original;

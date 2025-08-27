@@ -1,10 +1,10 @@
-import { DateFilter } from '@/components/dataTable/filters/DateFilter';
-import { SelectFilter } from '@/components/dataTable/filters/SelectFilter';
-import { Table } from '@tanstack/react-table';
+import { DateFilter } from "@/components/dataTable/filters/DateFilter";
+import { SelectFilter } from "@/components/dataTable/filters/SelectFilter";
+import type { Table } from "@tanstack/react-table";
 
 export type Filter<TData> = {
   column: keyof TData;
-  type: 'select' | 'date';
+  type: "select" | "date";
 };
 
 type DataTableFilterProps<TData> = {
@@ -17,13 +17,13 @@ export const DataTableFilter = <TData,>({
   filter,
 }: DataTableFilterProps<TData>) => {
   switch (filter.type) {
-    case 'select': {
+    case "select": {
       return <SelectFilter column={filter.column} table={table} />;
     }
-    case 'date': {
+    case "date": {
       return <DateFilter column={filter.column} table={table} />;
     }
     default:
-      throw new Error('Type not Implemented', filter.type);
+      throw new Error("Type not Implemented", filter.type);
   }
 };
