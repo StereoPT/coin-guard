@@ -1,4 +1,10 @@
-import { Button } from "@/components/ui/button";
+import type { Category } from "@/generated/prisma";
+import { useEditCategory } from "@/hooks/categories/useEditCategory";
+import {
+  editCategorySchema,
+  type editCategorySchemaType,
+} from "@/schemas/categories";
+import { Button } from "@/ui/button";
 import {
   Form,
   FormControl,
@@ -6,14 +12,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import type { Category } from "@/generated/prisma";
-import { useEditCategory } from "@/hooks/categories/useEditCategory";
-import {
-  editCategorySchema,
-  type editCategorySchemaType,
-} from "@/schemas/categories";
+} from "@/ui/form";
+import { Input } from "@/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon } from "lucide-react";
 import { useCallback } from "react";

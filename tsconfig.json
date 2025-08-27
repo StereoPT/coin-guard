@@ -19,7 +19,8 @@
     "target": "ES2022",
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/ui/*": ["./src/components/ui/*"]
     }
   },
   "include": [

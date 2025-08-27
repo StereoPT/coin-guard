@@ -1,19 +1,19 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
+import type { Transaction } from "@/generated/prisma";
+import { generateMonthRange } from "@/lib/date";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import type { Transaction } from "@/generated/prisma";
-import { generateMonthRange } from "@/lib/date";
+} from "@/ui/chart";
 import { format } from "date-fns";
 import { useMemo } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";

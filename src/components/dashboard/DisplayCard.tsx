@@ -1,10 +1,10 @@
 import type { TransactionStat } from "@/actions/analytics/getStats";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import type { TransactionType } from "@/generated/prisma";
 import { getTypeColor } from "@/lib/typeColors";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/ui/badge";
+import { Card } from "@/ui/card";
 import type { ClassValue } from "clsx";
 import { type LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
 

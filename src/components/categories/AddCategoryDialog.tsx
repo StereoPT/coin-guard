@@ -2,13 +2,13 @@
 
 import { AddCategoryForm } from "@/components/categories/AddCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/ui/dialog";
 
 import { PlusCircle, TagIcon } from "lucide-react";
 import { useState } from "react";

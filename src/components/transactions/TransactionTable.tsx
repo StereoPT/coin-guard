@@ -1,5 +1,6 @@
 import { AmountBadge } from "@/components/AmountBadge";
-import { Badge } from "@/components/ui/badge";
+import type { TransactionWithCategory } from "@/types/transactions";
+import { Badge } from "@/ui/badge";
 import {
   Table,
   TableBody,
@@ -7,8 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import type { TransactionWithCategory } from "@/types/transactions";
+} from "@/ui/table";
 import { format } from "date-fns";
 
 type TransactionTableProps = {

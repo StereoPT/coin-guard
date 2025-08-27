@@ -1,18 +1,13 @@
 import type { GetCategoryStatsReturnValue } from "@/actions/analytics/getCategoryStats";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { formatCurrency } from "@/lib/formatter";
+import { cn } from "@/lib/utils";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import { formatCurrency } from "@/lib/formatter";
-import { cn } from "@/lib/utils";
+} from "@/ui/chart";
 import type { ClassValue } from "clsx";
 import { endOfMonth, format, subMonths } from "date-fns";
 import { Cell, Pie, PieChart } from "recharts";

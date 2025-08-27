@@ -1,4 +1,5 @@
 import { AmountBadge } from "@/components/AmountBadge";
+import type { Transaction } from "@/generated/prisma";
 import {
   Table,
   TableBody,
@@ -6,8 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import type { Transaction } from "@/generated/prisma";
+} from "@/ui/table";
 import { format } from "date-fns";
 
 type CategoryTableProps = {

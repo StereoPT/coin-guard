@@ -1,10 +1,10 @@
+import { ROUTES } from "@/constants/routes";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
-import { ROUTES } from "@/constants/routes";
+} from "@/ui/breadcrumb";
 
 const BreadcrumbSlot = () => {
   return (

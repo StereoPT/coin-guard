@@ -2,14 +2,14 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { EditTransactionForm } from "@/components/transactions/EditTransactionForm";
-import { Button } from "@/components/ui/button";
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
+import { Button } from "@/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
+} from "@/ui/dialog";
 import { ArrowLeftRightIcon, Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 

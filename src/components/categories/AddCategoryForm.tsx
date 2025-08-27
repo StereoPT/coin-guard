@@ -1,4 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { useAddCategory } from "@/hooks/categories/useAddCategory";
+import {
+  addCategorySchema,
+  type addCategorySchemaType,
+} from "@/schemas/categories";
+import { Button } from "@/ui/button";
 import {
   Form,
   FormControl,
@@ -6,13 +11,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useAddCategory } from "@/hooks/categories/useAddCategory";
-import {
-  addCategorySchema,
-  type addCategorySchemaType,
-} from "@/schemas/categories";
+} from "@/ui/form";
+import { Input } from "@/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useCallback } from "react";

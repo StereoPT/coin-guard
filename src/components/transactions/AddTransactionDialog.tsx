@@ -1,20 +1,20 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/ui/dialog";
 
 import { ArrowLeftRightIcon, PlusCircle } from "lucide-react";
 import { useState } from "react";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AddTransactionWithFile } from "@/components/transactions/AddTransactionWithFile";
 import { AddTransactionForm } from "@/components/transactions/AddTransactionForm";
+import { AddTransactionWithFile } from "@/components/transactions/AddTransactionWithFile";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
 export const AddTransactionDialog = () => {
   const [open, setOpen] = useState(false);

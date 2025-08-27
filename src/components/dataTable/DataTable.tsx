@@ -12,18 +12,18 @@ import {
 } from "@tanstack/react-table";
 
 import {
+  DataTableFilters,
+  type Filters,
+} from "@/components/dataTable/DataTableFilters";
+import { DataTablePagination } from "@/components/dataTable/DataTablePagination";
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { DataTablePagination } from "@/components/dataTable/DataTablePagination";
-import {
-  DataTableFilters,
-  type Filters,
-} from "@/components/dataTable/DataTableFilters";
+} from "@/ui/table";
 
 type ColumnVisibility<TData> = {
   [K in keyof TData]?: boolean;
