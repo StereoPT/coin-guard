@@ -1,24 +1,24 @@
-import { AddTransaction } from '@/actions/transactions/addTransaction';
-import { KEYS } from '@/constants/queryKeys';
-import { addTransactionSchemaType } from '@/schemas/transactions';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { AddTransaction } from "@/actions/transactions/addTransaction";
+import { KEYS } from "@/constants/queryKeys";
+import type { addTransactionSchemaType } from "@/schemas/transactions";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const useAddTransaction = () => {
   const queryClient = useQueryClient();
-  const toastId = 'add-transaction';
+  const toastId = "add-transaction";
 
   return useMutation({
     mutationFn: (data: addTransactionSchemaType) => {
-      toast.loading('Creating transaction...', { id: toastId });
+      toast.loading("Creating transaction...", { id: toastId });
       return AddTransaction(data);
     },
     onSuccess: () => {
-      toast.success('Transaction added', { id: toastId });
+      toast.success("Transaction added", { id: toastId });
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
     onError: () => {
-      toast.error('Failed to add transaction', { id: toastId });
+      toast.error("Failed to add transaction", { id: toastId });
     },
   });
 };

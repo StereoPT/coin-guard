@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { AddCategoryDialog } from '@/components/categories/AddCategoryDialog';
-import { columns } from '@/components/categories/columns';
-import { DataTable } from '@/components/dataTable/DataTable';
-import { ErrorAlert } from '@/components/ErrorAlert';
-import { useGetCategories } from '@/hooks/categories/useGetCategories';
-import { fuzzyFilterFn } from '@/lib/dataTable';
-import { TagsIcon } from 'lucide-react';
+import { AddCategoryDialog } from "@/components/categories/AddCategoryDialog";
+import { columns } from "@/components/categories/columns";
+import { DataTable } from "@/components/dataTable/DataTable";
+import { ErrorAlert } from "@/components/ErrorAlert";
+import { useGetCategories } from "@/hooks/categories/useGetCategories";
+import { fuzzyFilterFn } from "@/lib/dataTable";
+import { TagsIcon } from "lucide-react";
 
 const EmptyUserCategories = () => {
   return (
     <div className="flex flex-col gap-4 h-full items-center justify-center">
       <div className="rounded-full bg-accent w-20 h-20 flex items-center justify-center">
-        <TagsIcon size={40} className="stroke-primary" />
+        <TagsIcon className="stroke-primary" size={40} />
       </div>
       <div className="flex flex-col gap-1 text-center">
         <p className="font-bold">No transactions added yet</p>
@@ -39,15 +39,15 @@ export const UserCategories = () => {
   return (
     <DataTable
       columns={columns}
-      data={categories}
       config={{
         filters: {
           search: {
-            filterFn: fuzzyFilterFn(['name']),
-            placeholder: 'Search categories...',
+            filterFn: fuzzyFilterFn(["name"]),
+            placeholder: "Search categories...",
           },
         },
       }}
+      data={categories}
     />
   );
 };

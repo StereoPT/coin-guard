@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { DialogHeader } from '@/components/DialogHeader';
-import { Button } from '@/components/ui/button';
+import { DialogHeader } from "@/components/DialogHeader";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
-import { ArrowLeftRightIcon, PlusCircle } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeftRightIcon, PlusCircle } from "lucide-react";
+import { useState } from "react";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AddTransactionWithFile } from '@/components/transactions/AddTransactionWithFile';
-import { AddTransactionForm } from '@/components/transactions/AddTransactionForm';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AddTransactionWithFile } from "@/components/transactions/AddTransactionWithFile";
+import { AddTransactionForm } from "@/components/transactions/AddTransactionForm";
 
 export const AddTransactionDialog = () => {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export const AddTransactionDialog = () => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleOnOpenChange}>
+    <Dialog onOpenChange={handleOnOpenChange} open={open}>
       <DialogTrigger asChild>
         <Button>
           <PlusCircle />
@@ -33,19 +33,19 @@ export const AddTransactionDialog = () => {
       </DialogTrigger>
       <DialogContent className="px-0 py-4 !max-w-2xl">
         <DialogHeader
-          title="Create Transactions"
-          subtitle="Create or import transactions"
           icon={ArrowLeftRightIcon}
+          subtitle="Create or import transactions"
+          title="Create Transactions"
         />
-        <Tabs defaultValue="file" className="px-4">
+        <Tabs className="px-4" defaultValue="file">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="file">File</TabsTrigger>
             <TabsTrigger value="form">Form</TabsTrigger>
           </TabsList>
-          <TabsContent value="file" className="pt-4">
+          <TabsContent className="pt-4" value="file">
             <AddTransactionWithFile setOpen={setOpen} />
           </TabsContent>
-          <TabsContent value="form" className="pt-4">
+          <TabsContent className="pt-4" value="form">
             <AddTransactionForm setOpen={setOpen} />
           </TabsContent>
         </Tabs>

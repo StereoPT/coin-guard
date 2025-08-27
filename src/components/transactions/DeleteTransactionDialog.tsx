@@ -7,10 +7,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { buttonVariants } from '@/components/ui/button';
-import { Transaction } from '@/generated/prisma';
-import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction';
+} from "@/components/ui/alert-dialog";
+import { buttonVariants } from "@/components/ui/button";
+import type { Transaction } from "@/generated/prisma";
+import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
 
 type DeleteTransactionDialogProps = {
   transaction: Transaction;
@@ -30,7 +30,7 @@ export const DeleteTransactionDialog = ({
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
+    <AlertDialog onOpenChange={onOpenChange} open={open}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -42,9 +42,10 @@ export const DeleteTransactionDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            className={buttonVariants({ variant: 'destructive' })}
+            className={buttonVariants({ variant: "destructive" })}
+            disabled={isPending}
             onClick={handleDeleteTransaction}
-            disabled={isPending}>
+          >
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

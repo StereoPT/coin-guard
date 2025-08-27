@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { GetCategoryStats } from '@/actions/analytics/getCategoryStats';
-import { GetLastTransactions } from '@/actions/analytics/getLastTransactions';
-import { GetStats } from '@/actions/analytics/getStats';
+import { GetCategoryStats } from "@/actions/analytics/getCategoryStats";
+import { GetLastTransactions } from "@/actions/analytics/getLastTransactions";
+import { GetStats } from "@/actions/analytics/getStats";
 
 export const DashboardAnalytics = async () => {
   const stats = await GetStats();

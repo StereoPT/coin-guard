@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { CategoryChart } from '@/components/categories/CategoryChart';
-import { CategoryTable } from '@/components/categories/CategoryTable';
-import { ErrorAlert } from '@/components/ErrorAlert';
-import { useGetCategory } from '@/hooks/categories/useGetCategory';
+import { CategoryChart } from "@/components/categories/CategoryChart";
+import { CategoryTable } from "@/components/categories/CategoryTable";
+import { ErrorAlert } from "@/components/ErrorAlert";
+import { useGetCategory } from "@/hooks/categories/useGetCategory";
 
 type UserCategoryProps = {
   categoryId: string;

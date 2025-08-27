@@ -1,8 +1,8 @@
-const TRANSACTIONS = 'transactions';
-const CATEGORIES = 'categories';
+const TRANSACTIONS = "transactions";
+const CATEGORIES = "categories";
 
 export const KEYS = {
-  analytics: ['analytics'],
+  analytics: ["analytics"],
 
   transactions: [TRANSACTIONS],
   transaction: (id: string) => [TRANSACTIONS, id],

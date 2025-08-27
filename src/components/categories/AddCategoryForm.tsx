@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -6,14 +6,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useAddCategory } from '@/hooks/categories/useAddCategory';
-import { addCategorySchema, addCategorySchemaType } from '@/schemas/categories';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2Icon } from 'lucide-react';
-import { Dispatch, SetStateAction, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useAddCategory } from "@/hooks/categories/useAddCategory";
+import {
+  addCategorySchema,
+  type addCategorySchemaType,
+} from "@/schemas/categories";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
+import { type Dispatch, type SetStateAction, useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 type AddCategoryFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +26,7 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
   const form = useForm<addCategorySchemaType>({
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
-      name: '',
+      name: "",
     },
   });
 
@@ -55,8 +58,8 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending && 'Add'}
+        <Button className="w-full" disabled={isPending} type="submit">
+          {!isPending && "Add"}
           {isPending && <Loader2Icon className="animate-spin" />}
         </Button>
       </form>

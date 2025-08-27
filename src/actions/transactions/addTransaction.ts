@@ -1,21 +1,20 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 import {
   addTransactionSchema,
-  addTransactionSchemaType,
-} from '@/schemas/transactions';
+  type addTransactionSchemaType,
+} from "@/schemas/transactions";
 
 export const AddTransaction = async (formValues: addTransactionSchemaType) => {
-  const { success, data } = await addTransactionSchema.safeParseAsync(
-    formValues,
-  );
+  const { success, data } =
+    await addTransactionSchema.safeParseAsync(formValues);
   if (!success) {
-    throw new Error('Invalid Form Data');
+    throw new Error("Invalid Form Data");
   }
 
   const result = await prisma.transaction.create({ data });
   if (!result) {
-    throw new Error('Failed to Add Transaction');
+    throw new Error("Failed to Add Transaction");
   }
 };

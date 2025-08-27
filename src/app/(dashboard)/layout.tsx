@@ -1,7 +1,7 @@
-import { Sidebar } from '@/components/Sidebar';
-import { Separator } from '@/components/ui/separator';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { ReactNode } from 'react';
+import { Sidebar } from "@/components/Sidebar";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import type { ReactNode } from "react";
 
 type DashboardLayoutProps = {
   breadcrumb: ReactNode;

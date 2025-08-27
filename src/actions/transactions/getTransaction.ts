@@ -1,6 +1,6 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
 export const GetTransaction = async (id: string) => {
   return await prisma.$transaction(async (prisma) => {
@@ -12,12 +12,12 @@ export const GetTransaction = async (id: string) => {
     });
 
     if (!transaction) {
-      throw new Error('Transaction not found!');
+      throw new Error("Transaction not found!");
     }
 
     const all = await prisma.transaction.findMany({
       where: { description: transaction.description },
-      orderBy: { date: 'asc' },
+      orderBy: { date: "asc" },
       include: {
         category: true,
       },

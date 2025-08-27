@@ -1,12 +1,12 @@
-import { TransactionStat } from '@/actions/analytics/getStats';
-import { CountUpWrapper } from '@/components/CountUpWrapper';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { TransactionType } from '@/generated/prisma';
-import { getTypeColor } from '@/lib/typeColors';
-import { cn } from '@/lib/utils';
-import { ClassValue } from 'clsx';
-import { LucideIcon, TrendingDown, TrendingUp } from 'lucide-react';
+import type { TransactionStat } from "@/actions/analytics/getStats";
+import { CountUpWrapper } from "@/components/CountUpWrapper";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import type { TransactionType } from "@/generated/prisma";
+import { getTypeColor } from "@/lib/typeColors";
+import { cn } from "@/lib/utils";
+import type { ClassValue } from "clsx";
+import { type LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
 
 type DisplayCardProps = {
   title: string;
@@ -27,10 +27,10 @@ export const DisplayCard = ({
   const isNegativePercentage = Math.sign(stat.percentage) < 1;
 
   return (
-    <Card className={cn('p-4', className)}>
+    <Card className={cn("p-4", className)}>
       <div className="flex gap-4 items-center">
         <div className="flex items-center justify-center bg-secondary rounded-lg w-10 h-10">
-          <Icon size={30} className={cn(getTypeColor(type))} />
+          <Icon className={cn(getTypeColor(type))} size={30} />
         </div>
         <div className="flex flex-col">
           <div className="text-muted-foreground font-medium text-sm">
@@ -42,7 +42,8 @@ export const DisplayCard = ({
             </div>
             <Badge
               className={cn(getTypeColor(type, isNegativePercentage))}
-              variant="secondary">
+              variant="secondary"
+            >
               {stat.percentage.toFixed(2)}%
               {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
             </Badge>

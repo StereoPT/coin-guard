@@ -1,10 +1,10 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 import {
   editCategorySchema,
-  editCategorySchemaType,
-} from '@/schemas/categories';
+  type editCategorySchemaType,
+} from "@/schemas/categories";
 
 export const EditCategory = async (
   categoryId: string,
@@ -12,7 +12,7 @@ export const EditCategory = async (
 ) => {
   const { success, data } = await editCategorySchema.safeParseAsync(formValues);
   if (!success) {
-    throw new Error('Invalid Form Data');
+    throw new Error("Invalid Form Data");
   }
 
   const result = await prisma.category.update({
@@ -20,6 +20,6 @@ export const EditCategory = async (
     data,
   });
   if (!result) {
-    throw new Error('Failed to Edit Category');
+    throw new Error("Failed to Edit Category");
   }
 };

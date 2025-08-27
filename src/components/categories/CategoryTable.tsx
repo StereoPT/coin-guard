@@ -1,4 +1,4 @@
-import { AmountBadge } from '@/components/AmountBadge';
+import { AmountBadge } from "@/components/AmountBadge";
 import {
   Table,
   TableBody,
@@ -6,9 +6,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Transaction } from '@/generated/prisma';
-import { format } from 'date-fns';
+} from "@/components/ui/table";
+import type { Transaction } from "@/generated/prisma";
+import { format } from "date-fns";
 
 type CategoryTableProps = {
   transactions: Transaction[];
@@ -29,7 +29,7 @@ export const CategoryTable = ({ transactions }: CategoryTableProps) => {
           {transactions.map((t) => {
             return (
               <TableRow key={t.id}>
-                <TableCell>{format(t.date, 'PPP')}</TableCell>
+                <TableCell>{format(t.date, "PPP")}</TableCell>
                 <TableCell>{t.description}</TableCell>
                 <TableCell className="text-right">
                   <AmountBadge amount={t.amount} type={t.type} />

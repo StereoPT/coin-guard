@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,17 +7,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useImportTransaction } from '@/hooks/transactions/useImportTransaction';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";
 import {
-  importTransactionSchemaType,
+  type importTransactionSchemaType,
   importTransactionsSchema,
-} from '@/schemas/transactions';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FileText, Loader2Icon } from 'lucide-react';
-import { Dispatch, SetStateAction, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+} from "@/schemas/transactions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FileText, Loader2Icon } from "lucide-react";
+import { type Dispatch, type SetStateAction, useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 type AddTransactionWithFileProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +29,7 @@ export const AddTransactionWithFile = ({
   const form = useForm<importTransactionSchemaType>({
     resolver: zodResolver(importTransactionsSchema),
   });
-  const selectedFile = form.watch('file')?.[0];
+  const selectedFile = form.watch("file")?.[0];
 
   const { mutateAsync, isPending } = useImportTransaction();
 
@@ -59,10 +59,10 @@ export const AddTransactionWithFile = ({
               <FormLabel className="flex items-center">File</FormLabel>
               <FormControl>
                 <Input
-                  type="file"
                   accept=".csv"
-                  placeholder="File"
                   onChange={(e) => onChange(e.target.files)}
+                  placeholder="File"
+                  type="file"
                   {...field}
                 />
               </FormControl>
@@ -78,8 +78,8 @@ export const AddTransactionWithFile = ({
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending && 'Import'}
+        <Button className="w-full" disabled={isPending} type="submit">
+          {!isPending && "Import"}
           {isPending && <Loader2Icon className="animate-spin" />}
         </Button>
       </form>

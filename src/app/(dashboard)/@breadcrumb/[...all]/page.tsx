@@ -5,10 +5,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { ROUTES } from '@/constants/routes';
-import React from 'react';
-import type { ReactElement } from 'react';
+} from "@/components/ui/breadcrumb";
+import { ROUTES } from "@/constants/routes";
+import React from "react";
+import type { ReactElement } from "react";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ all: string[] }>;
@@ -34,7 +34,7 @@ const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
       breadcrumbItems.push(
         <React.Fragment key={href}>
           <BreadcrumbItem>
-            <BreadcrumbLink href={href} className="capitalize">
+            <BreadcrumbLink className="capitalize" href={href}>
               {route}
             </BreadcrumbLink>
           </BreadcrumbItem>

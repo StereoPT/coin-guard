@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Sidebar as ShadcnSidebar,
@@ -10,18 +10,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from './ui/sidebar';
+} from "./ui/sidebar";
 import {
   LayoutDashboard,
-  LucideIcon,
+  type LucideIcon,
   Table2Icon,
   TagIcon,
   Triangle,
-} from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import React from 'react';
-import Link from 'next/link';
-import { ROUTES } from '@/constants/routes';
+} from "lucide-react";
+import { usePathname } from "next/navigation";
+import React from "react";
+import Link from "next/link";
+import { ROUTES } from "@/constants/routes";
 
 type Route = {
   icon: LucideIcon;
@@ -37,21 +37,21 @@ type GroupedRoute = {
 
 const groupRoutes: GroupedRoute[] = [
   {
-    key: 'dashboard',
-    items: [{ icon: LayoutDashboard, title: 'Dashboard', url: ROUTES.home }],
+    key: "dashboard",
+    items: [{ icon: LayoutDashboard, title: "Dashboard", url: ROUTES.home }],
   },
   {
-    key: 'mainMenu',
-    label: 'Main Menu',
+    key: "mainMenu",
+    label: "Main Menu",
     items: [
       {
         icon: Table2Icon,
-        title: 'Transactions',
+        title: "Transactions",
         url: ROUTES.transactions,
       },
       {
         icon: TagIcon,
-        title: 'Categories',
+        title: "Categories",
         url: ROUTES.categories,
       },
     ],
@@ -59,25 +59,25 @@ const groupRoutes: GroupedRoute[] = [
 ];
 
 const isActive = (routeUrl: string, currentPath: string) => {
-  if (routeUrl === '/') {
-    return currentPath === '/';
+  if (routeUrl === "/") {
+    return currentPath === "/";
   }
 
-  return currentPath === routeUrl || currentPath.startsWith(routeUrl + '/');
+  return currentPath === routeUrl || currentPath.startsWith(routeUrl + "/");
 };
 
 export const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <ShadcnSidebar variant="sidebar" collapsible="icon">
+    <ShadcnSidebar collapsible="icon" variant="sidebar">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton asChild size="lg">
               <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-gradient-to-r from-blue-500 to-blue-600">
-                  <Triangle size={16} className="stroke-white" />
+                  <Triangle className="stroke-white" size={16} />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">CoinGuard</span>
@@ -102,7 +102,8 @@ export const Sidebar = () => {
                       <SidebarMenuButton
                         asChild
                         isActive={isActive(url, pathname)}
-                        tooltip={title}>
+                        tooltip={title}
+                      >
                         <Link href={url}>
                           <Icon />
                           {title}

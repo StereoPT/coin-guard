@@ -1,10 +1,10 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
 export const GetTransactions = async () => {
   const transactions = await prisma.transaction.findMany({
-    orderBy: { date: 'desc' },
+    orderBy: { date: "desc" },
     include: {
       category: true,
     },

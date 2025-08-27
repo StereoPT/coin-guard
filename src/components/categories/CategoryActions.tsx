@@ -1,16 +1,16 @@
-import { DeleteCategoryDialog } from '@/components/categories/DeleteCategoryDialog';
-import { EditCategoryDialog } from '@/components/categories/EditCategoryDialog';
-import { Button } from '@/components/ui/button';
+import { DeleteCategoryDialog } from "@/components/categories/DeleteCategoryDialog";
+import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Category } from '@/generated/prisma';
-import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+} from "@/components/ui/dropdown-menu";
+import type { Category } from "@/generated/prisma";
+import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 type CategoryActionsProps = {
   category: Category;
@@ -24,23 +24,23 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
     <>
       {showDeleteAlert && (
         <DeleteCategoryDialog
-          open={showDeleteAlert}
-          onOpenChange={setShowDeleteAlert}
           category={category}
+          onOpenChange={setShowDeleteAlert}
+          open={showDeleteAlert}
         />
       )}
 
       {showEditDialog && (
         <EditCategoryDialog
-          open={showEditDialog}
-          onOpenChange={setShowEditDialog}
           id={category.id}
+          onOpenChange={setShowEditDialog}
+          open={showEditDialog}
         />
       )}
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button size="icon" variant="ghost">
             <MoreHorizontal />
           </Button>
         </DropdownMenuTrigger>
@@ -51,8 +51,9 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
+            onClick={() => setShowDeleteAlert(true)}
             variant="destructive"
-            onClick={() => setShowDeleteAlert(true)}>
+          >
             <Trash2 />
             Delete
           </DropdownMenuItem>

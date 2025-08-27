@@ -1,13 +1,13 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Table } from '@tanstack/react-table';
-import { ChevronDown } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import type { Table } from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
 
 type SelectFilterProps<TData> = {
   column: keyof TData;
@@ -51,10 +51,11 @@ export const SelectFilter = <TData,>({
         {possibleValues.map((option) => {
           return (
             <DropdownMenuCheckboxItem
+              checked={columnDef?.getFilterValue() === option}
               className="capitalize"
               key={option}
-              checked={columnDef?.getFilterValue() === option}
-              onCheckedChange={() => handleOnChange(option)}>
+              onCheckedChange={() => handleOnChange(option)}
+            >
               {option.toLowerCase()}
             </DropdownMenuCheckboxItem>
           );

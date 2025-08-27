@@ -1,5 +1,5 @@
-import { AmountBadge } from '@/components/AmountBadge';
-import { Badge } from '@/components/ui/badge';
+import { AmountBadge } from "@/components/AmountBadge";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -7,9 +7,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { TransactionWithCategory } from '@/types/transactions';
-import { format } from 'date-fns';
+} from "@/components/ui/table";
+import type { TransactionWithCategory } from "@/types/transactions";
+import { format } from "date-fns";
 
 type TransactionTableProps = {
   transactions: TransactionWithCategory[];
@@ -30,7 +30,7 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
           {transactions.map((t) => {
             return (
               <TableRow key={t.id}>
-                <TableCell>{format(t.date, 'PPP')}</TableCell>
+                <TableCell>{format(t.date, "PPP")}</TableCell>
                 <TableCell>
                   {t.category && (
                     <Badge variant="outline">{t.category.name}</Badge>

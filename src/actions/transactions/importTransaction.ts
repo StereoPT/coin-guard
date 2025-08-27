@@ -1,17 +1,17 @@
-'use server';
+"use server";
 
-import { format, isValid, parse } from 'date-fns';
-import Papa from 'papaparse';
-import prisma from '@/lib/prisma';
+import { format, isValid, parse } from "date-fns";
+import Papa from "papaparse";
+import prisma from "@/lib/prisma";
 
 type RawTransactionData = {
-  'Data mov.': string;
-  'Data valor': string;
+  "Data mov.": string;
+  "Data valor": string;
   Descrição: string;
   Débito: string;
   Crédito: string;
-  'Saldo contabilístico': string;
-  'Saldo disponível': string;
+  "Saldo contabilístico": string;
+  "Saldo disponível": string;
   Categoria: string;
   [key: string]: string | undefined;
 };
@@ -21,56 +21,56 @@ type ProcessedTransaction = {
   description: string;
   amount: number;
   balance: number;
-  type: 'CREDIT' | 'DEBIT';
+  type: "CREDIT" | "DEBIT";
 };
 
 const parseNumbers = (value: string) => {
-  const cleanValue = value.replace(/\./g, '').replace(',', '.');
+  const cleanValue = value.replace(/\./g, "").replace(",", ".");
 
   const number = parseFloat(cleanValue);
   return Math.round(number * 100) / 100;
 };
 
 const parseDates = (dateString: string) => {
-  if (!dateString || typeof dateString !== 'string') return null;
+  if (!dateString || typeof dateString !== "string") return null;
 
   try {
-    const parsedDate = parse(dateString, 'dd-MM-yyyy', new Date());
+    const parsedDate = parse(dateString, "dd-MM-yyyy", new Date());
 
     if (!isValid(parsedDate)) return null;
 
     return format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'");
   } catch (error) {
-    console.warn('Error parsing date:', dateString, error);
+    console.warn("Error parsing date:", dateString, error);
     return null;
   }
 };
 
 const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
   try {
-    const description = row['Descrição']?.trim().toLowerCase() || '';
+    const description = row["Descrição"]?.trim().toLowerCase() || "";
     if (!description) return null;
 
-    const creditValue = row['Crédito'] || '';
-    const debitValue = row['Débito'] || '';
+    const creditValue = row["Crédito"] || "";
+    const debitValue = row["Débito"] || "";
     const amountString = creditValue || debitValue;
 
     if (!amountString) return null;
 
-    const type: 'CREDIT' | 'DEBIT' = creditValue ? 'CREDIT' : 'DEBIT';
+    const type: "CREDIT" | "DEBIT" = creditValue ? "CREDIT" : "DEBIT";
 
     const amount = parseNumbers(amountString);
     if (isNaN(amount)) return null;
 
     // Process balance
-    const balanceString = row['Saldo contabilístico'] || '';
+    const balanceString = row["Saldo contabilístico"] || "";
     if (!balanceString) return null;
 
     const balance = parseNumbers(balanceString);
     if (isNaN(balance)) return null;
 
     // Process date
-    const dateString = row['Data valor'];
+    const dateString = row["Data valor"];
     if (!dateString) return null;
 
     const date = parseDates(dateString);
@@ -84,7 +84,7 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
       type,
     };
   } catch (error) {
-    console.warn('Error processing row:', error);
+    console.warn("Error processing row:", error);
     return null;
   }
 };
@@ -104,7 +104,7 @@ const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
   return new Promise((resolve, reject) => {
     Papa.parse(csvContent, {
       header: true,
-      delimiter: ';',
+      delimiter: ";",
       skipEmptyLines: true,
       transformHeader: (header: string) => header.trim(),
       complete: (results) => {
@@ -113,7 +113,7 @@ const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
             new Error(
               `CSV Parsing Errors: ${results.errors
                 .map((e) => e.message)
-                .join(', ')}`,
+                .join(", ")}`,
             ),
           );
         } else {
@@ -129,26 +129,26 @@ const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
 
 export const ImportTransaction = async (formValues: FormData) => {
   try {
-    const file = formValues.get('file') as File;
+    const file = formValues.get("file") as File;
 
     if (!file) {
-      throw new Error('No file uploaded!');
+      throw new Error("No file uploaded!");
     }
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     const fileContents = buffer
-      .toString('latin1')
-      .split('\n')
+      .toString("latin1")
+      .split("\n")
       .slice(6)
-      .join('\n');
+      .join("\n");
 
     const rawData = await parseCSV(fileContents);
     const processedData = processData(rawData);
 
     await prisma.transaction.createMany({ data: processedData });
   } catch (error) {
-    console.error('Failed to process CSV file:', error);
-    throw new Error('Failed to process CSV file!');
+    console.error("Failed to process CSV file:", error);
+    throw new Error("Failed to process CSV file!");
   }
 };

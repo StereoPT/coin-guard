@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { EditCategoryForm } from '@/components/categories/EditCategoryForm';
-import { DialogHeader } from '@/components/DialogHeader';
-import { Button } from '@/components/ui/button';
+import { EditCategoryForm } from "@/components/categories/EditCategoryForm";
+import { DialogHeader } from "@/components/DialogHeader";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { useGetCategory } from '@/hooks/categories/useGetCategory';
-import { Edit, Tag } from 'lucide-react';
-import { Dispatch, SetStateAction, useState } from 'react';
+} from "@/components/ui/dialog";
+import { useGetCategory } from "@/hooks/categories/useGetCategory";
+import { Edit, Tag } from "lucide-react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditCategoryDialogProps = {
   id: string;
@@ -50,7 +50,7 @@ export const EditCategoryDialog = ({
   }
 
   return (
-    <Dialog open={dialogOpen} onOpenChange={handleOpenChange}>
+    <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
         <DialogTrigger asChild>
           <Button>
@@ -61,9 +61,9 @@ export const EditCategoryDialog = ({
       )}
       <DialogContent className="px-0 py-4">
         <DialogHeader
-          title="Edit Category"
-          subtitle="Edit your category"
           icon={Tag}
+          subtitle="Edit your category"
+          title="Edit Category"
         />
         <div className="px-4 pt-4">
           {category && (

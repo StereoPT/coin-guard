@@ -1,11 +1,11 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
 export const GetLastTransactions = async (amount: number) => {
   const transactions = await prisma.transaction.findMany({
     orderBy: {
-      date: 'desc',
+      date: "desc",
     },
     take: amount,
   });

@@ -1,16 +1,16 @@
-import { DeleteTransactionDialog } from '@/components/transactions/DeleteTransactionDialog';
-import { EditTransactionDialog } from '@/components/transactions/EditTransactionDialog';
-import { Button } from '@/components/ui/button';
+import { DeleteTransactionDialog } from "@/components/transactions/DeleteTransactionDialog";
+import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { TransactionWithCategory } from '@/types/transactions';
-import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+} from "@/components/ui/dropdown-menu";
+import type { TransactionWithCategory } from "@/types/transactions";
+import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 type TransactionActionsProps = {
   transaction: TransactionWithCategory;
@@ -26,23 +26,23 @@ export const TransactionActions = ({
     <>
       {showDeleteAlert && (
         <DeleteTransactionDialog
-          open={showDeleteAlert}
           onOpenChange={setShowDeleteAlert}
+          open={showDeleteAlert}
           transaction={transaction}
         />
       )}
 
       {showEditDialog && (
         <EditTransactionDialog
-          open={showEditDialog}
-          onOpenChange={setShowEditDialog}
           id={transaction.id}
+          onOpenChange={setShowEditDialog}
+          open={showEditDialog}
         />
       )}
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button size="icon" variant="ghost">
             <MoreHorizontal />
           </Button>
         </DropdownMenuTrigger>
@@ -53,8 +53,9 @@ export const TransactionActions = ({
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
+            onClick={() => setShowDeleteAlert(true)}
             variant="destructive"
-            onClick={() => setShowDeleteAlert(true)}>
+          >
             <Trash2 />
             Delete
           </DropdownMenuItem>
