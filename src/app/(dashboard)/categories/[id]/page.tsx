@@ -1,10 +1,10 @@
-import { GetCategory } from '@/actions/categories/getCategory';
-import { EditCategoryDialog } from '@/components/categories/EditCategoryDialog';
-import { UserCategory } from '@/components/categories/UserCategory';
-import { PageHeader } from '@/components/PageHeader';
-import { KEYS } from '@/constants/queryKeys';
-import { getQueryClient } from '@/lib/getQueryClient';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { GetCategory } from "@/actions/categories/getCategory";
+import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
+import { UserCategory } from "@/components/categories/UserCategory";
+import { PageHeader } from "@/components/PageHeader";
+import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 type CategoryDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -23,8 +23,8 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
-          <PageHeader title="Category Details" goBack />
-          <EditCategoryDialog trigger id={id} />
+          <PageHeader goBack title="Category Details" />
+          <EditCategoryDialog id={id} trigger />
         </div>
         <div className="h-full py-6">
           <UserCategory categoryId={id} />

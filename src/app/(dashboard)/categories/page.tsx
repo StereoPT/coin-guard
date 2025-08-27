@@ -1,10 +1,10 @@
-import { GetCategories } from '@/actions/categories/getCategories';
-import { AddCategoryDialog } from '@/components/categories/AddCategoryDialog';
-import { UserCategories } from '@/components/categories/UserCategories';
-import { PageHeader } from '@/components/PageHeader';
-import { KEYS } from '@/constants/queryKeys';
-import { getQueryClient } from '@/lib/getQueryClient';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { GetCategories } from "@/actions/categories/getCategories";
+import { AddCategoryDialog } from "@/components/categories/AddCategoryDialog";
+import { UserCategories } from "@/components/categories/UserCategories";
+import { PageHeader } from "@/components/PageHeader";
+import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 const CategoriesPage = async () => {
   const queryClient = getQueryClient();
@@ -17,7 +17,7 @@ const CategoriesPage = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
-          <PageHeader title="Categories" description="Categories overview" />
+          <PageHeader description="Categories overview" title="Categories" />
           <AddCategoryDialog />
         </div>
 

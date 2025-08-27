@@ -1,9 +1,9 @@
-import { DashboardAnalytics } from '@/actions/analytics/dashboardAnalytics';
-import { UserDashboard } from '@/components/dashboard/UserDashboard';
-import { PageHeader } from '@/components/PageHeader';
-import { KEYS } from '@/constants/queryKeys';
-import { getQueryClient } from '@/lib/getQueryClient';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { DashboardAnalytics } from "@/actions/analytics/dashboardAnalytics";
+import { UserDashboard } from "@/components/dashboard/UserDashboard";
+import { PageHeader } from "@/components/PageHeader";
+import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 const HomePage = async () => {
   const queryClient = getQueryClient();
@@ -16,8 +16,8 @@ const HomePage = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
         <PageHeader
-          title="Welcome, Guido"
           description="This is your finance report"
+          title="Welcome, Guido"
         />
         <div className="h-full py-6">
           <UserDashboard />

@@ -1,10 +1,10 @@
-import { GetTransaction } from '@/actions/transactions/getTransaction';
-import { PageHeader } from '@/components/PageHeader';
-import { EditTransactionDialog } from '@/components/transactions/EditTransactionDialog';
-import { UserTransaction } from '@/components/transactions/UserTransaction';
-import { KEYS } from '@/constants/queryKeys';
-import { getQueryClient } from '@/lib/getQueryClient';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { GetTransaction } from "@/actions/transactions/getTransaction";
+import { PageHeader } from "@/components/PageHeader";
+import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
+import { UserTransaction } from "@/components/transactions/UserTransaction";
+import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 type TransactionDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -25,8 +25,8 @@ const TransactionDetailsPage = async ({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
-          <PageHeader title="Transaction Details" goBack />
-          <EditTransactionDialog trigger id={id} />
+          <PageHeader goBack title="Transaction Details" />
+          <EditTransactionDialog id={id} trigger />
         </div>
 
         <div className="h-full py-6">
