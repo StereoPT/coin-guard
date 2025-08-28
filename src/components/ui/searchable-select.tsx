@@ -2,7 +2,8 @@
 
 import { Check, ChevronsUpDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Button } from "@/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -10,13 +11,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from "@/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
 
 export interface SelectOption {

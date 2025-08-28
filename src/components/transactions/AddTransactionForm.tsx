@@ -1,4 +1,3 @@
-import { SearchableSelect } from "@/components/ui/searchable-select";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
 import { cn } from "@/lib/utils";
@@ -18,6 +17,7 @@ import {
 } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
+import { SearchableSelect } from "@/ui/searchable-select";
 import {
   Select,
   SelectContent,
