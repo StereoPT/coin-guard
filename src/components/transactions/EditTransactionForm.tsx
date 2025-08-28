@@ -18,6 +18,7 @@ import {
 } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
+import { SearchableSelect } from "@/ui/searchable-select";
 import {
   Select,
   SelectContent,
@@ -29,7 +30,7 @@ import { Textarea } from "@/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon, Loader2Icon } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
 type EditTransactionFormProps = {
@@ -53,6 +54,15 @@ export const EditTransactionForm = ({
   });
 
   const { mutateAsync, isPending } = useEditTransaction(initialValues.id);
+
+  const categoryOptions = useMemo(() => {
+    if (!categories) return [];
+
+    return categories.map((category) => ({
+      value: category.id,
+      label: category.name,
+    }));
+  }, [categories]);
 
   const onSubmit = useCallback(
     async (values: editTransactionSchemaType) => {
@@ -191,25 +201,14 @@ export const EditTransactionForm = ({
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="flex items-center">Category</FormLabel>
-                <FormControl>
-                  <Select
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a Category" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {categories?.map((category) => (
-                        <SelectItem key={category.id} value={category.id}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                <SearchableSelect
+                  emptyPlaceholer="No category found."
+                  onChange={field.onChange}
+                  options={categoryOptions}
+                  placeholder="Select a Category"
+                  searchPlaceholder="Search a category..."
+                  value={field.value}
+                />
                 <FormMessage />
               </FormItem>
             )}

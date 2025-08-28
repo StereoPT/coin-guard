@@ -1,6 +1,6 @@
 import { GetTransactions } from "@/actions/transactions/getTransactions";
 import { PageHeader } from "@/components/PageHeader";
-import { AddTransactionDialog } from "@/components/transactions/AddTransactionDialog";
+import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { UserTransactions } from "@/components/transactions/UserTransactions";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
@@ -21,7 +21,7 @@ const TransactionsPage = async () => {
             description="Transactions overview"
             title="Transactions"
           />
-          <AddTransactionDialog />
+          <AddTransaction />
         </div>
 
         <div className="h-full py-6">
