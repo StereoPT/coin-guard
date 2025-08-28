@@ -1,5 +1,15 @@
 "use client";
 
+import { ROUTES } from "@/constants/routes";
+import {
+  LayoutDashboard,
+  type LucideIcon,
+  Table2Icon,
+  TagIcon,
+  Triangle,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Sidebar as ShadcnSidebar,
   SidebarContent,
@@ -11,17 +21,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "./ui/sidebar";
-import {
-  LayoutDashboard,
-  type LucideIcon,
-  Table2Icon,
-  TagIcon,
-  Triangle,
-} from "lucide-react";
-import { usePathname } from "next/navigation";
-import React from "react";
-import Link from "next/link";
-import { ROUTES } from "@/constants/routes";
 
 type Route = {
   icon: LucideIcon;
@@ -63,7 +62,7 @@ const isActive = (routeUrl: string, currentPath: string) => {
     return currentPath === "/";
   }
 
-  return currentPath === routeUrl || currentPath.startsWith(routeUrl + "/");
+  return currentPath === routeUrl || currentPath.startsWith(`${routeUrl}/`);
 };
 
 export const Sidebar = () => {
@@ -75,7 +74,7 @@ export const Sidebar = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
-              <Link href="/">
+              <Link href={ROUTES.home}>
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-gradient-to-r from-blue-500 to-blue-600">
                   <Triangle className="stroke-white" size={16} />
                 </div>

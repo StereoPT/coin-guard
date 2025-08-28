@@ -1,11 +1,12 @@
 import { AddCategory } from "@/actions/categories/addCategory";
 import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
 import type { addCategorySchemaType } from "@/schemas/categories";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useAddCategory = () => {
-  const queryClient = useQueryClient();
+  const queryClient = getQueryClient();
   const toastId = "add-category";
 
   return useMutation({

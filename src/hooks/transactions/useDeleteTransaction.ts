@@ -1,10 +1,11 @@
 import { DeleteTransaction } from "@/actions/transactions/deleteTransaction";
 import { KEYS } from "@/constants/queryKeys";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useDeleteTransaction = (id: string) => {
-  const queryClient = useQueryClient();
+  const queryClient = getQueryClient();
   const toastID = `delete-transaction-${id}`;
 
   return useMutation({

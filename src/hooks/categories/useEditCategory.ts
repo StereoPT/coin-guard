@@ -1,11 +1,12 @@
 import { EditCategory } from "@/actions/categories/editCategory";
 import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
 import type { editCategorySchemaType } from "@/schemas/categories";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useEditCategory = (categoryId: string) => {
-  const queryClient = useQueryClient();
+  const queryClient = getQueryClient();
   const toastId = `edit-category-${categoryId}`;
 
   return useMutation({

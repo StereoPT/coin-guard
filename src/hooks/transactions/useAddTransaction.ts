@@ -1,11 +1,12 @@
 import { AddTransaction } from "@/actions/transactions/addTransaction";
 import { KEYS } from "@/constants/queryKeys";
+import { getQueryClient } from "@/lib/getQueryClient";
 import type { addTransactionSchemaType } from "@/schemas/transactions";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useAddTransaction = () => {
-  const queryClient = useQueryClient();
+  const queryClient = getQueryClient();
   const toastId = "add-transaction";
 
   return useMutation({

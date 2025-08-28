@@ -1,10 +1,11 @@
 import { DeleteCategory } from "@/actions/categories/deleteCategory";
 import { KEYS } from "@/constants/queryKeys";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useDeleteCategory = (id: string) => {
-  const queryClient = useQueryClient();
+  const queryClient = getQueryClient();
   const toastID = `delete-category-${id}`;
 
   return useMutation({
