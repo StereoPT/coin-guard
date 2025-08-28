@@ -2,7 +2,7 @@
 
 import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { AddTransactionDialog } from "@/components/transactions/AddTransactionDialog";
+import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { columns } from "@/components/transactions/columns";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
 import { fuzzyFilterFn } from "@/lib/dataTable";
@@ -17,10 +17,10 @@ const EmptyUserTransactions = () => {
       <div className="flex flex-col gap-1 text-center">
         <p className="font-bold">No transactions added yet</p>
         <p className="text-muted-foreground">
-          Click the button below to add your first transaction
+          Click the button below to add or import your first transaction
         </p>
       </div>
-      <AddTransactionDialog />
+      <AddTransaction />
     </div>
   );
 };
