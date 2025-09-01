@@ -1,7 +1,7 @@
 "use client";
 
+import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DisplayCard } from "@/components/dashboard/DisplayCard";
-import { DisplayCategoryGraph } from "@/components/dashboard/DisplayCategoryGraph";
 import { DisplayLastTransactions } from "@/components/dashboard/DisplayLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionType } from "@/generated/prisma";
@@ -31,9 +31,9 @@ export const UserDashboard = () => {
         title="Debit"
         type={TransactionType.DEBIT}
       />
-      <DisplayCategoryGraph
+      <CategoryPieChart
+        categoryStats={analytics.categoryStats}
         className="col-span-4 row-span-5 col-start-9"
-        stats={analytics.categoryStats}
       />
       <DisplayLastTransactions
         className="col-span-8 row-span-4 row-start-2"

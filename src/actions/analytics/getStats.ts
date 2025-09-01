@@ -2,9 +2,8 @@
 
 import { TransactionType } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
+import type { TransactionValue } from "@/types/transactions";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
-
-type TransactionValue = Record<TransactionType, number>;
 
 export type TransactionStat = {
   value: number;
