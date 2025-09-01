@@ -1,12 +1,12 @@
-import type { MonthlyTransactionValue } from "@/actions/analytics/monthly/getMonthlyStats";
 import { StatCard } from "@/components/analytics/StatCard";
+import type { StatCardsType } from "@/types/analytics";
 import { Banknote, BanknoteArrowDown, BanknoteArrowUp } from "lucide-react";
 
-type MonthlyStatsProps = {
-  stats?: MonthlyTransactionValue;
+type StatCardsProps = {
+  stats?: StatCardsType;
 };
 
-export const MonthlyStats = ({ stats }: MonthlyStatsProps) => {
+export const StatCards = ({ stats }: StatCardsProps) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       <StatCard

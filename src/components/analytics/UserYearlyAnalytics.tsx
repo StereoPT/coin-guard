@@ -1,20 +1,20 @@
 "use client";
 
-import { MonthlyChart } from "@/components/analytics/MonthlyChart";
-import { MonthlySelection } from "@/components/analytics/MonthlySelection";
 import { StatCards } from "@/components/analytics/StatCards";
+import { YearlyChart } from "@/components/analytics/YearlyChart";
+import { YearlySelection } from "@/components/analytics/YearlySelection";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { useMonthlyAnalytics } from "@/hooks/analytics/useMonthlyAnalytics";
+import { useYearlyAnalytics } from "@/hooks/analytics/useYearlyAnalytics";
 import { useState } from "react";
 
-type UserMonthlyAnalyticsProps = {
-  month: number;
+type UserYearlyAnalyticsProps = {
+  year: number;
 };
 
-export const UserMonthlyAnalytics = ({ month }: UserMonthlyAnalyticsProps) => {
-  const [selectedMonth, setSelectedMonth] = useState(month);
-  const { data: analytics, isLoading } = useMonthlyAnalytics(selectedMonth);
+export const UserYearlyAnalytics = ({ year }: UserYearlyAnalyticsProps) => {
+  const [selectedYear, setSelectedYear] = useState(year);
+  const { data: analytics, isLoading } = useYearlyAnalytics(selectedYear);
 
   if (!analytics && !isLoading) {
     return <ErrorAlert />;
@@ -22,14 +22,14 @@ export const UserMonthlyAnalytics = ({ month }: UserMonthlyAnalyticsProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <MonthlySelection
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
+      <YearlySelection
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
       />
       <StatCards stats={analytics?.stats} />
       <div className="grid grid-cols-3 gap-4">
-        <MonthlyChart
-          selectedMonth={selectedMonth}
+        <YearlyChart
+          selectedYear={selectedYear}
           transactions={analytics?.transactions}
         />
         <CategoryPieChart

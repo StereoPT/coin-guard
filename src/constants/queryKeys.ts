@@ -12,5 +12,5 @@ export const KEYS = {
   category: (id: string) => [CATEGORIES, id],
 
   monthlyAnalytics: (month: number) => [ANALYTICS, "monthly", month],
-  yearlyAnalytics: [ANALYTICS, "yearly"],
+  yearlyAnalytics: (year: number) => [ANALYTICS, "yearly", year],
 };
