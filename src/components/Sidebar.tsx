@@ -3,6 +3,7 @@
 import { ROUTES } from "@/constants/routes";
 import {
   CalendarDaysIcon,
+  Cog,
   LayoutDashboard,
   type LucideIcon,
   Table2Icon,
@@ -14,6 +15,7 @@ import { usePathname } from "next/navigation";
 import {
   Sidebar as ShadcnSidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
@@ -133,6 +135,21 @@ export const Sidebar = () => {
           );
         })}
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu className="gap-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={isActive(ROUTES.settings, pathname)}
+              tooltip="Settings"
+            >
+              <Link href={ROUTES.settings}>
+                <Cog /> Settings
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
       <SidebarRail />
     </ShadcnSidebar>
   );
