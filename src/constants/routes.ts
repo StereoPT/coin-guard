@@ -11,4 +11,6 @@ export const ROUTES = {
     monthly: "/analytics/monthly",
     yearly: "/analytics/yearly",
   },
+
+  settings: "/settings",
 } as const;
