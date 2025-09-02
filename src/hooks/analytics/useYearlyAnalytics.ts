@@ -1,4 +1,4 @@
-import { YearlyAnalytics } from "@/actions/analytics/yearly/yearlyAnalytics";
+import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
 import { KEYS } from "@/constants/queryKeys";
 import { useQuery } from "@tanstack/react-query";
 

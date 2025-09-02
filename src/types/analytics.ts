@@ -3,3 +3,8 @@ export type StatCardsType = {
   DEBIT: number;
   CASH_FLOW: number;
 };
+
+export type TransactionStat = {
+  value: number;
+  percentage?: number;
+};

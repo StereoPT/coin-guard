@@ -1,8 +1,8 @@
-import type { TransactionStat } from "@/actions/analytics/getStats";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import type { TransactionType } from "@/generated/prisma";
 import { getTypeColor } from "@/lib/typeColors";
 import { cn } from "@/lib/utils";
+import type { TransactionStat } from "@/types/analytics";
 import { Badge } from "@/ui/badge";
 import { Card } from "@/ui/card";
 import { Skeleton } from "@/ui/skeleton";

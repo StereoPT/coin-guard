@@ -1,4 +1,4 @@
-import { MonthlyAnalytics } from "@/actions/analytics/monthly/monthlyAnalytics";
+import { MonthlyAnalytics } from "@/actions/analytics/monthlyAnalytics";
 import { KEYS } from "@/constants/queryKeys";
 import { useQuery } from "@tanstack/react-query";
 

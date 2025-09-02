@@ -1,4 +1,4 @@
-import { YearlyAnalytics } from "@/actions/analytics/yearly/yearlyAnalytics";
+import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
 import { UserYearlyAnalytics } from "@/components/analytics/UserYearlyAnalytics";
 import { PageHeader } from "@/components/PageHeader";
 import { KEYS } from "@/constants/queryKeys";

@@ -1,14 +1,9 @@
 "use server";
 
+import { GetStatsForDate } from "@/actions/analytics/getStatsForDate";
 import { TransactionType } from "@/generated/prisma";
-import prisma from "@/lib/prisma";
-import type { TransactionValue } from "@/types/transactions";
+import type { TransactionStat } from "@/types/analytics";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
-
-export type TransactionStat = {
-  value: number;
-  percentage?: number;
-};
 
 type GetStatsReturnValue = Record<TransactionType, TransactionStat>;
 
@@ -16,40 +11,20 @@ const calculatePercentageChange = (newVal: number, oldVal: number) => {
   return ((newVal - oldVal) / oldVal) * 100;
 };
 
-const createEmptyTransactionSummary = (): TransactionValue => {
-  return Object.values(TransactionType).reduce(
-    (acc, type) => ({ ...acc, [type]: 0 }),
-    {} as TransactionValue,
-  );
-};
-
-const getDateRange = (monthsBack: number) => ({
-  gte: startOfMonth(subMonths(new Date(), monthsBack)),
-  lte: endOfMonth(subMonths(new Date(), monthsBack)),
-});
-
-const getTransactionSummaryForPeriod = async (
-  monthsBack: number,
-): Promise<TransactionValue> => {
-  const groupedData = await prisma.transaction.groupBy({
-    by: "type",
-    _sum: { amount: true },
-    where: { date: getDateRange(monthsBack) },
-  });
-
-  const summary = createEmptyTransactionSummary();
-
-  groupedData.forEach((item) => {
-    summary[item.type] = item._sum.amount ?? 0;
-  });
-
-  return summary;
-};
-
 export const GetStats = async (): Promise<GetStatsReturnValue> => {
+  const dateFilterOne = {
+    gte: startOfMonth(subMonths(new Date(), 1)),
+    lte: endOfMonth(subMonths(new Date(), 1)),
+  };
+
+  const dateFilterTwo = {
+    gte: startOfMonth(subMonths(new Date(), 2)),
+    lte: endOfMonth(subMonths(new Date(), 2)),
+  };
+
   const [currentSummary, previousSummary] = await Promise.all([
-    getTransactionSummaryForPeriod(1),
-    getTransactionSummaryForPeriod(2),
+    GetStatsForDate(dateFilterOne),
+    GetStatsForDate(dateFilterTwo),
   ]);
 
   const result = Object.values(TransactionType).reduce(

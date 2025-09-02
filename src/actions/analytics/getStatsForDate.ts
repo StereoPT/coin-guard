@@ -3,7 +3,6 @@
 import { TransactionType } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 import type { StatCardsType } from "@/types/analytics";
-import { endOfMonth, startOfMonth } from "date-fns";
 
 const createEmptyTransactionSummary = (): StatCardsType => {
   return Object.values(TransactionType).reduce(
@@ -12,15 +11,12 @@ const createEmptyTransactionSummary = (): StatCardsType => {
   );
 };
 
-export const GetMonthlyStats = async (month: number) => {
+export const GetStatsForDate = async (dateFilter: { gte: Date; lte: Date }) => {
   const groupedData = await prisma.transaction.groupBy({
     by: "type",
     _sum: { amount: true },
     where: {
-      date: {
-        gte: startOfMonth(new Date(2025, month, 1)),
-        lte: endOfMonth(new Date(2025, month, 1)),
-      },
+      date: dateFilter,
     },
   });
 
