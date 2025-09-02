@@ -99,7 +99,7 @@ export const Sidebar = () => {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">CoinGuard</span>
-                  <span className="">v5.0.0</span>
+                  <span className="">v6.0.0</span>
                 </div>
               </Link>
             </SidebarMenuButton>
