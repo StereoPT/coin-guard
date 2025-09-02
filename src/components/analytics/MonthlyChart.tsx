@@ -1,6 +1,12 @@
 import type { Transaction } from "@/generated/prisma";
 import { getDaysOfMonth } from "@/lib/date";
-import { Card, CardContent } from "@/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
@@ -48,6 +54,12 @@ export const MonthlyChart = ({
 
   return (
     <Card className="col-span-2">
+      <CardHeader>
+        <CardTitle>Expenses per Day</CardTitle>
+        <CardDescription>
+          For the month of: {format(new Date(2025, selectedMonth, 1), "MMMM")}
+        </CardDescription>
+      </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
           className="aspect-auto h-[250px] w-full"

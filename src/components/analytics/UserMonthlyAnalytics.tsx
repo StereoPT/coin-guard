@@ -6,6 +6,7 @@ import { StatCards } from "@/components/analytics/StatCards";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useMonthlyAnalytics } from "@/hooks/analytics/useMonthlyAnalytics";
+import { format } from "date-fns";
 import { useState } from "react";
 
 type UserMonthlyAnalyticsProps = {
@@ -34,7 +35,8 @@ export const UserMonthlyAnalytics = ({ month }: UserMonthlyAnalyticsProps) => {
         />
         <CategoryPieChart
           categoryStats={analytics?.categoryStats}
-          hasHeader={false}
+          description={`For the month of: ${format(new Date(2025, selectedMonth, 1), "MMMM")}`}
+          title="Category Summary"
         />
       </div>
     </div>

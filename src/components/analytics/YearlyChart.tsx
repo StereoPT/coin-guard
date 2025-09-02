@@ -1,6 +1,12 @@
 import type { Transaction } from "@/generated/prisma";
 import { getMonthsOfYear } from "@/lib/date";
-import { Card, CardContent } from "@/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
@@ -9,7 +15,7 @@ import {
 } from "@/ui/chart";
 import { format } from "date-fns";
 import { useMemo } from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig = {
   date: {
@@ -48,12 +54,16 @@ export const YearlyChart = ({
 
   return (
     <Card className="col-span-2">
+      <CardHeader>
+        <CardTitle>Expenses per Month</CardTitle>
+        <CardDescription>From: January, To: December</CardDescription>
+      </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
           className="aspect-auto h-[250px] w-full"
           config={chartConfig}
         >
-          <AreaChart
+          <BarChart
             accessibilityLayer
             data={transactionData}
             margin={{ left: 12, right: 12 }}
@@ -70,8 +80,8 @@ export const YearlyChart = ({
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
             />
-            <Area dataKey="amount" fillOpacity={0.4} type="monotone" />
-          </AreaChart>
+            <Bar dataKey="amount" fill="#adcde5" radius={4} />
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>

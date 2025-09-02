@@ -6,6 +6,7 @@ import { DisplayLastTransactions } from "@/components/dashboard/DisplayLastTrans
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionType } from "@/generated/prisma";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
+import { endOfMonth, format, subMonths } from "date-fns";
 import { BanknoteArrowDown, BanknoteArrowUp } from "lucide-react";
 
 export const UserDashboard = () => {
@@ -34,6 +35,8 @@ export const UserDashboard = () => {
       <CategoryPieChart
         categoryStats={analytics.categoryStats}
         className="col-span-4 row-span-5 col-start-9"
+        description={`Last Update - ${format(endOfMonth(subMonths(new Date(), 1)), "PPP")}`}
+        title="Category Summary"
       />
       <DisplayLastTransactions
         className="col-span-8 row-span-4 row-start-2"

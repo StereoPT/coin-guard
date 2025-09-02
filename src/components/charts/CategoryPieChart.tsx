@@ -9,7 +9,6 @@ import {
   ChartTooltipContent,
 } from "@/ui/chart";
 import type { ClassValue } from "clsx";
-import { endOfMonth, format, subMonths } from "date-fns";
 import { Loader2 } from "lucide-react";
 import { Cell, Pie, PieChart } from "recharts";
 
@@ -35,26 +34,24 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 type CategoryPieChartProps = {
+  title: string;
+  description: string;
   categoryStats?: CategoryStats[];
   className?: ClassValue;
-  hasHeader?: boolean;
 };
 
 export const CategoryPieChart = ({
+  title,
+  description,
   categoryStats,
   className,
-  hasHeader = true,
 }: CategoryPieChartProps) => {
   return (
     <Card className={cn("p-4", className)}>
-      {hasHeader && (
-        <CardHeader className="items-center pb-0">
-          <CardTitle>Category Summary</CardTitle>
-          <CardDescription>
-            Last Update - {format(endOfMonth(subMonths(new Date(), 1)), "PPP")}
-          </CardDescription>
-        </CardHeader>
-      )}
+      <CardHeader className="items-center pb-0">
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
       <div>
         {!categoryStats ? (
           <div className="flex items-center justify-center mx-auto aspect-square max-h-[300px]">

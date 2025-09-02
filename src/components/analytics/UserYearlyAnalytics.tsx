@@ -34,7 +34,8 @@ export const UserYearlyAnalytics = ({ year }: UserYearlyAnalyticsProps) => {
         />
         <CategoryPieChart
           categoryStats={analytics?.categoryStats}
-          hasHeader={false}
+          description={`For the year of: ${selectedYear}`}
+          title="Category Summary"
         />
       </div>
     </div>
