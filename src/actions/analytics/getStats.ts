@@ -7,7 +7,7 @@ import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
 export type TransactionStat = {
   value: number;
-  percentage: number;
+  percentage?: number;
 };
 
 type GetStatsReturnValue = Record<TransactionType, TransactionStat>;

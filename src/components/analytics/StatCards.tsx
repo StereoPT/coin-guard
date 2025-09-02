@@ -11,21 +11,21 @@ export const StatCards = ({ stats }: StatCardsProps) => {
     <div className="grid grid-cols-3 gap-4">
       <StatCard
         icon={BanknoteArrowUp}
-        iconColor="text-green-600"
-        stat={stats?.CREDIT}
+        stat={{ value: stats?.CREDIT ?? 0 }}
         title="Income"
+        type="CREDIT"
       />
       <StatCard
         icon={BanknoteArrowDown}
-        iconColor="text-red-600"
-        stat={stats?.DEBIT}
+        stat={{ value: stats?.DEBIT ?? 0 }}
         title="Debit"
+        type="DEBIT"
       />
       <StatCard
         icon={Banknote}
-        iconColor="text-blue-600"
-        stat={stats?.CASH_FLOW}
+        stat={{ value: stats?.CASH_FLOW ?? 0 }}
         title="Cash Flow"
+        type="CASH_FLOW"
       />
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
+import { StatCard } from "@/components/analytics/StatCard";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
-import { DisplayCard } from "@/components/dashboard/DisplayCard";
 import { DisplayLastTransactions } from "@/components/dashboard/DisplayLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionType } from "@/generated/prisma";
@@ -18,16 +18,18 @@ export const UserDashboard = () => {
 
   return (
     <div className="grid grid-cols-12 grid-rows-4 gap-4">
-      <DisplayCard
+      <StatCard
         className="col-span-4 row-span-1"
         icon={BanknoteArrowUp}
+        showBadge
         stat={analytics.stats.CREDIT}
         title="Income"
         type={TransactionType.CREDIT}
       />
-      <DisplayCard
+      <StatCard
         className="col-span-4 row-span-1 col-start-5"
         icon={BanknoteArrowDown}
+        showBadge
         stat={analytics.stats.DEBIT}
         title="Debit"
         type={TransactionType.DEBIT}
