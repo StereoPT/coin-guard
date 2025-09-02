@@ -2,27 +2,18 @@
 
 import { TransactionType } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
-import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
-export type GetCategoryStatsReturnValue = {
-  categoryId: string;
-  categoryName: string;
-  totalAmount: number;
-};
-
-export const GetCategoryStats = async (): Promise<
-  GetCategoryStatsReturnValue[]
-> => {
+export const GetCategoriesForDate = async (dateFilter: {
+  gte: Date;
+  lte: Date;
+}) => {
   const categoryTotals = await prisma.transaction.groupBy({
     by: "categoryId",
     _sum: {
       amount: true,
     },
     where: {
-      date: {
-        gte: startOfMonth(subMonths(new Date(), 1)),
-        lte: endOfMonth(subMonths(new Date(), 1)),
-      },
+      date: dateFilter,
       type: {
         equals: TransactionType.DEBIT,
       },

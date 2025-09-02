@@ -2,6 +2,7 @@
 
 import { ROUTES } from "@/constants/routes";
 import {
+  CalendarDaysIcon,
   LayoutDashboard,
   type LucideIcon,
   Table2Icon,
@@ -52,6 +53,22 @@ const groupRoutes: GroupedRoute[] = [
         icon: TagIcon,
         title: "Categories",
         url: ROUTES.categories,
+      },
+    ],
+  },
+  {
+    key: "analytics",
+    label: "Analytics",
+    items: [
+      {
+        icon: CalendarDaysIcon,
+        title: "Monthly",
+        url: ROUTES.analytics.monthly,
+      },
+      {
+        icon: CalendarDaysIcon,
+        title: "Yearly",
+        url: ROUTES.analytics.yearly,
       },
     ],
   },

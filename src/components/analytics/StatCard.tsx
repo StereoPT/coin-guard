@@ -1,30 +1,34 @@
-import type { TransactionStat } from "@/actions/analytics/getStats";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import type { TransactionType } from "@/generated/prisma";
 import { getTypeColor } from "@/lib/typeColors";
 import { cn } from "@/lib/utils";
+import type { TransactionStat } from "@/types/analytics";
 import { Badge } from "@/ui/badge";
 import { Card } from "@/ui/card";
+import { Skeleton } from "@/ui/skeleton";
 import type { ClassValue } from "clsx";
-import { type LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp, type LucideIcon } from "lucide-react";
 
-type DisplayCardProps = {
-  title: string;
+type StatCardProps = {
   icon: LucideIcon;
-  type: TransactionType;
-  stat: TransactionStat;
+  title: string;
+  type: TransactionType | "CASH_FLOW";
+  showBadge?: boolean;
+  stat?: TransactionStat;
+  iconColor?: ClassValue;
   className?: ClassValue;
 };
 
-export const DisplayCard = ({
-  title,
+export const StatCard = ({
   icon,
-  type,
+  title,
   stat,
+  type,
+  showBadge = false,
   className,
-}: DisplayCardProps) => {
+}: StatCardProps) => {
   const Icon = icon;
-  const isNegativePercentage = Math.sign(stat.percentage) < 1;
+  const isNegativePercentage = Math.sign(stat?.percentage ?? 0) < 1;
 
   return (
     <Card className={cn("p-4", className)}>
@@ -38,15 +42,21 @@ export const DisplayCard = ({
           </div>
           <div className="flex items-center gap-4">
             <div className="font-bold text-lg">
-              <CountUpWrapper value={stat.value} />
+              {!stat ? (
+                <Skeleton className="w-32 h-7" />
+              ) : (
+                <CountUpWrapper value={stat.value} />
+              )}
             </div>
-            <Badge
-              className={cn(getTypeColor(type, isNegativePercentage))}
-              variant="secondary"
-            >
-              {stat.percentage.toFixed(2)}%
-              {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
-            </Badge>
+            {showBadge && (
+              <Badge
+                className={cn(getTypeColor(type, isNegativePercentage))}
+                variant="secondary"
+              >
+                {stat?.percentage?.toFixed(2)}%
+                {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
+              </Badge>
+            )}
           </div>
         </div>
       </div>
