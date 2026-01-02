@@ -21,6 +21,7 @@ export type ProcessedTransaction = {
   amount: number;
   balance: number;
   type: "CREDIT" | "DEBIT";
+  categoryId?: string;
 };
 
 const parseNumbers = (value: string) => {
@@ -129,9 +130,16 @@ const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
 export const ParseTransaction = async (formValues: FormData) => {
   try {
     const file = formValues.get("file") as File;
-
     if (!file) {
       throw new Error("No file uploaded!");
+    }
+
+    if (file.size > 5000000) {
+      throw new Error("File size must be less than 5MB");
+    }
+
+    if (file.type !== "text/csv" || !file.name.toLowerCase().endsWith(".csv")) {
+      throw new Error("Only CSV files are allowed");
     }
 
     const arrayBuffer = await file.arrayBuffer();

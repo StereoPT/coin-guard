@@ -9,7 +9,5 @@ export const useParseTransaction = () => {
 
       return ParseTransaction(formData);
     },
-    onSuccess: () => {},
-    onError: () => {},
   });
 };
