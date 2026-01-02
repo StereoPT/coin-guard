@@ -1,6 +1,5 @@
 "use server";
 
-import prisma from "@/lib/prisma";
 import { format, isValid, parse } from "date-fns";
 import Papa from "papaparse";
 
@@ -16,7 +15,7 @@ type RawTransactionData = {
   [key: string]: string | undefined;
 };
 
-type ProcessedTransaction = {
+export type ProcessedTransaction = {
   date: string;
   description: string;
   amount: number;
@@ -127,7 +126,7 @@ const parseCSV = (csvContent: string): Promise<RawTransactionData[]> => {
   });
 };
 
-export const ImportTransaction = async (formValues: FormData) => {
+export const ParseTransaction = async (formValues: FormData) => {
   try {
     const file = formValues.get("file") as File;
 
@@ -146,7 +145,7 @@ export const ImportTransaction = async (formValues: FormData) => {
     const rawData = await parseCSV(fileContents);
     const processedData = processData(rawData);
 
-    await prisma.transaction.createMany({ data: processedData });
+    return processedData;
   } catch (error) {
     console.error("Failed to process CSV file:", error);
     throw new Error("Failed to process CSV file!");
