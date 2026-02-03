@@ -30,7 +30,7 @@ export const generateMonthRange = (
 };
 
 export const getDaysOfMonth = (month: number) => {
-  const date = new Date(2025, month, 1);
+  const date = new Date(2026, month, 1);
 
   const start = startOfMonth(date);
   const end = endOfMonth(date);

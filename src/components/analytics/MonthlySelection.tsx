@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { type Dispatch, type SetStateAction, useMemo } from "react";
 
 const months = [...Array(12)].map((_, index) => ({
-  label: format(new Date(2025, index, 1), "MMMM"),
+  label: format(new Date(2026, index, 1), "MMMM"),
   value: index,
 }));
 

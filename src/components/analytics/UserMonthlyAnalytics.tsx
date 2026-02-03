@@ -35,7 +35,7 @@ export const UserMonthlyAnalytics = ({ month }: UserMonthlyAnalyticsProps) => {
         />
         <CategoryPieChart
           categoryStats={analytics?.categoryStats}
-          description={`For the month of: ${format(new Date(2025, selectedMonth, 1), "MMMM")}`}
+          description={`For the month of: ${format(new Date(2026, selectedMonth, 1), "MMMM")}`}
           title="Category Summary"
         />
       </div>
