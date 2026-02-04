@@ -7,8 +7,8 @@ import { endOfMonth, startOfMonth } from "date-fns";
 
 export const MonthlyAnalytics = async (month: number) => {
   const dateFilter = {
-    gte: startOfMonth(new Date(2025, month, 1)),
-    lte: endOfMonth(new Date(2025, month, 1)),
+    gte: startOfMonth(new Date(2026, month, 1)),
+    lte: endOfMonth(new Date(2026, month, 1)),
   };
 
   const stats = await GetStatsForDate(dateFilter);

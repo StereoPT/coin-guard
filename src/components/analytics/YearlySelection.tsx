@@ -12,7 +12,7 @@ import {
 import { format } from "date-fns";
 import { useMemo, type Dispatch, type SetStateAction } from "react";
 
-const years = [...Array(2)].map((_, index) => ({
+const years = [...Array(3)].map((_, index) => ({
   label: format(new Date(index + 2024, 1, 1), "y"),
   value: index + 2024,
 }));

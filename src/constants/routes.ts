@@ -3,6 +3,7 @@ export const ROUTES = {
 
   transactions: "/transactions",
   transaction: (id: string) => `/transactions/${id}` as const,
+  importTransactions: "/transactions/import",
 
   categories: "/categories",
   category: (id: string) => `/categories/${id}` as const,

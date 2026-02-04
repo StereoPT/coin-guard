@@ -1,43 +1,77 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
-import { AddTransactionWithFile } from "@/components/transactions/AddTransactionWithFile";
-import { Button } from "@/ui/button";
+import { EditableDataTable } from "@/components/dataTable/EditableDataTable";
+import { editableColumns } from "@/components/transactions/editableColumns";
+import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "@/ui/dialog";
-import { FileDown } from "lucide-react";
+  Dropzone,
+  DropzoneContent,
+  DropzoneEmptyState,
+} from "@/components/ui/shadcn-io/dropzone";
+import { ROUTES } from "@/constants/routes";
+import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";
+import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
+import { processedTransactionsAtom } from "@/store/transactionsStore";
+import { useAtom } from "jotai";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const ImportTransactions = () => {
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  const handleOnOpenChange = (open: boolean) => {
-    setOpen(open);
+  const [files, setFiles] = useState<File[] | undefined>();
+  const [transactions, setTransactions] = useAtom(processedTransactionsAtom);
+
+  const { mutateAsync: mutateParse, isPending: parseIsPending } =
+    useParseTransaction();
+  const { mutateAsync: mutateImport, isPending: importIsPending } =
+    useImportTransaction();
+
+  const handleDrop = async (files: File[]) => {
+    setFiles(files);
+
+    if (files[0]) {
+      const fileTransactions = await mutateParse(files[0]);
+      setTransactions(fileTransactions);
+    }
   };
 
+  const handleImport = async () => {
+    if (transactions) {
+      await mutateImport(transactions);
+      router.push(ROUTES.transactions);
+    }
+  };
+
+  const isPending = parseIsPending || importIsPending;
+
   return (
-    <Dialog onOpenChange={handleOnOpenChange} open={open}>
-      <DialogTrigger asChild>
-        <Button className="rounded-r-none border-r border-r-white/30">
-          <FileDown />
-          Import Transactions
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={FileDown}
-          subtitle="Import your transactions from CGD"
-          title="Import Transactions"
+    <div className="flex flex-col gap-4">
+      <Dropzone
+        accept={{ "text/csv": [] }}
+        disabled={isPending}
+        multiple={false}
+        onDrop={handleDrop}
+        src={files}
+      >
+        <DropzoneEmptyState />
+        <DropzoneContent />
+      </Dropzone>
+      <div>
+        <EditableDataTable
+          columns={editableColumns}
+          data={transactions ?? []}
         />
-        <div className="px-4">
-          <AddTransactionWithFile setOpen={setOpen} />
-        </div>
-        <DialogDescription />
-      </DialogContent>
-    </Dialog>
+      </div>
+      <div className="flex justify-end gap-2">
+        <Button asChild variant="outline">
+          <Link href={ROUTES.transactions}>Back</Link>
+        </Button>
+        <Button disabled={isPending || !transactions} onClick={handleImport}>
+          Import
+        </Button>
+      </div>
+    </div>
   );
 };
