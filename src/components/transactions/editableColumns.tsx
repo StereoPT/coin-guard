@@ -1,5 +1,9 @@
+"use client";
+
 import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
 import { AmountBadge } from "@/components/AmountBadge";
+import { DeleteProcessedTransaction } from "@/components/transactions/DeleteProcessedTransaction";
+import { EditProcessedTransaction } from "@/components/transactions/EditProcessedTransaction";
 import { formatCurrency } from "@/lib/formatter";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
@@ -8,7 +12,7 @@ export const editableColumns: ColumnDef<ProcessedTransaction>[] = [
   {
     accessorKey: "description",
     header: "Description",
-    size: 350,
+    size: 300,
     cell: ({ row }) => {
       const { description, date } = row.original;
 
@@ -42,6 +46,23 @@ export const editableColumns: ColumnDef<ProcessedTransaction>[] = [
       return formatCurrency(balance);
     },
   },
-  { accessorKey: "categoryId", header: "Category", size: 90 },
-  { accessorKey: "actions", header: "Actions", size: 50 },
+  {
+    accessorKey: "categoryId",
+    header: "Category",
+    size: 140,
+    cell: ({ row }) => {
+      const transaction = row.original;
+
+      return <EditProcessedTransaction transaction={transaction} />;
+    },
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    size: 50,
+    cell: ({ row }) => {
+      const transaction = row.original;
+      return <DeleteProcessedTransaction transaction={transaction} />;
+    },
+  },
 ];

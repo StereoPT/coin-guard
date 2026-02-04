@@ -1,6 +1,5 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
 import { EditableDataTable } from "@/components/dataTable/EditableDataTable";
 import { editableColumns } from "@/components/transactions/editableColumns";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,8 @@ import {
 import { ROUTES } from "@/constants/routes";
 import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";
 import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
+import { processedTransactionsAtom } from "@/store/transactionsStore";
+import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -20,9 +21,7 @@ export const ImportTransactions = () => {
   const router = useRouter();
 
   const [files, setFiles] = useState<File[] | undefined>();
-  const [transactions, setTransactions] = useState<
-    ProcessedTransaction[] | undefined
-  >();
+  const [transactions, setTransactions] = useAtom(processedTransactionsAtom);
 
   const { mutateAsync: mutateParse, isPending: parseIsPending } =
     useParseTransaction();
@@ -54,7 +53,6 @@ export const ImportTransactions = () => {
         disabled={isPending}
         multiple={false}
         onDrop={handleDrop}
-        onError={console.error}
         src={files}
       >
         <DropzoneEmptyState />
