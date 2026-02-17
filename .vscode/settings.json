@@ -22,5 +22,6 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "javascript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "prisma.pinToPrisma6": false
 }

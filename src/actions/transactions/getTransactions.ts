@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export const GetTransactions = async () => {
   const transactions = await prisma.transaction.findMany({

@@ -16,7 +16,7 @@
     "allowJs": true,
     "noEmit": true,
     "jsx": "preserve",
-    "target": "ES2022",
+    "target": "es2023",
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./src/*"],

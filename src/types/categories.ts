@@ -1,4 +1,4 @@
-import type { Prisma } from "@/generated/prisma";
+import type { Prisma } from "@/generated/prisma/enums";
 
 export type CategoryWithTransactions = Prisma.CategoryGetPayload<{
   include: { transactions: true };

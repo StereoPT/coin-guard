@@ -2,7 +2,7 @@
 
 import { GetCategoriesForDate } from "@/actions/analytics/getCategoriesForDate";
 import { GetStatsForDate } from "@/actions/analytics/getStatsForDate";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { endOfYear, startOfYear } from "date-fns";
 
 export const YearlyAnalytics = async (year: number) => {

@@ -1,4 +1,4 @@
-import type { Transaction } from "@/generated/prisma";
+import type { Transaction } from "@/generated/prisma/enums";
 import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
 import {
   AlertDialog,

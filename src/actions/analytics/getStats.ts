@@ -1,7 +1,8 @@
 "use server";
 
 import { GetStatsForDate } from "@/actions/analytics/getStatsForDate";
-import { TransactionType } from "@/generated/prisma";
+import { TransactionType } from "@/generated/prisma/enums";
+
 import type { TransactionStat } from "@/types/analytics";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
