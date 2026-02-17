@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export const GetTransaction = async (id: string) => {
   return await prisma.$transaction(async (prisma) => {

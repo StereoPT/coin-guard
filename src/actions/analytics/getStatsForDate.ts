@@ -1,7 +1,7 @@
 "use server";
 
-import { TransactionType } from "@/generated/prisma";
-import prisma from "@/lib/prisma";
+import { TransactionType } from "@/generated/prisma/enums";
+import { prisma } from "@/lib/prisma";
 import type { StatCardsType } from "@/types/analytics";
 
 const createEmptyTransactionSummary = (): StatCardsType => {

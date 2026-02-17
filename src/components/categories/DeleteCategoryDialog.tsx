@@ -1,4 +1,4 @@
-import type { Category } from "@/generated/prisma";
+import type { Category } from "@/generated/prisma/enums";
 import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 import {
   AlertDialog,

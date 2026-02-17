@@ -4,7 +4,7 @@ import { StatCard } from "@/components/analytics/StatCard";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DisplayLastTransactions } from "@/components/dashboard/DisplayLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { TransactionType } from "@/generated/prisma";
+import { TransactionType } from "@/generated/prisma/enums";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
 import { endOfMonth, format, subMonths } from "date-fns";
 import { BanknoteArrowDown, BanknoteArrowUp } from "lucide-react";

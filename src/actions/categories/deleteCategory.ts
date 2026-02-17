@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export const DeleteCategory = async (id: string) => {
   const result = await prisma.category.delete({ where: { id } });

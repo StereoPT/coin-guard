@@ -2,7 +2,7 @@
 
 import { CategoryActions } from "@/components/categories/CategoryActions";
 import { ROUTES } from "@/constants/routes";
-import type { Category } from "@/generated/prisma";
+import type { Category } from "@/generated/prisma/enums";
 import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 

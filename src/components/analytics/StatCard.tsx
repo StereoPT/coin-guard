@@ -1,5 +1,5 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { TransactionType } from "@/generated/prisma";
+import type { TransactionType } from "@/generated/prisma/enums";
 import { getTypeColor } from "@/lib/typeColors";
 import { cn } from "@/lib/utils";
 import type { TransactionStat } from "@/types/analytics";

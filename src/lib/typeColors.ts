@@ -1,4 +1,4 @@
-import type { TransactionType } from "@/generated/prisma";
+import type { TransactionType } from "@/generated/prisma/enums";
 
 type ColorTypes = TransactionType | "CASH_FLOW";
 
