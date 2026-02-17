@@ -1,9 +1,9 @@
 "use client";
 
+import { transactionColumns } from "@/components/dataTable/columns/transactionColumns";
 import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddTransaction } from "@/components/transactions/AddTransaction";
-import { columns } from "@/components/transactions/columns";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
 import { fuzzyFilterFn } from "@/lib/dataTable";
 import { ArrowLeftRight } from "lucide-react";
@@ -38,7 +38,7 @@ export const UserTransactions = () => {
 
   return (
     <DataTable
-      columns={columns}
+      columns={transactionColumns}
       config={{
         filters: {
           search: {

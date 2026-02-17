@@ -11,7 +11,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";
 
-export const columns: ColumnDef<TransactionWithCategory>[] = [
+export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
   {
     accessorKey: "date",
     filterFn: dateBetweenFilterFn,
