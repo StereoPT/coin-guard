@@ -1,4 +1,4 @@
-import type { Category } from "@/generated/prisma/enums";
+import type { Category } from "@/generated/prisma/client";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import {
   editCategorySchema,

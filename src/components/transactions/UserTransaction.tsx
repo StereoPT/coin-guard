@@ -5,7 +5,7 @@ import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
 import { AmountBadge } from "@/components/AmountBadge";
 import { TransactionAreaChart } from "@/components/charts/TransactionAreaChart";
-import { TransactionTable } from "@/components/transactions/TransactionTable";
+import { TransactionTable } from "@/components/tables/TransactionTable";
 import { Badge } from "@/ui/badge";
 import {
   Card,

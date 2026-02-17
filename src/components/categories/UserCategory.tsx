@@ -1,8 +1,8 @@
 "use client";
 
-import { CategoryTable } from "@/components/categories/CategoryTable";
 import { CategoryAreaChart } from "@/components/charts/CategoryAreaChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { CategoryTable } from "@/components/tables/CategoryTable";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 
 type UserCategoryProps = {
