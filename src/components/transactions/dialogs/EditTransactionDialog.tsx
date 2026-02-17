@@ -1,7 +1,7 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
-import { EditTransactionForm } from "@/components/transactions/EditTransactionForm";
+import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { Button } from "@/ui/button";
 import {

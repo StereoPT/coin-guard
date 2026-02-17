@@ -8,7 +8,7 @@ import { formatCurrency } from "@/lib/formatter";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 
-export const editableColumns: ColumnDef<ProcessedTransaction>[] = [
+export const editableTransactionColumns: ColumnDef<ProcessedTransaction>[] = [
   {
     accessorKey: "description",
     header: "Description",

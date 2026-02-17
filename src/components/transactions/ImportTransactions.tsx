@@ -1,7 +1,7 @@
 "use client";
 
 import { EditableDataTable } from "@/components/dataTable/EditableDataTable";
-import { editableColumns } from "@/components/transactions/editableColumns";
+import { editableTransactionColumns } from "@/components/dataTable/columns/editableTransactionColumns";
 import { Button } from "@/components/ui/button";
 import {
   Dropzone,
@@ -60,7 +60,7 @@ export const ImportTransactions = () => {
       </Dropzone>
       <div>
         <EditableDataTable
-          columns={editableColumns}
+          columns={editableTransactionColumns}
           data={transactions ?? []}
         />
       </div>
