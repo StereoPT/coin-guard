@@ -1,4 +1,4 @@
-import type { Transaction } from "@/generated/prisma/enums";
+import type { Transaction } from "@/generated/prisma/client";
 import { getDaysOfMonth } from "@/lib/date";
 import {
   Card,

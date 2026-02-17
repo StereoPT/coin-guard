@@ -1,5 +1,6 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { Transaction } from "@/generated/prisma/enums";
+import type { Transaction } from "@/generated/prisma/client";
+
 import { generateMonthRange } from "@/lib/date";
 import {
   Card,
