@@ -1,9 +1,8 @@
-import { GetCategory } from "@/actions/categories/getCategory";
 import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
 import { UserCategory } from "@/components/categories/UserCategory";
 import { PageHeader } from "@/components/PageHeader";
-import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { getCategoryOptions } from "@/lib/queryOptions/categories";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 type CategoryDetailsPageProps = {
@@ -14,10 +13,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
   const { id } = await params;
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: KEYS.category(id),
-    queryFn: () => GetCategory(id),
-  });
+  await queryClient.prefetchQuery(getCategoryOptions(id));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

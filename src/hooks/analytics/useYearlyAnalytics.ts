@@ -1,10 +1,6 @@
-import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
-import { KEYS } from "@/constants/queryKeys";
+import { yearlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { useQuery } from "@tanstack/react-query";
 
 export const useYearlyAnalytics = (year: number) => {
-  return useQuery({
-    queryKey: KEYS.yearlyAnalytics(year),
-    queryFn: () => YearlyAnalytics(year),
-  });
+  return useQuery(yearlyAnalyticsOptions(year));
 };

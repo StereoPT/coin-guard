@@ -1,10 +1,6 @@
-import { GetCategory } from "@/actions/categories/getCategory";
-import { KEYS } from "@/constants/queryKeys";
+import { getCategoryOptions } from "@/lib/queryOptions/categories";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetCategory = (id: string) => {
-  return useQuery({
-    queryKey: KEYS.category(id),
-    queryFn: () => GetCategory(id),
-  });
+  return useQuery(getCategoryOptions(id));
 };

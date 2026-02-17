@@ -1,19 +1,15 @@
-import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
 import { UserYearlyAnalytics } from "@/components/analytics/UserYearlyAnalytics";
 import { PageHeader } from "@/components/PageHeader";
-import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { yearlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getYear } from "date-fns";
 
 const YearlyPage = async () => {
-  const currentYear = getYear(new Date());
+  const year = getYear(new Date());
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: KEYS.yearlyAnalytics(currentYear),
-    queryFn: () => YearlyAnalytics(currentYear),
-  });
+  await queryClient.prefetchQuery(yearlyAnalyticsOptions(year));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -25,7 +21,7 @@ const YearlyPage = async () => {
           />
         </div>
         <div className="h-full py-6">
-          <UserYearlyAnalytics year={currentYear} />
+          <UserYearlyAnalytics year={year} />
         </div>
       </div>
     </HydrationBoundary>

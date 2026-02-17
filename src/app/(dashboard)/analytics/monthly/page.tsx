@@ -1,19 +1,15 @@
-import { MonthlyAnalytics } from "@/actions/analytics/monthlyAnalytics";
 import { UserMonthlyAnalytics } from "@/components/analytics/UserMonthlyAnalytics";
 import { PageHeader } from "@/components/PageHeader";
-import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { monthlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getMonth, subMonths } from "date-fns";
 
 const MonthlyPage = async () => {
-  const currentMonth = getMonth(subMonths(new Date(), 1));
+  const month = getMonth(subMonths(new Date(), 1));
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: KEYS.monthlyAnalytics(currentMonth),
-    queryFn: () => MonthlyAnalytics(currentMonth),
-  });
+  await queryClient.prefetchQuery(monthlyAnalyticsOptions(month));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -25,7 +21,7 @@ const MonthlyPage = async () => {
           />
         </div>
         <div className="h-full py-6">
-          <UserMonthlyAnalytics month={currentMonth} />
+          <UserMonthlyAnalytics month={month} />
         </div>
       </div>
     </HydrationBoundary>
