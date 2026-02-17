@@ -1,10 +1,6 @@
-import { GetTransactions } from "@/actions/transactions/getTransactions";
-import { KEYS } from "@/constants/queryKeys";
+import { getTransactionsOptions } from "@/lib/queryOptions/transactions";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetTransactions = () => {
-  return useQuery({
-    queryKey: KEYS.transactions,
-    queryFn: () => GetTransactions(),
-  });
+  return useQuery(getTransactionsOptions());
 };

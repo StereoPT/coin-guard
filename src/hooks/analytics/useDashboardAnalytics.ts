@@ -1,10 +1,6 @@
-import { DashboardAnalytics } from "@/actions/analytics/dashboardAnalytics";
-import { KEYS } from "@/constants/queryKeys";
+import { dashboardAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { useQuery } from "@tanstack/react-query";
 
 export const useDashboardAnalytics = () => {
-  return useQuery({
-    queryKey: KEYS.analytics,
-    queryFn: () => DashboardAnalytics(),
-  });
+  return useQuery(dashboardAnalyticsOptions());
 };

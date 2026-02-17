@@ -1,9 +1,8 @@
-import { GetTransaction } from "@/actions/transactions/getTransaction";
 import { PageHeader } from "@/components/PageHeader";
 import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
 import { UserTransaction } from "@/components/transactions/UserTransaction";
-import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { getTransactionOptions } from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 type TransactionDetailsPageProps = {
@@ -16,10 +15,7 @@ const TransactionDetailsPage = async ({
   const { id } = await params;
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: KEYS.transaction(id),
-    queryFn: () => GetTransaction(id),
-  });
+  await queryClient.prefetchQuery(getTransactionOptions(id));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

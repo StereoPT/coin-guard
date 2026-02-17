@@ -1,10 +1,6 @@
-import { MonthlyAnalytics } from "@/actions/analytics/monthlyAnalytics";
-import { KEYS } from "@/constants/queryKeys";
+import { monthlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { useQuery } from "@tanstack/react-query";
 
 export const useMonthlyAnalytics = (month: number) => {
-  return useQuery({
-    queryKey: KEYS.monthlyAnalytics(month),
-    queryFn: () => MonthlyAnalytics(month),
-  });
+  return useQuery(monthlyAnalyticsOptions(month));
 };
