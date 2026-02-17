@@ -1,6 +1,6 @@
 "use client";
 
-import { AddTransactionDialog } from "@/components/transactions/AddTransactionDialog";
+import { AddTransactionDialog } from "@/components/transactions/dialogs/AddTransactionDialog";
 import {
   ButtonGroup,
   ButtonGroupSeparator,

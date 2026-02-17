@@ -1,5 +1,5 @@
-import { DeleteTransactionDialog } from "@/components/transactions/DeleteTransactionDialog";
-import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
+import { DeleteTransactionDialog } from "@/components/transactions/dialogs/DeleteTransactionDialog";
+import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
 import type { TransactionWithCategory } from "@/types/transactions";
 import { Button } from "@/ui/button";
 import {

@@ -1,6 +1,6 @@
 "use client";
 
-import { AddCategoryDialog } from "@/components/categories/AddCategoryDialog";
+import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
 import { categoryColumns } from "@/components/dataTable/columns/categoryColumns";
 import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
