@@ -1,5 +1,5 @@
 import type { Transaction } from "@/generated/prisma/client";
-import { getDaysOfMonth } from "@/lib/date";
+import { getMonthsOfYear } from "@/lib/date";
 import {
   Card,
   CardContent,
@@ -15,7 +15,7 @@ import {
 } from "@/ui/chart";
 import { format } from "date-fns";
 import { useMemo } from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig = {
   date: {
@@ -23,49 +23,47 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type MonthlyChartProps = {
+type YearlyBarChartProps = {
   transactions?: Transaction[];
-  selectedMonth: number;
+  selectedYear: number;
 };
 
-export const MonthlyChart = ({
+export const YearlyBarChart = ({
   transactions = [],
-  selectedMonth,
-}: MonthlyChartProps) => {
+  selectedYear,
+}: YearlyBarChartProps) => {
   const transactionData = useMemo(() => {
-    const transactionsByDay = transactions.reduce<Record<string, number>>(
+    const transactionsByMonth = transactions.reduce<Record<string, number>>(
       (acc, t) => {
-        const dayKey = format(t.date, "yyyy-MM-dd");
-        acc[dayKey] = (acc[dayKey] || 0) + t.amount;
+        const monthKey = format(t.date, "yyyy-MM");
+        acc[monthKey] = (acc[monthKey] || 0) + t.amount;
         return acc;
       },
       {},
     );
 
-    const allDays = getDaysOfMonth(selectedMonth);
+    const allMonths = getMonthsOfYear(selectedYear);
 
-    const transactionData = allDays.map((dayKey) => ({
-      date: dayKey,
-      amount: transactionsByDay[dayKey] || 0,
+    const transactionData = allMonths.map((monthKey) => ({
+      date: monthKey,
+      amount: transactionsByMonth[monthKey] || 0,
     }));
 
     return Object.values(transactionData);
-  }, [transactions, selectedMonth]);
+  }, [transactions, selectedYear]);
 
   return (
     <Card className="col-span-2">
       <CardHeader>
-        <CardTitle>Expenses per Day</CardTitle>
-        <CardDescription>
-          For the month of: {format(new Date(2026, selectedMonth, 1), "MMMM")}
-        </CardDescription>
+        <CardTitle>Expenses per Month</CardTitle>
+        <CardDescription>From: January, To: December</CardDescription>
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
           className="aspect-auto h-[250px] w-full"
           config={chartConfig}
         >
-          <AreaChart
+          <BarChart
             accessibilityLayer
             data={transactionData}
             margin={{ left: 12, right: 12 }}
@@ -74,7 +72,7 @@ export const MonthlyChart = ({
             <XAxis
               axisLine={false}
               dataKey="date"
-              tickFormatter={(value) => format(value, "yyyy-MM-dd")}
+              tickFormatter={(value) => format(value, "yyyy-MM")}
               tickLine={false}
               tickMargin={8}
             />
@@ -82,8 +80,8 @@ export const MonthlyChart = ({
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
             />
-            <Area dataKey="amount" fillOpacity={0.4} type="monotone" />
-          </AreaChart>
+            <Bar dataKey="amount" fill="#adcde5" radius={4} />
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>

@@ -1,9 +1,9 @@
 "use client";
 
 import { StatCards } from "@/components/analytics/StatCards";
-import { YearlyChart } from "@/components/analytics/YearlyChart";
 import { YearlySelection } from "@/components/analytics/YearlySelection";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
+import { YearlyBarChart } from "@/components/charts/YearlyBarChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useYearlyAnalytics } from "@/hooks/analytics/useYearlyAnalytics";
 import { useState } from "react";
@@ -28,7 +28,7 @@ export const UserYearlyAnalytics = ({ year }: UserYearlyAnalyticsProps) => {
       />
       <StatCards stats={analytics?.stats} />
       <div className="grid grid-cols-3 gap-4">
-        <YearlyChart
+        <YearlyBarChart
           selectedYear={selectedYear}
           transactions={analytics?.transactions}
         />

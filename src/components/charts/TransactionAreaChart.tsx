@@ -1,6 +1,5 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import type { Transaction } from "@/generated/prisma/client";
-
 import { generateMonthRange } from "@/lib/date";
 import {
   Card,
@@ -25,11 +24,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type CategoryChartProps = {
+type TransactionAreaChartProps = {
   transactions: Transaction[];
 };
 
-export const CategoryChart = ({ transactions }: CategoryChartProps) => {
+export const TransactionAreaChart = ({
+  transactions,
+}: TransactionAreaChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 
@@ -63,8 +64,10 @@ export const CategoryChart = ({ transactions }: CategoryChartProps) => {
     <Card className="py-4 sm:py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
-          <CardTitle>Category Graph</CardTitle>
-          <CardDescription>Showing category amount over time</CardDescription>
+          <CardTitle>Transaction Graph</CardTitle>
+          <CardDescription>
+            Showing transaction amount over time
+          </CardDescription>
         </div>
         <div className="flex">
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
