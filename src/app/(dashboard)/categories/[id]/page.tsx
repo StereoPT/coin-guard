@@ -1,4 +1,4 @@
-import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
+import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { UserCategory } from "@/components/categories/UserCategory";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";

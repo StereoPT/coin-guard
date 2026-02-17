@@ -1,5 +1,5 @@
-import type { Transaction } from "@/generated/prisma/enums";
-import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
+import type { Category } from "@/generated/prisma/client";
+import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,18 +12,18 @@ import {
 } from "@/ui/alert-dialog";
 import { buttonVariants } from "@/ui/button";
 
-type DeleteTransactionDialogProps = {
-  transaction: Transaction;
+type DeleteCategoryDialogProps = {
+  category: Category;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
 
-export const DeleteTransactionDialog = ({
+export const DeleteCategoryDialog = ({
   open,
   onOpenChange,
-  transaction,
-}: DeleteTransactionDialogProps) => {
-  const { isPending, mutate } = useDeleteTransaction(transaction.id);
+  category,
+}: DeleteCategoryDialogProps) => {
+  const { isPending, mutate } = useDeleteCategory(category.id);
 
   const handleDeleteTransaction = () => {
     mutate();
@@ -35,8 +35,8 @@ export const DeleteTransactionDialog = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete <b>{transaction.description}</b>. This
-            action cannot be undone.
+            This will permanently delete <b>{category.name}</b>. This action
+            cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

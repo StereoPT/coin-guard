@@ -2,11 +2,11 @@
 
 import { CategoryActions } from "@/components/categories/CategoryActions";
 import { ROUTES } from "@/constants/routes";
-import type { Category } from "@/generated/prisma/enums";
+import type { Category } from "@/generated/prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
-export const columns: ColumnDef<Category>[] = [
+export const categoryColumns: ColumnDef<Category>[] = [
   {
     accessorKey: "name",
     header: "Name",

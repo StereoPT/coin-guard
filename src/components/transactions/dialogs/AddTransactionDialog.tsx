@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription } from "@/ui/dialog";
 import { PlusCircle } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 
-import { AddTransactionForm } from "@/components/transactions/AddTransactionForm";
+import { AddTransactionForm } from "@/components/transactions/forms/AddTransactionForm";
 
 type AddTransactionDialogProps = {
   open: boolean;

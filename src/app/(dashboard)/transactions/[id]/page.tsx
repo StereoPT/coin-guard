@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/PageHeader";
-import { EditTransactionDialog } from "@/components/transactions/EditTransactionDialog";
+import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
 import { UserTransaction } from "@/components/transactions/UserTransaction";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getTransactionOptions } from "@/lib/queryOptions/transactions";

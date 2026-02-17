@@ -1,7 +1,7 @@
 "use client";
 
-import { AddCategoryDialog } from "@/components/categories/AddCategoryDialog";
-import { columns } from "@/components/categories/columns";
+import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
+import { categoryColumns } from "@/components/dataTable/columns/categoryColumns";
 import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
@@ -38,7 +38,7 @@ export const UserCategories = () => {
 
   return (
     <DataTable
-      columns={columns}
+      columns={categoryColumns}
       config={{
         filters: {
           search: {

@@ -1,5 +1,5 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { Transaction } from "@/generated/prisma/enums";
+import type { Transaction } from "@/generated/prisma/client";
 import { generateMonthRange } from "@/lib/date";
 import {
   Card,
@@ -24,11 +24,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type TransactionChartProps = {
+type TransactionAreaChartProps = {
   transactions: Transaction[];
 };
 
-export const TransactionChart = ({ transactions }: TransactionChartProps) => {
+export const TransactionAreaChart = ({
+  transactions,
+}: TransactionAreaChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { MonthlyChart } from "@/components/analytics/MonthlyChart";
 import { MonthlySelection } from "@/components/analytics/MonthlySelection";
 import { StatCards } from "@/components/analytics/StatCards";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
+import { MonthlyAreaChart } from "@/components/charts/MonthlyAreaChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useMonthlyAnalytics } from "@/hooks/analytics/useMonthlyAnalytics";
 import { format } from "date-fns";
@@ -29,7 +29,7 @@ export const UserMonthlyAnalytics = ({ month }: UserMonthlyAnalyticsProps) => {
       />
       <StatCards stats={analytics?.stats} />
       <div className="grid grid-cols-3 gap-4">
-        <MonthlyChart
+        <MonthlyAreaChart
           selectedMonth={selectedMonth}
           transactions={analytics?.transactions}
         />

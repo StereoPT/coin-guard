@@ -1,8 +1,8 @@
 "use client";
 
-import { EditCategoryForm } from "@/components/categories/EditCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { useGetCategory } from "@/hooks/categories/useGetCategory";
+import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { Button } from "@/ui/button";
 import {
   Dialog,
@@ -10,10 +10,10 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/ui/dialog";
-import { Edit, Tag } from "lucide-react";
+import { ArrowLeftRightIcon, Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
-type EditCategoryDialogProps = {
+type EditTransactionDialogProps = {
   id: string;
 } & (
   | {
@@ -28,14 +28,14 @@ type EditCategoryDialogProps = {
     }
 );
 
-export const EditCategoryDialog = ({
+export const EditTransactionDialog = ({
   open,
   onOpenChange,
   trigger,
   id,
-}: EditCategoryDialogProps) => {
+}: EditTransactionDialogProps) => {
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
-  const { data: category, isPending } = useGetCategory(id);
+  const { data: transaction, isPending } = useGetTransaction(id);
 
   const handleOpenChange = (prevOpen: boolean) => {
     if (!trigger) {
@@ -55,20 +55,20 @@ export const EditCategoryDialog = ({
         <DialogTrigger asChild>
           <Button>
             <Edit />
-            Edit Category
+            Edit Transaction
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4">
+      <DialogContent className="px-0 py-4 !max-w-2xl">
         <DialogHeader
-          icon={Tag}
-          subtitle="Edit your category"
-          title="Edit Category"
+          icon={ArrowLeftRightIcon}
+          subtitle="Edit your transaction"
+          title="Edit Transaction"
         />
         <div className="px-4 pt-4">
-          {category && (
-            <EditCategoryForm
-              initialValues={category}
+          {transaction && (
+            <EditTransactionForm
+              initialValues={transaction.transaction}
               setOpen={handleOpenChange}
             />
           )}

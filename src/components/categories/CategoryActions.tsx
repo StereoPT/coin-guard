@@ -1,6 +1,7 @@
-import { DeleteCategoryDialog } from "@/components/categories/DeleteCategoryDialog";
-import { EditCategoryDialog } from "@/components/categories/EditCategoryDialog";
-import type { Category } from "@/generated/prisma/enums";
+import { DeleteCategoryDialog } from "@/components/categories/dialogs/DeleteCategoryDialog";
+import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
+import type { Category } from "@/generated/prisma/client";
+
 import { Button } from "@/ui/button";
 import {
   DropdownMenu,

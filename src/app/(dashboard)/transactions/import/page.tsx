@@ -2,7 +2,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { ImportTransactions } from "@/components/transactions/ImportTransactions";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
-import { ImportTransactionsProvider } from "@/store/providers/ImportTransactionsProvider";
+import { ImportTransactionsProvider } from "@/providers/ImportTransactionsProvider";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 const TransactionsImportPage = async () => {

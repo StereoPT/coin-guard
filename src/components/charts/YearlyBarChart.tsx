@@ -1,4 +1,4 @@
-import type { Transaction } from "@/generated/prisma/enums";
+import type { Transaction } from "@/generated/prisma/client";
 import { getMonthsOfYear } from "@/lib/date";
 import {
   Card,
@@ -23,15 +23,15 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type YearlyChartProps = {
+type YearlyBarChartProps = {
   transactions?: Transaction[];
   selectedYear: number;
 };
 
-export const YearlyChart = ({
+export const YearlyBarChart = ({
   transactions = [],
   selectedYear,
-}: YearlyChartProps) => {
+}: YearlyBarChartProps) => {
   const transactionData = useMemo(() => {
     const transactionsByMonth = transactions.reduce<Record<string, number>>(
       (acc, t) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { AddCategoryForm } from "@/components/categories/AddCategoryForm";
+import { AddCategoryForm } from "@/components/categories/forms/AddCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
 import { Button } from "@/ui/button";
 import {

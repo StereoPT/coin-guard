@@ -4,8 +4,8 @@ import { ErrorAlert } from "@/components/ErrorAlert";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
 import { AmountBadge } from "@/components/AmountBadge";
-import { TransactionChart } from "@/components/transactions/TransactionChart";
-import { TransactionTable } from "@/components/transactions/TransactionTable";
+import { TransactionAreaChart } from "@/components/charts/TransactionAreaChart";
+import { TransactionTable } from "@/components/tables/TransactionTable";
 import { Badge } from "@/ui/badge";
 import {
   Card,
@@ -68,7 +68,7 @@ export const UserTransaction = ({ transactionId }: UserTransactionProps) => {
           </CardHeader>
         </Card>
       </div>
-      <TransactionChart transactions={transaction.all} />
+      <TransactionAreaChart transactions={transaction.all} />
       <TransactionTable transactions={transaction.all} />
     </div>
   );
