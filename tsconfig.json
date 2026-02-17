@@ -5,7 +5,11 @@
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
@@ -15,12 +19,20 @@
     "strict": true,
     "allowJs": true,
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "target": "es2023",
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/ui/*": ["./src/components/ui/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/ui/*": [
+        "./src/components/ui/*"
+      ]
     }
   },
   "include": [
@@ -28,7 +40,10 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
