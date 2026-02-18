@@ -16,7 +16,7 @@ const MonthlyPage = async () => {
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
           <PageHeader
-            description="You monthly overview"
+            description="Your monthly overview"
             title="Monthly Analytics"
           />
         </div>

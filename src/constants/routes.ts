@@ -13,5 +13,9 @@ export const ROUTES = {
     yearly: "/analytics/yearly",
   },
 
+  etl: {
+    categories: "/etl/categories",
+  },
+
   settings: "/settings",
 } as const;
