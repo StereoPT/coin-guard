@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/ui/spinner";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
 import { cn } from "@/lib/utils";
@@ -29,7 +30,7 @@ import {
 import { Textarea } from "@/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2Icon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
@@ -231,7 +232,7 @@ export const EditTransactionForm = ({
 
         <Button className="w-full" disabled={isPending} type="submit">
           {!isPending && "Edit"}
-          {isPending && <Loader2Icon className="animate-spin" />}
+          {isPending && <Spinner />}
         </Button>
       </form>
     </Form>

@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/ui/spinner";
 import type { Category } from "@/generated/prisma/client";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import {
@@ -15,7 +16,6 @@ import {
 } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2Icon } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
@@ -63,7 +63,7 @@ export const EditCategoryForm = ({
 
         <Button className="w-full" disabled={isPending} type="submit">
           {!isPending && "Edit"}
-          {isPending && <Loader2Icon className="animate-spin" />}
+          {isPending && <Spinner />}
         </Button>
       </form>
     </Form>
