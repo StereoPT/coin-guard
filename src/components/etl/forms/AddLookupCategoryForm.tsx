@@ -77,20 +77,6 @@ export const AddLookupCategoryForm = ({
       <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center">Description</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Description" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="categoryId"
           render={({ field }) => (
             <FormItem className="w-full">
@@ -103,6 +89,20 @@ export const AddLookupCategoryForm = ({
                 searchPlaceholder="Search a category..."
                 value={field.value}
               />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="flex items-center">Description</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Description" />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
