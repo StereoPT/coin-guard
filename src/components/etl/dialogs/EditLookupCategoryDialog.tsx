@@ -1,6 +1,7 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
+import { EditAddLookupCategoryForm } from "@/components/etl/forms/EditAddLookupCategoryForm";
 import { EditLookupCategoryForm } from "@/components/etl/forms/EditLookupCategoryForm";
 import {
   Dialog,
@@ -40,6 +41,10 @@ export const EditLookupCategoryDialog = ({
                 setOpen={onOpenChange}
               />
             ))}
+            <EditAddLookupCategoryForm
+              categoryId={categoryWithLookups.id}
+              setOpen={onOpenChange}
+            />
           </div>
         </div>
         <DialogDescription />
