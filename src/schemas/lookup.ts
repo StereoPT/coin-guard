@@ -6,6 +6,11 @@ export const addLookupCategorySchema = z.object({
   enabled: z.boolean(),
 });
 
+export const editLookupCategorySchema = addLookupCategorySchema.partial();
+
 export type addLookupCategorySchemaType = z.infer<
   typeof addLookupCategorySchema
+>;
+export type editLookupCategorySchemaType = z.infer<
+  typeof editLookupCategorySchema
 >;
