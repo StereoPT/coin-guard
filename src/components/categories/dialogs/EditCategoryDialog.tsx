@@ -35,7 +35,7 @@ export const EditCategoryDialog = ({
   id,
 }: EditCategoryDialogProps) => {
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
-  const { data: category, isPending } = useGetCategory(id);
+  const { data: category } = useGetCategory(id);
 
   const handleOpenChange = (prevOpen: boolean) => {
     if (!trigger) {
@@ -44,10 +44,6 @@ export const EditCategoryDialog = ({
 
     setDialogOpen(prevOpen);
   };
-
-  if (isPending) {
-    return null;
-  }
 
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>

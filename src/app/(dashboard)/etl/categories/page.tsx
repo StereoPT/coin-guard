@@ -19,7 +19,7 @@ const LookupCategoriesPage = async () => {
             description="Enhance you data with categories"
             title="Lookup Categories"
           />
-          <AddLookupCategoryDialog />
+          <AddLookupCategoryDialog trigger />
         </div>
         <div className="h-full py-6">
           <UserLookupCategories />

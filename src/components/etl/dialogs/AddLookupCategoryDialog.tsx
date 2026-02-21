@@ -10,23 +10,48 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { PlusCircle, TagsIcon } from "lucide-react";
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
-export const AddLookupCategoryDialog = () => {
-  const [open, setOpen] = useState(false);
+type AddLookupCategoryDialogProps =
+  | {
+      trigger: true;
+      open?: boolean;
+      onOpenChange?: Dispatch<SetStateAction<boolean>>;
+      categoryId?: never;
+    }
+  | {
+      trigger?: never;
+      categoryId: string;
+      open: boolean;
+      onOpenChange: Dispatch<SetStateAction<boolean>>;
+    };
 
-  const handleOnOpenChange = (open: boolean) => {
-    setOpen(open);
+export const AddLookupCategoryDialog = ({
+  open,
+  onOpenChange,
+  trigger,
+  categoryId,
+}: AddLookupCategoryDialogProps) => {
+  const [dialogOpen, setDialogOpen] = useState(open ?? false);
+
+  const handleOnOpenChange = (prevOpen: boolean) => {
+    if (!trigger) {
+      onOpenChange(prevOpen);
+    }
+
+    setDialogOpen(prevOpen);
   };
 
   return (
-    <Dialog onOpenChange={handleOnOpenChange} open={open}>
-      <DialogTrigger asChild>
-        <Button>
-          <PlusCircle />
-          Add Lookup Category
-        </Button>
-      </DialogTrigger>
+    <Dialog onOpenChange={handleOnOpenChange} open={dialogOpen}>
+      {trigger && (
+        <DialogTrigger asChild>
+          <Button>
+            <PlusCircle />
+            Add Lookup Category
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="px-0 py-4">
         <DialogHeader
           icon={TagsIcon}
@@ -34,7 +59,10 @@ export const AddLookupCategoryDialog = () => {
           title="Create Lookup Category"
         />
         <div className="px-4 pt-4">
-          <AddLookupCategoryForm setOpen={setOpen} />
+          <AddLookupCategoryForm
+            categoryId={categoryId}
+            setOpen={handleOnOpenChange}
+          />
         </div>
         <DialogDescription />
       </DialogContent>

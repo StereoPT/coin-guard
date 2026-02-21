@@ -18,9 +18,8 @@ import {
   type editLookupCategorySchemaType,
 } from "@/schemas/lookup";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { SetStateAction } from "jotai";
 import { Check, Trash2 } from "lucide-react";
-import { useCallback, type Dispatch } from "react";
+import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
 type EditLookupCategoryFormProps = {

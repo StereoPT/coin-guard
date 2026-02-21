@@ -1,3 +1,4 @@
+import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { DeleteLookupCategoriesDialog } from "@/components/etl/dialogs/DeleteLookupCategoriesDialog";
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
@@ -12,7 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { CategoryWithLookups } from "@/types/categories";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
-import { Edit, Maximize, MoreHorizontal, Trash2 } from "lucide-react";
+import {
+  Edit,
+  Maximize,
+  MoreHorizontal,
+  PlusCircle,
+  Trash2,
+} from "lucide-react";
 import { useState } from "react";
 
 type LookupCategoryCardProps = {
@@ -23,6 +30,7 @@ export const LookupCategoryCard = ({
   categoryWithLookups,
 }: LookupCategoryCardProps) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
 
@@ -37,6 +45,14 @@ export const LookupCategoryCard = ({
           categoryWithLookups={categoryWithLookups}
           onOpenChange={setShowDetailsDialog}
           open={showDetailsDialog}
+        />
+      )}
+
+      {showAddDialog && (
+        <AddLookupCategoryDialog
+          categoryId={categoryWithLookups.id}
+          onOpenChange={setShowAddDialog}
+          open={showAddDialog}
         />
       )}
 
@@ -69,6 +85,9 @@ export const LookupCategoryCard = ({
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => setShowDetailsDialog(true)}>
                 <Maximize /> Details
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowAddDialog(true)}>
+                <PlusCircle /> Add
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
                 <Edit /> Edit

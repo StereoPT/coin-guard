@@ -26,20 +26,17 @@ import {
   type addLookupCategorySchemaType,
 } from "@/schemas/lookup";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useCallback,
-  useMemo,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useCallback, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 type AddLookupCategoryFormProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: (prevOpen: boolean) => void;
+  categoryId?: string;
 };
 
 export const AddLookupCategoryForm = ({
   setOpen,
+  categoryId,
 }: AddLookupCategoryFormProps) => {
   const { data: categories } = useGetCategories();
 
@@ -47,7 +44,7 @@ export const AddLookupCategoryForm = ({
     resolver: zodResolver(addLookupCategorySchema),
     defaultValues: {
       description: "",
-      categoryId: undefined,
+      categoryId,
       enabled: true,
     },
   });

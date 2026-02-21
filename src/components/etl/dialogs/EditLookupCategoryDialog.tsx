@@ -1,7 +1,6 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
-import { EditAddLookupCategoryForm } from "@/components/etl/forms/EditAddLookupCategoryForm";
 import { EditLookupCategoryForm } from "@/components/etl/forms/EditLookupCategoryForm";
 import {
   Dialog,
@@ -9,9 +8,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { CategoryWithLookups } from "@/types/categories";
-import type { SetStateAction } from "jotai";
 import { TagIcon } from "lucide-react";
-import type { Dispatch } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 type EditLookupCategoryDialogProps = {
   categoryWithLookups: CategoryWithLookups;
@@ -41,10 +39,6 @@ export const EditLookupCategoryDialog = ({
                 setOpen={onOpenChange}
               />
             ))}
-            <EditAddLookupCategoryForm
-              categoryId={categoryWithLookups.id}
-              setOpen={onOpenChange}
-            />
           </div>
         </div>
         <DialogDescription />

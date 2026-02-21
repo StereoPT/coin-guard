@@ -13,8 +13,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
 import type { CategoryWithLookups } from "@/types/categories";
-import type { SetStateAction } from "jotai";
-import type { Dispatch } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 type DeleteLookupCategoriesDialogProps = {
   categoryWithLookups: CategoryWithLookups;

@@ -8,9 +8,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { CategoryWithLookups } from "@/types/categories";
-import type { SetStateAction } from "jotai";
 import { TagIcon } from "lucide-react";
-import type { Dispatch } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 type LookupCategoryDetailsDialogProps = {
   categoryWithLookups: CategoryWithLookups;
