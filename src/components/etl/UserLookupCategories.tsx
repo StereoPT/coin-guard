@@ -21,7 +21,7 @@ const EmptyUserLookupCategories = () => {
           Click the button below to add your first lookup category
         </p>
       </div>
-      <AddLookupCategoryDialog />
+      <AddLookupCategoryDialog trigger />
     </div>
   );
 };
