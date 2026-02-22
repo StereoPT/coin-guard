@@ -1,4 +1,4 @@
-import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
+import { EditCategory } from "@/components/categories/EditCategory";
 import { UserCategory } from "@/components/categories/UserCategory";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
@@ -20,7 +20,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
           <PageHeader goBack title="Category Details" />
-          <EditCategoryDialog id={id} trigger />
+          <EditCategory id={id} />
         </div>
         <div className="h-full py-6">
           <UserCategory categoryId={id} />

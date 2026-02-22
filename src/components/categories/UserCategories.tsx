@@ -15,9 +15,9 @@ const EmptyUserCategories = () => {
         <TagsIcon className="stroke-primary" size={40} />
       </div>
       <div className="flex flex-col gap-1 text-center">
-        <p className="font-bold">No transactions added yet</p>
+        <p className="font-bold">No categories added yet</p>
         <p className="text-muted-foreground">
-          Click the button below to add your first transaction
+          Click the button below to add your first category
         </p>
       </div>
       <AddCategoryDialog />

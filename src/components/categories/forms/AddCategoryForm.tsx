@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/ui/spinner";
 import { useAddCategory } from "@/hooks/categories/useAddCategory";
 import {
   addCategorySchema,
@@ -14,7 +15,6 @@ import {
 } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2Icon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
@@ -60,7 +60,7 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
 
         <Button className="w-full" disabled={isPending} type="submit">
           {!isPending && "Add"}
-          {isPending && <Loader2Icon className="animate-spin" />}
+          {isPending && <Spinner />}
         </Button>
       </form>
     </Form>

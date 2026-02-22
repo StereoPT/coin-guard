@@ -40,9 +40,26 @@ model Category {
   name          String
 
   transactions  Transaction[]
+  lookups       Lookup_Category[]
 
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
   @@unique([name])
+}
+
+
+
+// ***** ***** ***** LOOKUPS ***** ***** ***** //
+model Lookup_Category {
+  id            String            @id @default(cuid())
+  description   String            @unique
+
+  categoryId    String
+  category      Category          @relation(fields: [categoryId], references: [id])
+  
+  enabled       Boolean           @default(true)
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
 }

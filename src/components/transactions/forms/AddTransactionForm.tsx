@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/ui/spinner";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
 import { cn } from "@/lib/utils";
@@ -28,7 +29,7 @@ import {
 import { Textarea } from "@/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2Icon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import {
   type Dispatch,
   type SetStateAction,
@@ -232,7 +233,7 @@ export const AddTransactionForm = ({ setOpen }: AddTransactionFormProps) => {
 
         <Button className="w-full" disabled={isPending} type="submit">
           {!isPending && "Add"}
-          {isPending && <Loader2Icon className="animate-spin" />}
+          {isPending && <Spinner />}
         </Button>
       </form>
     </Form>

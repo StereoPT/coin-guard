@@ -8,6 +8,7 @@ import {
   type LucideIcon,
   Table2Icon,
   TagIcon,
+  TagsIcon,
   Triangle,
 } from "lucide-react";
 import Link from "next/link";
@@ -71,6 +72,17 @@ const groupRoutes: GroupedRoute[] = [
         icon: CalendarDaysIcon,
         title: "Yearly",
         url: ROUTES.analytics.yearly,
+      },
+    ],
+  },
+  {
+    key: "ETL",
+    label: "ETL",
+    items: [
+      {
+        icon: TagsIcon,
+        title: "Lookup Categories",
+        url: ROUTES.etl.categories,
       },
     ],
   },

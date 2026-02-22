@@ -1,9 +1,12 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
-import { DialogTitle, DialogHeader as ShadcnDialogHeader } from "./ui/dialog";
+import {
+  DialogTitle,
+  DialogHeader as ShadcnDialogHeader,
+} from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Separator } from "./ui/separator";
+import type { LucideIcon } from "lucide-react";
 
 type DialogHeaderProps = {
   title?: string;

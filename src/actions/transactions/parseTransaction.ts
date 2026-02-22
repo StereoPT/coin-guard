@@ -1,5 +1,6 @@
 "use server";
 
+import { TransformCategories } from "@/actions/etl/transformCategories";
 import { format, isValid, parse } from "date-fns";
 import Papa from "papaparse";
 
@@ -153,7 +154,13 @@ export const ParseTransaction = async (formValues: FormData) => {
     const rawData = await parseCSV(fileContents);
     const processedData = processData(rawData);
 
-    return processedData;
+    // ***** ***** ***** ETL Process ***** ***** ***** //
+
+    const enhancedTransactions = await TransformCategories(processedData);
+
+    // ***** ***** ***** ETL Process ***** ***** ***** //
+
+    return enhancedTransactions;
   } catch (error) {
     console.error("Failed to process CSV file:", error);
     throw new Error("Failed to process CSV file!");

@@ -23,5 +23,9 @@
   },
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "prisma.pinToPrisma6": false
+  "python.terminal.activateEnvironment": false,
+  "prisma.pinToPrisma6": false,
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "**/node_modules/@radix-ui/**"
+  ]
 }

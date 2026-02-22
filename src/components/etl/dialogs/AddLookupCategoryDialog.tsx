@@ -1,43 +1,40 @@
 "use client";
 
-import { EditCategoryForm } from "@/components/categories/forms/EditCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { useGetCategory } from "@/hooks/categories/useGetCategory";
-import { Button } from "@/ui/button";
+import { AddLookupCategoryForm } from "@/components/etl/forms/AddLookupCategoryForm";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTrigger,
-} from "@/ui/dialog";
-import { Edit, Tag } from "lucide-react";
+} from "@/components/ui/dialog";
+import { PlusCircle, TagsIcon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
-type EditCategoryDialogProps = {
-  id: string;
-} & (
+type AddLookupCategoryDialogProps =
   | {
       trigger: true;
       open?: boolean;
       onOpenChange?: Dispatch<SetStateAction<boolean>>;
+      categoryId?: never;
     }
   | {
       trigger?: never;
+      categoryId: string;
       open: boolean;
       onOpenChange: Dispatch<SetStateAction<boolean>>;
-    }
-);
+    };
 
-export const EditCategoryDialog = ({
+export const AddLookupCategoryDialog = ({
   open,
   onOpenChange,
   trigger,
-  id,
-}: EditCategoryDialogProps) => {
+  categoryId,
+}: AddLookupCategoryDialogProps) => {
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
-  const { data: category } = useGetCategory(id);
 
-  const handleOpenChange = (prevOpen: boolean) => {
+  const handleOnOpenChange = (prevOpen: boolean) => {
     if (!trigger) {
       onOpenChange(prevOpen);
     }
@@ -46,28 +43,26 @@ export const EditCategoryDialog = ({
   };
 
   return (
-    <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
+    <Dialog onOpenChange={handleOnOpenChange} open={dialogOpen}>
       {trigger && (
         <DialogTrigger asChild>
           <Button>
-            <Edit />
-            Edit Category
+            <PlusCircle />
+            Add Lookup Category
           </Button>
         </DialogTrigger>
       )}
       <DialogContent className="px-0 py-4">
         <DialogHeader
-          icon={Tag}
-          subtitle="Edit your category"
-          title="Edit Category"
+          icon={TagsIcon}
+          subtitle="Create your lookup categories"
+          title="Create Lookup Category"
         />
         <div className="px-4 pt-4">
-          {category && (
-            <EditCategoryForm
-              initialValues={category}
-              setOpen={handleOpenChange}
-            />
-          )}
+          <AddLookupCategoryForm
+            categoryId={categoryId}
+            setOpen={handleOnOpenChange}
+          />
         </div>
         <DialogDescription />
       </DialogContent>
