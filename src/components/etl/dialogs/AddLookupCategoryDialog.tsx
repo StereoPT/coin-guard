@@ -32,6 +32,7 @@ export const AddLookupCategoryDialog = ({
   trigger,
   categoryId,
 }: AddLookupCategoryDialogProps) => {
+  console.log("AddLookupCategoryDialog");
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
 
   const handleOnOpenChange = (prevOpen: boolean) => {

@@ -1,37 +1,42 @@
 "use client";
 
-import { AddTransactionDialog } from "@/components/transactions/dialogs/AddTransactionDialog";
+import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
+import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
+import { Button } from "@/components/ui/button";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
 } from "@/components/ui/button-group";
-import { ROUTES } from "@/constants/routes";
-import { Button } from "@/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
-import { ChevronDown, FileDown, PlusCircle } from "lucide-react";
-import Link from "next/link";
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown, PlusCircle } from "lucide-react";
 import { useState } from "react";
 
-export const AddTransaction = () => {
+type EditCategoryProps = {
+  id: string;
+};
+
+export const EditCategory = ({ id }: EditCategoryProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {open && <AddTransactionDialog open={open} setOpen={setOpen} />}
+      {open && (
+        <AddLookupCategoryDialog
+          categoryId={id}
+          onOpenChange={setOpen}
+          open={open}
+        />
+      )}
+
       <div>
         <ButtonGroup>
-          <Button asChild>
-            <Link href={ROUTES.importTransactions}>
-              <FileDown />
-              Import Transactions
-            </Link>
-          </Button>
+          <EditCategoryDialog id={id} trigger />
           <ButtonGroupSeparator />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -43,7 +48,7 @@ export const AddTransaction = () => {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => setOpen(true)}>
                 <PlusCircle />
-                Add Transaction
+                Add Lookup
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
