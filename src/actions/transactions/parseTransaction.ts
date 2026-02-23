@@ -49,11 +49,11 @@ const parseDates = (dateString: string) => {
 
 const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
   try {
-    const description = row["Descrição"]?.trim().toLowerCase() || "";
+    const description = row.Descrição?.trim().toLowerCase() || "";
     if (!description) return null;
 
-    const creditValue = row["Crédito"] || "";
-    const debitValue = row["Débito"] || "";
+    const creditValue = row.Crédito || "";
+    const debitValue = row.Débito || "";
     const amountString = creditValue || debitValue;
 
     if (!amountString) return null;
@@ -61,14 +61,14 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
     const type: "CREDIT" | "DEBIT" = creditValue ? "CREDIT" : "DEBIT";
 
     const amount = parseNumbers(amountString);
-    if (isNaN(amount)) return null;
+    if (Number.isNaN(amount)) return null;
 
     // Process balance
     const balanceString = row["Saldo contabilístico"] || "";
     if (!balanceString) return null;
 
     const balance = parseNumbers(balanceString);
-    if (isNaN(balance)) return null;
+    if (Number.isNaN(balance)) return null;
 
     // Process date
     const dateString = row["Data valor"];

@@ -23,7 +23,7 @@ export const AddTransactionDialog = ({
 
   return (
     <Dialog onOpenChange={handleOnOpenChange} open={open}>
-      <DialogContent className="px-0 py-4 !max-w-2xl">
+      <DialogContent className="px-0 py-4 max-w-2xl!">
         <DialogHeader
           icon={PlusCircle}
           subtitle="Create a new transaction"

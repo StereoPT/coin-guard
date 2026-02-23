@@ -61,7 +61,7 @@ export const CategoryAreaChart = ({ transactions }: CategoryAreaChartProps) => {
 
   return (
     <Card className="py-4 sm:py-0">
-      <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
+      <CardHeader className="flex flex-col items-stretch border-b p-0! sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
           <CardTitle>Category Graph</CardTitle>
           <CardDescription>Showing category amount over time</CardDescription>
@@ -83,7 +83,7 @@ export const CategoryAreaChart = ({ transactions }: CategoryAreaChartProps) => {
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
           <AreaChart
