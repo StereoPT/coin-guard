@@ -60,7 +60,7 @@ export const YearlyBarChart = ({
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
           <BarChart
@@ -80,7 +80,7 @@ export const YearlyBarChart = ({
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
             />
-            <Bar dataKey="amount" fill="#adcde5" radius={4} />
+            <Bar dataKey="amount" fill="#0f766e" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>

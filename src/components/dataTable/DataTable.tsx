@@ -61,7 +61,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <DataTableFilters filters={config?.filters} table={table} />
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-hidden">
         <Table>
           <TableHeader className="bg-muted">
             {table.getHeaderGroups().map((headerGroup) => (

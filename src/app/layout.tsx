@@ -7,7 +7,7 @@ import { Toaster } from "@/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Coin Guard",
@@ -20,8 +20,8 @@ type RootLayoutProps = Readonly<{
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "antialiased")}>
-        <NextTopLoader color="#2b7fff" showSpinner={false} />
+      <body className={cn("antialiased", "font-sans", inter.variable)}>
+        <NextTopLoader color="#009689" showSpinner={false} />
         <AppProviders>{children}</AppProviders>
         <Toaster richColors />
       </body>

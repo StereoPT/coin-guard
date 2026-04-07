@@ -106,7 +106,13 @@ export const CategoryAreaChart = ({ transactions }: CategoryAreaChartProps) => {
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
             />
-            <Area dataKey="amount" fillOpacity={0.4} type="monotone" />
+            <Area
+              dataKey="amount"
+              fill="#0f766e"
+              fillOpacity={0.2}
+              stroke="#134e4a"
+              type="monotone"
+            />
           </AreaChart>
         </ChartContainer>
       </CardContent>

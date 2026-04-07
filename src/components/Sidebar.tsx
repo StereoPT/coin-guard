@@ -106,7 +106,7 @@ export const Sidebar = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
               <Link href={ROUTES.home}>
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-gradient-to-r from-blue-500 to-blue-600">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-linear-to-r from-teal-600 to-teal-700">
                   <Triangle className="stroke-white" size={16} />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">

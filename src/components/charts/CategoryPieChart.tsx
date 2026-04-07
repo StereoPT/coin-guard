@@ -13,18 +13,17 @@ import { Loader2 } from "lucide-react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const COLORS = [
-  "#1e40af",
-  "#3b82f6",
-  "#60a5fa",
-  "#93c5fd",
-  "#dbeafe",
-  "#1e3a8a",
-  "#2563eb",
-  "#7c3aed",
-  "#6366f1",
-  "#8b5cf6",
-  "#a5b4fc",
-  "#c7d2fe",
+  "#99f6e4",
+  "#5eead4",
+  "#2dd4bf",
+  "#14b8a6",
+  "#0d9488",
+  "#0f766e",
+  "#115e59",
+  "#134e4a",
+  "#042f2e",
+  "#7ee7d8",
+  "#1fa796",
 ];
 
 const chartConfig = {
@@ -54,7 +53,7 @@ export const CategoryPieChart = ({
       </CardHeader>
       <div>
         {!categoryStats ? (
-          <div className="flex items-center justify-center mx-auto aspect-square max-h-[300px]">
+          <div className="flex items-center justify-center mx-auto aspect-square max-h-75">
             <Loader2 className="animate-spin text-muted-foreground" size={64} />
           </div>
         ) : (
@@ -93,8 +92,6 @@ export const CategoryPieChart = ({
                 innerRadius={60}
                 nameKey="categoryName"
                 outerRadius={100}
-                stroke="#ffffff"
-                strokeWidth={1}
               >
                 {categoryStats?.map((entry, index) => (
                   <Cell
