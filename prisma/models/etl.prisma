@@ -1,0 +1,12 @@
+model LookupCategory {
+  id            String            @id @default(cuid())
+  description   String            @unique
+
+  categoryId    String
+  category      Category          @relation(fields: [categoryId], references: [id])
+  
+  enabled       Boolean           @default(true)
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
