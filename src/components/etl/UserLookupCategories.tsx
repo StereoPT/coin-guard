@@ -1,12 +1,11 @@
 "use client";
 
 import { lookupCategoryColumns } from "@/components/dataTable/columns/lookupCategoryColumns";
-import { DataGrid } from "@/components/dataTable/DataGrid";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
-import { fuzzyFilterFn } from "@/lib/dataTable";
+import { DataGrid } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";
 
 const EmptyUserLookupCategories = () => {
@@ -41,11 +40,9 @@ export const UserLookupCategories = () => {
     <DataGrid
       columns={lookupCategoryColumns}
       config={{
-        filters: {
-          search: {
-            filterFn: fuzzyFilterFn(["name"]),
-            placeholder: "Search lookup categories...",
-          },
+        search: {
+          filterFields: ["name"],
+          placeholder: "Search lookup categories...",
         },
       }}
       data={lookupCategories}

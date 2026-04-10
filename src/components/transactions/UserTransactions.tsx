@@ -1,11 +1,10 @@
 "use client";
 
 import { transactionColumns } from "@/components/dataTable/columns/transactionColumns";
-import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
-import { fuzzyFilterFn } from "@/lib/dataTable";
+import { DataTable } from "@stereopt/data-table";
 import { ArrowLeftRight } from "lucide-react";
 
 const EmptyUserTransactions = () => {
@@ -37,25 +36,25 @@ export const UserTransactions = () => {
   }
 
   return (
-    <DataTable
-      columns={transactionColumns}
-      config={{
-        filters: {
+    <div className="flex flex-col gap-8">
+      <DataTable
+        columns={transactionColumns}
+        config={{
           search: {
-            filterFn: fuzzyFilterFn(["description"]),
+            filterFields: ["description"],
             placeholder: "Search transactions...",
           },
-          filter: [
+          filters: [
             { column: "date", type: "date" },
             { column: "type", type: "select" },
           ],
-        },
-        columnVisibility: {
-          type: false,
-          date: false,
-        },
-      }}
-      data={transactions}
-    />
+          columnVisibility: {
+            type: false,
+            date: false,
+          },
+        }}
+        data={transactions}
+      />
+    </div>
   );
 };
