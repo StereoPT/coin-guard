@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import type { Lookup_Category } from "@/generated/prisma/client";
+import type { LookupCategory } from "@/generated/prisma/client";
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 
 type EditLookupCategoryFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  initialValues: Lookup_Category;
+  initialValues: LookupCategory;
 };
 
 export const EditLookupCategoryForm = ({

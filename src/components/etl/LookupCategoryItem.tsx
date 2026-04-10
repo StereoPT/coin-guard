@@ -1,9 +1,9 @@
 import { Badge } from "@/components/ui/badge";
-import type { Lookup_Category } from "@/generated/prisma/client";
+import type { LookupCategory } from "@/generated/prisma/client";
 import { cn } from "@/lib/utils";
 
 type LookupCategoryItemProps = {
-  lookup: Lookup_Category;
+  lookup: LookupCategory;
 };
 
 export const LookupCategoryItem = ({ lookup }: LookupCategoryItemProps) => {
