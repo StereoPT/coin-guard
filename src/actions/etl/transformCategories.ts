@@ -8,7 +8,7 @@ export const TransformCategories = async (
 ) => {
   const descriptionToCategoryMap = new Map<string, string>();
 
-  const categoryLookups = await prisma.lookup_Category.findMany({
+  const categoryLookups = await prisma.lookupCategory.findMany({
     where: {
       enabled: true,
     },

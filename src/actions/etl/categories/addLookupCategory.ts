@@ -16,7 +16,7 @@ export const AddLookupCategory = async (
     throw new Error("Invalid Form Data");
   }
 
-  const result = await prisma.lookup_Category.create({ data });
+  const result = await prisma.lookupCategory.create({ data });
   if (!result) {
     throw new Error("Failed to Add Lookup Category");
   }

@@ -16,7 +16,7 @@ export const EditLookupCategory = async (
     throw new Error("Invalid Form Data");
   }
 
-  const result = await prisma.lookup_Category.update({
+  const result = await prisma.lookupCategory.update({
     where: { id },
     data,
   });

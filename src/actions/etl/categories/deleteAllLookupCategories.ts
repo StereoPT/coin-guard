@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 
 export const DeleteAllLookupCategories = async (id: string) => {
-  const result = await prisma.lookup_Category.deleteMany({
+  const result = await prisma.lookupCategory.deleteMany({
     where: { categoryId: id },
   });
   if (!result) {
