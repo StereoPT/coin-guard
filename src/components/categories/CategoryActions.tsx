@@ -1,6 +1,7 @@
-import { DeleteCategoryDialog } from "@/components/categories/dialogs/DeleteCategoryDialog";
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
+import { DeleteDialog } from "@/components/DeleteDialog";
 import type { Category } from "@/generated/prisma/client";
+import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 
 import { Button } from "@/ui/button";
 import {
@@ -21,11 +22,20 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
 
+  const { isPending, mutateAsync } = useDeleteCategory(category.id);
+
   return (
     <>
       {showDeleteAlert && (
-        <DeleteCategoryDialog
-          category={category}
+        <DeleteDialog
+          description={
+            <span>
+              This will permanently delete <b>{category.name}</b>. This action
+              cannot be undone.
+            </span>
+          }
+          isPending={isPending}
+          onDelete={mutateAsync}
           onOpenChange={setShowDeleteAlert}
           open={showDeleteAlert}
         />

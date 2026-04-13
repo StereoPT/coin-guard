@@ -1,5 +1,5 @@
+import { DeleteDialog } from "@/components/DeleteDialog";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
-import { DeleteLookupCategoriesDialog } from "@/components/etl/dialogs/DeleteLookupCategoriesDialog";
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
 import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
@@ -11,6 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
 import type { CategoryWithLookups } from "@/types/categories";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import {
@@ -33,6 +34,10 @@ export const LookupCategoryCard = ({
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
+
+  const { isPending, mutateAsync } = useDeleteAllLookupCategories(
+    categoryWithLookups.id,
+  );
 
   const visibleLookups = categoryWithLookups.lookups.slice(0, 4);
   const remainingCount =
@@ -65,8 +70,15 @@ export const LookupCategoryCard = ({
       )}
 
       {showDeleteDialog && (
-        <DeleteLookupCategoriesDialog
-          categoryWithLookups={categoryWithLookups}
+        <DeleteDialog
+          description={
+            <span>
+              This will permanently delete all lookups in{" "}
+              <b>{categoryWithLookups.name}</b>. This action cannot be undone.
+            </span>
+          }
+          isPending={isPending}
+          onDelete={mutateAsync}
           onOpenChange={setShowDeleteDialog}
           open={showDeleteDialog}
         />
