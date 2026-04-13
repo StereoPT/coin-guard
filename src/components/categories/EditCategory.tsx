@@ -18,17 +18,17 @@ import { ChevronDown, PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 type EditCategoryProps = {
-  id: string;
+  categoryId: string;
 };
 
-export const EditCategory = ({ id }: EditCategoryProps) => {
+export const EditCategory = ({ categoryId }: EditCategoryProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       {open && (
         <AddLookupCategoryDialog
-          categoryId={id}
+          categoryId={categoryId}
           onOpenChange={setOpen}
           open={open}
         />
@@ -36,7 +36,7 @@ export const EditCategory = ({ id }: EditCategoryProps) => {
 
       <div>
         <ButtonGroup>
-          <EditCategoryDialog categoryId={id} trigger />
+          <EditCategoryDialog categoryId={categoryId} trigger />
           <ButtonGroupSeparator />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

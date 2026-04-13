@@ -13,8 +13,8 @@ type BreadcrumbSlotProps = {
 };
 
 const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
-  const { id } = await params;
-  const transaction = await GetTransaction(id);
+  const { id: transactionId } = await params;
+  const transaction = await GetTransaction(transactionId);
 
   return (
     <BreadcrumbList>

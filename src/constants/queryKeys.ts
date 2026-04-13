@@ -6,10 +6,10 @@ export const KEYS = {
   analytics: [ANALYTICS],
 
   transactions: [TRANSACTIONS],
-  transaction: (id: string) => [TRANSACTIONS, id],
+  transaction: (transactionId: string) => [TRANSACTIONS, transactionId],
 
   categories: [CATEGORIES],
-  category: (id: string) => [CATEGORIES, id],
+  category: (categoryId: string) => [CATEGORIES, categoryId],
 
   monthlyAnalytics: (month: number) => [ANALYTICS, "monthly", month],
   yearlyAnalytics: (year: number) => [ANALYTICS, "yearly", year],

@@ -2,10 +2,11 @@
 
 import { prisma } from "@/lib/prisma";
 
-export const DeleteAllLookupCategories = async (id: string) => {
+export const DeleteAllLookupCategories = async (categoryId: string) => {
   const result = await prisma.lookupCategory.deleteMany({
-    where: { categoryId: id },
+    where: { categoryId },
   });
+
   if (!result) {
     throw new Error("Failed to Delete All Lookup Categories");
   }

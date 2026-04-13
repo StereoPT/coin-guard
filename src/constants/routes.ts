@@ -2,11 +2,12 @@ export const ROUTES = {
   home: "/",
 
   transactions: "/transactions",
-  transaction: (id: string) => `/transactions/${id}` as const,
+  transaction: (transactionId: string) =>
+    `/transactions/${transactionId}` as const,
   importTransactions: "/transactions/import",
 
   categories: "/categories",
-  category: (id: string) => `/categories/${id}` as const,
+  category: (categoryId: string) => `/categories/${categoryId}` as const,
 
   analytics: {
     monthly: "/analytics/monthly",

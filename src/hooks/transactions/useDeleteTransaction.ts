@@ -4,14 +4,14 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const useDeleteTransaction = (id: string) => {
+export const useDeleteTransaction = (transactionId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-transaction-${id}`;
+  const toastID = `delete-transaction-${transactionId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting transaction...", { id: toastID });
-      return DeleteTransaction(id);
+      return DeleteTransaction(transactionId);
     },
     onSuccess: () => {
       toast.success("Transaction deleted", { id: toastID });
