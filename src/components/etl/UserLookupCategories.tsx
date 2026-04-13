@@ -1,9 +1,9 @@
 "use client";
 
-import { lookupCategoryColumns } from "@/components/dataTable/columns/lookupCategoryColumns";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
+import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
 import { DataGrid } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";

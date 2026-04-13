@@ -1,8 +1,8 @@
 "use client";
 
 import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
-import { categoryColumns } from "@/components/dataTable/columns/categoryColumns";
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { categoryColumns } from "@/constants/columns/categoryColumns";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { DataTable } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";
