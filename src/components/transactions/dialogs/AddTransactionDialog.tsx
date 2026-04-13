@@ -1,7 +1,7 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
-import { Dialog, DialogContent, DialogDescription } from "@/ui/dialog";
+import { Dialog, DialogContent } from "@/ui/dialog";
 
 import { PlusCircle } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
@@ -32,7 +32,6 @@ export const AddTransactionDialog = ({
         <div className="px-4">
           <AddTransactionForm setOpen={setOpen} />
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );

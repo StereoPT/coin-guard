@@ -3,12 +3,7 @@
 import { DialogHeader } from "@/components/DialogHeader";
 import { AddLookupCategoryForm } from "@/components/etl/forms/AddLookupCategoryForm";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PlusCircle, TagsIcon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -58,13 +53,12 @@ export const AddLookupCategoryDialog = ({
           subtitle="Create your lookup categories"
           title="Create Lookup Category"
         />
-        <div className="px-4 pt-4">
+        <div className="px-4">
           <AddLookupCategoryForm
             categoryId={categoryId}
             setOpen={handleOnOpenChange}
           />
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );

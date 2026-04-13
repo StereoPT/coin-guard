@@ -4,12 +4,7 @@ import { DialogHeader } from "@/components/DialogHeader";
 import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { Button } from "@/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "@/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
 import { ArrowLeftRightIcon, Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -59,13 +54,13 @@ export const EditTransactionDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4 !max-w-2xl">
+      <DialogContent className="px-0 py-4 max-w-2xl!">
         <DialogHeader
           icon={ArrowLeftRightIcon}
           subtitle="Edit your transaction"
           title="Edit Transaction"
         />
-        <div className="px-4 pt-4">
+        <div className="px-4">
           {transaction && (
             <EditTransactionForm
               initialValues={transaction.transaction}
@@ -73,7 +68,6 @@ export const EditTransactionDialog = ({
             />
           )}
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );

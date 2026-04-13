@@ -2,11 +2,7 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { EditLookupCategoryForm } from "@/components/etl/forms/EditLookupCategoryForm";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { CategoryWithLookups } from "@/types/categories";
 import { TagIcon } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
@@ -30,7 +26,7 @@ export const EditLookupCategoryDialog = ({
           subtitle="Edit your lookup category"
           title={`Edit ${categoryWithLookups.name}`}
         />
-        <div className="px-4 pt-4">
+        <div className="px-4">
           <div className="flex flex-col gap-4">
             {categoryWithLookups.lookups.map((lookup) => (
               <EditLookupCategoryForm
@@ -41,7 +37,6 @@ export const EditLookupCategoryDialog = ({
             ))}
           </div>
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );
