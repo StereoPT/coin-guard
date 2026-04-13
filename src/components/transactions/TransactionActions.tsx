@@ -1,5 +1,6 @@
-import { DeleteTransactionDialog } from "@/components/transactions/dialogs/DeleteTransactionDialog";
+import { DeleteDialog } from "@/components/DeleteDialog";
 import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
+import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
 import type { TransactionWithCategory } from "@/types/transactions";
 import { Button } from "@/ui/button";
 import {
@@ -22,13 +23,22 @@ export const TransactionActions = ({
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
 
+  const { isPending, mutateAsync } = useDeleteTransaction(transaction.id);
+
   return (
     <>
       {showDeleteAlert && (
-        <DeleteTransactionDialog
+        <DeleteDialog
+          description={
+            <span>
+              This will permanently delete <b>{transaction.description}</b>.
+              This action cannot be undone.
+            </span>
+          }
+          isPending={isPending}
+          onDelete={mutateAsync}
           onOpenChange={setShowDeleteAlert}
           open={showDeleteAlert}
-          transaction={transaction}
         />
       )}
 
