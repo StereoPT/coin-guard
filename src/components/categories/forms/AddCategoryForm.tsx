@@ -1,3 +1,4 @@
+import { CategoryFormFields } from "@/components/categories/forms/CategoryFormFields";
 import { Spinner } from "@/components/ui/spinner";
 import { useAddCategory } from "@/hooks/categories/useAddCategory";
 import {
@@ -5,15 +6,7 @@ import {
   type addCategorySchemaType,
 } from "@/schemas/categories";
 import { Button } from "@/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/ui/form";
-import { Input } from "@/ui/input";
+import { Form } from "@/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -44,19 +37,7 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
   return (
     <Form {...form}>
       <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center">Name</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Name" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <CategoryFormFields formId="add-category" />
 
         <Button className="w-full" disabled={isPending} type="submit">
           {!isPending && "Add"}
