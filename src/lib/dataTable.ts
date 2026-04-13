@@ -1,5 +1,5 @@
-import type { FilterFn, FilterMeta, Row } from "@tanstack/react-table";
 import { rankItem } from "@tanstack/match-sorter-utils";
+import type { FilterFn, FilterMeta, Row } from "@tanstack/react-table";
 import { endOfDay, isWithinInterval, startOfDay } from "date-fns";
 
 export const fuzzyFilterFn =
@@ -20,7 +20,6 @@ export const fuzzyFilterFn =
     return itemRank.passed;
   };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const dateBetweenFilterFn: FilterFn<any> = (row, columnId, value) => {
   const date = row.getValue(columnId) as Date;
   const { from: start, to: end } = value;

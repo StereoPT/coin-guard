@@ -1,11 +1,10 @@
 "use client";
 
 import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
-import { categoryColumns } from "@/components/dataTable/columns/categoryColumns";
-import { DataTable } from "@/components/dataTable/DataTable";
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { categoryColumns } from "@/constants/columns/categoryColumns";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
-import { fuzzyFilterFn } from "@/lib/dataTable";
+import { DataTable } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";
 
 const EmptyUserCategories = () => {
@@ -40,11 +39,9 @@ export const UserCategories = () => {
     <DataTable
       columns={categoryColumns}
       config={{
-        filters: {
-          search: {
-            filterFn: fuzzyFilterFn(["name"]),
-            placeholder: "Search categories...",
-          },
+        search: {
+          filterFields: ["name"],
+          placeholder: "Search categories...",
         },
       }}
       data={categories}
