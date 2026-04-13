@@ -10,9 +10,9 @@ export const getTransactionsOptions = () => {
   });
 };
 
-export const getTransactionOptions = (id: string) => {
+export const getTransactionOptions = (transactionId: string) => {
   return queryOptions({
-    queryKey: KEYS.transaction(id),
-    queryFn: () => GetTransaction(id),
+    queryKey: KEYS.transaction(transactionId),
+    queryFn: () => GetTransaction(transactionId),
   });
 };

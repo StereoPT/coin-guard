@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  DialogDescription,
   DialogTitle,
   DialogHeader as ShadcnDialogHeader,
 } from "@/components/ui/dialog";
@@ -54,6 +55,7 @@ export const DialogHeader = ({
           </div>
         </div>
       </DialogTitle>
+      <DialogDescription />
       <Separator />
     </ShadcnDialogHeader>
   );

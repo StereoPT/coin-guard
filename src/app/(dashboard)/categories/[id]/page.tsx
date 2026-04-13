@@ -10,20 +10,20 @@ type CategoryDetailsPageProps = {
 };
 
 const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
-  const { id } = await params;
+  const { id: categoryId } = await params;
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(getCategoryOptions(id));
+  await queryClient.prefetchQuery(getCategoryOptions(categoryId));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
           <PageHeader goBack title="Category Details" />
-          <EditCategory id={id} />
+          <EditCategory categoryId={categoryId} />
         </div>
         <div className="h-full py-6">
-          <UserCategory categoryId={id} />
+          <UserCategory categoryId={categoryId} />
         </div>
       </div>
     </HydrationBoundary>

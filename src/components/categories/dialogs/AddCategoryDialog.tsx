@@ -3,12 +3,7 @@
 import { AddCategoryForm } from "@/components/categories/forms/AddCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
 import { Button } from "@/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "@/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
 
 import { PlusCircle, TagIcon } from "lucide-react";
 import { useState } from "react";
@@ -34,10 +29,9 @@ export const AddCategoryDialog = () => {
           subtitle="Create your categories"
           title="Create Category"
         />
-        <div className="px-4 pt-4">
+        <div className="px-4">
           <AddCategoryForm setOpen={setOpen} />
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );

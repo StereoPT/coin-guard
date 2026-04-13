@@ -2,10 +2,10 @@
 
 import { prisma } from "@/lib/prisma";
 
-export const GetTransaction = async (id: string) => {
+export const GetTransaction = async (transactionId: string) => {
   return await prisma.$transaction(async (prisma) => {
     const transaction = await prisma.transaction.findUnique({
-      where: { id },
+      where: { id: transactionId },
       include: {
         category: true,
       },

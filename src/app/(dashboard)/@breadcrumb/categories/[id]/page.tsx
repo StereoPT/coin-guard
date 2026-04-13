@@ -13,8 +13,8 @@ type BreadcrumbSlotProps = {
 };
 
 const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
-  const { id } = await params;
-  const category = await GetCategory(id);
+  const { id: categoryId } = await params;
+  const category = await GetCategory(categoryId);
 
   return (
     <BreadcrumbList>

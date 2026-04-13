@@ -10,9 +10,9 @@ export const getCategoriesOptions = () => {
   });
 };
 
-export const getCategoryOptions = (id: string) => {
+export const getCategoryOptions = (categoryId: string) => {
   return queryOptions({
-    queryKey: KEYS.category(id),
-    queryFn: () => GetCategory(id),
+    queryKey: KEYS.category(categoryId),
+    queryFn: () => GetCategory(categoryId),
   });
 };

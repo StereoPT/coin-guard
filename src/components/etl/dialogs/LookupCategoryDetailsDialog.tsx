@@ -2,11 +2,7 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { CategoryWithLookups } from "@/types/categories";
 import { TagIcon } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
@@ -30,14 +26,13 @@ export const LookupCategoryDetailsDialog = ({
           subtitle="View your lookup category details"
           title={categoryWithLookups.name}
         />
-        <div className="px-4 pt-4">
+        <div className="px-4">
           <ul className="flex flex-col gap-4">
             {categoryWithLookups.lookups.map((lookup) => (
               <LookupCategoryItem key={lookup.id} lookup={lookup} />
             ))}
           </ul>
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );

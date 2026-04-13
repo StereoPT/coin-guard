@@ -44,9 +44,9 @@ export const TransactionActions = ({
 
       {showEditDialog && (
         <EditTransactionDialog
-          id={transaction.id}
           onOpenChange={setShowEditDialog}
           open={showEditDialog}
+          transactionId={transaction.id}
         />
       )}
 

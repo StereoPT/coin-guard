@@ -4,14 +4,14 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const useDeleteAllLookupCategories = (id: string) => {
+export const useDeleteAllLookupCategories = (categoryId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-all-lookup-categories-${id}`;
+  const toastID = `delete-all-lookup-categories-${categoryId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting all lookup categories...", { id: toastID });
-      return DeleteAllLookupCategories(id);
+      return DeleteAllLookupCategories(categoryId);
     },
     onSuccess: () => {
       toast.success("All lookup categories deleted", { id: toastID });

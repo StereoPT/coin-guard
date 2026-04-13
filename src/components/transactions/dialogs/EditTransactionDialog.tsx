@@ -2,19 +2,13 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
-import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { Button } from "@/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "@/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
 import { ArrowLeftRightIcon, Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditTransactionDialogProps = {
-  id: string;
+  transactionId: string;
 } & (
   | {
       trigger: true;
@@ -32,10 +26,9 @@ export const EditTransactionDialog = ({
   open,
   onOpenChange,
   trigger,
-  id,
+  transactionId,
 }: EditTransactionDialogProps) => {
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
-  const { data: transaction, isPending } = useGetTransaction(id);
 
   const handleOpenChange = (prevOpen: boolean) => {
     if (!trigger) {
@@ -44,10 +37,6 @@ export const EditTransactionDialog = ({
 
     setDialogOpen(prevOpen);
   };
-
-  if (isPending) {
-    return null;
-  }
 
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
@@ -59,21 +48,18 @@ export const EditTransactionDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4 !max-w-2xl">
+      <DialogContent className="px-0 py-4 max-w-2xl!">
         <DialogHeader
           icon={ArrowLeftRightIcon}
           subtitle="Edit your transaction"
           title="Edit Transaction"
         />
-        <div className="px-4 pt-4">
-          {transaction && (
-            <EditTransactionForm
-              initialValues={transaction.transaction}
-              setOpen={handleOpenChange}
-            />
-          )}
+        <div className="px-4">
+          <EditTransactionForm
+            setOpen={handleOpenChange}
+            transactionId={transactionId}
+          />
         </div>
-        <DialogDescription />
       </DialogContent>
     </Dialog>
   );
