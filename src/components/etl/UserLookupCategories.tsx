@@ -1,5 +1,6 @@
 "use client";
 
+import { EmptyState } from "@/components/EmptyState";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
@@ -7,23 +8,6 @@ import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
 import { DataGrid } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";
-
-const EmptyUserLookupCategories = () => {
-  return (
-    <div className="flex flex-col gap-4 h-full items-center justify-center">
-      <div className="rounded-full bg-accent w-20 h-20 flex items-center justify-center">
-        <TagsIcon className="stroke-primary" size={40} />
-      </div>
-      <div className="flex flex-col gap-1 text-center">
-        <p className="font-bold">No lookup categories added yet</p>
-        <p className="text-muted-foreground">
-          Click the button below to add your first lookup category
-        </p>
-      </div>
-      <AddLookupCategoryDialog trigger />
-    </div>
-  );
-};
 
 export const UserLookupCategories = () => {
   const { data: lookupCategories } = useGetLookupCategories();
@@ -33,7 +17,14 @@ export const UserLookupCategories = () => {
   }
 
   if (lookupCategories.length <= 0) {
-    return <EmptyUserLookupCategories />;
+    return (
+      <EmptyState
+        action={<AddLookupCategoryDialog trigger />}
+        description="Click the button below to add your first lookup category"
+        icon={TagsIcon}
+        title="No lookup categories added yet"
+      />
+    );
   }
 
   return (
