@@ -1,37 +1,63 @@
+import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionFormFields } from "@/components/transactions/forms/TransactionFormFields";
 import { Spinner } from "@/components/ui/spinner";
 import { FormType } from "@/constants/forms";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
+import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import {
   editTransactionSchema,
   type editTransactionSchemaType,
 } from "@/schemas/transactions";
-import type { TransactionWithCategory } from "@/types/transactions";
 import { Button } from "@/ui/button";
 import { Form } from "@/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type EditTransactionFormProps = {
   setOpen: (prevOpen: boolean) => void;
-  initialValues: TransactionWithCategory;
+  transactionId: string;
 };
 
 export const EditTransactionForm = ({
   setOpen,
-  initialValues,
+  transactionId,
 }: EditTransactionFormProps) => {
+  const {
+    data: transaction,
+    isPending: isLoadingTransaction,
+    isError: isErrorTransaction,
+  } = useGetTransaction(transactionId);
+
   const form = useForm<editTransactionSchemaType>({
     resolver: zodResolver(editTransactionSchema),
     defaultValues: {
-      ...initialValues,
-      note: initialValues.note ?? "",
-      categoryId: initialValues.categoryId ?? undefined,
+      date: undefined,
+      description: "",
+      type: undefined,
+      amount: 0,
+      balance: 0,
+      note: "",
+      categoryId: undefined,
     },
   });
 
-  const { mutateAsync, isPending } = useEditTransaction(initialValues.id);
+  useEffect(() => {
+    if (!transaction) return;
+
+    const currentTransaction = transaction.transaction;
+    form.reset({
+      date: currentTransaction.date,
+      description: currentTransaction.description,
+      type: currentTransaction.type,
+      amount: currentTransaction.amount,
+      balance: currentTransaction.balance,
+      note: currentTransaction.note ?? "",
+      categoryId: currentTransaction.categoryId ?? undefined,
+    });
+  }, [transaction, form]);
+
+  const { mutateAsync, isPending } = useEditTransaction(transactionId);
 
   const onSubmit = useCallback(
     async (values: editTransactionSchemaType) => {
@@ -41,6 +67,14 @@ export const EditTransactionForm = ({
     },
     [form, mutateAsync, setOpen],
   );
+
+  if (isLoadingTransaction) {
+    return <Spinner />;
+  }
+
+  if (isErrorTransaction || !transaction) {
+    return <ErrorAlert />;
+  }
 
   return (
     <Form {...form}>

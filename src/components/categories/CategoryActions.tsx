@@ -43,7 +43,7 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
 
       {showEditDialog && (
         <EditCategoryDialog
-          id={category.id}
+          categoryId={category.id}
           onOpenChange={setShowEditDialog}
           open={showEditDialog}
         />

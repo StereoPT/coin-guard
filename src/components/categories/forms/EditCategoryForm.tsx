@@ -1,7 +1,8 @@
 import { CategoryFormFields } from "@/components/categories/forms/CategoryFormFields";
+import { ErrorAlert } from "@/components/ErrorAlert";
 import { Spinner } from "@/components/ui/spinner";
-import type { Category } from "@/generated/prisma/client";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
+import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import {
   editCategorySchema,
   type editCategorySchemaType,
@@ -9,24 +10,40 @@ import {
 import { Button } from "@/ui/button";
 import { Form } from "@/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type EditCategoryFormProps = {
   setOpen: (prevOpen: boolean) => void;
-  initialValues: Category;
+  categoryId: string;
 };
 
 export const EditCategoryForm = ({
   setOpen,
-  initialValues,
+  categoryId,
 }: EditCategoryFormProps) => {
+  const {
+    data: category,
+    isPending: isLoadingCategory,
+    isError: isErrorCategory,
+  } = useGetCategory(categoryId);
+
   const form = useForm<editCategorySchemaType>({
     resolver: zodResolver(editCategorySchema),
-    defaultValues: initialValues,
+    defaultValues: {
+      name: "",
+    },
   });
 
-  const { mutateAsync, isPending } = useEditCategory(initialValues.id);
+  useEffect(() => {
+    if (!category) return;
+
+    form.reset({
+      name: category.name,
+    });
+  }, [category, form]);
+
+  const { mutateAsync, isPending } = useEditCategory(categoryId);
 
   const onSubmit = useCallback(
     async (values: editCategorySchemaType) => {
@@ -36,6 +53,14 @@ export const EditCategoryForm = ({
     },
     [form, mutateAsync, setOpen],
   );
+
+  if (isLoadingCategory) {
+    return <Spinner />;
+  }
+
+  if (isErrorCategory || !category) {
+    return <ErrorAlert />;
+  }
 
   return (
     <Form {...form}>

@@ -40,8 +40,8 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
         <CategoryFormFields formId="add-category" />
 
         <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Add"}
           {isPending && <Spinner />}
+          Add Category
         </Button>
       </form>
     </Form>

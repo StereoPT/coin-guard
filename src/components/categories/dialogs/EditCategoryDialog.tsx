@@ -2,14 +2,13 @@
 
 import { EditCategoryForm } from "@/components/categories/forms/EditCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import { Button } from "@/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
 import { Edit, Tag } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditCategoryDialogProps = {
-  id: string;
+  categoryId: string;
 } & (
   | {
       trigger: true;
@@ -27,10 +26,9 @@ export const EditCategoryDialog = ({
   open,
   onOpenChange,
   trigger,
-  id,
+  categoryId,
 }: EditCategoryDialogProps) => {
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
-  const { data: category } = useGetCategory(id);
 
   const handleOpenChange = (prevOpen: boolean) => {
     if (!trigger) {
@@ -57,12 +55,10 @@ export const EditCategoryDialog = ({
           title="Edit Category"
         />
         <div className="px-4">
-          {category && (
-            <EditCategoryForm
-              initialValues={category}
-              setOpen={handleOpenChange}
-            />
-          )}
+          <EditCategoryForm
+            categoryId={categoryId}
+            setOpen={handleOpenChange}
+          />
         </div>
       </DialogContent>
     </Dialog>

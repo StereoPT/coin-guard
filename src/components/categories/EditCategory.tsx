@@ -36,7 +36,7 @@ export const EditCategory = ({ id }: EditCategoryProps) => {
 
       <div>
         <ButtonGroup>
-          <EditCategoryDialog id={id} trigger />
+          <EditCategoryDialog categoryId={id} trigger />
           <ButtonGroupSeparator />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
