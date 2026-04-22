@@ -33,6 +33,7 @@ export const ExportDatabase = async () => {
       filename,
     };
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Export failed:", error);
     return {
       success: false,

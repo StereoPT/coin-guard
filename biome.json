@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["**", "!src/components/ui"]
   },
   "formatter": {
     "enabled": true,
@@ -44,7 +45,24 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/app/not-found.tsx", "src/hooks/use-mobile.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
+    }
+  ],
   "css": {
+    "parser": {
+      "cssModules": false,
+      "allowWrongLineComments": false,
+      "tailwindDirectives": true
+    },
     "formatter": {
       "quoteStyle": "single",
       "indentStyle": "space"

@@ -38,6 +38,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Download error:", error);
     return new NextResponse("Download failed", { status: 500 });
   }

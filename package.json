@@ -9,8 +9,8 @@
     "start": "next start",
     "format": "biome format ./src",
     "format:fix": "biome format ./src --write",
-    "lint": "biome lint ./src && next lint",
-    "lint:fix": "biome lint ./src --write && next lint",
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint ./src --write",
     "typecheck": "tsc"
   },
   "dependencies": {

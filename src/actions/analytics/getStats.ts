@@ -28,19 +28,16 @@ export const GetStats = async (): Promise<GetStatsReturnValue> => {
     GetStatsForDate(dateFilterTwo),
   ]);
 
-  const result = Object.values(TransactionType).reduce(
-    (acc, type) => ({
-      ...acc,
-      [type]: {
-        value: currentSummary[type],
-        percentage: calculatePercentageChange(
-          currentSummary[type],
-          previousSummary[type],
-        ),
-      },
-    }),
-    {} as GetStatsReturnValue,
-  );
+  const result = Object.values(TransactionType).reduce((acc, type) => {
+    acc[type] = {
+      value: currentSummary[type],
+      percentage: calculatePercentageChange(
+        currentSummary[type],
+        previousSummary[type],
+      ),
+    };
+    return acc;
+  }, {} as GetStatsReturnValue);
 
   return result;
 };

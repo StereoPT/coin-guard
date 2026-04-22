@@ -42,6 +42,7 @@ const parseDates = (dateString: string) => {
 
     return format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'");
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error logging
     console.warn("Error parsing date:", dateString, error);
     return null;
   }
@@ -85,6 +86,7 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
       type,
     };
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error logging
     console.warn("Error processing row:", error);
     return null;
   }
@@ -162,6 +164,7 @@ export const ParseTransaction = async (formValues: FormData) => {
 
     return enhancedTransactions;
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Failed to process CSV file:", error);
     throw new Error("Failed to process CSV file!");
   }

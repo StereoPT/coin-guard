@@ -5,10 +5,10 @@ import { prisma } from "@/lib/prisma";
 import type { StatCardsType } from "@/types/analytics";
 
 const createEmptyTransactionSummary = (): StatCardsType => {
-  return Object.values(TransactionType).reduce(
-    (acc, type) => ({ ...acc, [type]: 0 }),
-    {} as StatCardsType,
-  );
+  return Object.values(TransactionType).reduce((acc, type) => {
+    acc[type] = 0;
+    return acc;
+  }, {} as StatCardsType);
 };
 
 export const GetStatsForDate = async (dateFilter: { gte: Date; lte: Date }) => {
