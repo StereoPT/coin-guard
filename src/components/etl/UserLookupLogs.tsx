@@ -1,6 +1,7 @@
 "use client";
 
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -28,7 +29,8 @@ export const UserLookupLogs = () => {
           <TableRow>
             <TableHead>Time</TableHead>
             <TableHead>Type</TableHead>
-            <TableHead>Message</TableHead>
+            <TableHead>Field</TableHead>
+            <TableHead>Description</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="gap-2 h-full overflow-auto">
@@ -47,7 +49,10 @@ export const UserLookupLogs = () => {
                 {log.type}
               </TableCell>
               <TableCell className="text-sm flex-1 p-0.75">
-                {log.message}
+                <Badge variant="outline">{log.lookupField}</Badge>
+              </TableCell>
+              <TableCell className="text-sm flex-1 p-0.75">
+                {log.description}
               </TableCell>
             </TableRow>
           ))}

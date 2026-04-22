@@ -3,6 +3,10 @@ enum LoggingType {
   ERROR
 }
 
+enum LookupField {
+  CATEGORY
+  DESCRIPTION
+}
 
 model LookupCategory {
   id            String            @id @default(cuid())
@@ -20,8 +24,9 @@ model LookupCategory {
 model LookupLogging {
   id            String            @id @default(cuid())
   
-  message       String
   type          LoggingType
+  lookupField   LookupField
+  description   String
 
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
