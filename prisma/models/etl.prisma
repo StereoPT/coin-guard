@@ -1,3 +1,9 @@
+enum LoggingType {
+  INFO
+  ERROR
+}
+
+
 model LookupCategory {
   id            String            @id @default(cuid())
   description   String            @unique
@@ -6,6 +12,16 @@ model LookupCategory {
   category      Category          @relation(fields: [categoryId], references: [id])
   
   enabled       Boolean           @default(true)
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model LookupLogging {
+  id            String            @id @default(cuid())
+  
+  message       String
+  type          LoggingType
 
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt

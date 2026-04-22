@@ -1,6 +1,7 @@
 const TRANSACTIONS = "transactions";
 const CATEGORIES = "categories";
 const ANALYTICS = "analytics";
+const LOOKUP = "lookup";
 
 export const KEYS = {
   analytics: [ANALYTICS],
@@ -14,5 +15,6 @@ export const KEYS = {
   monthlyAnalytics: (month: number) => [ANALYTICS, "monthly", month],
   yearlyAnalytics: (year: number) => [ANALYTICS, "yearly", year],
 
-  lookupCategories: ["lookup", CATEGORIES],
+  lookupCategories: [LOOKUP, CATEGORIES],
+  lookupLogs: [LOOKUP, "logs"],
 };
