@@ -21,11 +21,10 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "javascript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
   "python.terminal.activateEnvironment": false,
   "prisma.pinToPrisma6": false,
-  "typescript.preferences.autoImportFileExcludePatterns": [
+  "js/ts.preferences.autoImportFileExcludePatterns": [
     "**/node_modules/@radix-ui/**"
   ]
 }

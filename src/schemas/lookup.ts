@@ -14,3 +14,13 @@ export type addLookupCategorySchemaType = z.infer<
 export type editLookupCategorySchemaType = z.infer<
   typeof editLookupCategorySchema
 >;
+
+export const addLookupDescriptionSchema = z.object({
+  description: z.string().trim().nonempty(),
+  newDescription: z.string().trim().nonempty(),
+  enabled: z.boolean(),
+});
+
+export type addLookupDescriptionSchemaType = z.infer<
+  typeof addLookupDescriptionSchema
+>;
