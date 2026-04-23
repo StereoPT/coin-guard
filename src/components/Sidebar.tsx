@@ -10,6 +10,7 @@ import {
   Table2Icon,
   TagIcon,
   TagsIcon,
+  TextInitialIcon,
   Triangle,
 } from "lucide-react";
 import Link from "next/link";
@@ -84,6 +85,11 @@ const groupRoutes: GroupedRoute[] = [
         icon: TagsIcon,
         title: "Lookup Categories",
         url: ROUTES.etl.categories,
+      },
+      {
+        icon: TextInitialIcon,
+        title: "Lookup Descriptions",
+        url: ROUTES.etl.descriptions,
       },
       {
         icon: ScrollTextIcon,
