@@ -1,6 +1,7 @@
 "use server";
 
 import { TransformCategories } from "@/actions/etl/transformCategories";
+import { TransformDescriptions } from "@/actions/etl/transformDescriptions";
 import { format, isValid, parse } from "date-fns";
 import Papa from "papaparse";
 
@@ -158,11 +159,15 @@ export const ParseTransaction = async (formValues: FormData) => {
 
     // ***** ***** ***** ETL Process ***** ***** ***** //
 
-    const enhancedTransactions = await TransformCategories(processedData);
+    const enhancedTransactions_description =
+      await TransformDescriptions(processedData);
+    const enhancedTransactions_final = await TransformCategories(
+      enhancedTransactions_description,
+    );
 
     // ***** ***** ***** ETL Process ***** ***** ***** //
 
-    return enhancedTransactions;
+    return enhancedTransactions_final;
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Failed to process CSV file:", error);
