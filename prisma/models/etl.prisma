@@ -9,25 +9,37 @@ enum LookupField {
 }
 
 model LookupCategory {
-  id            String            @id @default(cuid())
-  description   String            @unique
+  id               String            @id @default(cuid())
+  description      String            @unique
 
-  categoryId    String
-  category      Category          @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  category         Category          @relation(fields: [categoryId], references: [id])
   
-  enabled       Boolean           @default(true)
+  enabled          Boolean           @default(true)
 
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model LookupDescription {
+  id               String            @id @default(cuid())
+
+  description      String            @unique
+  newDescription   String
+
+  enabled          Boolean           @default(true)
+
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
 model LookupLogging {
-  id            String            @id @default(cuid())
+  id               String            @id @default(cuid())
   
-  type          LoggingType
-  lookupField   LookupField
-  description   String
+  type             LoggingType
+  lookupField      LookupField
+  description      String
 
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }

@@ -16,5 +16,6 @@ export const KEYS = {
   yearlyAnalytics: (year: number) => [ANALYTICS, "yearly", year],
 
   lookupCategories: [LOOKUP, CATEGORIES],
+  lookupDescriptions: [LOOKUP, "descriptions"],
   lookupLogs: [LOOKUP, "logs"],
 };

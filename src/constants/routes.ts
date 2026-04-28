@@ -16,6 +16,7 @@ export const ROUTES = {
 
   etl: {
     categories: "/etl/categories",
+    descriptions: "/etl/descriptions",
     logs: "/etl/logs",
   },
 

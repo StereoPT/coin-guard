@@ -32,7 +32,7 @@ export const DialogHeader = ({
   return (
     <ShadcnDialogHeader>
       <DialogTitle asChild>
-        <div className="flex gap-4 px-4 mb-2 items-center">
+        <div className="flex gap-4 px-4 items-center">
           {Icon && (
             <Icon className={cn("stroke-primary", iconClassName)} size={30} />
           )}
