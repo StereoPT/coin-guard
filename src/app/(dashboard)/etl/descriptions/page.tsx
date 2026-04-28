@@ -1,10 +1,13 @@
 import { AddLookupDescriptionDialog } from "@/components/etl/dialogs/AddLookupDescriptionDialog";
+import { UserLookupDescriptions } from "@/components/etl/UserLookupDescriptions";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { getLookupDescriptionsOptions } from "@/lib/queryOptions/lookup";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 const LookupDescriptionsPage = async () => {
   const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(getLookupDescriptionsOptions());
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -16,7 +19,9 @@ const LookupDescriptionsPage = async () => {
           />
           <AddLookupDescriptionDialog trigger />
         </div>
-        <div className="h-full py-6">Lookup Descriptions Page</div>
+        <div className="h-full py-6">
+          <UserLookupDescriptions />
+        </div>
       </div>
     </HydrationBoundary>
   );
