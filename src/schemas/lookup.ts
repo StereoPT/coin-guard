@@ -21,6 +21,11 @@ export const addLookupDescriptionSchema = z.object({
   enabled: z.boolean(),
 });
 
+export const editLookupDescriptionSchema = addLookupDescriptionSchema.partial();
+
 export type addLookupDescriptionSchemaType = z.infer<
   typeof addLookupDescriptionSchema
+>;
+export type editLookupDescriptionSchemaType = z.infer<
+  typeof editLookupDescriptionSchema
 >;

@@ -1,5 +1,6 @@
 "use client";
 
+import { LookupDescriptionActions } from "@/components/etl/LookupDescriptionActions";
 import { Badge } from "@/components/ui/badge";
 import type { LookupDescription } from "@/generated/prisma/client";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ export const lookupDescriptionColumns: ColumnDef<LookupDescription>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    size: 520,
     cell: ({ row }) => {
       const { description, newDescription } = row.original;
 
@@ -25,6 +27,7 @@ export const lookupDescriptionColumns: ColumnDef<LookupDescription>[] = [
   {
     accessorKey: "enabled",
     header: "Enabled",
+    size: 100,
     cell: ({ row }) => {
       const { enabled } = row.original;
 
@@ -42,5 +45,10 @@ export const lookupDescriptionColumns: ColumnDef<LookupDescription>[] = [
     accessorKey: "actions",
     header: "Actions",
     size: 50,
+    cell: ({ row }) => {
+      const lookupDescription = row.original;
+
+      return <LookupDescriptionActions lookupDescription={lookupDescription} />;
+    },
   },
 ];
