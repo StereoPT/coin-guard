@@ -3,6 +3,10 @@
   "version": "8.0.0",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -60,6 +64,7 @@
     "@types/react-dom": "^19.2.3",
     "prisma": "^7.4.0",
     "tailwindcss": "^4.2.1",
+    "turbo": "^2.9.6",
     "typescript": "^5.9.3"
   }
 }
