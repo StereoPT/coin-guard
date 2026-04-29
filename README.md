@@ -156,18 +156,23 @@ CoinGuard makes personal finance management simple and intuitive:
 - See recent transactions at a glance
 - Monitor key financial metrics
 
+### Import Process
+
+- Enhance your transactions with categories and descriptions
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [x] Basic income and expense tracking
-- [x] Financial goal setting
-- [x] Report generation
-- [ ] Update dependencies
-- [ ] Replace eslint + prettier with Biome
-- [ ] Analytics Sections
+- [x] Analytics Sections
+- [x] Edit during Import
+- [x] ETL Process
+  - [x] Categories
+  - [x] Description
+  - [x] Logs
+- [ ] Turborepo 
 
 See the [open issues](https://github.com/StereoPT/coin-guard/issues) for a full list of proposed features (and known issues).
 
@@ -237,7 +242,7 @@ Special thanks to the following resources and tools that made CoinGuard possible
 [issues-url]: https://github.com/StereoPT/coin-guard/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/guidosp
-[product-screenshot]: images/banner.png
+[product-screenshot]: images/banner_02.jpeg
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
