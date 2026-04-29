@@ -1,4 +1,5 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
+import { ApplyLookupDescriptionAlert } from "@/components/etl/dialogs/ApplyLookupDescriptionAlert";
 import { EditLookupDescriptionDialog } from "@/components/etl/dialogs/EditLookupDescriptionDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { LookupDescription } from "@/generated/prisma/client";
 import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
-import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
+import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 type LookupDescriptionActionsProps = {
@@ -20,6 +21,7 @@ type LookupDescriptionActionsProps = {
 export const LookupDescriptionActions = ({
   lookupDescription,
 }: LookupDescriptionActionsProps) => {
+  const [showApplyAlert, setShowApplyAlert] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
 
@@ -29,6 +31,14 @@ export const LookupDescriptionActions = ({
 
   return (
     <>
+      {showApplyAlert && (
+        <ApplyLookupDescriptionAlert
+          lookupDescription={lookupDescription}
+          onOpenChange={setShowApplyAlert}
+          open={showApplyAlert}
+        />
+      )}
+
       {showDeleteAlert && (
         <DeleteDialog
           description={
@@ -61,6 +71,10 @@ export const LookupDescriptionActions = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => setShowApplyAlert(true)}>
+            <RefreshCw />
+            Apply
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
             <Edit />
             Edit
