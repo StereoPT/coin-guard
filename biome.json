@@ -47,7 +47,10 @@
   },
   "overrides": [
     {
-      "includes": ["src/app/not-found.tsx", "src/hooks/use-mobile.ts"],
+      "includes": [
+        "apps/web/src/app/not-found.tsx",
+        "apps/web/src/hooks/use-mobile.ts"
+      ],
       "linter": {
         "rules": {
           "style": {

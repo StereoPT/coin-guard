@@ -1,0 +1,10 @@
+# Next.js artifacts
+.next/
+out/
+
+# Next generated types
+next-env.d.ts
+
+/src/generated/prisma
+/prisma/dev.db
+transactions/*.*
