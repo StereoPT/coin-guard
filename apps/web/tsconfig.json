@@ -1,7 +1,6 @@
 {
   "extends": "@coin-guard/ts-config/nextjs.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
     "strictNullChecks": true,
     "paths": {
       "@/*": ["./src/*"],
