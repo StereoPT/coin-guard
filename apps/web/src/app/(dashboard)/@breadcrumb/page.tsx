@@ -4,7 +4,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-} from "@/ui/breadcrumb";
+} from "@coin-guard/ui";
 
 const BreadcrumbSlot = () => {
   return (

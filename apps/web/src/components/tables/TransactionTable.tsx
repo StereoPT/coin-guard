@@ -1,6 +1,6 @@
 import { AmountBadge } from "@/components/AmountBadge";
 import type { TransactionWithCategory } from "@/types/transactions";
-import { Badge } from "@/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/ui/table";
+} from "@coin-guard/ui";
 import { format } from "date-fns";
 
 type TransactionTableProps = {

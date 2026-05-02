@@ -1,8 +1,8 @@
 import { AmountBadge } from "@/components/AmountBadge";
 import { ROUTES } from "@/constants/routes";
 import type { Transaction } from "@/generated/prisma/client";
-import { cn } from "@/lib/utils";
-import { Card } from "@/ui/card";
+import { cn } from "@coin-guard/ui";
+import { Card } from "@coin-guard/ui";
 import type { ClassValue } from "clsx";
 import { format } from "date-fns";
 import Link from "next/link";

@@ -2,18 +2,18 @@
 
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
-} from "@/components/ui/button-group";
+} from "@coin-guard/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@coin-guard/ui";
 import { ChevronDown, PlusCircle } from "lucide-react";
 import { useState } from "react";
 

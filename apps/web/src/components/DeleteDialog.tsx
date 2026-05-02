@@ -7,9 +7,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { buttonVariants } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+} from "@coin-guard/ui";
+import { buttonVariants } from "@coin-guard/ui";
+import { Spinner } from "@coin-guard/ui";
 import {
   useCallback,
   type Dispatch,

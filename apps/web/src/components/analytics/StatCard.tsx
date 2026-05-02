@@ -1,11 +1,11 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import type { TransactionType } from "@/generated/prisma/enums";
 import { getTypeColor } from "@/lib/typeColors";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import type { TransactionStat } from "@/types/analytics";
-import { Badge } from "@/ui/badge";
-import { Card } from "@/ui/card";
-import { Skeleton } from "@/ui/skeleton";
+import { Badge } from "@coin-guard/ui";
+import { Card } from "@coin-guard/ui";
+import { Skeleton } from "@coin-guard/ui";
 import type { ClassValue } from "clsx";
 import { TrendingDown, TrendingUp, type LucideIcon } from "lucide-react";
 

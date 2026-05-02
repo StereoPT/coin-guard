@@ -2,8 +2,8 @@
 
 import { EditCategoryForm } from "@/components/categories/forms/EditCategoryForm";
 import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
+import { Button } from "@coin-guard/ui";
+import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
 import { Edit, Tag } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 

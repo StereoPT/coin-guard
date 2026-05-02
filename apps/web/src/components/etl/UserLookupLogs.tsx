@@ -1,7 +1,7 @@
 "use client";
 
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import {
   Table,
   TableBody,
@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@coin-guard/ui";
 import { LoggingType } from "@/generated/prisma/enums";
 import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import { format } from "date-fns";
 
 export const UserLookupLogs = () => {

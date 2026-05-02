@@ -1,7 +1,7 @@
 import type { TransactionType } from "@/generated/prisma/enums";
 import { formatCurrency } from "@/lib/formatter";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/ui/badge";
+import { cn } from "@coin-guard/ui";
+import { Badge } from "@coin-guard/ui";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 type AmountBadgeProps = {

@@ -2,14 +2,14 @@ import { DeleteDialog } from "@/components/DeleteDialog";
 import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
 import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
 import type { TransactionWithCategory } from "@/types/transactions";
-import { Button } from "@/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
+} from "@coin-guard/ui";
 import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
 import { useState } from "react";
 

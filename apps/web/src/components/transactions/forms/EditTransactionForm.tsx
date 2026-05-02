@@ -1,6 +1,6 @@
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionFormFields } from "@/components/transactions/forms/TransactionFormFields";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@coin-guard/ui";
 import { FormType } from "@/constants/forms";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
@@ -8,8 +8,8 @@ import {
   editTransactionSchema,
   type editTransactionSchemaType,
 } from "@/schemas/transactions";
-import { Button } from "@/ui/button";
-import { Form } from "@/ui/form";
+import { Button } from "@coin-guard/ui";
+import { Form } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";

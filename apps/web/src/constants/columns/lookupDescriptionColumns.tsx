@@ -1,9 +1,9 @@
 "use client";
 
 import { LookupDescriptionActions } from "@/components/etl/LookupDescriptionActions";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import type { LookupDescription } from "@/generated/prisma/client";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowRight } from "lucide-react";
 

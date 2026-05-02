@@ -1,13 +1,13 @@
 import { formatCurrency } from "@/lib/formatter";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import type { CategoryStats } from "@/types/categories";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@coin-guard/ui";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/ui/chart";
+} from "@coin-guard/ui";
 import type { ClassValue } from "clsx";
 import { Loader2 } from "lucide-react";
 import { Cell, Pie, PieChart } from "recharts";

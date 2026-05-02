@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   Field,
   FieldContent,
@@ -6,7 +6,7 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
+} from "@coin-guard/ui";
 import {
   Form,
   FormControl,
@@ -14,10 +14,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Spinner } from "@/components/ui/spinner";
-import { Switch } from "@/components/ui/switch";
+} from "@coin-guard/ui";
+import { Input } from "@coin-guard/ui";
+import { Spinner } from "@coin-guard/ui";
+import { Switch } from "@coin-guard/ui";
 import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
 import {
   addLookupDescriptionSchema,

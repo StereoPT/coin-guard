@@ -14,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/ui/table";
+} from "@coin-guard/ui";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

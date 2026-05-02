@@ -1,6 +1,6 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import type { LookupCategory } from "@/generated/prisma/client";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 
 type LookupCategoryItemProps = {
   lookup: LookupCategory;

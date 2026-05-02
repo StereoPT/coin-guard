@@ -7,7 +7,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty";
+} from "@coin-guard/ui";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 

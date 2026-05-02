@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/ui/table";
+} from "@coin-guard/ui";
 import { format } from "date-fns";
 
 type CategoryTableProps = {

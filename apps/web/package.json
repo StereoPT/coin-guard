@@ -13,6 +13,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@coin-guard/ui": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/adapter-better-sqlite3": "^7.4.0",
     "@prisma/client": "^7.4.0",

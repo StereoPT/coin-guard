@@ -2,6 +2,18 @@
 
 import { ROUTES } from "@/constants/routes";
 import {
+  Sidebar as ShadcnSidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from "@coin-guard/ui";
+import {
   CalendarDaysIcon,
   Cog,
   LayoutDashboard,
@@ -15,18 +27,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Sidebar as ShadcnSidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-} from "./ui/sidebar";
 
 type Route = {
   icon: LucideIcon;

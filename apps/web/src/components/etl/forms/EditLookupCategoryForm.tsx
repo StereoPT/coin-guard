@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+} from "@coin-guard/ui";
+import { Input } from "@coin-guard/ui";
+import { Switch } from "@coin-guard/ui";
 import type { LookupCategory } from "@/generated/prisma/client";
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";

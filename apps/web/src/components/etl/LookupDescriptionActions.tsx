@@ -1,14 +1,14 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { ApplyLookupDescriptionAlert } from "@/components/etl/dialogs/ApplyLookupDescriptionAlert";
 import { EditLookupDescriptionDialog } from "@/components/etl/dialogs/EditLookupDescriptionDialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@coin-guard/ui";
 import type { LookupDescription } from "@/generated/prisma/client";
 import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
 import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "lucide-react";

@@ -1,33 +1,33 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { FieldGroup } from "@/components/ui/field";
+import { Button } from "@coin-guard/ui";
+import { Calendar } from "@coin-guard/ui";
+import { FieldGroup } from "@coin-guard/ui";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@coin-guard/ui";
+import { Input } from "@coin-guard/ui";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { SearchableSelect } from "@/components/ui/searchable-select";
+} from "@coin-guard/ui";
+import { SearchableSelect } from "@coin-guard/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from "@coin-guard/ui";
+import { Textarea } from "@coin-guard/ui";
 import { FormType } from "@/constants/forms";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import type {
   addTransactionSchemaType,
   editTransactionSchemaType,

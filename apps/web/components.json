@@ -14,8 +14,8 @@
   "rtl": false,
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
+    "utils": "@coin-guard/ui/lib/utils",
+    "ui": "@coin-guard/ui/components",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

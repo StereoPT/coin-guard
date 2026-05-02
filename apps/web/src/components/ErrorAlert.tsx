@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from "@/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@coin-guard/ui";
 import { AlertCircle } from "lucide-react";
 
 export const ErrorAlert = () => {

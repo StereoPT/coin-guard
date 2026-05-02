@@ -2,8 +2,8 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
-import { Button } from "@/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
+import { Button } from "@coin-guard/ui";
+import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
 import { ArrowLeftRightIcon, Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 

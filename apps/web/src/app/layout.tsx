@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@coin-guard/ui";
 import { AppProviders } from "@/providers/AppProviders";
-import { Toaster } from "@/ui/sonner";
+import { Toaster } from "@coin-guard/ui";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 

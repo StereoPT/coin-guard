@@ -4,9 +4,9 @@ import {
   DialogDescription,
   DialogTitle,
   DialogHeader as ShadcnDialogHeader,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+} from "@coin-guard/ui";
+import { Separator } from "@coin-guard/ui";
+import { cn } from "@coin-guard/ui";
 import type { LucideIcon } from "lucide-react";
 
 type DialogHeaderProps = {

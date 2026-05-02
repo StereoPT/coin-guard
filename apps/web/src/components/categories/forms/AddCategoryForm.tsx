@@ -1,12 +1,12 @@
 import { CategoryFormFields } from "@/components/categories/forms/CategoryFormFields";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@coin-guard/ui";
 import { useAddCategory } from "@/hooks/categories/useAddCategory";
 import {
   addCategorySchema,
   type addCategorySchemaType,
 } from "@/schemas/categories";
-import { Button } from "@/ui/button";
-import { Form } from "@/ui/form";
+import { Button } from "@coin-guard/ui";
+import { Form } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";

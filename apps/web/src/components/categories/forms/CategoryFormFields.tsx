@@ -1,14 +1,14 @@
 "use client";
 
-import { FieldGroup } from "@/components/ui/field";
+import { FieldGroup } from "@coin-guard/ui";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@coin-guard/ui";
+import { Input } from "@coin-guard/ui";
 import type {
   addCategorySchemaType,
   editCategorySchemaType,

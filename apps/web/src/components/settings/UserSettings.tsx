@@ -1,7 +1,7 @@
 "use client";
 
 import { useExportDatabase } from "@/hooks/settings/useExportDatabase";
-import { Button } from "@/ui/button";
+import { Button } from "@coin-guard/ui";
 import { DatabaseBackup, Loader2 } from "lucide-react";
 
 export const UserSettings = () => {

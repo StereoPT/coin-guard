@@ -1,7 +1,7 @@
 "use client";
 
 import { DialogHeader } from "@/components/DialogHeader";
-import { Dialog, DialogContent } from "@/ui/dialog";
+import { Dialog, DialogContent } from "@coin-guard/ui";
 
 import { PlusCircle } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";

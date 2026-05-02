@@ -6,7 +6,7 @@ import { ROUTES } from "@/constants/routes";
 import { dateBetweenFilterFn } from "@/lib/dataTable";
 import { formatCurrency } from "@/lib/formatter";
 import type { TransactionWithCategory } from "@/types/transactions";
-import { Badge } from "@/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";

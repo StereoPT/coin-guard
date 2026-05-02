@@ -3,17 +3,17 @@ import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCateg
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
 import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@coin-guard/ui";
 import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
 import type { CategoryWithLookups } from "@/types/categories";
-import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@coin-guard/ui";
 import {
   Edit,
   Maximize,

@@ -6,7 +6,7 @@ import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { AmountBadge } from "@/components/AmountBadge";
 import { TransactionAreaChart } from "@/components/charts/TransactionAreaChart";
 import { TransactionTable } from "@/components/tables/TransactionTable";
-import { Badge } from "@/ui/badge";
+import { Badge } from "@coin-guard/ui";
 import {
   Card,
   CardAction,
@@ -14,7 +14,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/ui/card";
+} from "@coin-guard/ui";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
 

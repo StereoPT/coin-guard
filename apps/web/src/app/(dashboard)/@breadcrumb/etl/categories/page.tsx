@@ -5,7 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/ui/breadcrumb";
+} from "@coin-guard/ui";
 
 const BreadcrumbSlot = async () => {
   return (

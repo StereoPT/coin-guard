@@ -4,16 +4,16 @@ import { AddTransactionDialog } from "@/components/transactions/dialogs/AddTrans
 import {
   ButtonGroup,
   ButtonGroupSeparator,
-} from "@/components/ui/button-group";
+} from "@coin-guard/ui";
 import { ROUTES } from "@/constants/routes";
-import { Button } from "@/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
+} from "@coin-guard/ui";
 import { ChevronDown, FileDown, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";

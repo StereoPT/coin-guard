@@ -2,8 +2,8 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { AddLookupDescriptionForm } from "@/components/etl/forms/AddLookupDescriptionForm";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@coin-guard/ui";
+import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
 import { PlusCircle, TextInitialIcon } from "lucide-react";
 import { useState, type Dispatch, type SetStateAction } from "react";
 

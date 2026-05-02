@@ -8,13 +8,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/ui/card";
+} from "@coin-guard/ui";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/ui/chart";
+} from "@coin-guard/ui";
 import { format } from "date-fns";
 import { useMemo } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";

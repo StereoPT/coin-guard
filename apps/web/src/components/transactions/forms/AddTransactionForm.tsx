@@ -1,13 +1,13 @@
 import { TransactionFormFields } from "@/components/transactions/forms/TransactionFormFields";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@coin-guard/ui";
 import { FormType } from "@/constants/forms";
 import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
 import {
   addTransactionSchema,
   type addTransactionSchemaType,
 } from "@/schemas/transactions";
-import { Button } from "@/ui/button";
-import { Form } from "@/ui/form";
+import { Button } from "@coin-guard/ui";
+import { Form } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";

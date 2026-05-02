@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/ui/breadcrumb";
+} from "@coin-guard/ui";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ id: string }>;

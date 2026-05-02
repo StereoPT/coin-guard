@@ -2,8 +2,8 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { AddLookupCategoryForm } from "@/components/etl/forms/AddLookupCategoryForm";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@coin-guard/ui";
+import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
 import { PlusCircle, TagsIcon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 

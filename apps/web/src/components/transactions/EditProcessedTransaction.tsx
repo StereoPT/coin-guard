@@ -1,7 +1,7 @@
 "use client";
 
 import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
-import { SearchableSelect } from "@/components/ui/searchable-select";
+import { SearchableSelect } from "@coin-guard/ui";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import { useSetAtom } from "jotai";

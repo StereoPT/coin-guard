@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/Sidebar";
-import { Separator } from "@/ui/separator";
-import { SidebarTrigger } from "@/ui/sidebar";
+import { Separator } from "@coin-guard/ui";
+import { SidebarTrigger } from "@coin-guard/ui";
 import type { ReactNode } from "react";
 
 type DashboardLayoutProps = {

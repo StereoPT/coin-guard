@@ -1,12 +1,12 @@
 "use client";
 
 import { EditableDataTable } from "@/components/editableDataTable/EditableDataTable";
-import { Button } from "@/components/ui/button";
+import { Button } from "@coin-guard/ui";
 import {
   Dropzone,
   DropzoneContent,
   DropzoneEmptyState,
-} from "@/components/ui/shadcn-io/dropzone";
+} from "@coin-guard/ui";
 import { editableTransactionColumns } from "@/constants/columns/editableTransactionColumns";
 import { ROUTES } from "@/constants/routes";
 import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";

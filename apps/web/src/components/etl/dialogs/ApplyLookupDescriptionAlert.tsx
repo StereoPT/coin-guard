@@ -9,8 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Spinner } from "@/components/ui/spinner";
+} from "@coin-guard/ui";
+import { Spinner } from "@coin-guard/ui";
 import type { LookupDescription } from "@/generated/prisma/client";
 import { useApplyLookupDescription } from "@/hooks/etl/descriptions/useApplyLookupDescription";
 import { useCallback, type Dispatch, type SetStateAction } from "react";

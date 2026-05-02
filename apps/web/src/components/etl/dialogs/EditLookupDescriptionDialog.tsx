@@ -2,7 +2,7 @@
 
 import { DialogHeader } from "@/components/DialogHeader";
 import { EditLookupDescriptionForm } from "@/components/etl/forms/EditLookupDescriptionForm";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@coin-guard/ui";
 import type { LookupDescription } from "@/generated/prisma/client";
 import { TextInitialIcon } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";

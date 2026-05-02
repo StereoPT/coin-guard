@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/ui/breadcrumb";
+} from "@coin-guard/ui";
 import type { ReactElement } from "react";
 import React from "react";
 

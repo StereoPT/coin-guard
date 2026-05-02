@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/ui/button";
+import { Button } from "@coin-guard/ui";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 

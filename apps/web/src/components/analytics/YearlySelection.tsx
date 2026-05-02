@@ -1,14 +1,14 @@
 "use client";
 
 import { getStartEndFromYear } from "@/lib/date";
-import { Card, CardContent } from "@/ui/card";
+import { Card, CardContent } from "@coin-guard/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/ui/select";
+} from "@coin-guard/ui";
 import { format } from "date-fns";
 import { useMemo, type Dispatch, type SetStateAction } from "react";
 

@@ -1,14 +1,14 @@
 import { CategoryFormFields } from "@/components/categories/forms/CategoryFormFields";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@coin-guard/ui";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import {
   editCategorySchema,
   type editCategorySchemaType,
 } from "@/schemas/categories";
-import { Button } from "@/ui/button";
-import { Form } from "@/ui/form";
+import { Button } from "@coin-guard/ui";
+import { Form } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
