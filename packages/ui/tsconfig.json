@@ -1,7 +1,10 @@
 {
   "extends": "@coin-guard/ts-config/nextjs.json",
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@coin-guard/ui/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]

@@ -25,6 +25,12 @@
     },
     "typecheck": {
       "dependsOn": ["^typecheck"]
+    },
+    "shadcn": {
+      "cache": false
+    },
+    "shadcn:add": {
+      "cache": false
     }
   }
 }
