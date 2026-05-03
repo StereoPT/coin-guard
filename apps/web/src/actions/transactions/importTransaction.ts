@@ -1,7 +1,7 @@
 "use server";
 
 import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@coin-guard/db/server";
 
 export const ImportTransaction = async (
   transactions: ProcessedTransaction[],

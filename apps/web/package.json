@@ -13,10 +13,9 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@coin-guard/db": "workspace:*",
     "@coin-guard/ui": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
-    "@prisma/adapter-better-sqlite3": "^7.4.0",
-    "@prisma/client": "^7.4.0",
     "@stereopt/data-table": "^0.2.5",
     "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-query": "^5.90.21",
@@ -59,7 +58,6 @@
     "@types/node": "^25",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "prisma": "^7.4.0",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   }

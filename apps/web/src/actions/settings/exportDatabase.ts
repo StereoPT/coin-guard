@@ -1,37 +1,10 @@
 "use server";
 
-import { config } from "@/constants";
-import { execSync } from "node:child_process";
-import crypto from "node:crypto";
-import fs from "node:fs";
+import { exportDatabase } from "@coin-guard/db/server";
 
 export const ExportDatabase = async () => {
   try {
-    const timestamp = Date.now();
-    const dbPath = config.databasePath;
-
-    const filePath = `/tmp/backup_${timestamp}.sql`;
-    execSync(`sqlite3 "${dbPath}" .dump > "${filePath}"`);
-    const filename = `database_backup_${timestamp}.sql`;
-
-    const downloadToken = crypto.randomBytes(32).toString("hex");
-    const tokenPath = `/tmp/token_${downloadToken}.json`;
-
-    fs.writeFileSync(
-      tokenPath,
-      JSON.stringify({
-        filePath,
-        filename,
-        contentType: "application/sql",
-        timestamp: Date.now(),
-      }),
-    );
-
-    return {
-      success: true,
-      downloadToken,
-      filename,
-    };
+    return await exportDatabase();
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Export failed:", error);

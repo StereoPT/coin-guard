@@ -1,0 +1,3 @@
+# Prisma
+/src/generated/prisma
+/prisma/dev.db

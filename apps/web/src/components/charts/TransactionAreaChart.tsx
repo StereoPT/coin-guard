@@ -1,5 +1,5 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { Transaction } from "@/generated/prisma/client";
+import type { Transaction } from "@coin-guard/db";
 import { generateMonthRange } from "@/lib/date";
 import {
   Card,

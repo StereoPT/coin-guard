@@ -1,5 +1,5 @@
 import { AmountBadge } from "@/components/AmountBadge";
-import type { Transaction } from "@/generated/prisma/client";
+import type { Transaction } from "@coin-guard/db";
 import {
   Table,
   TableBody,

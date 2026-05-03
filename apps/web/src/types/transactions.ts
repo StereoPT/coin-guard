@@ -1,5 +1,5 @@
-import type { Prisma } from "@/generated/prisma/client";
-import type { TransactionType } from "@/generated/prisma/enums";
+import type { Prisma } from "@coin-guard/db";
+import type { TransactionType } from "@coin-guard/db";
 
 export type TransactionWithCategory = Prisma.TransactionGetPayload<{
   include: { category: true };

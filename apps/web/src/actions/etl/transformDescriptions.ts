@@ -1,8 +1,8 @@
 "use server";
 
 import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
-import { LoggingType, LookupField } from "@/generated/prisma/enums";
-import { prisma } from "@/lib/prisma";
+import { LoggingType, LookupField } from "@coin-guard/db";
+import { prisma } from "@coin-guard/db/server";
 
 export const TransformDescriptions = async (
   processedTransactions: ProcessedTransaction[],

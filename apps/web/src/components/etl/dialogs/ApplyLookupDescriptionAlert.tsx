@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
 } from "@coin-guard/ui";
 import { Spinner } from "@coin-guard/ui";
-import type { LookupDescription } from "@/generated/prisma/client";
+import type { LookupDescription } from "@coin-guard/db";
 import { useApplyLookupDescription } from "@/hooks/etl/descriptions/useApplyLookupDescription";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
 

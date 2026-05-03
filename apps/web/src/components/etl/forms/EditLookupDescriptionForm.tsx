@@ -18,7 +18,7 @@ import {
 import { Input } from "@coin-guard/ui";
 import { Spinner } from "@coin-guard/ui";
 import { Switch } from "@coin-guard/ui";
-import type { LookupDescription } from "@/generated/prisma/client";
+import type { LookupDescription } from "@coin-guard/db";
 import { useEditLookupDescription } from "@/hooks/etl/descriptions/useEditLookupDescription";
 import {
   editLookupDescriptionSchema,

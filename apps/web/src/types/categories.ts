@@ -1,4 +1,4 @@
-import type { Prisma } from "@/generated/prisma/client";
+import type { Prisma } from "@coin-guard/db";
 
 export type CategoryWithTransactions = Prisma.CategoryGetPayload<{
   include: { transactions: true };

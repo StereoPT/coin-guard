@@ -1,6 +1,6 @@
 import { AmountBadge } from "@/components/AmountBadge";
 import { ROUTES } from "@/constants/routes";
-import type { Transaction } from "@/generated/prisma/client";
+import type { Transaction } from "@coin-guard/db";
 import { cn } from "@coin-guard/ui";
 import { Card } from "@coin-guard/ui";
 import type { ClassValue } from "clsx";

@@ -1,4 +1,4 @@
-import type { TransactionType } from "@/generated/prisma/enums";
+import type { TransactionType } from "@coin-guard/db";
 import { formatCurrency } from "@/lib/formatter";
 import { cn } from "@coin-guard/ui";
 import { Badge } from "@coin-guard/ui";

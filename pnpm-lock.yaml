@@ -20,18 +20,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@coin-guard/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@coin-guard/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.74.0(react@19.2.5))
-      '@prisma/adapter-better-sqlite3':
-        specifier: ^7.4.0
-        version: 7.8.0
-      '@prisma/client':
-        specifier: ^7.4.0
-        version: 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.9.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(typescript@5.9.3))(typescript@5.9.3)
       '@stereopt/data-table':
         specifier: ^0.2.5
         version: 0.2.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -153,9 +150,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
-      prisma:
-        specifier: ^7.4.0
-        version: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.9.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(typescript@5.9.3)
       tailwindcss:
         specifier: ^4.2.1
         version: 4.2.4
@@ -164,6 +158,31 @@ importers:
         version: 5.9.3
 
   packages/biome-config: {}
+
+  packages/db:
+    dependencies:
+      '@prisma/adapter-better-sqlite3':
+        specifier: ^7.4.0
+        version: 7.8.0
+      '@prisma/client':
+        specifier: ^7.4.0
+        version: 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.9.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(typescript@5.9.3))(typescript@5.9.3)
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
+    devDependencies:
+      '@coin-guard/ts-config':
+        specifier: workspace:*
+        version: link:../ts-config
+      '@types/node':
+        specifier: ^25
+        version: 25.6.0
+      prisma:
+        specifier: ^7.4.0
+        version: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.9.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/ts-config: {}
 

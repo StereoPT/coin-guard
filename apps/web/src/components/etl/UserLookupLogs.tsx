@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@coin-guard/ui";
-import { LoggingType } from "@/generated/prisma/enums";
+import { LoggingType } from "@coin-guard/db";
 import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
 import { cn } from "@coin-guard/ui";
 import { format } from "date-fns";

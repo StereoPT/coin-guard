@@ -1,6 +1,6 @@
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { DeleteDialog } from "@/components/DeleteDialog";
-import type { Category } from "@/generated/prisma/client";
+import type { Category } from "@coin-guard/db";
 import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 
 import { Button } from "@coin-guard/ui";

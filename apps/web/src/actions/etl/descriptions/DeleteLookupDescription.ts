@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@coin-guard/db/server";
 
 export const DeleteLookupDescription = async (lookupDescriptionId: string) => {
   const result = await prisma.lookupDescription.delete({

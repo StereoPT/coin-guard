@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@coin-guard/db/server";
 
 export const DeleteTransaction = async (transactionId: string) => {
   const result = await prisma.transaction.delete({

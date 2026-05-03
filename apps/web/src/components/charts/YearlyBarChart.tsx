@@ -1,4 +1,4 @@
-import type { Transaction } from "@/generated/prisma/client";
+import type { Transaction } from "@coin-guard/db";
 import { getMonthsOfYear } from "@/lib/date";
 import {
   Card,

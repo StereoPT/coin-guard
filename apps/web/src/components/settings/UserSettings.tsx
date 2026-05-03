@@ -10,7 +10,7 @@ export const UserSettings = () => {
   const handleExport = async () => {
     const result = await mutateAsync();
 
-    if (result.success && result.filename) {
+    if (result.success && "downloadToken" in result && "filename" in result) {
       const link = document.createElement("a");
 
       link.href = `/api/export-database?token=${result.downloadToken}`;
