@@ -171,6 +171,9 @@ importers:
         specifier: ^17.4.2
         version: 17.4.2
     devDependencies:
+      '@coin-guard/biome-config':
+        specifier: workspace:^
+        version: link:../biome-config
       '@coin-guard/ts-config':
         specifier: workspace:*
         version: link:../ts-config
