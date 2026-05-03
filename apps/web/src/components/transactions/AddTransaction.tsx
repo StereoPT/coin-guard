@@ -1,0 +1,51 @@
+"use client";
+
+import { AddTransactionDialog } from "@/components/transactions/dialogs/AddTransactionDialog";
+import { ButtonGroup, ButtonGroupSeparator } from "@coin-guard/ui";
+import { ROUTES } from "@/constants/routes";
+import { Button } from "@coin-guard/ui";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@coin-guard/ui";
+import { ChevronDown, FileDown, PlusCircle } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+
+export const AddTransaction = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {open && <AddTransactionDialog open={open} setOpen={setOpen} />}
+      <div>
+        <ButtonGroup>
+          <Button asChild>
+            <Link href={ROUTES.importTransactions}>
+              <FileDown />
+              Import Transactions
+            </Link>
+          </Button>
+          <ButtonGroupSeparator />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="icon">
+                <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem onClick={() => setOpen(true)}>
+                <PlusCircle />
+                Add Transaction
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </ButtonGroup>
+      </div>
+    </>
+  );
+};

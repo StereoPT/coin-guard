@@ -1,0 +1,36 @@
+import { GetCategory } from "@/actions/categories/getCategory";
+import { ROUTES } from "@/constants/routes";
+import {
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@coin-guard/ui";
+
+type BreadcrumbSlotProps = {
+  params: Promise<{ id: string }>;
+};
+
+const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
+  const { id: categoryId } = await params;
+  const category = await GetCategory(categoryId);
+
+  return (
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href={ROUTES.categories}>Categories</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage className="capitalize">{category?.name}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  );
+};
+
+export default BreadcrumbSlot;

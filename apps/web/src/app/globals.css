@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@stereopt/data-table/tailwind-source.css';
+@import '@coin-guard/ui/styles.css';
+@import '@coin-guard/ui/tailwind-source.css';
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+#nprogress {
+  position: relative;
+  z-index: 9999999;
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@coin-guard/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./src/server.ts",
+      "default": "./dist/server.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm db:generate && tsc",
+    "db:generate": "prisma generate --config prisma.config.ts",
+    "db:migrate": "prisma migrate dev --config prisma.config.ts",
+    "format": "biome format .",
+    "format:fix": "biome format . --write",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@coin-guard/biome-config": "workspace:^",
+    "@coin-guard/ts-config": "workspace:*",
+    "@types/node": "^25",
+    "prisma": "^7.4.0",
+    "typescript": "^5.9.3"
+  }
+}

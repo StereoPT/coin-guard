@@ -1,0 +1,12 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Next.js artifacts
+.next/
+out/
+
+# vercel
+.vercel
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts

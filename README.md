@@ -119,16 +119,20 @@ Make sure you have the following installed on your system:
    ```sh
    npm install
    ```
-4. Set up your database with Prisma
+4. Create the database environment file
+  ```sh
+  cp packages/db/.env.example packages/db/.env
+  ```
+5. Set up your database with Prisma
    ```sh
-   npx prisma migrate dev
-   npx prisma generate
+  pnpm db:migrate
+  pnpm db:generate
    ```
-5. Start the development server
+6. Start the development server
    ```sh
    npm run dev
    ```
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
+7. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

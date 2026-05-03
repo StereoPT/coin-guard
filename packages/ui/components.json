@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "radix-luma",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "olive",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@coin-guard/ui/components",
+    "utils": "@coin-guard/ui/lib/utils",
+    "hooks": "@coin-guard/ui/hooks",
+    "lib": "@coin-guard/ui/lib",
+    "ui": "@coin-guard/ui/components"
+  }
+}
