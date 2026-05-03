@@ -2,11 +2,7 @@
 
 import { EditableDataTable } from "@/components/editableDataTable/EditableDataTable";
 import { Button } from "@coin-guard/ui";
-import {
-  Dropzone,
-  DropzoneContent,
-  DropzoneEmptyState,
-} from "@coin-guard/ui";
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@coin-guard/ui";
 import { editableTransactionColumns } from "@/constants/columns/editableTransactionColumns";
 import { ROUTES } from "@/constants/routes";
 import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";

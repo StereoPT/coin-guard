@@ -2,12 +2,10 @@
 
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
-import { Button } from "@coin-guard/ui";
 import {
+  Button,
   ButtonGroup,
   ButtonGroupSeparator,
-} from "@coin-guard/ui";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,

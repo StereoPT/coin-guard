@@ -32,6 +32,9 @@
     "typecheck": {
       "dependsOn": ["^typecheck"]
     },
+    "@coin-guard/db#typecheck": {
+      "dependsOn": ["db:generate", "^typecheck"]
+    },
     "db:generate": {
       "cache": false
     },

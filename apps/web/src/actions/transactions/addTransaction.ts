@@ -1,10 +1,10 @@
 "use server";
 
-import { prisma } from "@coin-guard/db/server";
 import {
   addTransactionSchema,
   type addTransactionSchemaType,
 } from "@/schemas/transactions";
+import { prisma } from "@coin-guard/db/server";
 
 export const AddTransaction = async (formValues: addTransactionSchemaType) => {
   const { success, data } =
