@@ -1,12 +1,11 @@
 "use client";
 
-import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
+import { DashboardCategoryChart } from "@/components/dashboard/DashboardCategoryChart";
 import { DashboardLastTransactions } from "@/components/dashboard/DashboardLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
 import { CountType } from "@/types/dashboard";
-import { endOfMonth, format, subMonths } from "date-fns";
 
 export const Dashboard = () => {
   const { data: analytics } = useDashboardAnalytics();
@@ -37,18 +36,14 @@ export const Dashboard = () => {
           title="Transactions"
         />
       </div>
-      <div className="grid gap-4 grid-cols-5">
-        <div className="col-span-5 xl:col-span-3">
+      <div className="grid gap-4 grid-cols-5 items-stretch">
+        <div className="col-span-5 xl:col-span-3 h-full">
           <DashboardLastTransactions
             transactions={analytics.lastFiveTransactions}
           />
         </div>
-        <div className="col-span-5 xl:col-span-2">
-          <CategoryPieChart
-            categoryStats={analytics.categoryStats}
-            description={`Last Update - ${format(endOfMonth(subMonths(new Date(), 1)), "PPP")}`}
-            title="Category Summary"
-          />
+        <div className="col-span-5 xl:col-span-2 h-full">
+          <DashboardCategoryChart categoryStats={analytics.categoryStats} />
         </div>
       </div>
     </div>

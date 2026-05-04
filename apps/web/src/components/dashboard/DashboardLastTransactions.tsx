@@ -21,7 +21,7 @@ export const DashboardLastTransactions = ({
   transactions,
 }: DashboardLastTransactionsProps) => {
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
         <div>
           <CardTitle>Recent Transactions</CardTitle>
@@ -34,7 +34,7 @@ export const DashboardLastTransactions = ({
           </Link>
         </Button>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="flex-1 space-y-4">
         {transactions.map((transaction) => {
           return (
             <Link
