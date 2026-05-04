@@ -1,0 +1,67 @@
+import { AmountBadge } from "@/components/AmountBadge";
+import { ROUTES } from "@/constants/routes";
+import type { Transaction } from "@coin-guard/db";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@coin-guard/ui";
+import { format } from "date-fns";
+import { Eye } from "lucide-react";
+import Link from "next/link";
+
+type DashboardLastTransactionsProps = {
+  transactions: Transaction[];
+};
+
+export const DashboardLastTransactions = ({
+  transactions,
+}: DashboardLastTransactionsProps) => {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0">
+        <div>
+          <CardTitle>Recent Transactions</CardTitle>
+          <CardDescription>Latest five transactions</CardDescription>
+        </div>
+        <Button asChild size="sm" variant="outline">
+          <Link href={ROUTES.transactions}>
+            <Eye />
+            View All
+          </Link>
+        </Button>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {transactions.map((transaction) => {
+          return (
+            <Link
+              className="flex p-3 rounded-lg border gap-2"
+              href={ROUTES.transaction(transaction.id)}
+              key={transaction.id}
+            >
+              <div className="flex flex-1 items-center flex-wrap justify-between gap-1">
+                <div className="flex items-center space-x-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium truncate">
+                      {transaction.description}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {format(transaction.date, "PPP")}
+                    </p>
+                  </div>
+                </div>
+                <AmountBadge
+                  amount={transaction.amount}
+                  type={transaction.type}
+                />
+              </div>
+            </Link>
+          );
+        })}
+      </CardContent>
+    </Card>
+  );
+};
