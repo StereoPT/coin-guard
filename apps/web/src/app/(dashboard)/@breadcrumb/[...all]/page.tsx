@@ -1,4 +1,5 @@
 import { ROUTES } from "@/constants/routes";
+import { buildBreadcrumbTrail } from "@/lib/breadcrumbs";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,26 +18,33 @@ type BreadcrumbSlotProps = {
 const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
   const { all } = await params;
 
+  const trail = buildBreadcrumbTrail(all);
+
   const breadcrumbItems: ReactElement[] = [];
   let breadcrumbPage: ReactElement = <></>;
 
-  for (let i = 0; i < all.length; i++) {
-    const route = all[i];
-    const href = `/${all.at(0)}/${route}`;
+  for (let i = 0; i < trail.length; i++) {
+    const item = trail[i];
+    if (!item) continue;
 
-    if (i === all.length - 1) {
+    const { label, href } = item;
+
+    if (i === trail.length - 1) {
       breadcrumbPage = (
         <BreadcrumbItem>
-          <BreadcrumbPage className="capitalize">{route}</BreadcrumbPage>
+          <BreadcrumbPage>{label}</BreadcrumbPage>
         </BreadcrumbItem>
       );
     } else {
       breadcrumbItems.push(
-        <React.Fragment key={href}>
+        <React.Fragment key={`${href ?? label}-${i}`}>
+          <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink className="capitalize" href={href}>
-              {route}
-            </BreadcrumbLink>
+            {href ? (
+              <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
+            ) : (
+              label
+            )}
           </BreadcrumbItem>
         </React.Fragment>,
       );
@@ -50,7 +58,7 @@ const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
           <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
         </BreadcrumbItem>
         {breadcrumbItems}
-        <BreadcrumbSeparator />
+        {trail.length > 0 && <BreadcrumbSeparator />}
         {breadcrumbPage}
       </BreadcrumbList>
     </Breadcrumb>

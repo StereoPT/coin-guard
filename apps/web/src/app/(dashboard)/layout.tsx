@@ -1,6 +1,5 @@
 import { Sidebar } from "@/components/Sidebar";
-import { Separator } from "@coin-guard/ui";
-import { SidebarTrigger } from "@coin-guard/ui";
+import { Separator, SidebarTrigger } from "@coin-guard/ui";
 import type { ReactNode } from "react";
 
 type DashboardLayoutProps = {
@@ -13,7 +12,7 @@ const DashboardLayout = ({ children, breadcrumb }: DashboardLayoutProps) => {
     <div className="flex h-screen w-full">
       <Sidebar />
       <div className="flex flex-col flex-1 min-h-screen">
-        <header className="flex items-center justify-between pl-2 pr-6 py-4 h-[50px]">
+        <header className="flex items-center justify-between pl-2 pr-6 py-4 h-12.5">
           <div className="flex items-center gap-8 w-full">
             <SidebarTrigger />
             {breadcrumb}
