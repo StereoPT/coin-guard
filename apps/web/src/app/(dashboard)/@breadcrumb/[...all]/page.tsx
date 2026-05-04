@@ -1,14 +1,5 @@
-import { ROUTES } from "@/constants/routes";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@coin-guard/ui";
-import type { ReactElement } from "react";
-import React from "react";
+import { BreadcrumbShell } from "@/components/BreadcrumbShell";
+import { buildBreadcrumbTrail } from "@/lib/breadcrumbs";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ all: string[] }>;
@@ -17,44 +8,12 @@ type BreadcrumbSlotProps = {
 const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
   const { all } = await params;
 
-  const breadcrumbItems: ReactElement[] = [];
-  let breadcrumbPage: ReactElement = <></>;
+  const trail = buildBreadcrumbTrail(all);
+  const currentPage = trail.pop();
 
-  for (let i = 0; i < all.length; i++) {
-    const route = all[i];
-    const href = `/${all.at(0)}/${route}`;
+  if (!currentPage) return null;
 
-    if (i === all.length - 1) {
-      breadcrumbPage = (
-        <BreadcrumbItem>
-          <BreadcrumbPage className="capitalize">{route}</BreadcrumbPage>
-        </BreadcrumbItem>
-      );
-    } else {
-      breadcrumbItems.push(
-        <React.Fragment key={href}>
-          <BreadcrumbItem>
-            <BreadcrumbLink className="capitalize" href={href}>
-              {route}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </React.Fragment>,
-      );
-    }
-  }
-
-  return (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
-        </BreadcrumbItem>
-        {breadcrumbItems}
-        <BreadcrumbSeparator />
-        {breadcrumbPage}
-      </BreadcrumbList>
-    </Breadcrumb>
-  );
+  return <BreadcrumbShell currentPage={currentPage.label} trail={trail} />;
 };
 
 export default BreadcrumbSlot;

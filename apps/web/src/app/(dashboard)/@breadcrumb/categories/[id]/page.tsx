@@ -1,12 +1,7 @@
 import { GetCategory } from "@/actions/categories/getCategory";
+import { BreadcrumbShell } from "@/components/BreadcrumbShell";
 import { ROUTES } from "@/constants/routes";
-import {
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@coin-guard/ui";
+import { notFound } from "next/navigation";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ id: string }>;
@@ -16,20 +11,13 @@ const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
   const { id: categoryId } = await params;
   const category = await GetCategory(categoryId);
 
+  if (!category) notFound();
+
   return (
-    <BreadcrumbList>
-      <BreadcrumbItem>
-        <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbLink href={ROUTES.categories}>Categories</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbPage className="capitalize">{category?.name}</BreadcrumbPage>
-      </BreadcrumbItem>
-    </BreadcrumbList>
+    <BreadcrumbShell
+      currentPage={category.name}
+      trail={[{ label: "Categories", href: ROUTES.categories }]}
+    />
   );
 };
 
