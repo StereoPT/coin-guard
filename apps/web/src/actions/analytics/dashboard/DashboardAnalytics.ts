@@ -1,8 +1,8 @@
 "use server";
 
+import { GetDashboardStats } from "@/actions/analytics/dashboard/GetDashboardStats";
 import { GetCategoriesForDate } from "@/actions/analytics/getCategoriesForDate";
 import { GetLastTransactions } from "@/actions/analytics/getLastTransactions";
-import { GetStats } from "@/actions/analytics/getStats";
 import { endOfMonth, getMonth, startOfMonth, subMonths } from "date-fns";
 
 export const DashboardAnalytics = async () => {
@@ -12,9 +12,9 @@ export const DashboardAnalytics = async () => {
     lte: endOfMonth(new Date(2026, lastMonth, 1)),
   };
 
-  const stats = await GetStats();
-  const categoryStats = await GetCategoriesForDate(dateFilter);
+  const stats = await GetDashboardStats();
   const lastFiveTransactions = await GetLastTransactions(5);
+  const categoryStats = await GetCategoriesForDate(dateFilter);
 
   return { stats, categoryStats, lastFiveTransactions };
 };

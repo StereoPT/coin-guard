@@ -1,4 +1,4 @@
-import { DashboardAnalytics } from "@/actions/analytics/dashboardAnalytics";
+import { DashboardAnalytics } from "@/actions/analytics/dashboard/DashboardAnalytics";
 import { MonthlyAnalytics } from "@/actions/analytics/monthlyAnalytics";
 import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
 import { KEYS } from "@/constants/queryKeys";

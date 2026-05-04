@@ -1,4 +1,4 @@
-import { UserDashboard } from "@/components/dashboard/UserDashboard";
+import { Dashboard } from "@/components/dashboard/Dashboard";
 import { PageHeader } from "@/components/PageHeader";
 import { config } from "@/constants";
 import { getQueryClient } from "@/lib/getQueryClient";
@@ -17,7 +17,7 @@ const HomePage = async () => {
           title={`Welcome, ${config.username}`}
         />
         <div className="h-full py-6">
-          <UserDashboard />
+          <Dashboard />
         </div>
       </div>
     </HydrationBoundary>
