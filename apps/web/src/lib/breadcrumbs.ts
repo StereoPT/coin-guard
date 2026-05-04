@@ -1,4 +1,4 @@
-type BreadcrumbTrailItem = {
+export type BreadcrumbTrailItem = {
   label: string;
   href?: string;
 };
@@ -11,7 +11,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
 
 const CONTAINER_ROUTES = new Set(["etl", "analytics"]);
 
-export const formatBreadcrumbLabel = (segment: string) => {
+const formatBreadcrumbLabel = (segment: string) => {
   if (BREADCRUMB_LABELS[segment]) {
     return BREADCRUMB_LABELS[segment];
   }
