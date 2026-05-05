@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { AddTransaction } from "@/components/transactions/AddTransaction";
-import { UserTransactions } from "@/components/transactions/UserTransactions";
+import { Transactions } from "@/components/transactions/Transactions";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getTransactionsOptions } from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -21,7 +21,7 @@ const TransactionsPage = async () => {
         </div>
 
         <div className="h-full py-6">
-          <UserTransactions />
+          <Transactions />
         </div>
       </div>
     </HydrationBoundary>

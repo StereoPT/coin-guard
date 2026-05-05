@@ -1,5 +1,5 @@
 import { GetTransaction } from "@/actions/transactions/getTransaction";
-import { GetTransactions } from "@/actions/transactions/getTransactions";
+import { GetTransactions } from "@/actions/transactions/GetTransactions";
 import { KEYS } from "@/constants/queryKeys";
 import { queryOptions } from "@tanstack/react-query";
 

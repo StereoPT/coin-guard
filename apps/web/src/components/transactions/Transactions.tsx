@@ -8,7 +8,7 @@ import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
 import { DataTable } from "@stereopt/data-table";
 import { ArrowLeftRight } from "lucide-react";
 
-export const UserTransactions = () => {
+export const Transactions = () => {
   const { data: transactions } = useGetTransactions();
 
   if (!transactions) {
@@ -27,25 +27,23 @@ export const UserTransactions = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <DataTable
-        columns={transactionColumns}
-        config={{
-          search: {
-            filterFields: ["description"],
-            placeholder: "Search transactions...",
-          },
-          filters: [
-            { column: "date", type: "date" },
-            { column: "type", type: "select" },
-          ],
-          columnVisibility: {
-            type: false,
-            date: false,
-          },
-        }}
-        data={transactions}
-      />
-    </div>
+    <DataTable
+      columns={transactionColumns}
+      config={{
+        search: {
+          filterFields: ["description"],
+          placeholder: "Search transactions...",
+        },
+        filters: [
+          { column: "date", type: "date" },
+          { column: "type", type: "select" },
+        ],
+        columnVisibility: {
+          type: false,
+          date: false,
+        },
+      }}
+      data={transactions}
+    />
   );
 };

@@ -1,13 +1,18 @@
 "use client";
 
 import { EditableDataTable } from "@/components/editableDataTable/EditableDataTable";
-import { Button } from "@coin-guard/ui";
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@coin-guard/ui";
 import { editableTransactionColumns } from "@/constants/columns/editableTransactionColumns";
 import { ROUTES } from "@/constants/routes";
 import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";
 import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
+import {
+  Button,
+  Dropzone,
+  DropzoneContent,
+  DropzoneEmptyState,
+  Spinner,
+} from "@coin-guard/ui";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -54,17 +59,21 @@ export const ImportTransactions = () => {
         <DropzoneEmptyState />
         <DropzoneContent />
       </Dropzone>
-      <div>
-        <EditableDataTable
-          columns={editableTransactionColumns}
-          data={transactions ?? []}
-        />
-      </div>
+
+      <EditableDataTable
+        columns={editableTransactionColumns}
+        data={transactions ?? []}
+      />
+
       <div className="flex justify-end gap-2">
         <Button asChild variant="outline">
           <Link href={ROUTES.transactions}>Back</Link>
         </Button>
-        <Button disabled={isPending || !transactions} onClick={handleImport}>
+        <Button
+          disabled={isPending || transactions.length <= 0}
+          onClick={handleImport}
+        >
+          {isPending && <Spinner />}
           Import
         </Button>
       </div>

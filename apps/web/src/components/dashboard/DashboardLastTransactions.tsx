@@ -4,6 +4,7 @@ import type { Transaction } from "@coin-guard/db";
 import {
   Button,
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -22,17 +23,17 @@ export const DashboardLastTransactions = ({
 }: DashboardLastTransactionsProps) => {
   return (
     <Card className="h-full flex flex-col">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <div>
-          <CardTitle>Recent Transactions</CardTitle>
-          <CardDescription>Latest five transactions</CardDescription>
-        </div>
-        <Button asChild size="sm" variant="outline">
-          <Link href={ROUTES.transactions}>
-            <Eye />
-            View All
-          </Link>
-        </Button>
+      <CardHeader>
+        <CardTitle>Recent Transactions</CardTitle>
+        <CardDescription>Latest five transactions</CardDescription>
+        <CardAction>
+          <Button asChild size="sm" variant="outline">
+            <Link href={ROUTES.transactions}>
+              <Eye />
+              View All
+            </Link>
+          </Button>
+        </CardAction>
       </CardHeader>
       <CardContent className="flex-1 space-y-4">
         {transactions.map((transaction) => {
