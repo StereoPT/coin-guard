@@ -4,7 +4,6 @@ import { AmountBadge } from "@/components/AmountBadge";
 import { TransactionActions } from "@/components/transactions/TransactionActions";
 import { ROUTES } from "@/constants/routes";
 import { dateBetweenFilterFn } from "@/lib/dataTable";
-import { formatCurrency } from "@/lib/formatter";
 import type { TransactionWithCategory } from "@/types/transactions";
 import { Badge } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
@@ -19,7 +18,7 @@ export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
   {
     accessorKey: "description",
     header: "Description",
-    size: 350,
+    size: 420,
     cell: ({ row }) => {
       const { id, description, date } = row.original;
 
@@ -37,6 +36,16 @@ export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
   },
   { accessorKey: "type" },
   {
+    accessorKey: "category.name",
+    header: "Category",
+    size: 110,
+    cell: ({ row }) => {
+      const { category } = row.original;
+
+      return category && <Badge variant="outline">{category.name}</Badge>;
+    },
+  },
+  {
     accessorKey: "amount",
     header: "Amount",
     size: 90,
@@ -44,26 +53,6 @@ export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
       const { type, amount } = row.original;
 
       return <AmountBadge amount={amount} type={type} />;
-    },
-  },
-  {
-    accessorKey: "balance",
-    header: "Balance",
-    size: 90,
-    cell: ({ row }) => {
-      const { balance } = row.original;
-
-      return formatCurrency(balance);
-    },
-  },
-  {
-    accessorKey: "category.name",
-    header: "Category",
-    size: 90,
-    cell: ({ row }) => {
-      const { category } = row.original;
-
-      return category && <Badge variant="outline">{category.name}</Badge>;
     },
   },
   {

@@ -53,11 +53,9 @@ export const DashboardCategoryChart = ({
 
   return (
     <Card className="h-full flex flex-col" data-chart={id}>
-      <CardHeader className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 pb-2">
-        <div>
-          <CardTitle>Category Summary</CardTitle>
-          <CardDescription>Categories with the most expenses</CardDescription>
-        </div>
+      <CardHeader>
+        <CardTitle>Category Summary</CardTitle>
+        <CardDescription>Categories with the most expenses</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center justify-center">
         <div className="flex h-full w-full justify-center">

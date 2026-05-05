@@ -15,21 +15,24 @@ import {
 } from "@coin-guard/ui";
 import { format } from "date-fns";
 import { useMemo } from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, CartesianGrid, ComposedChart, Line, XAxis } from "recharts";
 
 const chartConfig = {
-  date: {
+  amount: {
     label: "Amount",
+    color: "#0f766e",
+  },
+  trend: {
+    label: "Trend",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
-type TransactionAreaChartProps = {
+type TransactionsChartProps = {
   transactions: Transaction[];
 };
 
-export const TransactionAreaChart = ({
-  transactions,
-}: TransactionAreaChartProps) => {
+export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 
@@ -48,22 +51,34 @@ export const TransactionAreaChart = ({
 
     const allMonths = generateMonthRange(minDate, maxDate);
 
-    const transactionData = allMonths.map((monthKey) => ({
+    const monthlyData = allMonths.map((monthKey) => ({
       date: monthKey,
       amount: transactionsByMonth[monthKey] || 0,
     }));
 
-    return Object.values(transactionData);
+    return monthlyData.map((item, index, arr) => {
+      const startIndex = Math.max(0, index - 2);
+      const windowSlice = arr.slice(startIndex, index + 1);
+      const trend =
+        windowSlice.reduce((acc, current) => acc + current.amount, 0) /
+        windowSlice.length;
+
+      return {
+        ...item,
+        trend,
+      };
+    });
   }, [transactions]);
 
   const sum = transactionData.reduce((acc, t) => (acc += t.amount), 0);
-  const average = sum / transactionData.length;
+  const average =
+    transactionData.length === 0 ? 0 : sum / transactionData.length;
 
   return (
-    <Card className="py-4 sm:py-0">
-      <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
-        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
-          <CardTitle>Transaction Graph</CardTitle>
+    <Card className="py-0">
+      <CardHeader className="flex flex-col items-stretch border-b p-0! sm:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-0!">
+          <CardTitle>Transactions</CardTitle>
           <CardDescription>
             Showing transaction amount over time
           </CardDescription>
@@ -85,10 +100,10 @@ export const TransactionAreaChart = ({
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
-          <AreaChart
+          <ComposedChart
             accessibilityLayer
             data={transactionData}
             margin={{
@@ -105,17 +120,24 @@ export const TransactionAreaChart = ({
               tickMargin={8}
             />
             <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
+              content={<ChartTooltipContent indicator="dot" />}
               cursor={false}
             />
-            <Area
+            <Bar
               dataKey="amount"
-              fill="#0f766e"
-              fillOpacity={0.2}
-              stroke="#134e4a"
+              fill="var(--color-amount)"
+              fillOpacity={0.8}
+              radius={4}
+            />
+            <Line
+              dataKey="trend"
+              dot={false}
+              stroke="var(--color-trend)"
+              strokeDasharray="7 7"
+              strokeWidth={2}
               type="monotone"
             />
-          </AreaChart>
+          </ComposedChart>
         </ChartContainer>
       </CardContent>
     </Card>
