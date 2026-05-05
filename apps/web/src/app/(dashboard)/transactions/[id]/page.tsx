@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
-import { UserTransaction } from "@/components/transactions/UserTransaction";
+import { TransactionDetails } from "@/components/transactions/TransactionDetails";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getTransactionOptions } from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -26,7 +26,7 @@ const TransactionDetailsPage = async ({
         </div>
 
         <div className="h-full py-6">
-          <UserTransaction transactionId={transactionId} />
+          <TransactionDetails transactionId={transactionId} />
         </div>
       </div>
     </HydrationBoundary>
