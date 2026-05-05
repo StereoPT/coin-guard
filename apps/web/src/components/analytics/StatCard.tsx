@@ -1,11 +1,9 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { TransactionType } from "@coin-guard/db";
 import { getTypeColor } from "@/lib/typeColors";
-import { cn } from "@coin-guard/ui";
 import type { TransactionStat } from "@/types/analytics";
-import { Badge } from "@coin-guard/ui";
-import { Card } from "@coin-guard/ui";
-import { Skeleton } from "@coin-guard/ui";
+import { CountType } from "@/types/dashboard";
+import type { TransactionType } from "@coin-guard/db";
+import { Badge, Card, cn, Skeleton } from "@coin-guard/ui";
 import type { ClassValue } from "clsx";
 import { TrendingDown, TrendingUp, type LucideIcon } from "lucide-react";
 
@@ -45,7 +43,7 @@ export const StatCard = ({
               {!stat ? (
                 <Skeleton className="w-32 h-7" />
               ) : (
-                <CountUpWrapper value={stat.value} />
+                <CountUpWrapper type={CountType.MONEY} value={stat.value} />
               )}
             </div>
             {showBadge && (

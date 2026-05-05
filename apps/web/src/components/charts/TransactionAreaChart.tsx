@@ -1,14 +1,13 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import type { Transaction } from "@coin-guard/db";
 import { generateMonthRange } from "@/lib/date";
+import { CountType } from "@/types/dashboard";
+import type { Transaction } from "@coin-guard/db";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@coin-guard/ui";
-import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
@@ -73,13 +72,13 @@ export const TransactionAreaChart = ({
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Sum</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              <CountUpWrapper value={sum} />
+              <CountUpWrapper type={CountType.MONEY} value={sum} />
             </span>
           </div>
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
             <span className="text-muted-foreground text-xs">Average</span>
             <span className="text-lg leading-none font-bold sm:text-3xl">
-              <CountUpWrapper value={average} />
+              <CountUpWrapper type={CountType.MONEY} value={average} />
             </span>
           </div>
         </div>

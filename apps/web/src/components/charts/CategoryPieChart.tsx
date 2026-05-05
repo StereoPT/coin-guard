@@ -1,12 +1,15 @@
 import { formatCurrency } from "@/lib/formatter";
-import { cn } from "@coin-guard/ui";
 import type { CategoryStats } from "@/types/categories";
-import { Card, CardDescription, CardHeader, CardTitle } from "@coin-guard/ui";
 import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  cn,
 } from "@coin-guard/ui";
 import type { ClassValue } from "clsx";
 import { Loader2 } from "lucide-react";
@@ -58,7 +61,7 @@ export const CategoryPieChart = ({
           </div>
         ) : (
           <ChartContainer
-            className="mx-auto aspect-square max-h-[300px]"
+            className="mx-auto aspect-square max-h-75"
             config={chartConfig}
           >
             <PieChart>

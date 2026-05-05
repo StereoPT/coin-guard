@@ -1,8 +1,8 @@
 "use server";
 
+import type { StatCardsType } from "@/types/analytics";
 import { TransactionType } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
-import type { StatCardsType } from "@/types/analytics";
 
 const createEmptyTransactionSummary = (): StatCardsType => {
   return Object.values(TransactionType).reduce((acc, type) => {
