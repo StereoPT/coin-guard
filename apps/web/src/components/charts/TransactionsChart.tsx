@@ -13,7 +13,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@coin-guard/ui";
-import { format } from "date-fns";
+import { endOfMonth, format, subMonths } from "date-fns";
 import { useMemo } from "react";
 import { Bar, CartesianGrid, ComposedChart, Line, XAxis } from "recharts";
 
@@ -32,6 +32,8 @@ type TransactionsChartProps = {
   transactions: Transaction[];
 };
 
+const CHART_START_DATE = new Date(2024, 0, 1);
+
 export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
@@ -45,11 +47,8 @@ export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
       {},
     );
 
-    const dates = transactions.map((t) => t.date.getTime());
-    const minDate = new Date(Math.min(...dates));
-    const maxDate = new Date(Math.max(...dates));
-
-    const allMonths = generateMonthRange(minDate, maxDate);
+    const lastCompletedMonth = endOfMonth(subMonths(new Date(), 1));
+    const allMonths = generateMonthRange(CHART_START_DATE, lastCompletedMonth);
 
     const monthlyData = allMonths.map((monthKey) => ({
       date: monthKey,
