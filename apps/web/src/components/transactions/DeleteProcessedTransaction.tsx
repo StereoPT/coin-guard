@@ -1,8 +1,8 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
-import { Button } from "@coin-guard/ui";
+import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
+import { Button } from "@coin-guard/ui";
 import { useSetAtom } from "jotai";
 import { Trash2 } from "lucide-react";
 import { useCallback } from "react";

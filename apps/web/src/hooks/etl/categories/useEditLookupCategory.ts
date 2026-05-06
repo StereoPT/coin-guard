@@ -1,4 +1,4 @@
-import { EditLookupCategory } from "@/actions/etl/categories/editLookupCategory";
+import { EditLookupCategory } from "@/actions/etl/categories/EditLookupCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { editLookupCategorySchemaType } from "@/schemas/lookup";

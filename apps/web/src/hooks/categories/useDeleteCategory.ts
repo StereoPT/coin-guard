@@ -1,4 +1,4 @@
-import { DeleteCategory } from "@/actions/categories/deleteCategory";
+import { DeleteCategory } from "@/actions/categories/DeleteCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";

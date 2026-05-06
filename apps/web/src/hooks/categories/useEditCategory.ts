@@ -1,4 +1,4 @@
-import { EditCategory } from "@/actions/categories/editCategory";
+import { EditCategory } from "@/actions/categories/EditCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { editCategorySchemaType } from "@/schemas/categories";

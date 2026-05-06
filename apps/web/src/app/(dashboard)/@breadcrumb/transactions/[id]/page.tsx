@@ -1,4 +1,4 @@
-import { GetTransaction } from "@/actions/transactions/getTransaction";
+import { GetTransaction } from "@/actions/transactions/GetTransaction";
 import { BreadcrumbShell } from "@/components/BreadcrumbShell";
 import { ROUTES } from "@/constants/routes";
 import { notFound } from "next/navigation";

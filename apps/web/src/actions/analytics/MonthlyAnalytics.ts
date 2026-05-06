@@ -1,14 +1,14 @@
 "use server";
 
-import { GetCategoriesForDate } from "@/actions/analytics/getCategoriesForDate";
-import { GetStatsForDate } from "@/actions/analytics/getStatsForDate";
+import { GetCategoriesForDate } from "@/actions/analytics/GetCategoriesForDate";
+import { GetStatsForDate } from "@/actions/analytics/GetStatsForDate";
 import { prisma } from "@coin-guard/db/server";
-import { endOfYear, startOfYear } from "date-fns";
+import { endOfMonth, startOfMonth } from "date-fns";
 
-export const YearlyAnalytics = async (year: number) => {
+export const MonthlyAnalytics = async (month: number) => {
   const dateFilter = {
-    gte: startOfYear(new Date(year, 1, 1)),
-    lte: endOfYear(new Date(year, 1, 1)),
+    gte: startOfMonth(new Date(2026, month, 1)),
+    lte: endOfMonth(new Date(2026, month, 1)),
   };
 
   const stats = await GetStatsForDate(dateFilter);

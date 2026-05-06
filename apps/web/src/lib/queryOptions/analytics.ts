@@ -1,6 +1,6 @@
 import { DashboardAnalytics } from "@/actions/analytics/dashboard/DashboardAnalytics";
-import { MonthlyAnalytics } from "@/actions/analytics/monthlyAnalytics";
-import { YearlyAnalytics } from "@/actions/analytics/yearlyAnalytics";
+import { MonthlyAnalytics } from "@/actions/analytics/MonthlyAnalytics";
+import { YearlyAnalytics } from "@/actions/analytics/YearlyAnalytics";
 import { KEYS } from "@/constants/queryKeys";
 import { queryOptions } from "@tanstack/react-query";
 

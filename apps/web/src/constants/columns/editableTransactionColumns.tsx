@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
+import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { AmountBadge } from "@/components/AmountBadge";
 import { DeleteProcessedTransaction } from "@/components/transactions/DeleteProcessedTransaction";
 import { EditProcessedTransaction } from "@/components/transactions/EditProcessedTransaction";

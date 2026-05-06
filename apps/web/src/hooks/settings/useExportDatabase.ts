@@ -1,4 +1,4 @@
-import { ExportDatabase } from "@/actions/settings/exportDatabase";
+import { ExportDatabase } from "@/actions/settings/ExportDatabase";
 import { useMutation } from "@tanstack/react-query";
 
 export const useExportDatabase = () => {
