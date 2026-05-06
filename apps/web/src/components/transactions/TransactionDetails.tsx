@@ -3,9 +3,8 @@
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
-import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import { TransactionTable } from "@/components/tables/TransactionTable";
+import { TransactionTabs } from "@/components/transactions/TransactionTabs";
 import { formatCurrency } from "@/lib/formatter";
 import { CountType } from "@/types/dashboard";
 import { TransactionType } from "@coin-guard/db";
@@ -16,20 +15,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
 import {
-  AreaChart,
   ArrowDownRight,
   ArrowUpRight,
   Banknote,
   Calendar,
   FileText,
-  Table2,
   Tag,
 } from "lucide-react";
 
@@ -125,27 +118,12 @@ export const TransactionDetails = ({
           </CardContent>
         </div>
       </Card>
-      <Tabs className="w-full" defaultValue="graph">
-        <TabsList className="min-w-64">
-          <TabsTrigger value="graph">
-            <AreaChart /> Graph
-          </TabsTrigger>
-          <TabsTrigger value="table">
-            <Table2 />
-            Table
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="graph">
-          <TransactionsChart
-            description="Showing transaction amount over time"
-            title="Transactions"
-            transactions={transaction.all}
-          />
-        </TabsContent>
-        <TabsContent value="table">
-          <TransactionTable transactions={transaction.all} />
-        </TabsContent>
-      </Tabs>
+
+      <TransactionTabs
+        description="Showing transaction amount over time"
+        title="Transactions"
+        transactions={transaction.all}
+      />
     </div>
   );
 };
