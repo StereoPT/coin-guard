@@ -1,5 +1,5 @@
+import { Categories } from "@/components/categories/Categories";
 import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
-import { UserCategories } from "@/components/categories/UserCategories";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
@@ -18,7 +18,7 @@ const CategoriesPage = async () => {
         </div>
 
         <div className="h-full py-6">
-          <UserCategories />
+          <Categories />
         </div>
       </div>
     </HydrationBoundary>
