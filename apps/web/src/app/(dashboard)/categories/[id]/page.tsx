@@ -1,5 +1,5 @@
+import { CategoryDetails } from "@/components/categories/CategoryDetails";
 import { EditCategory } from "@/components/categories/EditCategory";
-import { UserCategory } from "@/components/categories/UserCategory";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoryOptions } from "@/lib/queryOptions/categories";
@@ -23,7 +23,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
           <EditCategory categoryId={categoryId} />
         </div>
         <div className="h-full py-6">
-          <UserCategory categoryId={categoryId} />
+          <CategoryDetails categoryId={categoryId} />
         </div>
       </div>
     </HydrationBoundary>

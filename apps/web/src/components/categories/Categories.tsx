@@ -8,7 +8,7 @@ import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { DataTable } from "@stereopt/data-table";
 import { TagsIcon } from "lucide-react";
 
-export const UserCategories = () => {
+export const Categories = () => {
   const { data: categories } = useGetCategories();
 
   if (!categories) {
