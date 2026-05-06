@@ -1,7 +1,7 @@
 import { AmountBadge } from "@/components/AmountBadge";
 import type { TransactionWithCategory } from "@/types/transactions";
-import { Badge } from "@coin-guard/ui";
 import {
+  Badge,
   Table,
   TableBody,
   TableCell,
@@ -21,7 +21,7 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
       <Table className="h-full">
         <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead>Date</TableHead>
+            <TableHead>Description</TableHead>
             <TableHead>Category</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
@@ -30,13 +30,20 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
           {transactions.map((t) => {
             return (
               <TableRow key={t.id}>
-                <TableCell>{format(t.date, "PPP")}</TableCell>
-                <TableCell>
+                <TableCell className="py-1">
+                  <div className="flex flex-col text-xs">
+                    <div className="font-medium">{t.description}</div>
+                    <div className="text-muted-foreground">
+                      {format(t.date, "PPP")}
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className="py-1">
                   {t.category && (
                     <Badge variant="outline">{t.category.name}</Badge>
                   )}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right py-1">
                   <AmountBadge amount={t.amount} type={t.type} />
                 </TableCell>
               </TableRow>

@@ -136,7 +136,11 @@ export const TransactionDetails = ({
           </TabsTrigger>
         </TabsList>
         <TabsContent value="graph">
-          <TransactionsChart transactions={transaction.all} />
+          <TransactionsChart
+            description="Showing transaction amount over time"
+            title="Transactions"
+            transactions={transaction.all}
+          />
         </TabsContent>
         <TabsContent value="table">
           <TransactionTable transactions={transaction.all} />

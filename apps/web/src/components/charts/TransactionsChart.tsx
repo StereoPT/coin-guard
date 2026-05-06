@@ -1,4 +1,5 @@
 import { CountUpWrapper } from "@/components/CountUpWrapper";
+import { CHART_START_DATE } from "@/constants";
 import { generateMonthRange } from "@/lib/date";
 import { CountType } from "@/types/dashboard";
 import type { Transaction } from "@coin-guard/db";
@@ -30,11 +31,15 @@ const chartConfig = {
 
 type TransactionsChartProps = {
   transactions: Transaction[];
+  title: string;
+  description: string;
 };
 
-const CHART_START_DATE = new Date(2024, 0, 1);
-
-export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
+export const TransactionsChart = ({
+  transactions,
+  title,
+  description,
+}: TransactionsChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 
@@ -77,10 +82,8 @@ export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
     <Card className="py-0">
       <CardHeader className="flex flex-col items-stretch border-b p-0! sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-0!">
-          <CardTitle>Transactions</CardTitle>
-          <CardDescription>
-            Showing transaction amount over time
-          </CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </div>
         <div className="flex">
           <div className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6">
@@ -105,10 +108,7 @@ export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
           <ComposedChart
             accessibilityLayer
             data={transactionData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
+            margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis

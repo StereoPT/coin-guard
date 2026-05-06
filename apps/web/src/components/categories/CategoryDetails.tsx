@@ -1,8 +1,8 @@
 "use client";
 
-import { CategoryAreaChart } from "@/components/charts/CategoryAreaChart";
+import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { CategoryTable } from "@/components/tables/CategoryTable";
+import { TransactionTable } from "@/components/tables/TransactionTable";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@coin-guard/ui";
 import { AreaChart, Table2 } from "lucide-react";
@@ -31,10 +31,14 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="graph">
-          <CategoryAreaChart transactions={category.transactions} />
+          <TransactionsChart
+            description="Showing category amount over time"
+            title={category.name}
+            transactions={category.transactions}
+          />
         </TabsContent>
         <TabsContent value="table">
-          <CategoryTable transactions={category.transactions} />
+          <TransactionTable transactions={category.transactions} />
         </TabsContent>
       </Tabs>
     </div>
