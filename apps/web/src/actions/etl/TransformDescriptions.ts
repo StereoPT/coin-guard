@@ -1,6 +1,6 @@
 "use server";
 
-import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
+import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { LoggingType, LookupField } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 

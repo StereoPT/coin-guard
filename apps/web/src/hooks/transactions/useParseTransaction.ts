@@ -1,4 +1,4 @@
-import { ParseTransaction } from "@/actions/transactions/parseTransaction";
+import { ParseTransaction } from "@/actions/transactions/ParseTransaction";
 import { useMutation } from "@tanstack/react-query";
 
 export const useParseTransaction = () => {

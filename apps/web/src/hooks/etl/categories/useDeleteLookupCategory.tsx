@@ -1,4 +1,4 @@
-import { DeleteLookupCategory } from "@/actions/etl/categories/deleteLookupCategory";
+import { DeleteLookupCategory } from "@/actions/etl/categories/DeleteLookupCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";

@@ -1,4 +1,4 @@
-import { GetCategory } from "@/actions/categories/getCategory";
+import { GetCategory } from "@/actions/categories/GetCategory";
 import { BreadcrumbShell } from "@/components/BreadcrumbShell";
 import { ROUTES } from "@/constants/routes";
 import { notFound } from "next/navigation";

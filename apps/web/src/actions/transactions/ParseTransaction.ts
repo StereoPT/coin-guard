@@ -1,7 +1,7 @@
 "use server";
 
-import { TransformCategories } from "@/actions/etl/transformCategories";
-import { TransformDescriptions } from "@/actions/etl/transformDescriptions";
+import { TransformCategories } from "@/actions/etl/TransformCategories";
+import { TransformDescriptions } from "@/actions/etl/TransformDescriptions";
 import { format, isValid, parse } from "date-fns";
 import Papa from "papaparse";
 

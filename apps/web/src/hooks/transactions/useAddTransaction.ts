@@ -1,4 +1,4 @@
-import { AddTransaction } from "@/actions/transactions/addTransaction";
+import { AddTransaction } from "@/actions/transactions/AddTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { addTransactionSchemaType } from "@/schemas/transactions";

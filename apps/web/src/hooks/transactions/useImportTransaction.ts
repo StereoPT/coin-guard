@@ -1,5 +1,5 @@
-import { ImportTransaction } from "@/actions/transactions/importTransaction";
-import type { ProcessedTransaction } from "@/actions/transactions/parseTransaction";
+import { ImportTransaction } from "@/actions/transactions/ImportTransaction";
+import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";

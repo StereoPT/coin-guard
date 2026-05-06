@@ -1,5 +1,5 @@
-import { GetCategories } from "@/actions/categories/getCategories";
-import { GetCategory } from "@/actions/categories/getCategory";
+import { GetCategories } from "@/actions/categories/GetCategories";
+import { GetCategory } from "@/actions/categories/GetCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { queryOptions } from "@tanstack/react-query";
 

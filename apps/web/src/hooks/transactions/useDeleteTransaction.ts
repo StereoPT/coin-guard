@@ -1,4 +1,4 @@
-import { DeleteTransaction } from "@/actions/transactions/deleteTransaction";
+import { DeleteTransaction } from "@/actions/transactions/DeleteTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";

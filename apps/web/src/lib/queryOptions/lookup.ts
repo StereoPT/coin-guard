@@ -1,4 +1,4 @@
-import { GetLookupCategories } from "@/actions/etl/categories/getLookupCategories";
+import { GetLookupCategories } from "@/actions/etl/categories/GetLookupCategories";
 import { GetLookupDescriptions } from "@/actions/etl/descriptions/GetLookupDescriptions";
 import { GetLookupLogs } from "@/actions/etl/logs/GetLookupLogs";
 import { KEYS } from "@/constants/queryKeys";
