@@ -1,28 +1,28 @@
-import { Button } from "@coin-guard/ui";
+import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
 import {
+  addLookupDescriptionSchema,
+  type addLookupDescriptionSchemaType,
+} from "@/schemas/lookup";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
   Field,
   FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@coin-guard/ui";
-import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  Input,
+  Spinner,
+  Switch,
 } from "@coin-guard/ui";
-import { Input } from "@coin-guard/ui";
-import { Spinner } from "@coin-guard/ui";
-import { Switch } from "@coin-guard/ui";
-import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
-import {
-  addLookupDescriptionSchema,
-  type addLookupDescriptionSchemaType,
-} from "@/schemas/lookup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -116,10 +116,15 @@ export const AddLookupDescriptionForm = ({
           />
         </FieldGroup>
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Add"}
-          {isPending && <Spinner />}
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Add Lookup Description
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

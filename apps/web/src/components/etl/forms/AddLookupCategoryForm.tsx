@@ -1,30 +1,30 @@
-import { Button } from "@coin-guard/ui";
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@coin-guard/ui";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@coin-guard/ui";
-import { Input } from "@coin-guard/ui";
-import { SearchableSelect } from "@coin-guard/ui";
-import { Spinner } from "@coin-guard/ui";
-import { Switch } from "@coin-guard/ui";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { useAddLookupCategory } from "@/hooks/etl/categories/useAddLookupCategory";
 import {
   addLookupCategorySchema,
   type addLookupCategorySchemaType,
 } from "@/schemas/lookup";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+  SearchableSelect,
+  Spinner,
+  Switch,
+} from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -132,10 +132,15 @@ export const AddLookupCategoryForm = ({
           />
         </FieldGroup>
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Add"}
-          {isPending && <Spinner />}
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Add Lookup Category
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

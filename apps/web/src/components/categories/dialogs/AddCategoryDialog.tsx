@@ -1,11 +1,17 @@
 "use client";
 
 import { AddCategoryForm } from "@/components/categories/forms/AddCategoryForm";
-import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@coin-guard/ui";
 
-import { PlusCircle, TagIcon } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 export const AddCategoryDialog = () => {
@@ -23,15 +29,15 @@ export const AddCategoryDialog = () => {
           Add Category
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TagIcon}
-          subtitle="Create your categories"
-          title="Create Category"
-        />
-        <div className="px-4">
-          <AddCategoryForm setOpen={setOpen} />
-        </div>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create Category</DialogTitle>
+          <DialogDescription>
+            Create categories for your transactions
+          </DialogDescription>
+        </DialogHeader>
+
+        <AddCategoryForm setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );

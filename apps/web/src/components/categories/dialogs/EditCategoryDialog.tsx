@@ -1,10 +1,16 @@
 "use client";
 
 import { EditCategoryForm } from "@/components/categories/forms/EditCategoryForm";
-import { DialogHeader } from "@/components/DialogHeader";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
-import { Edit, Tag } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@coin-guard/ui";
+import { Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditCategoryDialogProps = {
@@ -48,18 +54,13 @@ export const EditCategoryDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={Tag}
-          subtitle="Edit your category"
-          title="Edit Category"
-        />
-        <div className="px-4">
-          <EditCategoryForm
-            categoryId={categoryId}
-            setOpen={handleOpenChange}
-          />
-        </div>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Category</DialogTitle>
+          <DialogDescription>Edit your category details</DialogDescription>
+        </DialogHeader>
+
+        <EditCategoryForm categoryId={categoryId} setOpen={handleOpenChange} />
       </DialogContent>
     </Dialog>
   );

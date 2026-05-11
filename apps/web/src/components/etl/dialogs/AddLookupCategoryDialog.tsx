@@ -1,10 +1,16 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
 import { AddLookupCategoryForm } from "@/components/etl/forms/AddLookupCategoryForm";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
-import { PlusCircle, TagsIcon } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@coin-guard/ui";
+import { PlusCircle } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 type AddLookupCategoryDialogProps =
@@ -47,18 +53,16 @@ export const AddLookupCategoryDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TagsIcon}
-          subtitle="Create your lookup categories"
-          title="Create Lookup Category"
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create Lookup Category</DialogTitle>
+          <DialogDescription>Create your lookup categories</DialogDescription>
+        </DialogHeader>
+
+        <AddLookupCategoryForm
+          categoryId={categoryId}
+          setOpen={handleOnOpenChange}
         />
-        <div className="px-4">
-          <AddLookupCategoryForm
-            categoryId={categoryId}
-            setOpen={handleOnOpenChange}
-          />
-        </div>
       </DialogContent>
     </Dialog>
   );

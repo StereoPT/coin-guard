@@ -1,6 +1,5 @@
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionFormFields } from "@/components/transactions/forms/TransactionFormFields";
-import { Spinner } from "@coin-guard/ui";
 import { FormType } from "@/constants/forms";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
@@ -8,8 +7,13 @@ import {
   editTransactionSchema,
   type editTransactionSchemaType,
 } from "@/schemas/transactions";
-import { Button } from "@coin-guard/ui";
-import { Form } from "@coin-guard/ui";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
+  Form,
+  Spinner,
+} from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -84,10 +88,15 @@ export const EditTransactionForm = ({
           formType={FormType.EDIT}
         />
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Edit"}
-          {isPending && <Spinner />}
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Edit Transaction
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

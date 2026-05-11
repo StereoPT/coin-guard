@@ -6,7 +6,13 @@ import {
   editCategorySchema,
   type editCategorySchemaType,
 } from "@/schemas/categories";
-import { Button, Form, Spinner } from "@coin-guard/ui";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
+  Form,
+  Spinner,
+} from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -65,10 +71,15 @@ export const EditCategoryForm = ({
       <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
         <CategoryFormFields formId="edit-category" />
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Edit"}
-          {isPending && <Spinner />}
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Edit Category
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

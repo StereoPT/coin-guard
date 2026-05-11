@@ -1,10 +1,16 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
 import { EditTransactionForm } from "@/components/transactions/forms/EditTransactionForm";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
-import { ArrowLeftRightIcon, Edit } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@coin-guard/ui";
+import { Edit } from "lucide-react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 type EditTransactionDialogProps = {
@@ -48,18 +54,16 @@ export const EditTransactionDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4 max-w-2xl!">
-        <DialogHeader
-          icon={ArrowLeftRightIcon}
-          subtitle="Edit your transaction"
-          title="Edit Transaction"
+      <DialogContent className="max-w-2xl!">
+        <DialogHeader>
+          <DialogTitle>Edit Transaction</DialogTitle>
+          <DialogDescription>Edit your transaction</DialogDescription>
+        </DialogHeader>
+
+        <EditTransactionForm
+          setOpen={handleOpenChange}
+          transactionId={transactionId}
         />
-        <div className="px-4">
-          <EditTransactionForm
-            setOpen={handleOpenChange}
-            transactionId={transactionId}
-          />
-        </div>
       </DialogContent>
     </Dialog>
   );

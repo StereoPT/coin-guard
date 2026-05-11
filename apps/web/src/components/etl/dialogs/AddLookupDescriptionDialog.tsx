@@ -1,10 +1,16 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
 import { AddLookupDescriptionForm } from "@/components/etl/forms/AddLookupDescriptionForm";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
-import { PlusCircle, TextInitialIcon } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@coin-guard/ui";
+import { PlusCircle } from "lucide-react";
 import { useState, type Dispatch, type SetStateAction } from "react";
 
 type AddLookupDescriptionDialogProps =
@@ -47,18 +53,16 @@ export const AddLookupDescriptionDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TextInitialIcon}
-          subtitle="Create your lookup descriptions"
-          title="Create Lookup Description"
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create Lookup Description</DialogTitle>
+          <DialogDescription>Create your lookup descriptions</DialogDescription>
+        </DialogHeader>
+
+        <AddLookupDescriptionForm
+          description={description}
+          setOpen={handleOnOpenChange}
         />
-        <div className="px-4">
-          <AddLookupDescriptionForm
-            description={description}
-            setOpen={handleOnOpenChange}
-          />
-        </div>
       </DialogContent>
     </Dialog>
   );

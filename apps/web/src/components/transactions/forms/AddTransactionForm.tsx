@@ -1,13 +1,17 @@
 import { TransactionFormFields } from "@/components/transactions/forms/TransactionFormFields";
-import { Spinner } from "@coin-guard/ui";
 import { FormType } from "@/constants/forms";
 import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
 import {
   addTransactionSchema,
   type addTransactionSchemaType,
 } from "@/schemas/transactions";
-import { Button } from "@coin-guard/ui";
-import { Form } from "@coin-guard/ui";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
+  Form,
+  Spinner,
+} from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -49,10 +53,15 @@ export const AddTransactionForm = ({ setOpen }: AddTransactionFormProps) => {
           formType={FormType.ADD}
         />
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {!isPending && "Add"}
-          {isPending && <Spinner />}
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Add Transaction
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

@@ -1,12 +1,16 @@
 import { CategoryFormFields } from "@/components/categories/forms/CategoryFormFields";
-import { Spinner } from "@coin-guard/ui";
 import { useAddCategory } from "@/hooks/categories/useAddCategory";
 import {
   addCategorySchema,
   type addCategorySchemaType,
 } from "@/schemas/categories";
-import { Button } from "@coin-guard/ui";
-import { Form } from "@coin-guard/ui";
+import {
+  Button,
+  DialogClose,
+  DialogFooter,
+  Form,
+  Spinner,
+} from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction, useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -39,10 +43,15 @@ export const AddCategoryForm = ({ setOpen }: AddCategoryFormProps) => {
       <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
         <CategoryFormFields formId="add-category" />
 
-        <Button className="w-full" disabled={isPending} type="submit">
-          {isPending && <Spinner />}
-          Add Category
-        </Button>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} type="submit">
+            {isPending && <Spinner />}
+            Add Category
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

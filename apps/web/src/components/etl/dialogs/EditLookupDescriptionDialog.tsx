@@ -1,10 +1,14 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
 import { EditLookupDescriptionForm } from "@/components/etl/forms/EditLookupDescriptionForm";
-import { Dialog, DialogContent } from "@coin-guard/ui";
 import type { LookupDescription } from "@coin-guard/db";
-import { TextInitialIcon } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@coin-guard/ui";
 import type { Dispatch, SetStateAction } from "react";
 
 type EditLookupDescriptionDialogProps = {
@@ -20,18 +24,16 @@ export const EditLookupDescriptionDialog = ({
 }: EditLookupDescriptionDialogProps) => {
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TextInitialIcon}
-          subtitle="Edit your lookup description"
-          title="Edit Lookup Description"
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Lookup Description</DialogTitle>
+          <DialogDescription>Edit your lookup description</DialogDescription>
+        </DialogHeader>
+
+        <EditLookupDescriptionForm
+          initialValues={lookupDescription}
+          setOpen={onOpenChange}
         />
-        <div className="px-4">
-          <EditLookupDescriptionForm
-            initialValues={lookupDescription}
-            setOpen={onOpenChange}
-          />
-        </div>
       </DialogContent>
     </Dialog>
   );
