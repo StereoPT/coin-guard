@@ -34,6 +34,8 @@ export const AddTransactionDialog = ({
   open,
   setOpen,
 }: AddTransactionDialogProps) => {
+  const formId = "add-transaction";
+
   const form = useForm<addTransactionSchemaType>({
     resolver: zodResolver(addTransactionSchema),
     defaultValues: {
@@ -60,31 +62,28 @@ export const AddTransactionDialog = ({
 
   return (
     <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogContent className="max-w-2xl!">
-            <DialogHeader>
-              <DialogTitle>Create Transaction</DialogTitle>
-              <DialogDescription>Create a new transaction</DialogDescription>
-            </DialogHeader>
+      <DialogContent className="max-w-2xl!">
+        <DialogHeader>
+          <DialogTitle>Create Transaction</DialogTitle>
+          <DialogDescription>Create a new transaction</DialogDescription>
+        </DialogHeader>
 
-            <TransactionFormFields
-              formId="add-transaction"
-              formType={FormType.ADD}
-            />
+        <Form {...form}>
+          <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+            <TransactionFormFields formId={formId} formType={FormType.ADD} />
+          </form>
+        </Form>
 
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button disabled={isPending} type="submit">
-                {isPending && <Spinner />}
-                Add Transaction
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </form>
-      </Form>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} form={formId} type="submit">
+            {isPending && <Spinner />}
+            Add Transaction
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };

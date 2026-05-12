@@ -53,13 +53,11 @@ export const EditTransactionDialog = ({
   trigger,
   transactionId,
 }: EditTransactionDialogProps) => {
+  const formId = "edit-transaction";
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
 
-  const {
-    data: transaction,
-    isPending: isLoadingTransaction,
-    isError: isErrorTransaction,
-  } = useGetTransaction(transactionId);
+  const { data: transaction, isPending: isLoadingTransaction } =
+    useGetTransaction(transactionId);
 
   const form = useForm<editTransactionSchemaType>({
     resolver: zodResolver(editTransactionSchema),
@@ -113,43 +111,40 @@ export const EditTransactionDialog = ({
 
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          {trigger && (
-            <DialogTrigger asChild>
-              <Button>
-                <Edit />
-                Edit Transaction
-              </Button>
-            </DialogTrigger>
-          )}
-          <DialogContent className="max-w-2xl!">
-            <DialogHeader>
-              <DialogTitle>Edit Transaction</DialogTitle>
-              <DialogDescription>Edit your transaction</DialogDescription>
-            </DialogHeader>
+      {trigger && (
+        <DialogTrigger asChild>
+          <Button>
+            <Edit />
+            Edit Transaction
+          </Button>
+        </DialogTrigger>
+      )}
+      <DialogContent className="max-w-2xl!">
+        <DialogHeader>
+          <DialogTitle>Edit Transaction</DialogTitle>
+          <DialogDescription>Edit your transaction</DialogDescription>
+        </DialogHeader>
 
+        <Form {...form}>
+          <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingTransaction ? (
               <Spinner />
             ) : (
-              <TransactionFormFields
-                formId="edit-transaction"
-                formType={FormType.EDIT}
-              />
+              <TransactionFormFields formId={formId} formType={FormType.EDIT} />
             )}
+          </form>
+        </Form>
 
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button disabled={isPending} type="submit">
-                {isPending && <Spinner />}
-                Edit Transaction
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </form>
-      </Form>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} form={formId} type="submit">
+            {isPending && <Spinner />}
+            Edit Transaction
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };
