@@ -7,7 +7,6 @@ import { StatCard } from "@/components/StatCard";
 import { useMonthlyAnalytics } from "@/hooks/analytics/useMonthlyAnalytics";
 import { monthlyAnalyticsAtom } from "@/store/analyticsStore";
 import { CountType } from "@/types/dashboard";
-import { format } from "date-fns";
 import { useAtomValue } from "jotai";
 
 export const MonthlyAnalytics = () => {
@@ -45,11 +44,7 @@ export const MonthlyAnalytics = () => {
           <MonthlyChart transactions={analytics.transactions} />
         </div>
         <div className="col-span-5 xl:col-span-2 h-full">
-          <CategoryPieChart
-            categoryStats={analytics?.categoryStats}
-            description={`For the month of: ${format(new Date(2026, selectedMonth, 1), "MMMM")}`}
-            title="Category Summary"
-          />
+          <CategoryPieChart categoryStats={analytics.categoryStats} />
         </div>
       </div>
     </div>

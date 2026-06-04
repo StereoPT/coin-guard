@@ -29,13 +29,13 @@ export const YearlyAnalytics = () => {
         <StatCard
           countType={CountType.MONEY}
           stat={{ value: analytics.stats.DEBIT }}
-          subfooter="Expenses for the month"
+          subfooter="Expenses for the year"
           title="Expenses"
         />
         <StatCard
           countType={CountType.MONEY}
           stat={{ value: analytics.stats.CASH_FLOW }}
-          subfooter="Cash Flow for the month"
+          subfooter="Cash Flow for the year"
           title="Cash Flow"
         />
       </div>
@@ -44,11 +44,7 @@ export const YearlyAnalytics = () => {
           <YearlyChart transactions={analytics.transactions} />
         </div>
         <div className="col-span-5 xl:col-span-2 h-full">
-          <CategoryPieChart
-            categoryStats={analytics?.categoryStats}
-            description={`For the year of: ${selectedYear}`}
-            title="Category Summary"
-          />
+          <CategoryPieChart categoryStats={analytics.categoryStats} />
         </div>
       </div>
     </div>

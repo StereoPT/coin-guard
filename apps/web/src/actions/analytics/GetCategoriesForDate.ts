@@ -18,6 +18,9 @@ export const GetCategoriesForDate = async (dateFilter: {
         equals: TransactionType.DEBIT,
       },
     },
+    orderBy: {
+      _sum: { amount: "desc" },
+    },
   });
 
   const categoryIds = categoryTotals
