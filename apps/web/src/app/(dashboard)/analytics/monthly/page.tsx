@@ -1,4 +1,5 @@
-import { UserMonthlyAnalytics } from "@/components/analytics/UserMonthlyAnalytics";
+import { MonthlyAnalytics } from "@/components/analytics/MonthlyAnalytics";
+import { MonthlySelection } from "@/components/analytics/MonthlySelection";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { monthlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
@@ -14,14 +15,15 @@ const MonthlyPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <PageHeader
             description="Your monthly overview"
             title="Monthly Analytics"
           />
+          <MonthlySelection />
         </div>
         <div className="h-full py-6">
-          <UserMonthlyAnalytics month={month} />
+          <MonthlyAnalytics />
         </div>
       </div>
     </HydrationBoundary>

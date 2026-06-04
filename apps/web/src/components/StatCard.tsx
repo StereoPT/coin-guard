@@ -12,19 +12,19 @@ import {
 } from "@coin-guard/ui";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
-type DashboardCardProps = {
+type StatCardProps = {
   title: string;
   stat: TransactionStat;
   subfooter: string;
   countType: CountType;
 };
 
-export const DashboardCard = ({
+export const StatCard = ({
   title,
   stat,
   subfooter,
   countType,
-}: DashboardCardProps) => {
+}: StatCardProps) => {
   const isNegativePercentage = Math.sign(stat?.percentage ?? 0) < 1;
 
   return (
@@ -35,22 +35,26 @@ export const DashboardCard = ({
           <CountUpWrapper type={countType} value={stat.value} />
         </CardTitle>
         <CardAction>
-          <Badge variant="outline">
-            {isNegativePercentage ? "-" : "+"}
-            {stat?.percentage?.toFixed(2)}%
-            {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
-          </Badge>
+          {stat.percentage && (
+            <Badge variant="outline">
+              {!isNegativePercentage && "+"}
+              {stat?.percentage?.toFixed(2)}%
+              {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
+            </Badge>
+          )}
         </CardAction>
       </CardHeader>
       <CardFooter className="flex-col items-start gap-1.5 text-sm">
-        <div className="line-clamp-1 flex gap-2 font-medium items-center">
-          Trending {isNegativePercentage ? "down" : "up"}
-          {isNegativePercentage ? (
-            <TrendingDown className="size-4" />
-          ) : (
-            <TrendingUp className="size-4" />
-          )}
-        </div>
+        {stat.percentage && (
+          <div className="line-clamp-1 flex gap-2 font-medium items-center">
+            Trending {isNegativePercentage ? "down" : "up"}
+            {isNegativePercentage ? (
+              <TrendingDown className="size-4" />
+            ) : (
+              <TrendingUp className="size-4" />
+            )}
+          </div>
+        )}
         <div className="text-muted-foreground">{subfooter}</div>
       </CardFooter>
     </Card>

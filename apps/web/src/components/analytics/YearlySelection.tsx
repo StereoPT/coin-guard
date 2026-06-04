@@ -1,7 +1,6 @@
 "use client";
 
-import { getStartEndFromYear } from "@/lib/date";
-import { Card, CardContent } from "@coin-guard/ui";
+import { yearlyAnalyticsAtom } from "@/store/analyticsStore";
 import {
   Select,
   SelectContent,
@@ -10,57 +9,33 @@ import {
   SelectValue,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
-import { useMemo, type Dispatch, type SetStateAction } from "react";
+import { useAtom } from "jotai";
 
 const years = [...Array(3)].map((_, index) => ({
   label: format(new Date(index + 2024, 1, 1), "y"),
   value: index + 2024,
 }));
 
-type YearlySelectionProps = {
-  selectedYear: number;
-  setSelectedYear: Dispatch<SetStateAction<number>>;
-};
-
-export const YearlySelection = ({
-  selectedYear,
-  setSelectedYear,
-}: YearlySelectionProps) => {
-  const startEndOfYear = useMemo(() => {
-    return getStartEndFromYear(selectedYear);
-  }, [selectedYear]);
+export const YearlySelection = () => {
+  const [selectedYear, setSelectedYear] = useAtom(yearlyAnalyticsAtom);
 
   return (
-    <Card>
-      <CardContent className="flex items-center justify-between">
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1">
-            <span className="font-bold">From:</span>
-            {startEndOfYear.start}
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-bold">To:</span>
-            {startEndOfYear.end}
-          </div>
-        </div>
-        <Select
-          defaultValue={selectedYear.toString()}
-          onValueChange={(val) => {
-            setSelectedYear(Number(val));
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Transaction Type" />
-          </SelectTrigger>
-          <SelectContent>
-            {years.map((year) => (
-              <SelectItem key={year.value} value={year.value.toString()}>
-                {year.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </CardContent>
-    </Card>
+    <Select
+      defaultValue={selectedYear.toString()}
+      onValueChange={(val) => {
+        setSelectedYear(Number(val));
+      }}
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Transaction Type" />
+      </SelectTrigger>
+      <SelectContent>
+        {years.map((year) => (
+          <SelectItem key={year.value} value={year.value.toString()}>
+            {year.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

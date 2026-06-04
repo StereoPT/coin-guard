@@ -1,7 +1,6 @@
 "use client";
 
-import { getStartEndFromMonth } from "@/lib/date";
-import { Card, CardContent } from "@coin-guard/ui";
+import { monthlyAnalyticsAtom } from "@/store/analyticsStore";
 import {
   Select,
   SelectContent,
@@ -10,57 +9,33 @@ import {
   SelectValue,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
-import { type Dispatch, type SetStateAction, useMemo } from "react";
+import { useAtom } from "jotai";
 
 const months = [...Array(12)].map((_, index) => ({
   label: format(new Date(2026, index, 1), "MMMM"),
   value: index,
 }));
 
-type MonthlySelectionProps = {
-  selectedMonth: number;
-  setSelectedMonth: Dispatch<SetStateAction<number>>;
-};
-
-export const MonthlySelection = ({
-  selectedMonth,
-  setSelectedMonth,
-}: MonthlySelectionProps) => {
-  const startEndOfMonth = useMemo(() => {
-    return getStartEndFromMonth(selectedMonth);
-  }, [selectedMonth]);
+export const MonthlySelection = () => {
+  const [selectedMonth, setSelectedMonth] = useAtom(monthlyAnalyticsAtom);
 
   return (
-    <Card>
-      <CardContent className="flex items-center justify-between">
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1">
-            <span className="font-bold">From:</span>
-            {startEndOfMonth.start}
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-bold">To:</span>
-            {startEndOfMonth.end}
-          </div>
-        </div>
-        <Select
-          defaultValue={selectedMonth.toString()}
-          onValueChange={(val) => {
-            setSelectedMonth(Number(val));
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Transaction Type" />
-          </SelectTrigger>
-          <SelectContent>
-            {months.map((month) => (
-              <SelectItem key={month.value} value={month.value.toString()}>
-                {month.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </CardContent>
-    </Card>
+    <Select
+      defaultValue={selectedMonth.toString()}
+      onValueChange={(val) => {
+        setSelectedMonth(Number(val));
+      }}
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Transaction Type" />
+      </SelectTrigger>
+      <SelectContent>
+        {months.map((month) => (
+          <SelectItem key={month.value} value={month.value.toString()}>
+            {month.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

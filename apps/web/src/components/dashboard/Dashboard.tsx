@@ -1,9 +1,9 @@
 "use client";
 
-import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import { DashboardCategoryChart } from "@/components/dashboard/DashboardCategoryChart";
 import { DashboardLastTransactions } from "@/components/dashboard/DashboardLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { StatCard } from "@/components/StatCard";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
 import { CountType } from "@/types/dashboard";
 
@@ -17,19 +17,19 @@ export const Dashboard = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="grid gap-4 grid-cols-1 xl:grid-cols-3">
-        <DashboardCard
+        <StatCard
           countType={CountType.MONEY}
           stat={analytics.stats.CREDIT}
           subfooter="Income for the last month"
           title="Income"
         />
-        <DashboardCard
+        <StatCard
           countType={CountType.MONEY}
           stat={analytics.stats.DEBIT}
           subfooter="Expenses for the last month"
           title="Expenses"
         />
-        <DashboardCard
+        <StatCard
           countType={CountType.NUMBER}
           stat={analytics.stats.TRANSACTIONS}
           subfooter="Transaction amount for the last month"
