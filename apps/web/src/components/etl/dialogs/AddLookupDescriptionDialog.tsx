@@ -1,11 +1,45 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
-import { AddLookupDescriptionForm } from "@/components/etl/forms/AddLookupDescriptionForm";
-import { Button } from "@coin-guard/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@coin-guard/ui";
-import { PlusCircle, TextInitialIcon } from "lucide-react";
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
+import {
+  addLookupDescriptionSchema,
+  type addLookupDescriptionSchemaType,
+} from "@/schemas/lookup";
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+  Spinner,
+  Switch,
+} from "@coin-guard/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PlusCircle } from "lucide-react";
+import {
+  useCallback,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
+import { Controller, useForm } from "react-hook-form";
 
 type AddLookupDescriptionDialogProps =
   | {
@@ -27,15 +61,39 @@ export const AddLookupDescriptionDialog = ({
   trigger,
   description,
 }: AddLookupDescriptionDialogProps) => {
+  const formId = "add-lookup-description";
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
 
-  const handleOnOpenChange = (prevOpen: boolean) => {
-    if (!trigger) {
-      onOpenChange(prevOpen);
-    }
+  const form = useForm<addLookupDescriptionSchemaType>({
+    resolver: zodResolver(addLookupDescriptionSchema),
+    defaultValues: {
+      description,
+      newDescription: "",
+      enabled: true,
+    },
+  });
 
-    setDialogOpen(prevOpen);
-  };
+  const { mutateAsync, isPending } = useAddLookupDescription();
+
+  const handleOnOpenChange = useCallback(
+    (prevOpen: boolean) => {
+      if (!trigger) {
+        onOpenChange(prevOpen);
+      }
+
+      setDialogOpen(prevOpen);
+    },
+    [trigger, onOpenChange],
+  );
+
+  const onSubmit = useCallback(
+    async (values: addLookupDescriptionSchemaType) => {
+      await mutateAsync(values);
+      form.reset();
+      handleOnOpenChange(false);
+    },
+    [form, mutateAsync, handleOnOpenChange],
+  );
 
   return (
     <Dialog onOpenChange={handleOnOpenChange} open={dialogOpen}>
@@ -47,18 +105,89 @@ export const AddLookupDescriptionDialog = ({
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TextInitialIcon}
-          subtitle="Create your lookup descriptions"
-          title="Create Lookup Description"
-        />
-        <div className="px-4">
-          <AddLookupDescriptionForm
-            description={description}
-            setOpen={handleOnOpenChange}
-          />
-        </div>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create Lookup Description</DialogTitle>
+          <DialogDescription>Create your lookup descriptions</DialogDescription>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+            <FieldGroup>
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center">
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Description" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="newDescription"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center">
+                      New Description
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="New Description" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FieldGroup>
+                <Controller
+                  control={form.control}
+                  name="enabled"
+                  render={({ field, fieldState }) => (
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      orientation="horizontal"
+                    >
+                      <FieldContent>
+                        <FieldLabel htmlFor="enable-switch">Enable</FieldLabel>
+                        <FieldDescription>
+                          Enable to modify this description in the transaction.
+                        </FieldDescription>
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </FieldContent>
+                      <Switch
+                        aria-invalid={fieldState.invalid}
+                        checked={field.value}
+                        id="enable-switch"
+                        name={field.name}
+                        onCheckedChange={field.onChange}
+                      />
+                    </Field>
+                  )}
+                />
+              </FieldGroup>
+            </FieldGroup>
+          </form>
+        </Form>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} form={formId} type="submit">
+            {isPending && <Spinner />}
+            Add Lookup Description
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

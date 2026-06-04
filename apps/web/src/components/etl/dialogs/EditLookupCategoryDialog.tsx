@@ -1,10 +1,17 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
 import { EditLookupCategoryForm } from "@/components/etl/forms/EditLookupCategoryForm";
-import { Dialog, DialogContent } from "@coin-guard/ui";
 import type { CategoryWithLookups } from "@/types/categories";
-import { TagIcon } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@coin-guard/ui";
 import type { Dispatch, SetStateAction } from "react";
 
 type EditLookupCategoryDialogProps = {
@@ -20,23 +27,27 @@ export const EditLookupCategoryDialog = ({
 }: EditLookupCategoryDialogProps) => {
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent className="px-0 py-4">
-        <DialogHeader
-          icon={TagIcon}
-          subtitle="Edit your lookup category"
-          title={`Edit ${categoryWithLookups.name}`}
-        />
-        <div className="px-4">
-          <div className="flex flex-col gap-4">
-            {categoryWithLookups.lookups.map((lookup) => (
-              <EditLookupCategoryForm
-                initialValues={lookup}
-                key={lookup.id}
-                setOpen={onOpenChange}
-              />
-            ))}
-          </div>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit your lookup category</DialogTitle>
+          <DialogDescription>Edit {categoryWithLookups.name}</DialogDescription>
+        </DialogHeader>
+
+        <div className="flex flex-col gap-4">
+          {categoryWithLookups.lookups.map((lookup) => (
+            <EditLookupCategoryForm
+              initialValues={lookup}
+              key={lookup.id}
+              setOpen={onOpenChange}
+            />
+          ))}
         </div>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

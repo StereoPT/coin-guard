@@ -1,12 +1,29 @@
 "use client";
 
-import { DialogHeader } from "@/components/DialogHeader";
-import { Dialog, DialogContent } from "@coin-guard/ui";
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Form,
+  Spinner,
+} from "@coin-guard/ui";
 
-import { PlusCircle } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { useCallback, type Dispatch, type SetStateAction } from "react";
 
-import { AddTransactionForm } from "@/components/transactions/forms/AddTransactionForm";
+import { TransactionFormFields } from "@/components/transactions/TransactionFormFields";
+import { FormType } from "@/constants/forms";
+import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
+import {
+  addTransactionSchema,
+  type addTransactionSchemaType,
+} from "@/schemas/transactions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 type AddTransactionDialogProps = {
   open: boolean;
@@ -17,21 +34,55 @@ export const AddTransactionDialog = ({
   open,
   setOpen,
 }: AddTransactionDialogProps) => {
-  const handleOnOpenChange = (open: boolean) => {
-    setOpen(open);
-  };
+  const formId = "add-transaction";
+
+  const form = useForm<addTransactionSchemaType>({
+    resolver: zodResolver(addTransactionSchema),
+    defaultValues: {
+      date: undefined,
+      description: "",
+      type: undefined,
+      amount: 0,
+      balance: 0,
+      note: "",
+      categoryId: undefined,
+    },
+  });
+
+  const { mutateAsync, isPending } = useAddTransaction();
+
+  const onSubmit = useCallback(
+    async (values: addTransactionSchemaType) => {
+      await mutateAsync(values);
+      form.reset();
+      setOpen(false);
+    },
+    [form, mutateAsync, setOpen],
+  );
 
   return (
-    <Dialog onOpenChange={handleOnOpenChange} open={open}>
-      <DialogContent className="px-0 py-4 max-w-2xl!">
-        <DialogHeader
-          icon={PlusCircle}
-          subtitle="Create a new transaction"
-          title="Create Transaction"
-        />
-        <div className="px-4">
-          <AddTransactionForm setOpen={setOpen} />
-        </div>
+    <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
+      <DialogContent className="max-w-2xl!">
+        <DialogHeader>
+          <DialogTitle>Create Transaction</DialogTitle>
+          <DialogDescription>Create a new transaction</DialogDescription>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+            <TransactionFormFields formId={formId} formType={FormType.ADD} />
+          </form>
+        </Form>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button disabled={isPending} form={formId} type="submit">
+            {isPending && <Spinner />}
+            Add Transaction
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

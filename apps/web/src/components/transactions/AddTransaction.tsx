@@ -1,10 +1,11 @@
 "use client";
 
 import { AddTransactionDialog } from "@/components/transactions/dialogs/AddTransactionDialog";
-import { ButtonGroup, ButtonGroupSeparator } from "@coin-guard/ui";
 import { ROUTES } from "@/constants/routes";
-import { Button } from "@coin-guard/ui";
 import {
+  Button,
+  ButtonGroup,
+  ButtonGroupSeparator,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -21,6 +22,7 @@ export const AddTransaction = () => {
   return (
     <>
       {open && <AddTransactionDialog open={open} setOpen={setOpen} />}
+
       <div>
         <ButtonGroup>
           <Button asChild>
