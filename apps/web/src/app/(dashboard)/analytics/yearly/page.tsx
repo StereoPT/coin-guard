@@ -1,4 +1,5 @@
-import { UserYearlyAnalytics } from "@/components/analytics/UserYearlyAnalytics";
+import { YearlyAnalytics } from "@/components/analytics/YearlyAnalytics";
+import { YearlySelection } from "@/components/analytics/YearlySelection";
 import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { yearlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
@@ -14,14 +15,15 @@ const YearlyPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <PageHeader
             description="Your yearly overview"
             title="Yearly Analytics"
           />
+          <YearlySelection />
         </div>
         <div className="h-full py-6">
-          <UserYearlyAnalytics year={year} />
+          <YearlyAnalytics />
         </div>
       </div>
     </HydrationBoundary>

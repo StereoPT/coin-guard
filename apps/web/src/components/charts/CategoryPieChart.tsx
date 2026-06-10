@@ -1,112 +1,149 @@
+"use client";
+
+import { CategoryChartDialog } from "@/components/charts/CategoryChartDialog";
 import { formatCurrency } from "@/lib/formatter";
 import type { CategoryStats } from "@/types/categories";
 import {
+  Button,
   Card,
+  CardAction,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  type ChartConfig,
   ChartContainer,
+  ChartStyle,
   ChartTooltip,
   ChartTooltipContent,
-  cn,
 } from "@coin-guard/ui";
-import type { ClassValue } from "clsx";
-import { Loader2 } from "lucide-react";
-import { Cell, Pie, PieChart } from "recharts";
-
-const COLORS = [
-  "#99f6e4",
-  "#5eead4",
-  "#2dd4bf",
-  "#14b8a6",
-  "#0d9488",
-  "#0f766e",
-  "#115e59",
-  "#134e4a",
-  "#042f2e",
-  "#7ee7d8",
-  "#1fa796",
-];
-
-const chartConfig = {
-  totalAmount: {
-    label: "Amount",
-  },
-} satisfies ChartConfig;
+import { Eye } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Cell, Pie, PieChart, Sector } from "recharts";
+import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 type CategoryPieChartProps = {
-  title: string;
-  description: string;
-  categoryStats?: CategoryStats[];
-  className?: ClassValue;
+  categoryStats: CategoryStats[];
 };
 
-export const CategoryPieChart = ({
-  title,
-  description,
-  categoryStats,
-  className,
-}: CategoryPieChartProps) => {
+export const CategoryPieChart = ({ categoryStats }: CategoryPieChartProps) => {
+  const id = "analytics-categories";
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const pieData = useMemo(() => categoryStats.slice(0, 5), [categoryStats]);
+
+  const chartConfig = useMemo(() => {
+    const colors = [
+      "var(--chart-1)",
+      "var(--chart-2)",
+      "var(--chart-3)",
+      "var(--chart-4)",
+      "var(--chart-5)",
+    ];
+
+    const config: Record<string, { label: string; color?: string }> = {
+      totalAmount: {
+        label: "Amount",
+      },
+    };
+
+    pieData.forEach((stat, index) => {
+      config[stat.categoryId] = {
+        label: stat.categoryName,
+        color: colors[index % colors.length],
+      };
+    });
+
+    return config;
+  }, [pieData]);
+
   return (
-    <Card className={cn("p-4", className)}>
-      <CardHeader className="items-center pb-0">
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <div>
-        {!categoryStats ? (
-          <div className="flex items-center justify-center mx-auto aspect-square max-h-75">
-            <Loader2 className="animate-spin text-muted-foreground" size={64} />
+    <>
+      {openDialog && (
+        <CategoryChartDialog
+          categoryStats={categoryStats}
+          onOpenChange={setOpenDialog}
+          open={openDialog}
+        />
+      )}
+
+      <Card className="h-full flex flex-col" data-chart={id}>
+        <CardHeader className="flex flex-col items-stretch border-b sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1">
+            <CardTitle>Expenses Categories</CardTitle>
+            <CardDescription>Category breakdown of expenses</CardDescription>
           </div>
-        ) : (
-          <ChartContainer
-            className="mx-auto aspect-square max-h-75"
-            config={chartConfig}
-          >
-            <PieChart>
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name, item) => {
-                      return (
-                        <div className="flex items-center gap-2">
-                          <div
-                            className="w-2.5 h-2.5 rounded-xs bg-(--color-bg)"
-                            style={
-                              {
-                                "--color-bg": item.payload.fill,
-                              } as React.CSSProperties
-                            }
-                          />
-                          <span className="font-bold">{name}:</span>
-                          <span>{formatCurrency(Number(value))}</span>
-                        </div>
-                      );
-                    }}
-                    hideLabel
-                  />
-                }
-                cursor={false}
-              />
-              <Pie
-                data={categoryStats}
-                dataKey="totalAmount"
-                innerRadius={60}
-                nameKey="categoryName"
-                outerRadius={100}
-              >
-                {categoryStats?.map((entry, index) => (
-                  <Cell
-                    fill={COLORS[index % COLORS.length]}
-                    key={`cell-${entry.categoryId}`}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-        )}
-      </div>
-    </Card>
+          <CardAction>
+            <Button
+              onClick={() => setOpenDialog(true)}
+              size="sm"
+              variant="outline"
+            >
+              <Eye />
+              View All
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent className="flex flex-1 items-center justify-center">
+          <div className="flex h-full w-full justify-center">
+            <ChartStyle config={chartConfig} id={id} key={id} />
+            <ChartContainer
+              className="mx-auto aspect-square min-h-32"
+              config={chartConfig}
+              id={id}
+            >
+              <PieChart>
+                <ChartTooltip
+                  content={
+                    <ChartTooltipContent
+                      formatter={(value, _name, item) => {
+                        return (
+                          <div className="flex flex-col gap-1" key="tooltip">
+                            <span className="text-foreground text-xs font-bold">
+                              {item.payload.categoryName}
+                            </span>
+                            <span className="text-foreground font-medium">
+                              {formatCurrency(Number(value))}
+                            </span>
+                          </div>
+                        );
+                      }}
+                      hideLabel
+                    />
+                  }
+                  cursor={false}
+                />
+                <Pie
+                  activeShape={({
+                    outerRadius = 0,
+                    ...props
+                  }: PieSectorDataItem) => (
+                    <g>
+                      <Sector {...props} outerRadius={outerRadius + 10} />
+                      <Sector
+                        {...props}
+                        innerRadius={outerRadius + 12}
+                        outerRadius={outerRadius + 25}
+                      />
+                    </g>
+                  )}
+                  data={pieData}
+                  dataKey="totalAmount"
+                  innerRadius={75}
+                  nameKey="categoryId"
+                  strokeWidth={5}
+                >
+                  {pieData.map((entry) => (
+                    <Cell
+                      fill={`var(--color-${entry.categoryId})`}
+                      key={entry.categoryId}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ChartContainer>
+          </div>
+        </CardContent>
+      </Card>
+    </>
   );
 };
