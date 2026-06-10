@@ -24,8 +24,8 @@ export const BreadcrumbShell = ({
         <BreadcrumbItem>
           <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
         </BreadcrumbItem>
-        {trail.map(({ label, href }, i) => (
-          <span className="contents" key={`${href ?? label}-${i}`}>
+        {trail.map(({ label, href }) => (
+          <span className="contents" key={`${href ?? label}`}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               {href ? (
