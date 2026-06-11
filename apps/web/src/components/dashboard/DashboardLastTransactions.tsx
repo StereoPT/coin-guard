@@ -23,9 +23,11 @@ export const DashboardLastTransactions = ({
 }: DashboardLastTransactionsProps) => {
   return (
     <Card className="h-full flex flex-col">
-      <CardHeader>
-        <CardTitle>Recent Transactions</CardTitle>
-        <CardDescription>Latest five transactions</CardDescription>
+      <CardHeader className="flex flex-col items-stretch border-b sm:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1">
+          <CardTitle>Recent Transactions</CardTitle>
+          <CardDescription>Latest five transactions</CardDescription>
+        </div>
         <CardAction>
           <Button asChild size="sm" variant="outline">
             <Link href={ROUTES.transactions}>
@@ -39,7 +41,7 @@ export const DashboardLastTransactions = ({
         {transactions.map((transaction) => {
           return (
             <Link
-              className="flex p-3 rounded-lg border gap-2"
+              className="flex p-3 rounded-lg border gap-2 hover:bg-secondary/80 transition-colors"
               href={ROUTES.transaction(transaction.id)}
               key={transaction.id}
             >

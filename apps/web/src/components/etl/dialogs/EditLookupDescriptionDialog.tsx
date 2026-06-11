@@ -1,5 +1,6 @@
 "use client";
 
+import { LookupDescriptionFormField } from "@/components/etl/LookupDescriptionFormField";
 import { useEditLookupDescription } from "@/hooks/etl/descriptions/useEditLookupDescription";
 import {
   editLookupDescriptionSchema,
@@ -15,25 +16,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
   Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
   Spinner,
-  Switch,
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type EditLookupDescriptionDialogProps = {
   lookupDescription: LookupDescription;
@@ -78,69 +66,7 @@ export const EditLookupDescriptionDialog = ({
 
         <Form {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Description" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="newDescription"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      New Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="New Description" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FieldGroup>
-                <Controller
-                  control={form.control}
-                  name="enabled"
-                  render={({ field, fieldState }) => (
-                    <Field
-                      data-invalid={fieldState.invalid}
-                      orientation="horizontal"
-                    >
-                      <FieldContent>
-                        <FieldLabel htmlFor="enable-switch">Enable</FieldLabel>
-                        <FieldDescription>
-                          Enable to modify this description in the transaction.
-                        </FieldDescription>
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </FieldContent>
-                      <Switch
-                        aria-invalid={fieldState.invalid}
-                        checked={field.value}
-                        id="enable-switch"
-                        name={field.name}
-                        onCheckedChange={field.onChange}
-                      />
-                    </Field>
-                  )}
-                />
-              </FieldGroup>
-            </FieldGroup>
+            <LookupDescriptionFormField formId={formId} />
           </form>
         </Form>
 

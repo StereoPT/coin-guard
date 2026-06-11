@@ -24,7 +24,6 @@ export const GetDashboardCategories = async () => {
     orderBy: {
       _sum: { amount: "desc" },
     },
-    take: 5,
   });
 
   const categoryIds = categoryTotals

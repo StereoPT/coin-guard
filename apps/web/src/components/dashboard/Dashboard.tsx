@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardCategoryChart } from "@/components/dashboard/DashboardCategoryChart";
+import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DashboardLastTransactions } from "@/components/dashboard/DashboardLastTransactions";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { StatCard } from "@/components/StatCard";
@@ -43,7 +43,7 @@ export const Dashboard = () => {
           />
         </div>
         <div className="col-span-5 xl:col-span-2 h-full">
-          <DashboardCategoryChart categoryStats={analytics.categoryStats} />
+          <CategoryPieChart categoryStats={analytics.categoryStats} />
         </div>
       </div>
     </div>
