@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: Version bump type
+        required: true
+        type: choice
+        options:
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "coin-guard[bot]"
+          git config user.email "bot@coin-guard.noreply"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Bump version
+        id: bump
+        run: |
+          npm version ${{ inputs.bump_type }} -m "chore: release %s [skip ci]"
+          NEW_VERSION=$(npm pkg get version | tr -d '"')
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Push
+        run: git push --follow-tags
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.bump.outputs.version }}" \
+            --title "CoinGuard v${{ steps.bump.outputs.version }}" \
+            --generate-notes
