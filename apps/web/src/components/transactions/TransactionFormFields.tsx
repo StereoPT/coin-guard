@@ -185,6 +185,7 @@ export const TransactionFormFields = ({
                 <Input
                   {...field}
                   id={`${formId}-amount`}
+                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   placeholder="Amount"
                   type="number"
                 />
@@ -209,6 +210,7 @@ export const TransactionFormFields = ({
                 <Input
                   {...field}
                   id={`${formId}-balance`}
+                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   placeholder="Balance"
                   type="number"
                 />
