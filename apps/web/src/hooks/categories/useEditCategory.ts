@@ -11,15 +11,26 @@ export const useEditCategory = (categoryId: string) => {
 
   return useMutation({
     mutationFn: (data: editCategorySchemaType) => {
-      toast.loading("Editing category...", { id: toastId });
+      toast.loading("Editing category...", {
+        description: "",
+        id: toastId,
+      });
+
       return EditCategory(categoryId, data);
     },
     onSuccess: () => {
-      toast.success("Category edited", { id: toastId });
+      toast.success("Category edited", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
-    onError: () => {
-      toast.error("Failed to edit category", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to edit category", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

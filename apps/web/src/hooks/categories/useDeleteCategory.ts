@@ -10,15 +10,26 @@ export const useDeleteCategory = (id: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Deleting category...", { id: toastID });
+      toast.loading("Deleting category...", {
+        description: "",
+        id: toastID,
+      });
+
       return DeleteCategory(id);
     },
     onSuccess: () => {
-      toast.success("Category deleted", { id: toastID });
+      toast.success("Category deleted", {
+        description: "",
+        id: toastID,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
-    onError: () => {
-      toast.error("Failed to delete category", { id: toastID });
+    onError: ({ message }) => {
+      toast.error("Failed to delete category", {
+        description: message ?? "Please try again later",
+        id: toastID,
+      });
     },
   });
 };
