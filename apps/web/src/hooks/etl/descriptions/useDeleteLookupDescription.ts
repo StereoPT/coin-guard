@@ -10,15 +10,26 @@ export const useDeleteLookupDescription = (lookupDescriptionId: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Deleting lookup description...", { id: toastID });
+      toast.loading("Deleting lookup description...", {
+        description: "",
+        id: toastID,
+      });
+
       return DeleteLookupDescription(lookupDescriptionId);
     },
     onSuccess: () => {
-      toast.success("Lookup description deleted", { id: toastID });
+      toast.success("Lookup description deleted", {
+        description: "",
+        id: toastID,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupDescriptions });
     },
     onError: () => {
-      toast.error("Failed to delete lookup description", { id: toastID });
+      toast.error("Failed to delete lookup description", {
+        description: "",
+        id: toastID,
+      });
     },
   });
 };

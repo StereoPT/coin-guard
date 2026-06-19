@@ -1,23 +1,16 @@
 "use server";
 
-import { prisma } from "@coin-guard/db/server";
+import { parseOrThrow } from "@/lib/parseOrThrow";
 import {
   addLookupDescriptionSchema,
   type addLookupDescriptionSchemaType,
 } from "@/schemas/lookup";
+import { prisma } from "@coin-guard/db/server";
 
 export const AddLookupDescription = async (
   values: addLookupDescriptionSchemaType,
 ) => {
-  const { success, data } =
-    await addLookupDescriptionSchema.safeParseAsync(values);
+  const data = await parseOrThrow(addLookupDescriptionSchema, values);
 
-  if (!success) {
-    throw new Error("Invalid Form Data");
-  }
-
-  const result = await prisma.lookupDescription.create({ data });
-  if (!result) {
-    throw new Error("Failed to Add Lookup Description");
-  }
+  await prisma.lookupDescription.create({ data });
 };

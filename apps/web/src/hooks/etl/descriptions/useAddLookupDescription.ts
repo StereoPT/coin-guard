@@ -11,15 +11,26 @@ export const useAddLookupDescription = () => {
 
   return useMutation({
     mutationFn: (data: addLookupDescriptionSchemaType) => {
-      toast.loading("Creating lookup description...", { id: toastId });
+      toast.loading("Creating lookup description...", {
+        description: "",
+        id: toastId,
+      });
+
       return AddLookupDescription(data);
     },
     onSuccess: () => {
-      toast.success("Lookup description added", { id: toastId });
+      toast.success("Lookup description added", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupDescriptions });
     },
-    onError: () => {
-      toast.error("Failed to add lookup description", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to add lookup description", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };
