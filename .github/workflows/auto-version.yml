@@ -1,0 +1,36 @@
+name: Auto Version
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    name: Bump Patch Version
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "coin-guard[bot]"
+          git config user.email "bot@coin-guard.noreply"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Bump patch version
+        run: |
+          npm version patch -m "chore: bump version to %s [skip ci]"
+
+      - name: Push
+        run: git push --follow-tags

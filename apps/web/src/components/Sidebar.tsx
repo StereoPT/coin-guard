@@ -123,7 +123,9 @@ export const Sidebar = () => {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">CoinGuard</span>
-                  <span className="">v8.0.0</span>
+                  <span className="">
+                    v{process.env.NEXT_PUBLIC_APP_VERSION}
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
