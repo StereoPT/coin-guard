@@ -7,14 +7,24 @@ export const useApplyLookupDescription = (lookupDescriptionId: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Applying lookup description...", { id: toastID });
+      toast.loading("Applying lookup description...", {
+        description: "",
+        id: toastID,
+      });
+
       return ApplyLookupDescription(lookupDescriptionId);
     },
     onSuccess: () => {
-      toast.success("Lookup description applied", { id: toastID });
+      toast.success("Lookup description applied", {
+        description: "",
+        id: toastID,
+      });
     },
-    onError: () => {
-      toast.error("Failed to apply lookup description", { id: toastID });
+    onError: ({ message }) => {
+      toast.error("Failed to apply lookup description", {
+        description: message ?? "Please try again later",
+        id: toastID,
+      });
     },
   });
 };

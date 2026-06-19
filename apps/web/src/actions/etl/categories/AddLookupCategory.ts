@@ -1,23 +1,16 @@
 "use server";
 
-import { prisma } from "@coin-guard/db/server";
+import { parseOrThrow } from "@/lib/parseOrThrow";
 import {
   addLookupCategorySchema,
   type addLookupCategorySchemaType,
 } from "@/schemas/lookup";
+import { prisma } from "@coin-guard/db/server";
 
 export const AddLookupCategory = async (
   formValues: addLookupCategorySchemaType,
 ) => {
-  const { success, data } =
-    await addLookupCategorySchema.safeParseAsync(formValues);
+  const data = await parseOrThrow(addLookupCategorySchema, formValues);
 
-  if (!success) {
-    throw new Error("Invalid Form Data");
-  }
-
-  const result = await prisma.lookupCategory.create({ data });
-  if (!result) {
-    throw new Error("Failed to Add Lookup Category");
-  }
+  await prisma.lookupCategory.create({ data });
 };

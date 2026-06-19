@@ -8,10 +8,12 @@ export const ApplyLookupDescription = async (lookupDescriptionId: string) => {
   });
 
   if (!lookupDescription) {
-    throw new Error("Lookup description not found");
+    throw new Error(
+      `Lookup description with ID ${lookupDescriptionId} not found`,
+    );
   }
 
-  const result = await prisma.transaction.updateMany({
+  await prisma.transaction.updateMany({
     where: {
       description: lookupDescription.description,
     },
@@ -19,8 +21,4 @@ export const ApplyLookupDescription = async (lookupDescriptionId: string) => {
       description: lookupDescription.newDescription,
     },
   });
-
-  if (!result) {
-    throw new Error("Failed to apply lookup description");
-  }
 };

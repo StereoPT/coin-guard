@@ -1,19 +1,14 @@
 "use server";
 
-import { prisma } from "@coin-guard/db/server";
+import { parseOrThrow } from "@/lib/parseOrThrow";
 import {
   addCategorySchema,
   type addCategorySchemaType,
 } from "@/schemas/categories";
+import { prisma } from "@coin-guard/db/server";
 
 export const AddCategory = async (formValues: addCategorySchemaType) => {
-  const { success, data } = await addCategorySchema.safeParseAsync(formValues);
-  if (!success) {
-    throw new Error("Invalid Form Data");
-  }
+  const data = await parseOrThrow(addCategorySchema, formValues);
 
-  const result = await prisma.category.create({ data });
-  if (!result) {
-    throw new Error("Failed to Add Category");
-  }
+  await prisma.category.create({ data });
 };

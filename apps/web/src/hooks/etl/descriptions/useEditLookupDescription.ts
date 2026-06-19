@@ -11,15 +11,26 @@ export const useEditLookupDescription = (lookupDescriptionId: string) => {
 
   return useMutation({
     mutationFn: (data: editLookupDescriptionSchemaType) => {
-      toast.loading("Editing lookup description...", { id: toastId });
+      toast.loading("Editing lookup description...", {
+        description: "",
+        id: toastId,
+      });
+
       return EditLookupDescription(lookupDescriptionId, data);
     },
     onSuccess: () => {
-      toast.success("Lookup description edited", { id: toastId });
+      toast.success("Lookup description edited", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupDescriptions });
     },
-    onError: () => {
-      toast.error("Failed to edit lookup description", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to edit lookup description", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

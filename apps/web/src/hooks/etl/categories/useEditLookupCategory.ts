@@ -11,15 +11,26 @@ export const useEditLookupCategory = (lookupCategoryId: string) => {
 
   return useMutation({
     mutationFn: (data: editLookupCategorySchemaType) => {
-      toast.loading("Editing lookup category...", { id: toastId });
+      toast.loading("Editing lookup category...", {
+        description: "",
+        id: toastId,
+      });
+
       return EditLookupCategory(lookupCategoryId, data);
     },
     onSuccess: () => {
-      toast.success("Lookup category edited", { id: toastId });
+      toast.success("Lookup category edited", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupCategories });
     },
-    onError: () => {
-      toast.error("Failed to edit lookup category", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to edit lookup category", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

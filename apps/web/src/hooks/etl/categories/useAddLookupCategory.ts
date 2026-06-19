@@ -11,15 +11,26 @@ export const useAddLookupCategory = () => {
 
   return useMutation({
     mutationFn: (data: addLookupCategorySchemaType) => {
-      toast.loading("Creating lookup category...", { id: toastId });
+      toast.loading("Creating lookup category...", {
+        description: "",
+        id: toastId,
+      });
+
       return AddLookupCategory(data);
     },
     onSuccess: () => {
-      toast.success("Lookup category added", { id: toastId });
+      toast.success("Lookup category added", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupCategories });
     },
-    onError: () => {
-      toast.error("Failed to add lookup category", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to add lookup category", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

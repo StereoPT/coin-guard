@@ -12,7 +12,7 @@ export const GetTransaction = async (transactionId: string) => {
     });
 
     if (!transaction) {
-      throw new Error("Transaction not found!");
+      throw new Error(`Transaction with ID ${transactionId} not found`);
     }
 
     const all = await prisma.transaction.findMany({

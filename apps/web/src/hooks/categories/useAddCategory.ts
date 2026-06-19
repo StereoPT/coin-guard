@@ -11,15 +11,26 @@ export const useAddCategory = () => {
 
   return useMutation({
     mutationFn: (data: addCategorySchemaType) => {
-      toast.loading("Creating category...", { id: toastId });
+      toast.loading("Creating category...", {
+        description: "",
+        id: toastId,
+      });
+
       return AddCategory(data);
     },
     onSuccess: () => {
-      toast.success("Category added", { id: toastId });
+      toast.success("Category added", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.categories });
     },
-    onError: () => {
-      toast.error("Failed to add category", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to add category", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

@@ -10,15 +10,26 @@ export const useDeleteAllLookupCategories = (categoryId: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Deleting all lookup categories...", { id: toastID });
+      toast.loading("Deleting all lookup categories...", {
+        description: "",
+        id: toastID,
+      });
+
       return DeleteAllLookupCategories(categoryId);
     },
     onSuccess: () => {
-      toast.success("All lookup categories deleted", { id: toastID });
+      toast.success("All lookup categories deleted", {
+        description: "",
+        id: toastID,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.lookupCategories });
     },
-    onError: () => {
-      toast.error("Failed to delete all lookup categories", { id: toastID });
+    onError: ({ message }) => {
+      toast.error("Failed to delete all lookup categories", {
+        description: message ?? "Please try again later",
+        id: toastID,
+      });
     },
   });
 };

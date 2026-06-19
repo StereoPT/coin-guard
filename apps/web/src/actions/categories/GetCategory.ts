@@ -8,7 +8,7 @@ export const GetCategory = async (categoryId: string) => {
   });
 
   if (!category) {
-    throw new Error("Category not found");
+    throw new Error(`Category with ID ${categoryId} not found`);
   }
 
   const transactions = await prisma.transaction.findMany({
