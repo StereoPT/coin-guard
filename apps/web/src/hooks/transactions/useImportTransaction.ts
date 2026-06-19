@@ -12,17 +12,23 @@ export const useImportTransaction = () => {
   return useMutation({
     mutationFn: async (transactions: ProcessedTransaction[]) => {
       toast.loading("Importing transactions...", {
+        description: "",
         id: toastId,
       });
 
       return ImportTransaction(transactions);
     },
     onSuccess: () => {
-      toast.success("Transactions imported", { id: toastId });
+      toast.success("Transactions imported", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
-    onError: () => {
+    onError: ({ message }) => {
       toast.error("Failed to import transactions", {
+        description: message ?? "Please try again later",
         id: toastId,
       });
     },

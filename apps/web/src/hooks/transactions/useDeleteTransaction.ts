@@ -10,15 +10,26 @@ export const useDeleteTransaction = (transactionId: string) => {
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Deleting transaction...", { id: toastID });
+      toast.loading("Deleting transaction...", {
+        description: "",
+        id: toastID,
+      });
+
       return DeleteTransaction(transactionId);
     },
     onSuccess: () => {
-      toast.success("Transaction deleted", { id: toastID });
+      toast.success("Transaction deleted", {
+        description: "",
+        id: toastID,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
-    onError: () => {
-      toast.error("Failed to delete transaction", { id: toastID });
+    onError: ({ message }) => {
+      toast.error("Failed to delete transaction", {
+        description: message ?? "Please try again later",
+        id: toastID,
+      });
     },
   });
 };

@@ -11,15 +11,26 @@ export const useEditTransaction = (transactionId: string) => {
 
   return useMutation({
     mutationFn: (data: editTransactionSchemaType) => {
-      toast.loading("Editing transaction...", { id: toastId });
+      toast.loading("Editing transaction...", {
+        description: "",
+        id: toastId,
+      });
+
       return EditTransaction(transactionId, data);
     },
     onSuccess: () => {
-      toast.success("Transaction edited", { id: toastId });
+      toast.success("Transaction edited", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
-    onError: () => {
-      toast.error("Failed to edit transaction", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to edit transaction", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };

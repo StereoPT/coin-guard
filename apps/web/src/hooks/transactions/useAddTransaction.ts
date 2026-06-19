@@ -11,15 +11,26 @@ export const useAddTransaction = () => {
 
   return useMutation({
     mutationFn: (data: addTransactionSchemaType) => {
-      toast.loading("Creating transaction...", { id: toastId });
+      toast.loading("Creating transaction...", {
+        description: "",
+        id: toastId,
+      });
+
       return AddTransaction(data);
     },
     onSuccess: () => {
-      toast.success("Transaction added", { id: toastId });
+      toast.success("Transaction added", {
+        description: "",
+        id: toastId,
+      });
+
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
     },
-    onError: () => {
-      toast.error("Failed to add transaction", { id: toastId });
+    onError: ({ message }) => {
+      toast.error("Failed to add transaction", {
+        description: message ?? "Please try again later",
+        id: toastId,
+      });
     },
   });
 };
