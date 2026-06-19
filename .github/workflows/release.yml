@@ -47,6 +47,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "v${{ steps.bump.outputs.version }}" \
-            --title "CoinGuard v${{ steps.bump.outputs.version }}" \
-            --generate-notes
+          PREV_RELEASE=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
+          if [ -n "$PREV_RELEASE" ]; then
+            gh release create "v${{ steps.bump.outputs.version }}" \
+              --title "CoinGuard v${{ steps.bump.outputs.version }}" \
+              --generate-notes \
+              --notes-start-tag "$PREV_RELEASE"
+          else
+            gh release create "v${{ steps.bump.outputs.version }}" \
+              --title "CoinGuard v${{ steps.bump.outputs.version }}" \
+              --generate-notes
+          fi
