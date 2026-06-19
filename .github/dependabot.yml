@@ -10,11 +10,47 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
     groups:
-      production-dependencies:
+      production-patch:
         dependency-type: "production"
-      development-dependencies:
+        update-types:
+          - "patch"
+      production-minor:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+      development-patch:
         dependency-type: "development"
+        update-types:
+          - "patch"
+      development-minor:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-patch"
+          - "version-update:semver-minor"
+    groups:
+      production-major:
+        dependency-type: "production"
+        update-types:
+          - "major"
+      development-major:
+        dependency-type: "development"
+        update-types:
+          - "major"
 
   - package-ecosystem: "github-actions"
     directory: "/"
