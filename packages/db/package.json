@@ -31,8 +31,8 @@
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
-    "@types/node": "^25",
+    "@types/node": "^26",
     "prisma": "^7.4.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   }
 }
