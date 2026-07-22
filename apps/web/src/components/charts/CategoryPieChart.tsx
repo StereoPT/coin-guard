@@ -18,8 +18,13 @@ import {
 } from "@coin-guard/ui";
 import { Eye } from "@coin-guard/ui/icons";
 import { useMemo, useState } from "react";
-import { Cell, Pie, PieChart, Sector } from "recharts";
-import type { PieSectorDataItem } from "recharts/types/polar/Pie";
+import {
+  Cell,
+  Pie,
+  PieChart,
+  type PieSectorDataItem,
+  Sector,
+} from "@coin-guard/ui/charts";
 
 type CategoryPieChartProps = {
   categoryStats: CategoryStats[];

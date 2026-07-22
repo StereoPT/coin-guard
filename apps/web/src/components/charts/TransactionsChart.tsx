@@ -9,7 +9,7 @@ import {
 } from "@coin-guard/ui";
 import { endOfMonth, format, subMonths } from "date-fns";
 import { useMemo } from "react";
-import { Bar, CartesianGrid, ComposedChart, Line, XAxis } from "recharts";
+import { Bar, CartesianGrid, ComposedChart, Line, XAxis } from "@coin-guard/ui/charts";
 
 const chartConfig = {
   amount: {

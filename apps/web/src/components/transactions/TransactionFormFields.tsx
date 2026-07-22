@@ -89,7 +89,7 @@ export const TransactionFormFields = ({
                           )}
                           disabled={formType === FormType.EDIT}
                           id={`${formId}-date`}
-                          variant={"outline"}
+                          variant="input"
                         >
                           {field.value ? (
                             format(field.value, "PPP")
@@ -101,7 +101,7 @@ export const TransactionFormFields = ({
                       </FormControl>
                     }
                   />
-                  <PopoverContent align="start" className="w-auto p-0">
+                  <PopoverContent align="center" className="w-auto p-0">
                     <Calendar
                       captionLayout="dropdown"
                       disabled={(date) =>

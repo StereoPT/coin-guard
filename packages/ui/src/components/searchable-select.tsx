@@ -61,13 +61,13 @@ export function SearchableSelect({
             !value && "text-muted-foreground",
           )}
           disabled={disabled}
-          variant="outline"
+          variant="input"
         />
       }>
         {selectedOption ? selectedOption.label : placeholder}
         <ChevronsUpDown className="opacity-50" />
       </PopoverTrigger>
-      <PopoverContent className="w-[230px] p-0">
+      <PopoverContent className="w-57.5 p-0">
         <Command>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
