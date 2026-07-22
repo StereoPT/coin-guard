@@ -2,8 +2,8 @@ import { AddTransaction } from "@/actions/transactions/AddTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { addTransactionSchemaType } from "@/schemas/transactions";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useAddTransaction = () => {
   const queryClient = getQueryClient();

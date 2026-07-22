@@ -2,8 +2,8 @@ import { AddLookupDescription } from "@/actions/etl/descriptions/AddLookupDescri
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { addLookupDescriptionSchemaType } from "@/schemas/lookup";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useAddLookupDescription = () => {
   const queryClient = getQueryClient();

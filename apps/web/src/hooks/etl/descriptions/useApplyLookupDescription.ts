@@ -1,6 +1,6 @@
 import { ApplyLookupDescription } from "@/actions/etl/descriptions/ApplyLookupDescription";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useApplyLookupDescription = (lookupDescriptionId: string) => {
   const toastID = `apply-lookup-description-${lookupDescriptionId}`;

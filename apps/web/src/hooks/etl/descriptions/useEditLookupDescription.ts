@@ -2,8 +2,8 @@ import { EditLookupDescription } from "@/actions/etl/descriptions/EditLookupDesc
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { editLookupDescriptionSchemaType } from "@/schemas/lookup";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useEditLookupDescription = (lookupDescriptionId: string) => {
   const queryClient = getQueryClient();

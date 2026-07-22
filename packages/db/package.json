@@ -31,6 +31,7 @@
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^26.1.1",
     "prisma": "^7.9.0",
     "typescript": "catalog:"

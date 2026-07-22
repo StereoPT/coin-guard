@@ -2,8 +2,8 @@ import { EditTransaction } from "@/actions/transactions/EditTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { editTransactionSchemaType } from "@/schemas/transactions";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useEditTransaction = (transactionId: string) => {
   const queryClient = getQueryClient();
