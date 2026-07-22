@@ -29,7 +29,7 @@ import {
   Textarea,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon } from "@coin-guard/ui/icons";
 import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 

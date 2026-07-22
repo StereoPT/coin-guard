@@ -1,5 +1,5 @@
 import { ROUTES } from "@/constants/routes";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "@coin-guard/ui/icons";
 import Link from "next/link";
 
 const NotFound = () => {

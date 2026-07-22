@@ -24,7 +24,7 @@ import {
   Calendar,
   FileText,
   Tag,
-} from "lucide-react";
+} from "@coin-guard/ui/icons";
 
 type TransactionDetailsProps = {
   transactionId: string;

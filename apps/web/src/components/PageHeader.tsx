@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@coin-guard/ui";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "@coin-guard/ui/icons";
 import { useRouter } from "next/navigation";
 
 type PageHeaderProps = {

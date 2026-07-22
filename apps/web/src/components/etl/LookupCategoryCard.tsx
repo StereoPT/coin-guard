@@ -20,7 +20,7 @@ import {
   MoreHorizontal,
   PlusCircle,
   Trash2,
-} from "lucide-react";
+} from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type LookupCategoryCardProps = {

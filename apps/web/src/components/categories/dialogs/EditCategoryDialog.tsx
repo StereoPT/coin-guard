@@ -21,7 +21,7 @@ import {
   Spinner,
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Edit } from "lucide-react";
+import { Edit } from "@coin-guard/ui/icons";
 import {
   type Dispatch,
   type SetStateAction,

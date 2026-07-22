@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@coin-guard/ui";
-import { TrendingDown, TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp } from "@coin-guard/ui/icons";
 
 type StatCardProps = {
   title: string;

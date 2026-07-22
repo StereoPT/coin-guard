@@ -2,7 +2,7 @@ import type { TransactionType } from "@coin-guard/db";
 import { formatCurrency } from "@/lib/formatter";
 import { cn } from "@coin-guard/ui";
 import { Badge } from "@coin-guard/ui";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp } from "@coin-guard/ui/icons";
 
 type AmountBadgeProps = {
   amount: number;

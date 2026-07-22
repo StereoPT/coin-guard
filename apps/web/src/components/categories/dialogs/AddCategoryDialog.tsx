@@ -21,7 +21,7 @@ import {
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { PlusCircle } from "lucide-react";
+import { PlusCircle } from "@coin-guard/ui/icons";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 

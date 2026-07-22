@@ -24,7 +24,7 @@ import {
   TagsIcon,
   TextInitialIcon,
   Triangle,
-} from "lucide-react";
+} from "@coin-guard/ui/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

@@ -18,7 +18,7 @@ import {
   type editLookupCategorySchemaType,
 } from "@/schemas/lookup";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, Trash2 } from "lucide-react";
+import { Check, Trash2 } from "@coin-guard/ui/icons";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 

@@ -34,7 +34,7 @@ import {
   Switch,
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle } from "@coin-guard/ui/icons";
 import {
   type Dispatch,
   type SetStateAction,

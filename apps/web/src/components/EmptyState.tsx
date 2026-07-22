@@ -8,7 +8,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@coin-guard/ui";
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "@coin-guard/ui/icons";
 import type { ReactNode } from "react";
 
 type EmptyStateProps = {

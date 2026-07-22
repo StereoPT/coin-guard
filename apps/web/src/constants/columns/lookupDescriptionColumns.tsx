@@ -5,7 +5,7 @@ import { Badge } from "@coin-guard/ui";
 import type { LookupDescription } from "@coin-guard/db";
 import { cn } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@coin-guard/ui/icons";
 
 export const lookupDescriptionColumns: ColumnDef<LookupDescription>[] = [
   {

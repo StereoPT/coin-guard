@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
+import { Edit, MoreHorizontal, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type TransactionActionsProps = {

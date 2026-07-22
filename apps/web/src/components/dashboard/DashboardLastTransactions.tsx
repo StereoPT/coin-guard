@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
-import { Eye } from "lucide-react";
+import { Eye } from "@coin-guard/ui/icons";
 import Link from "next/link";
 
 type DashboardLastTransactionsProps = {

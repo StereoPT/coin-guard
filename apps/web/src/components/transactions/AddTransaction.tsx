@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import { ChevronDown, FileDown, PlusCircle } from "lucide-react";
+import { ChevronDown, FileDown, PlusCircle } from "@coin-guard/ui/icons";
 import Link from "next/link";
 import { useState } from "react";
 

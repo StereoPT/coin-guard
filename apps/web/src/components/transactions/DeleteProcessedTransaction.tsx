@@ -4,7 +4,7 @@ import type { ProcessedTransaction } from "@/actions/transactions/ParseTransacti
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import { Button } from "@coin-guard/ui";
 import { useSetAtom } from "jotai";
-import { Trash2 } from "lucide-react";
+import { Trash2 } from "@coin-guard/ui/icons";
 import { useCallback } from "react";
 
 type DeleteProcessedTransactionProps = {

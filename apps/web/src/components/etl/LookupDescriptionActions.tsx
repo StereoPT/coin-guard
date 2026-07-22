@@ -11,7 +11,7 @@ import {
 } from "@coin-guard/ui";
 import type { LookupDescription } from "@coin-guard/db";
 import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
-import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "lucide-react";
+import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type LookupDescriptionActionsProps = {

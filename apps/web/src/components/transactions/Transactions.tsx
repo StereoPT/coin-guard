@@ -6,7 +6,7 @@ import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { transactionColumns } from "@/constants/columns/transactionColumns";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
 import { DataTable } from "@stereopt/data-table";
-import { ArrowLeftRight } from "lucide-react";
+import { ArrowLeftRight } from "@coin-guard/ui/icons";
 
 export const Transactions = () => {
   const { data: transactions } = useGetTransactions();

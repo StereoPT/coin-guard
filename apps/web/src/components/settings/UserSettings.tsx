@@ -2,7 +2,7 @@
 
 import { useExportDatabase } from "@/hooks/settings/useExportDatabase";
 import { Button } from "@coin-guard/ui";
-import { DatabaseBackup, Loader2 } from "lucide-react";
+import { DatabaseBackup, Loader2 } from "@coin-guard/ui/icons";
 
 export const UserSettings = () => {
   const { mutateAsync, isPending } = useExportDatabase();

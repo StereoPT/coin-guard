@@ -7,7 +7,7 @@ import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
 import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
 import { DataGrid } from "@stereopt/data-table";
-import { TagsIcon } from "lucide-react";
+import { TagsIcon } from "@coin-guard/ui/icons";
 
 export const UserLookupCategories = () => {
   const { data: lookupCategories } = useGetLookupCategories();

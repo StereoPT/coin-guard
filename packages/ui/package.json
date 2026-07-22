@@ -14,7 +14,8 @@
     "./lib/*": "./src/lib/*.ts",
     "./hooks/use-mobile": "./src/hooks/use-mobile.ts",
     "./hooks/*": "./src/hooks/*.ts",
-    "./components/*": "./src/components/*.tsx"
+    "./components/*": "./src/components/*.tsx",
+    "./icons": "./src/icons.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

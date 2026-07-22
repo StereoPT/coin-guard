@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import { ChevronDown, PlusCircle } from "lucide-react";
+import { ChevronDown, PlusCircle } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type EditCategoryProps = {

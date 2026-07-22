@@ -6,7 +6,7 @@ import { AddLookupDescriptionDialog } from "@/components/etl/dialogs/AddLookupDe
 import { lookupDescriptionColumns } from "@/constants/columns/lookupDescriptionColumns";
 import { useGetLookupDescriptions } from "@/hooks/etl/descriptions/useGetLookupDescriptions";
 import { DataTable } from "@stereopt/data-table";
-import { TextInitialIcon } from "lucide-react";
+import { TextInitialIcon } from "@coin-guard/ui/icons";
 
 export const UserLookupDescriptions = () => {
   const { data: lookupDescriptions } = useGetLookupDescriptions();

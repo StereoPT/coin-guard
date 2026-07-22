@@ -16,7 +16,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@coin-guard/ui";
-import { AreaChart, Table2 } from "lucide-react";
+import { AreaChart, Table2 } from "@coin-guard/ui/icons";
 
 type TransactionTabsProps = {
   transactions: TransactionWithCategory[];
