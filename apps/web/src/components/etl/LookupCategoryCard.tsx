@@ -3,17 +3,21 @@ import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCateg
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
 import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
-import { Button } from "@coin-guard/ui";
+import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
+import type { CategoryWithLookups } from "@/types/categories";
 import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
-import type { CategoryWithLookups } from "@/types/categories";
-import { Card, CardContent, CardHeader, CardTitle } from "@coin-guard/ui";
 import {
   Edit,
   Maximize,
@@ -88,28 +92,30 @@ export const LookupCategoryCard = ({
         <CardHeader className="flex justify-between items-center">
           <CardTitle>{categoryWithLookups.name}</CardTitle>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="icon-sm" variant="outline">
-                <MoreHorizontal />
-              </Button>
+            <DropdownMenuTrigger
+              render={<Button size="icon-sm" variant="outline" />}
+            >
+              <MoreHorizontal />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => setShowDetailsDialog(true)}>
-                <Maximize /> Details
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setShowAddDialog(true)}>
-                <PlusCircle /> Add
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-                <Edit /> Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setShowDeleteDialog(true)}
-                variant="destructive"
-              >
-                <Trash2 /> Delete
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => setShowDetailsDialog(true)}>
+                  <Maximize /> Details
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setShowAddDialog(true)}>
+                  <PlusCircle /> Add
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
+                  <Edit /> Edit
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setShowDeleteDialog(true)}
+                  variant="destructive"
+                >
+                  <Trash2 /> Delete
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </CardHeader>

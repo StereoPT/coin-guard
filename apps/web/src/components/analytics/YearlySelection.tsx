@@ -4,7 +4,9 @@ import { yearlyAnalyticsAtom } from "@/store/analyticsStore";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@coin-guard/ui";
@@ -21,20 +23,24 @@ export const YearlySelection = () => {
 
   return (
     <Select
-      defaultValue={selectedYear.toString()}
+      items={years}
       onValueChange={(val) => {
-        setSelectedYear(Number(val));
+        if (val !== null) setSelectedYear(val);
       }}
+      value={selectedYear}
     >
-      <SelectTrigger>
+      <SelectTrigger className="w-40">
         <SelectValue placeholder="Transaction Type" />
       </SelectTrigger>
-      <SelectContent>
-        {years.map((year) => (
-          <SelectItem key={year.value} value={year.value.toString()}>
-            {year.label}
-          </SelectItem>
-        ))}
+      <SelectContent alignItemWithTrigger={false}>
+        <SelectGroup>
+          <SelectLabel>Years</SelectLabel>
+          {years.map((year) => (
+            <SelectItem key={year.value} value={year.value}>
+              {year.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
       </SelectContent>
     </Select>
   );

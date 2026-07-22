@@ -23,7 +23,9 @@ import {
   SearchableSelect,
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
   Textarea,
@@ -34,6 +36,11 @@ import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 
 type TransactionSchema = addTransactionSchemaType | editTransactionSchemaType;
+
+const transactionTypeItems = [
+  { value: "DEBIT", label: "Debit" },
+  { value: "CREDIT", label: "Credit" },
+];
 
 type TransactionFormFieldsProps = {
   formId: string;
@@ -125,8 +132,9 @@ export const TransactionFormFields = ({
               </FormLabel>
               <FormControl>
                 <Select
-                  defaultValue={field.value}
+                  items={transactionTypeItems}
                   onValueChange={field.onChange}
+                  value={field.value}
                 >
                   <FormControl id={`${formId}-type`}>
                     <SelectTrigger
@@ -136,9 +144,12 @@ export const TransactionFormFields = ({
                       <SelectValue placeholder="Transaction Type" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="DEBIT">Debit</SelectItem>
-                    <SelectItem value="CREDIT">Credit</SelectItem>
+                  <SelectContent alignItemWithTrigger={false}>
+                    <SelectGroup>
+                      <SelectLabel>Transaction Type</SelectLabel>
+                      <SelectItem value="DEBIT">Debit</SelectItem>
+                      <SelectItem value="CREDIT">Credit</SelectItem>
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
               </FormControl>

@@ -4,7 +4,9 @@ import { monthlyAnalyticsAtom } from "@/store/analyticsStore";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@coin-guard/ui";
@@ -21,20 +23,24 @@ export const MonthlySelection = () => {
 
   return (
     <Select
-      defaultValue={selectedMonth.toString()}
+      items={months}
       onValueChange={(val) => {
-        setSelectedMonth(Number(val));
+        if (val !== null) setSelectedMonth(val);
       }}
+      value={selectedMonth}
     >
-      <SelectTrigger>
+      <SelectTrigger className="w-40">
         <SelectValue placeholder="Transaction Type" />
       </SelectTrigger>
-      <SelectContent>
-        {months.map((month) => (
-          <SelectItem key={month.value} value={month.value.toString()}>
-            {month.label}
-          </SelectItem>
-        ))}
+      <SelectContent alignItemWithTrigger={false}>
+        <SelectGroup>
+          <SelectLabel>Months</SelectLabel>
+          {months.map((month) => (
+            <SelectItem key={month.value} value={month.value}>
+              {month.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
       </SelectContent>
     </Select>
   );

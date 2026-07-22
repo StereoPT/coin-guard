@@ -8,6 +8,7 @@ import {
   ButtonGroupSeparator,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
@@ -26,25 +27,25 @@ export const AddTransaction = () => {
       <div>
         <ButtonGroup>
           <Button
-            render={<Link href={ROUTES.importTransactions} />}
             nativeButton={false}
+            render={<Link href={ROUTES.importTransactions} />}
           >
             <FileDown />
             Import Transactions
           </Button>
           <ButtonGroupSeparator />
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="icon">
-                <ChevronDown />
-              </Button>
+            <DropdownMenuTrigger render={<Button size="icon" />}>
+              <ChevronDown />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => setOpen(true)}>
-                <PlusCircle />
-                Add Transaction
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => setOpen(true)}>
+                  <PlusCircle />
+                  Add Transaction
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </ButtonGroup>
