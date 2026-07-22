@@ -25,11 +25,12 @@ export const AddTransaction = () => {
 
       <div>
         <ButtonGroup>
-          <Button asChild>
-            <Link href={ROUTES.importTransactions}>
-              <FileDown />
-              Import Transactions
-            </Link>
+          <Button
+            render={<Link href={ROUTES.importTransactions} />}
+            nativeButton={false}
+          >
+            <FileDown />
+            Import Transactions
           </Button>
           <ButtonGroupSeparator />
           <DropdownMenu>

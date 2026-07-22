@@ -29,11 +29,14 @@ export const DashboardLastTransactions = ({
           <CardDescription>Latest five transactions</CardDescription>
         </div>
         <CardAction>
-          <Button asChild size="sm" variant="outline">
-            <Link href={ROUTES.transactions}>
-              <Eye />
-              View All
-            </Link>
+          <Button
+            render={<Link href={ROUTES.transactions} />}
+            nativeButton={false}
+            size="sm"
+            variant="outline"
+          >
+            <Eye />
+            View All
           </Button>
         </CardAction>
       </CardHeader>
