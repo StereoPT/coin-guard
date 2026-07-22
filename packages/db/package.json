@@ -33,6 +33,6 @@
     "@coin-guard/ts-config": "workspace:*",
     "@types/node": "^25",
     "prisma": "^7.4.0",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:"
   }
 }
