@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "shadcn": "pnpm --filter @coin-guard/ui exec shadcn",
-    "shadcn:add": "pnpm --filter @coin-guard/ui exec shadcn add"
+    "shadcn:add": "pnpm --filter @coin-guard/ui exec shadcn add",
+    "format": "biome format .",
+    "format:fix": "biome format . --write",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "typecheck": "tsc --noEmit"
   },
   "exports": {
     ".": "./src/index.ts",
@@ -40,10 +45,11 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "shadcn": "^4.1.2",
+    "shadcn": "^4.14.0",
     "typescript": "catalog:"
   }
 }

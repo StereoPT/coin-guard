@@ -3,11 +3,11 @@
   "root": false,
   "extends": ["@coin-guard/biome-config/base", "@coin-guard/biome-config/next"],
   "files": {
-    "ignoreUnknown": false
+    "includes": ["!src/components"]
   },
   "overrides": [
     {
-      "includes": ["src/app/not-found.tsx"],
+      "includes": ["src/hooks/use-mobile.ts"],
       "linter": {
         "rules": {
           "style": {
