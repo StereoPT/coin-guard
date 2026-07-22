@@ -24,15 +24,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.4.0",
-    "@prisma/client": "^7.4.0",
+    "@prisma/adapter-better-sqlite3": "^7.9.0",
+    "@prisma/client": "^7.9.0",
     "dotenv": "^17.4.2"
   },
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
-    "@types/node": "^25",
-    "prisma": "^7.4.0",
+    "@types/node": "^26.1.1",
+    "prisma": "^7.9.0",
     "typescript": "catalog:"
   }
 }
