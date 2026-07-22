@@ -20,9 +20,7 @@ const DashboardLayout = ({ children, breadcrumb }: DashboardLayoutProps) => {
         </header>
         <Separator />
         <div className="overflow-auto">
-          <div className="flex-1 container py-8 text-accent-foreground">
-            {children}
-          </div>
+          <div className="flex-1 container py-8">{children}</div>
         </div>
       </div>
     </div>

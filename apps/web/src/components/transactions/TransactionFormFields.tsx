@@ -89,7 +89,7 @@ export const TransactionFormFields = ({
                           )}
                           disabled={formType === FormType.EDIT}
                           id={`${formId}-date`}
-                          variant="input"
+                          variant="outline"
                         >
                           {field.value ? (
                             format(field.value, "PPP")
@@ -134,7 +134,7 @@ export const TransactionFormFields = ({
                 <Select
                   items={transactionTypeItems}
                   onValueChange={field.onChange}
-                  value={field.value}
+                  value={field.value ?? null}
                 >
                   <FormControl id={`${formId}-type`}>
                     <SelectTrigger

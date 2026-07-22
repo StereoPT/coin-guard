@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { cn } from "@coin-guard/ui";
 import { AppProviders } from "@/providers/AppProviders";
-import { Toaster } from "@coin-guard/ui";
+import { cn, Toaster } from "@coin-guard/ui";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
@@ -19,8 +18,8 @@ type RootLayoutProps = Readonly<{
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html lang="en">
-      <body className={cn("antialiased", "font-sans", inter.variable)}>
+    <html className={cn("antialiased", "font-sans", inter.variable)} lang="en">
+      <body>
         <NextTopLoader color="#009689" showSpinner={false} />
         <AppProviders>{children}</AppProviders>
         <Toaster richColors />

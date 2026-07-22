@@ -61,7 +61,7 @@ export function SearchableSelect({
             !value && "text-muted-foreground",
           )}
           disabled={disabled}
-          variant="input"
+          variant="outline"
         />
       }>
         {selectedOption ? selectedOption.label : placeholder}

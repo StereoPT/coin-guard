@@ -1,24 +1,24 @@
 "use client";
 
-import { Button } from "@coin-guard/ui";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@coin-guard/ui";
-import { Input } from "@coin-guard/ui";
-import { Switch } from "@coin-guard/ui";
-import type { LookupCategory } from "@coin-guard/db";
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
   editLookupCategorySchema,
   type editLookupCategorySchemaType,
 } from "@/schemas/lookup";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { LookupCategory } from "@coin-guard/db";
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  Input,
+  Switch,
+} from "@coin-guard/ui";
 import { Check, Trash2 } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
@@ -102,7 +102,12 @@ export const EditLookupCategoryForm = ({
             >
               <Trash2 />
             </Button>
-            <Button disabled={isPending} size="icon" variant="outline">
+            <Button
+              disabled={isPending}
+              size="icon"
+              type="submit"
+              variant="outline"
+            >
               <Check />
             </Button>
           </div>
