@@ -33,8 +33,8 @@ import {
   Spinner,
   Switch,
 } from "@coin-guard/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Dispatch,
   type SetStateAction,
@@ -112,11 +112,9 @@ export const AddLookupCategoryDialog = ({
   return (
     <Dialog onOpenChange={handleOnOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <PlusCircle />
-            Add Lookup Category
-          </Button>
+        <DialogTrigger render={<Button />}>
+          <PlusCircle />
+          Add Lookup Category
         </DialogTrigger>
       )}
       <DialogContent>
@@ -199,8 +197,8 @@ export const AddLookupCategoryDialog = ({
         </Form>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

@@ -21,8 +21,8 @@ import {
   Form,
   Spinner,
 } from "@coin-guard/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Dispatch,
   type SetStateAction,
@@ -112,11 +112,9 @@ export const EditTransactionDialog = ({
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <Edit />
-            Edit Transaction
-          </Button>
+        <DialogTrigger render={<Button />}>
+          <Edit />
+          Edit Transaction
         </DialogTrigger>
       )}
       <DialogContent className="max-w-2xl!">
@@ -136,8 +134,8 @@ export const EditTransactionDialog = ({
         </Form>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

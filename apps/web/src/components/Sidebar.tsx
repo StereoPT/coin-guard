@@ -116,18 +116,14 @@ export const Sidebar = () => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild size="lg">
-              <Link href={ROUTES.home}>
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-linear-to-r from-teal-600 to-teal-700">
-                  <Triangle className="stroke-white" size={16} />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">CoinGuard</span>
-                  <span className="">
-                    v{process.env.NEXT_PUBLIC_APP_VERSION}
-                  </span>
-                </div>
-              </Link>
+            <SidebarMenuButton render={<Link href={ROUTES.home} />} size="lg">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-linear-to-r from-teal-600 to-teal-700">
+                <Triangle className="stroke-white" size={16} />
+              </div>
+              <div className="flex flex-col gap-0.5 leading-none">
+                <span className="font-semibold">CoinGuard</span>
+                <span className="">v{process.env.NEXT_PUBLIC_APP_VERSION}</span>
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -144,14 +140,12 @@ export const Sidebar = () => {
                   return (
                     <SidebarMenuItem key={title}>
                       <SidebarMenuButton
-                        asChild
                         isActive={isActive(url, pathname)}
+                        render={<Link href={url} />}
                         tooltip={title}
                       >
-                        <Link href={url}>
-                          <Icon />
-                          {title}
-                        </Link>
+                        <Icon />
+                        {title}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );
@@ -165,13 +159,11 @@ export const Sidebar = () => {
         <SidebarMenu className="gap-2">
           <SidebarMenuItem>
             <SidebarMenuButton
-              asChild
               isActive={isActive(ROUTES.settings, pathname)}
+              render={<Link href={ROUTES.settings} />}
               tooltip="Settings"
             >
-              <Link href={ROUTES.settings}>
-                <Cog /> Settings
-              </Link>
+              <Cog /> Settings
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -49,11 +49,9 @@ export const AddCategoryDialog = () => {
 
   return (
     <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
-      <DialogTrigger asChild>
-        <Button>
-          <PlusCircle />
-          Add Category
-        </Button>
+      <DialogTrigger render={<Button />}>
+        <PlusCircle />
+        Add Category
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -70,8 +68,8 @@ export const AddCategoryDialog = () => {
         </Form>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

@@ -28,8 +28,8 @@ import {
   SelectValue,
   Textarea,
 } from "@coin-guard/ui";
-import { format } from "date-fns";
 import { CalendarIcon } from "@coin-guard/ui/icons";
+import { format } from "date-fns";
 import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -72,26 +72,28 @@ export const TransactionFormFields = ({
               </FormLabel>
               <FormControl>
                 <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        className={cn(
-                          "pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground",
-                        )}
-                        disabled={formType === FormType.EDIT}
-                        id={`${formId}-date`}
-                        variant={"outline"}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Transaction date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
+                  <PopoverTrigger
+                    render={
+                      <FormControl>
+                        <Button
+                          className={cn(
+                            "pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                          disabled={formType === FormType.EDIT}
+                          id={`${formId}-date`}
+                          variant={"outline"}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Transaction date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    }
+                  />
                   <PopoverContent align="start" className="w-auto p-0">
                     <Calendar
                       captionLayout="dropdown"
