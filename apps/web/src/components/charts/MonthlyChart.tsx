@@ -15,7 +15,13 @@ import {
 import { format } from "date-fns";
 import { useAtomValue } from "jotai";
 import { useMemo } from "react";
-import { Bar, CartesianGrid, ComposedChart, Line, XAxis } from "@coin-guard/ui/charts";
+import {
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  Line,
+  XAxis,
+} from "@coin-guard/ui/charts";
 
 const chartConfig = {
   amount: {
