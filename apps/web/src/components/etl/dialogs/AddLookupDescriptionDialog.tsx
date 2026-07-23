@@ -16,18 +16,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useCallback,
   useState,
   type Dispatch,
   type SetStateAction,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type AddLookupDescriptionDialogProps =
   | {
@@ -86,11 +85,9 @@ export const AddLookupDescriptionDialog = ({
   return (
     <Dialog onOpenChange={handleOnOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <PlusCircle />
-            Add Lookup Description
-          </Button>
+        <DialogTrigger render={<Button />}>
+          <PlusCircle />
+          Add Lookup Description
         </DialogTrigger>
       )}
       <DialogContent>
@@ -99,15 +96,15 @@ export const AddLookupDescriptionDialog = ({
           <DialogDescription>Create your lookup descriptions</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <LookupDescriptionFormField formId={formId} />
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

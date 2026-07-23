@@ -44,8 +44,8 @@ export const EditLookupCategoryDialog = ({
         </div>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
         </DialogFooter>
       </DialogContent>

@@ -16,14 +16,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { PlusCircle } from "@coin-guard/ui/icons";
 import { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 export const AddCategoryDialog = () => {
   const formId = "add-category";
@@ -49,11 +48,9 @@ export const AddCategoryDialog = () => {
 
   return (
     <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
-      <DialogTrigger asChild>
-        <Button>
-          <PlusCircle />
-          Add Category
-        </Button>
+      <DialogTrigger render={<Button />}>
+        <PlusCircle />
+        Add Category
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -63,15 +60,15 @@ export const AddCategoryDialog = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <CategoryFormFields formId={formId} />
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

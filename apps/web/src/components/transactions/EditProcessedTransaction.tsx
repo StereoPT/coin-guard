@@ -37,7 +37,7 @@ export const EditProcessedTransaction = ({
 
   return (
     <SearchableSelect
-      emptyPlaceholer="No category found."
+      emptyPlaceholder="No category found."
       onChange={handleEditProcessedTransaction}
       options={categoryOptions}
       placeholder="Select a Category"

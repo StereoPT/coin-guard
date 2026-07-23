@@ -1,26 +1,24 @@
 "use client";
 
-import { Button } from "@coin-guard/ui";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@coin-guard/ui";
-import { Input } from "@coin-guard/ui";
-import { Switch } from "@coin-guard/ui";
-import type { LookupCategory } from "@coin-guard/db";
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
   editLookupCategorySchema,
   type editLookupCategorySchemaType,
 } from "@/schemas/lookup";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { LookupCategory } from "@coin-guard/db";
+import {
+  Button,
+  Field,
+  FieldError,
+  FieldGroup,
+  Input,
+  Switch,
+} from "@coin-guard/ui";
 import { Check, Trash2 } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 
 type EditLookupCategoryFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -61,37 +59,38 @@ export const EditLookupCategoryForm = ({
   const isPending = isPendingEdit || isPendingDelete;
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-row gap-2 w-full items-center">
-          <FormField
+        <FieldGroup className="flex flex-row gap-2 w-full items-center">
+          <Controller
             control={form.control}
             name="enabled"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={({ field, fieldState }) => (
+              <Field className="flex-1">
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
           />
 
-          <FormField
+          <Controller
             control={form.control}
             name="description"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input {...field} placeholder="Description" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={({ field, fieldState }) => (
+              <Field className="w-full">
+                <Input {...field} placeholder="Description" />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
           />
+
           <div className="flex flex-row gap-2">
             <Button
               disabled={isPending}
@@ -102,12 +101,17 @@ export const EditLookupCategoryForm = ({
             >
               <Trash2 />
             </Button>
-            <Button disabled={isPending} size="icon" variant="outline">
+            <Button
+              disabled={isPending}
+              size="icon"
+              type="submit"
+              variant="outline"
+            >
               <Check />
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </form>
-    </Form>
+    </FormProvider>
   );
 };

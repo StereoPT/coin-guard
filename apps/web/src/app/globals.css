@@ -1,9 +1,9 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
-@import '@stereopt/data-table/tailwind-source.css';
+
 @import '@coin-guard/ui/styles.css';
 @import '@coin-guard/ui/tailwind-source.css';
+
+@import '@stereopt/data-table/tailwind-source.css';
 
 @layer base {
   * {

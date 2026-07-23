@@ -18,7 +18,7 @@ export const PageHeader = ({
   const router = useRouter();
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-center">
       {goBack && (
         <Button onClick={() => router.back()} size="icon" variant="outline">
           <ChevronLeft />

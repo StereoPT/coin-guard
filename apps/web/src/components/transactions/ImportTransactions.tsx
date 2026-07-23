@@ -66,8 +66,12 @@ export const ImportTransactions = () => {
       />
 
       <div className="flex justify-end gap-2">
-        <Button asChild variant="outline">
-          <Link href={ROUTES.transactions}>Back</Link>
+        <Button
+          render={<Link href={ROUTES.transactions} />}
+          nativeButton={false}
+          variant="outline"
+        >
+          Back
         </Button>
         <Button
           disabled={isPending || transactions.length <= 0}

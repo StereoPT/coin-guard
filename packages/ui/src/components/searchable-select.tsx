@@ -2,6 +2,7 @@
 
 import { Check, ChevronsUpDown } from "lucide-react";
 
+import { useState } from "react";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
 import {
@@ -10,10 +11,9 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
+  CommandList
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { useState } from "react";
 
 export interface SelectOption {
   value: string;
@@ -26,7 +26,7 @@ type SearchableSelectProps = {
   options: SelectOption[];
   placeholder: string;
   searchPlaceholder: string;
-  emptyPlaceholer: string;
+  emptyPlaceholder: string;
   disabled?: boolean;
 };
 
@@ -36,7 +36,7 @@ export function SearchableSelect({
   options,
   placeholder,
   searchPlaceholder,
-  emptyPlaceholer,
+  emptyPlaceholder,
   disabled = false,
 }: SearchableSelectProps) {
   const [open, setOpen] = useState(false);
@@ -54,7 +54,7 @@ export function SearchableSelect({
 
   return (
     <Popover modal onOpenChange={setOpen} open={open}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger render={
         <Button
           className={cn(
             "w-full justify-between truncate",
@@ -62,16 +62,16 @@ export function SearchableSelect({
           )}
           disabled={disabled}
           variant="outline"
-        >
-          {selectedOption ? selectedOption.label : placeholder}
-          <ChevronsUpDown className="opacity-50" />
-        </Button>
+        />
+      }>
+        {selectedOption ? selectedOption.label : placeholder}
+        <ChevronsUpDown className="opacity-50" />
       </PopoverTrigger>
-      <PopoverContent className="w-[230px] p-0">
+      <PopoverContent className="w-57.5 p-0">
         <Command>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
-            <CommandEmpty>{emptyPlaceholer}</CommandEmpty>
+            <CommandEmpty>{emptyPlaceholder}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem

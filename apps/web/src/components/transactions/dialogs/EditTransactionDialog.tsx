@@ -18,11 +18,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Dispatch,
   type SetStateAction,
@@ -30,7 +29,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type EditTransactionDialogProps = {
   transactionId: string;
@@ -112,11 +111,9 @@ export const EditTransactionDialog = ({
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <Edit />
-            Edit Transaction
-          </Button>
+        <DialogTrigger render={<Button />}>
+          <Edit />
+          Edit Transaction
         </DialogTrigger>
       )}
       <DialogContent className="max-w-2xl!">
@@ -125,7 +122,7 @@ export const EditTransactionDialog = ({
           <DialogDescription>Edit your transaction</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingTransaction ? (
               <Spinner />
@@ -133,11 +130,11 @@ export const EditTransactionDialog = ({
               <TransactionFormFields formId={formId} formType={FormType.EDIT} />
             )}
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

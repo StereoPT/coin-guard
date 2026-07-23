@@ -1,12 +1,13 @@
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { DeleteDialog } from "@/components/DeleteDialog";
-import type { Category } from "@coin-guard/db";
 import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
+import type { Category } from "@coin-guard/db";
 
-import { Button } from "@coin-guard/ui";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
@@ -50,24 +51,24 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
       )}
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="ghost">
-            <MoreHorizontal />
-          </Button>
+        <DropdownMenuTrigger render={<Button size="icon" variant="ghost" />}>
+          <MoreHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-            <Edit />
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => setShowDeleteAlert(true)}
-            variant="destructive"
-          >
-            <Trash2 />
-            Delete
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
+              <Edit />
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setShowDeleteAlert(true)}
+              variant="destructive"
+            >
+              <Trash2 />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

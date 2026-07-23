@@ -17,11 +17,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit } from "@coin-guard/ui/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Dispatch,
   type SetStateAction,
@@ -29,7 +28,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type EditCategoryDialogProps = {
   categoryId: string;
@@ -98,11 +97,9 @@ export const EditCategoryDialog = ({
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <Edit />
-            Edit Category
-          </Button>
+        <DialogTrigger render={<Button />}>
+          <Edit />
+          Edit Category
         </DialogTrigger>
       )}
       <DialogContent>
@@ -111,7 +108,7 @@ export const EditCategoryDialog = ({
           <DialogDescription>Edit your category details</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingCategory ? (
               <Spinner />
@@ -119,11 +116,11 @@ export const EditCategoryDialog = ({
               <CategoryFormFields formId={formId} />
             )}
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
           </DialogClose>
           <Button disabled={isPending} form={formId} type="submit">
             {isPending && <Spinner />}

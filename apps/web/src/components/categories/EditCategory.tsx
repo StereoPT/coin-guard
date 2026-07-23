@@ -8,6 +8,7 @@ import {
   ButtonGroupSeparator,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
@@ -37,17 +38,17 @@ export const EditCategory = ({ categoryId }: EditCategoryProps) => {
           <EditCategoryDialog categoryId={categoryId} trigger />
           <ButtonGroupSeparator />
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="icon">
-                <ChevronDown />
-              </Button>
+            <DropdownMenuTrigger render={<Button size="icon" />}>
+              <ChevronDown />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => setOpen(true)}>
-                <PlusCircle />
-                Add Lookup
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => setOpen(true)}>
+                  <PlusCircle />
+                  Add Lookup
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </ButtonGroup>

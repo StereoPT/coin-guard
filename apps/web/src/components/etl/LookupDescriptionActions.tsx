@@ -1,16 +1,17 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { ApplyLookupDescriptionAlert } from "@/components/etl/dialogs/ApplyLookupDescriptionAlert";
 import { EditLookupDescriptionDialog } from "@/components/etl/dialogs/EditLookupDescriptionDialog";
-import { Button } from "@coin-guard/ui";
+import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
+import type { LookupDescription } from "@coin-guard/db";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import type { LookupDescription } from "@coin-guard/db";
-import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
 import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
@@ -64,28 +65,28 @@ export const LookupDescriptionActions = ({
       )}
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="ghost">
-            <MoreHorizontal />
-          </Button>
+        <DropdownMenuTrigger render={<Button size="icon" variant="ghost" />}>
+          <MoreHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setShowApplyAlert(true)}>
-            <RefreshCw />
-            Apply
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-            <Edit />
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => setShowDeleteAlert(true)}
-            variant="destructive"
-          >
-            <Trash2 />
-            Delete
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => setShowApplyAlert(true)}>
+              <RefreshCw />
+              Apply
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
+              <Edit />
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setShowDeleteAlert(true)}
+              variant="destructive"
+            >
+              <Trash2 />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

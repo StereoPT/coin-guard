@@ -1,8 +1,8 @@
 import { DeleteTransaction } from "@/actions/transactions/DeleteTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useDeleteTransaction = (transactionId: string) => {
   const queryClient = getQueryClient();

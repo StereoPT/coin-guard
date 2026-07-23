@@ -2,8 +2,8 @@ import { AddCategory } from "@/actions/categories/AddCategory";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import type { addCategorySchemaType } from "@/schemas/categories";
+import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useAddCategory = () => {
   const queryClient = getQueryClient();
