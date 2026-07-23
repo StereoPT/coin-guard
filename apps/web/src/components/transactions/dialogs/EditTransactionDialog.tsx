@@ -18,7 +18,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 import { Edit } from "@coin-guard/ui/icons";
@@ -30,7 +29,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type EditTransactionDialogProps = {
   transactionId: string;
@@ -123,7 +122,7 @@ export const EditTransactionDialog = ({
           <DialogDescription>Edit your transaction</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingTransaction ? (
               <Spinner />
@@ -131,7 +130,7 @@ export const EditTransactionDialog = ({
               <TransactionFormFields formId={formId} formType={FormType.EDIT} />
             )}
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

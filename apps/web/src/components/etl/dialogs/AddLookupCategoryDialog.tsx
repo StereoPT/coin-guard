@@ -22,12 +22,6 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
   Input,
   SearchableSelect,
   Spinner,
@@ -42,7 +36,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 
 type AddLookupCategoryDialogProps =
   | {
@@ -123,43 +117,47 @@ export const AddLookupCategoryDialog = ({
           <DialogDescription>Create your lookup categories</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
-              <FormField
+              <Controller
                 control={form.control}
                 name="categoryId"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel className="flex items-center">
-                      Category
-                    </FormLabel>
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel>Category</FieldLabel>
                     <SearchableSelect
-                      emptyPlaceholer="No category found."
+                      emptyPlaceholder="No category found."
                       onChange={field.onChange}
                       options={categoryOptions}
                       placeholder="Select a Category"
                       searchPlaceholder="Search a category..."
                       value={field.value}
                     />
-                    <FormMessage />
-                  </FormItem>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
                 )}
               />
 
-              <FormField
+              <Controller
                 control={form.control}
                 name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor={`${formId}-description`}>
                       Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Description" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id={`${formId}-description`}
+                      placeholder="Description"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
                 )}
               />
 
@@ -174,7 +172,7 @@ export const AddLookupCategoryDialog = ({
                     >
                       <FieldContent>
                         <FieldLabel htmlFor="enable-switch">Enable</FieldLabel>
-                        <FieldDescription>
+                        <FieldDescription className="text-xs">
                           Enable to add this category to the transaction.
                         </FieldDescription>
                         {fieldState.invalid && (
@@ -194,7 +192,7 @@ export const AddLookupCategoryDialog = ({
               </FieldGroup>
             </FieldGroup>
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

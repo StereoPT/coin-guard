@@ -17,7 +17,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 import { Edit } from "@coin-guard/ui/icons";
@@ -29,7 +28,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type EditCategoryDialogProps = {
   categoryId: string;
@@ -109,7 +108,7 @@ export const EditCategoryDialog = ({
           <DialogDescription>Edit your category details</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingCategory ? (
               <Spinner />
@@ -117,7 +116,7 @@ export const EditCategoryDialog = ({
               <CategoryFormFields formId={formId} />
             )}
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

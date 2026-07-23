@@ -1,19 +1,17 @@
 "use client";
 
-import { FieldGroup } from "@coin-guard/ui";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@coin-guard/ui";
-import { Input } from "@coin-guard/ui";
 import type {
   addCategorySchemaType,
   editCategorySchemaType,
 } from "@/schemas/categories";
-import { useFormContext } from "react-hook-form";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  Input,
+} from "@coin-guard/ui";
+import { Controller, useFormContext } from "react-hook-form";
 
 type CategorySchema = addCategorySchemaType | editCategorySchemaType;
 
@@ -26,19 +24,15 @@ export const CategoryFormFields = ({ formId }: CategoryFormFieldsProps) => {
 
   return (
     <FieldGroup>
-      <FormField
+      <Controller
         control={control}
         name="name"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center" htmlFor={`${formId}-name`}>
-              Name
-            </FormLabel>
-            <FormControl>
-              <Input {...field} id={`${formId}-name`} placeholder="Name" />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-name`}>Name</FieldLabel>
+            <Input {...field} id={`${formId}-name`} placeholder="Name" />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
         )}
       />
     </FieldGroup>

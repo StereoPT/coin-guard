@@ -16,7 +16,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 import { PlusCircle } from "@coin-guard/ui/icons";
@@ -27,7 +26,7 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type AddLookupDescriptionDialogProps =
   | {
@@ -97,11 +96,11 @@ export const AddLookupDescriptionDialog = ({
           <DialogDescription>Create your lookup descriptions</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <LookupDescriptionFormField formId={formId} />
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

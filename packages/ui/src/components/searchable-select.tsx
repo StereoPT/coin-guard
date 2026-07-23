@@ -11,7 +11,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
+  CommandList
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
@@ -26,7 +26,7 @@ type SearchableSelectProps = {
   options: SelectOption[];
   placeholder: string;
   searchPlaceholder: string;
-  emptyPlaceholer: string;
+  emptyPlaceholder: string;
   disabled?: boolean;
 };
 
@@ -36,7 +36,7 @@ export function SearchableSelect({
   options,
   placeholder,
   searchPlaceholder,
-  emptyPlaceholer,
+  emptyPlaceholder,
   disabled = false,
 }: SearchableSelectProps) {
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ export function SearchableSelect({
         <Command>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
-            <CommandEmpty>{emptyPlaceholer}</CommandEmpty>
+            <CommandEmpty>{emptyPlaceholder}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem

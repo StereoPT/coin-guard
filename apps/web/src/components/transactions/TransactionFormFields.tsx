@@ -10,12 +10,10 @@ import {
   Button,
   Calendar,
   cn,
+  Field,
+  FieldError,
   FieldGroup,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  FieldLabel,
   Input,
   Popover,
   PopoverContent,
@@ -33,7 +31,7 @@ import {
 import { CalendarIcon } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
 import { useMemo } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 type TransactionSchema = addTransactionSchemaType | editTransactionSchemaType;
 
@@ -66,216 +64,171 @@ export const TransactionFormFields = ({
   return (
     <FieldGroup>
       <FieldGroup className="grid grid-cols-2 gap-4">
-        <FormField
+        <Controller
           control={control}
           name="date"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel
-                className="flex items-center"
-                htmlFor={`${formId}-date`}
-              >
-                Date
-              </FormLabel>
-              <FormControl>
-                <Popover>
-                  <PopoverTrigger
-                    render={
-                      <FormControl>
-                        <Button
-                          className={cn(
-                            "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground",
-                          )}
-                          disabled={formType === FormType.EDIT}
-                          id={`${formId}-date`}
-                          variant="outline"
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Transaction date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-date`}>Date</FieldLabel>
+              <Popover>
+                <PopoverTrigger
+                  render={
+                    <Button
+                      className={cn(
+                        "pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground",
+                      )}
+                      disabled={formType === FormType.EDIT}
+                      id={`${formId}-date`}
+                      variant="outline"
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Transaction date</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  }
+                />
+                <PopoverContent align="center" className="w-auto p-0">
+                  <Calendar
+                    captionLayout="dropdown"
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
                     }
+                    mode="single"
+                    onSelect={field.onChange}
+                    selected={field.value}
                   />
-                  <PopoverContent align="center" className="w-auto p-0">
-                    <Calendar
-                      captionLayout="dropdown"
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      mode="single"
-                      onSelect={field.onChange}
-                      selected={field.value}
-                    />
-                  </PopoverContent>
-                </Popover>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+                </PopoverContent>
+              </Popover>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
           )}
         />
 
-        <FormField
+        <Controller
           control={control}
           name="type"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel
-                className="flex items-center"
-                htmlFor={`${formId}-type`}
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-type`}>Type</FieldLabel>
+              <Select
+                items={transactionTypeItems}
+                onValueChange={field.onChange}
+                value={field.value ?? null}
               >
-                Type
-              </FormLabel>
-              <FormControl>
-                <Select
-                  items={transactionTypeItems}
-                  onValueChange={field.onChange}
-                  value={field.value ?? null}
+                <SelectTrigger
+                  className="w-full"
+                  disabled={formType === "edit"}
+                  id={`${formId}-type`}
                 >
-                  <FormControl id={`${formId}-type`}>
-                    <SelectTrigger
-                      className="w-full"
-                      disabled={formType === "edit"}
-                    >
-                      <SelectValue placeholder="Transaction Type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent alignItemWithTrigger={false}>
-                    <SelectGroup>
-                      <SelectLabel>Transaction Type</SelectLabel>
-                      <SelectItem value="DEBIT">Debit</SelectItem>
-                      <SelectItem value="CREDIT">Credit</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+                  <SelectValue placeholder="Transaction Type" />
+                </SelectTrigger>
+                <SelectContent alignItemWithTrigger={false}>
+                  <SelectGroup>
+                    <SelectLabel>Transaction Type</SelectLabel>
+                    <SelectItem value="DEBIT">Debit</SelectItem>
+                    <SelectItem value="CREDIT">Credit</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
           )}
         />
       </FieldGroup>
 
-      <FormField
+      <Controller
         control={control}
         name="description"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel
-              className="flex items-center"
-              htmlFor={`${formId}-description`}
-            >
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-description`}>
               Description
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                id={`${formId}-description`}
-                placeholder="Description"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+            </FieldLabel>
+            <Input
+              {...field}
+              id={`${formId}-description`}
+              placeholder="Description"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
         )}
       />
 
       <FieldGroup className="grid grid-cols-3 gap-4">
-        <FormField
+        <Controller
           control={control}
           name="amount"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel
-                className="flex items-center"
-                htmlFor={`${formId}-amount`}
-              >
-                Amount
-              </FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  id={`${formId}-amount`}
-                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  placeholder="Amount"
-                  type="number"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-amount`}>Amount</FieldLabel>
+              <Input
+                {...field}
+                id={`${formId}-amount`}
+                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                placeholder="Amount"
+                type="number"
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
           )}
         />
 
-        <FormField
+        <Controller
           control={control}
           name="balance"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel
-                className="flex items-center"
-                htmlFor={`${formId}-balance`}
-              >
-                Balance
-              </FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  id={`${formId}-balance`}
-                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  placeholder="Balance"
-                  type="number"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-balance`}>Balance</FieldLabel>
+              <Input
+                {...field}
+                id={`${formId}-balance`}
+                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                placeholder="Balance"
+                type="number"
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
           )}
         />
 
-        <FormField
+        <Controller
           control={control}
           name="categoryId"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel
-                className="flex items-center"
-                htmlFor={`${formId}-category`}
-              >
-                Category
-              </FormLabel>
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-category`}>Category</FieldLabel>
               <SearchableSelect
-                emptyPlaceholer="No category found."
+                emptyPlaceholder="No category found."
                 onChange={field.onChange}
                 options={categoryOptions}
                 placeholder="Select a Category"
                 searchPlaceholder="Search a category..."
                 value={field.value}
               />
-              <FormMessage />
-            </FormItem>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
           )}
         />
       </FieldGroup>
 
-      <FormField
+      <Controller
         control={control}
         name="note"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center" htmlFor={`${formId}-note`}>
-              Notes
-            </FormLabel>
-            <FormControl>
-              <Textarea
-                {...field}
-                className="h-32"
-                id={`${formId}-note`}
-                placeholder="Notes"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-note`}>Notes</FieldLabel>
+            <Textarea
+              {...field}
+              className="h-32"
+              id={`${formId}-note`}
+              placeholder="Notes"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
         )}
       />
     </FieldGroup>

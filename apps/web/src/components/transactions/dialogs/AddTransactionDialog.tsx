@@ -9,7 +9,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 
@@ -23,7 +22,7 @@ import {
   type addTransactionSchemaType,
 } from "@/schemas/transactions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type AddTransactionDialogProps = {
   open: boolean;
@@ -68,11 +67,11 @@ export const AddTransactionDialog = ({
           <DialogDescription>Create a new transaction</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <TransactionFormFields formId={formId} formType={FormType.ADD} />
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

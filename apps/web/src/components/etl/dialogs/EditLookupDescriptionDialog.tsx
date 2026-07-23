@@ -16,12 +16,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Form,
   Spinner,
 } from "@coin-guard/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 type EditLookupDescriptionDialogProps = {
   lookupDescription: LookupDescription;
@@ -64,11 +63,11 @@ export const EditLookupDescriptionDialog = ({
           <DialogDescription>Edit your lookup description</DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             <LookupDescriptionFormField formId={formId} />
           </form>
-        </Form>
+        </FormProvider>
 
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>

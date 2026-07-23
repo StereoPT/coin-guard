@@ -11,11 +11,6 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
   Input,
   Switch,
 } from "@coin-guard/ui";
@@ -36,49 +31,39 @@ export const LookupDescriptionFormField = ({
 
   return (
     <FieldGroup>
-      <FormField
+      <Controller
         control={control}
         name="description"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel
-              className="flex items-center"
-              htmlFor={`${formId}-description`}
-            >
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-description`}>
               Description
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                id={`${formId}-description`}
-                placeholder="Description"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+            </FieldLabel>
+            <Input
+              {...field}
+              id={`${formId}-description`}
+              placeholder="Description"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
         )}
       />
 
-      <FormField
+      <Controller
         control={control}
         name="newDescription"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel
-              className="flex items-center"
-              htmlFor={`${formId}-new-description`}
-            >
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-new-description`}>
               New Description
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                id={`${formId}-new-description`}
-                placeholder="New Description"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+            </FieldLabel>
+            <Input
+              {...field}
+              id={`${formId}-new-description`}
+              placeholder="New Description"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
         )}
       />
 
@@ -92,7 +77,7 @@ export const LookupDescriptionFormField = ({
                 <FieldLabel htmlFor={`${formId}-enable-switch`}>
                   Enable
                 </FieldLabel>
-                <FieldDescription>
+                <FieldDescription className="text-xs">
                   Enable to modify this description in the transaction.
                 </FieldDescription>
                 {fieldState.invalid && (
