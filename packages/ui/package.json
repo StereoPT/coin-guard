@@ -51,7 +51,7 @@
     "@coin-guard/ts-config": "workspace:*",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "shadcn": "^4.14.0",
+    "shadcn": "^4.14.1",
     "typescript": "catalog:"
   }
 }
