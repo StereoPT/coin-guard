@@ -21,7 +21,7 @@
     "@tanstack/react-query-devtools": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
     "@types/papaparse": "^5.5.2",
-    "better-sqlite3": "^12.9.0",
+    "better-sqlite3": "^13.0.1",
     "date-fns": "^4.4.0",
     "jotai": "^2.20.2",
     "next": "^16.2.11",
@@ -30,7 +30,7 @@
     "react": "^19.2.8",
     "react-countup": "^6.5.3",
     "react-dom": "^19.2.8",
-    "react-hook-form": "^7.78.0",
+    "react-hook-form": "^7.82.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
