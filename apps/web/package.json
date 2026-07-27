@@ -21,7 +21,6 @@
     "@tanstack/react-query-devtools": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
     "@types/papaparse": "^5.5.2",
-    "better-sqlite3": "^12.9.0",
     "date-fns": "^4.4.0",
     "jotai": "^2.20.2",
     "next": "^16.2.11",
