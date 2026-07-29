@@ -16,6 +16,7 @@ import {
 import {
   CalendarDaysIcon,
   Cog,
+  LandmarkIcon,
   LayoutDashboard,
   type LucideIcon,
   ScrollTextIcon,
@@ -58,6 +59,11 @@ const groupRoutes: GroupedRoute[] = [
         icon: TagIcon,
         title: "Categories",
         url: ROUTES.categories,
+      },
+      {
+        icon: LandmarkIcon,
+        title: "Bank Accounts",
+        url: ROUTES.bankAccounts,
       },
     ],
   },

@@ -9,6 +9,8 @@ export const ROUTES = {
   categories: "/categories",
   category: (categoryId: string) => `/categories/${categoryId}` as const,
 
+  bankAccounts: "/bank-accounts",
+
   analytics: {
     monthly: "/analytics/monthly",
     yearly: "/analytics/yearly",
