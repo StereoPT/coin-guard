@@ -1,12 +1,14 @@
 "use client";
 
 import { FormType } from "@/constants/forms";
+import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import type {
   addTransactionSchemaType,
   editTransactionSchemaType,
 } from "@/schemas/transactions";
 import {
+  Badge,
   Button,
   Calendar,
   cn,
@@ -50,6 +52,7 @@ export const TransactionFormFields = ({
   formType,
 }: TransactionFormFieldsProps) => {
   const { data: categories } = useGetCategories();
+  const { data: bankAccounts } = useGetBankAccounts();
   const { control } = useFormContext<TransactionSchema>();
 
   const categoryOptions = useMemo(() => {
@@ -60,6 +63,27 @@ export const TransactionFormFields = ({
       label: category.name,
     }));
   }, [categories]);
+
+  const bankAccountOptions = useMemo(() => {
+    if (!bankAccounts) return [];
+
+    return bankAccounts.map((bankAccount) => {
+      const label = bankAccount.alias ?? bankAccount.name;
+
+      return {
+        value: bankAccount.id,
+        label: `${label} (${bankAccount.type})`,
+        content: (
+          <span className="flex items-center gap-2">
+            {label}
+            <Badge className="capitalize" variant="outline">
+              {bankAccount.type.toLocaleLowerCase()}
+            </Badge>
+          </span>
+        ),
+      };
+    });
+  }, [bankAccounts]);
 
   return (
     <FieldGroup>
@@ -158,7 +182,7 @@ export const TransactionFormFields = ({
         )}
       />
 
-      <FieldGroup className="grid grid-cols-3 gap-4">
+      <FieldGroup className="grid grid-cols-2 gap-4">
         <Controller
           control={control}
           name="amount"
@@ -194,7 +218,9 @@ export const TransactionFormFields = ({
             </Field>
           )}
         />
+      </FieldGroup>
 
+      <FieldGroup className="grid grid-cols-2 gap-4">
         <Controller
           control={control}
           name="categoryId"
@@ -207,6 +233,27 @@ export const TransactionFormFields = ({
                 options={categoryOptions}
                 placeholder="Select a Category"
                 searchPlaceholder="Search a category..."
+                value={field.value}
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="accountId"
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-account`}>
+                Bank Account
+              </FieldLabel>
+              <SearchableSelect
+                emptyPlaceholder="No bank account found."
+                onChange={field.onChange}
+                options={bankAccountOptions}
+                placeholder="Select a Bank Account"
+                searchPlaceholder="Search a bank account..."
                 value={field.value}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}

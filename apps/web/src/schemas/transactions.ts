@@ -9,6 +9,7 @@ export const addTransactionSchema = z.object({
   balance: z.number(),
   note: z.string().trim().optional(),
   categoryId: z.string().trim().optional(),
+  accountId: z.string().trim().optional(),
 });
 
 export const editTransactionSchema = addTransactionSchema.partial();
