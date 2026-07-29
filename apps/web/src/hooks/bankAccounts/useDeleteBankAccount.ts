@@ -1,32 +1,32 @@
-import { DeleteCategory } from "@/actions/categories/DeleteCategory";
+import { DeleteBankAccount } from "@/actions/bankAccounts/DeleteBankAccount";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
 
-export const useDeleteCategory = (categoryId: string) => {
+export const useDeleteBankAccount = (bankAccountId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-category-${categoryId}`;
+  const toastID = `delete-bank-account-${bankAccountId}`;
 
   return useMutation({
     mutationFn: () => {
-      toast.loading("Deleting category...", {
+      toast.loading("Deleting bank account...", {
         description: "",
         id: toastID,
       });
 
-      return DeleteCategory(categoryId);
+      return DeleteBankAccount(bankAccountId);
     },
     onSuccess: () => {
-      toast.success("Category deleted", {
+      toast.success("Bank account deleted", {
         description: "",
         id: toastID,
       });
 
-      queryClient.invalidateQueries({ queryKey: KEYS.categories });
+      queryClient.invalidateQueries({ queryKey: KEYS.bankAccounts });
     },
     onError: ({ message }) => {
-      toast.error("Failed to delete category", {
+      toast.error("Failed to delete bank account", {
         description: message ?? "Please try again later",
         id: toastID,
       });
