@@ -1,6 +1,7 @@
 import { AmountBadge } from "@/components/AmountBadge";
+import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { ROUTES } from "@/constants/routes";
-import type { Transaction } from "@coin-guard/db";
+import type { Prisma } from "@coin-guard/db";
 import {
   Button,
   Card,
@@ -10,12 +11,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@coin-guard/ui";
-import { format } from "date-fns";
 import { Eye } from "@coin-guard/ui/icons";
+import { format } from "date-fns";
 import Link from "next/link";
 
 type DashboardLastTransactionsProps = {
-  transactions: Transaction[];
+  transactions: Prisma.TransactionGetPayload<{
+    include: {
+      account: true;
+    };
+  }>[];
 };
 
 export const DashboardLastTransactions = ({
@@ -30,8 +35,8 @@ export const DashboardLastTransactions = ({
         </div>
         <CardAction>
           <Button
-            render={<Link href={ROUTES.transactions} />}
             nativeButton={false}
+            render={<Link href={ROUTES.transactions} />}
             size="sm"
             variant="outline"
           >
@@ -49,14 +54,17 @@ export const DashboardLastTransactions = ({
               key={transaction.id}
             >
               <div className="flex flex-1 items-center flex-wrap justify-between gap-1">
-                <div className="flex items-center space-x-3">
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium truncate">
-                      {transaction.description}
-                    </p>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {format(transaction.date, "PPP")}
-                    </p>
+                <div className="flex items-center gap-4">
+                  <BankAccountAvatar alias={transaction.account.alias ?? ""} />
+                  <div className="flex items-center space-x-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium truncate">
+                        {transaction.description}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {format(transaction.date, "PPP")}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <AmountBadge

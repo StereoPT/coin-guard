@@ -45,6 +45,7 @@ export const AddTransactionDialog = ({
       balance: 0,
       note: "",
       categoryId: undefined,
+      accountId: undefined,
     },
   });
 

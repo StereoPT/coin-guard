@@ -8,6 +8,7 @@ export const GetTransaction = async (transactionId: string) => {
       where: { id: transactionId },
       include: {
         category: true,
+        account: true,
       },
     });
 
@@ -20,6 +21,7 @@ export const GetTransaction = async (transactionId: string) => {
       orderBy: { date: "asc" },
       include: {
         category: true,
+        account: true,
       },
     });
 

@@ -68,6 +68,7 @@ export const EditTransactionDialog = ({
       balance: 0,
       note: "",
       categoryId: undefined,
+      accountId: undefined,
     },
   });
 
@@ -83,6 +84,7 @@ export const EditTransactionDialog = ({
       balance: currentTransaction.balance,
       note: currentTransaction.note ?? "",
       categoryId: currentTransaction.categoryId ?? undefined,
+      accountId: currentTransaction.accountId ?? undefined,
     });
   }, [transaction, form]);
 

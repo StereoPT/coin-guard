@@ -1,7 +1,7 @@
+import { EditBankAccountDialog } from "@/components/bankAccounts/dialogs/EditBankAccountDialog";
 import { DeleteDialog } from "@/components/DeleteDialog";
-import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
-import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
-import type { TransactionWithRelations } from "@/types/transactions";
+import { useDeleteBankAccount } from "@/hooks/bankAccounts/useDeleteBankAccount";
+import type { BankAccount } from "@coin-guard/db";
 import {
   Button,
   DropdownMenu,
@@ -14,17 +14,17 @@ import {
 import { Edit, MoreHorizontal, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
-type TransactionActionsProps = {
-  transaction: TransactionWithRelations;
+type BankAccountActionsProps = {
+  bankAccount: BankAccount;
 };
 
-export const TransactionActions = ({
-  transaction,
-}: TransactionActionsProps) => {
+export const BankAccountActions = ({
+  bankAccount,
+}: BankAccountActionsProps) => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
 
-  const { isPending, mutateAsync } = useDeleteTransaction(transaction.id);
+  const { isPending, mutateAsync } = useDeleteBankAccount(bankAccount.id);
 
   return (
     <>
@@ -32,8 +32,8 @@ export const TransactionActions = ({
         <DeleteDialog
           description={
             <span>
-              This will permanently delete <b>{transaction.description}</b>.
-              This action cannot be undone.
+              This will permanently delete <b>{bankAccount.name}</b> with the
+              IBAN <b>{bankAccount.iban}</b>. This action cannot be undone.
             </span>
           }
           isPending={isPending}
@@ -44,10 +44,10 @@ export const TransactionActions = ({
       )}
 
       {showEditDialog && (
-        <EditTransactionDialog
+        <EditBankAccountDialog
+          bankAccount={bankAccount}
           onOpenChange={setShowEditDialog}
           open={showEditDialog}
-          transactionId={transaction.id}
         />
       )}
 

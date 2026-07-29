@@ -2,6 +2,7 @@
 
 import { Check, ChevronsUpDown } from "lucide-react";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
@@ -18,6 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 export interface SelectOption {
   value: string;
   label: string;
+  content?: ReactNode;
 }
 
 type SearchableSelectProps = {
@@ -28,6 +30,7 @@ type SearchableSelectProps = {
   searchPlaceholder: string;
   emptyPlaceholder: string;
   disabled?: boolean;
+  align?: "start" | "center" | "end";
 };
 
 export function SearchableSelect({
@@ -38,6 +41,7 @@ export function SearchableSelect({
   searchPlaceholder,
   emptyPlaceholder,
   disabled = false,
+  align = "center",
 }: SearchableSelectProps) {
   const [open, setOpen] = useState(false);
 
@@ -64,10 +68,12 @@ export function SearchableSelect({
           variant="outline"
         />
       }>
-        {selectedOption ? selectedOption.label : placeholder}
+        {selectedOption
+          ? (selectedOption.content ?? selectedOption.label)
+          : placeholder}
         <ChevronsUpDown className="opacity-50" />
       </PopoverTrigger>
-      <PopoverContent className="w-57.5 p-0">
+      <PopoverContent align={align} className="w-57.5 p-0">
         <Command>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
@@ -79,7 +85,7 @@ export function SearchableSelect({
                   onSelect={() => handleSelect(option.value)}
                   value={option.label}
                 >
-                  {option.label}
+                  {option.content ?? option.label}
                   <Check
                     className={cn(
                       "ml-auto",

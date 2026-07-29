@@ -14,7 +14,7 @@ export const GetCategory = async (categoryId: string) => {
   const transactions = await prisma.transaction.findMany({
     where: { categoryId },
     orderBy: { date: "asc" },
-    include: { category: true },
+    include: { category: true, account: true },
   });
 
   return { ...category, transactions };

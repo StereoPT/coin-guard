@@ -1,5 +1,6 @@
 import { AmountBadge } from "@/components/AmountBadge";
-import type { TransactionWithCategory } from "@/types/transactions";
+import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
+import type { TransactionWithRelations } from "@/types/transactions";
 import {
   Badge,
   Table,
@@ -12,7 +13,7 @@ import {
 import { format } from "date-fns";
 
 type TransactionTableProps = {
-  transactions: TransactionWithCategory[];
+  transactions: TransactionWithRelations[];
 };
 
 export const TransactionTable = ({ transactions }: TransactionTableProps) => {
@@ -30,10 +31,13 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
           return (
             <TableRow key={t.id}>
               <TableCell className="py-1">
-                <div className="flex flex-col text-xs">
-                  <div className="font-medium">{t.description}</div>
-                  <div className="text-muted-foreground">
-                    {format(t.date, "PPP")}
+                <div className="flex items-center gap-4">
+                  <BankAccountAvatar alias={t.account.alias ?? ""} size="sm" />
+                  <div className="flex flex-col text-xs">
+                    <div className="font-medium">{t.description}</div>
+                    <div className="text-muted-foreground">
+                      {format(t.date, "PPP")}
+                    </div>
                   </div>
                 </div>
               </TableCell>
