@@ -4,7 +4,7 @@ import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { TransactionTable } from "@/components/tables/TransactionTable";
 import { CountType } from "@/types/dashboard";
-import type { TransactionWithCategory } from "@/types/transactions";
+import type { TransactionWithRelations } from "@/types/transactions";
 import {
   Card,
   CardContent,
@@ -19,7 +19,7 @@ import {
 import { AreaChart, Table2 } from "@coin-guard/ui/icons";
 
 type TransactionTabsProps = {
-  transactions: TransactionWithCategory[];
+  transactions: TransactionWithRelations[];
   title: string;
   description: string;
 };

@@ -1,7 +1,7 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
 import { useDeleteTransaction } from "@/hooks/transactions/useDeleteTransaction";
-import type { TransactionWithCategory } from "@/types/transactions";
+import type { TransactionWithRelations } from "@/types/transactions";
 import {
   Button,
   DropdownMenu,
@@ -15,7 +15,7 @@ import { Edit, MoreHorizontal, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type TransactionActionsProps = {
-  transaction: TransactionWithCategory;
+  transaction: TransactionWithRelations;
 };
 
 export const TransactionActions = ({

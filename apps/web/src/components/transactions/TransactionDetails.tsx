@@ -3,9 +3,9 @@
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
+import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
-import { formatCurrency } from "@/lib/formatter";
 import { CountType } from "@/types/dashboard";
 import { TransactionType } from "@coin-guard/db";
 import {
@@ -16,15 +16,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@coin-guard/ui";
-import { format } from "date-fns";
 import {
   ArrowDownRight,
   ArrowUpRight,
-  Banknote,
   Calendar,
   FileText,
   Tag,
 } from "@coin-guard/ui/icons";
+import { format } from "date-fns";
 
 type TransactionDetailsProps = {
   transactionId: string;
@@ -43,24 +42,35 @@ export const TransactionDetails = ({
     <div className="flex flex-col gap-6">
       <Card className="grid grid-cols-3">
         <div className="col-span-2">
-          <CardHeader>
-            <CardDescription className="flex items-center gap-2 capitalize">
-              {transaction.transaction.type === TransactionType.CREDIT ? (
-                <ArrowUpRight className="size-4" />
-              ) : (
-                <ArrowDownRight className="size-4" />
-              )}
-              {transaction.transaction.type.toLowerCase()}
-            </CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
-              <CountUpWrapper
-                type={CountType.MONEY}
-                value={transaction.transaction.amount}
-              />
-            </CardTitle>
-            <CardTitle>{transaction.transaction.description}</CardTitle>
-          </CardHeader>
+          <div className="flex justify-between items-start">
+            <CardHeader>
+              <CardDescription className="flex items-center gap-2 capitalize">
+                {transaction.transaction.type === TransactionType.CREDIT ? (
+                  <ArrowUpRight className="size-4" />
+                ) : (
+                  <ArrowDownRight className="size-4" />
+                )}
+                {transaction.transaction.type.toLowerCase()}
+              </CardDescription>
+              <CardTitle className="text-2xl font-semibold tabular-nums">
+                <CountUpWrapper
+                  type={CountType.MONEY}
+                  value={transaction.transaction.amount}
+                />
+              </CardTitle>
+              <CardTitle>{transaction.transaction.description}</CardTitle>
+            </CardHeader>
+          </div>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
+            <div className="flex flex-row gap-4 items-center">
+              <BankAccountAvatar
+                alias={transaction.transaction.account?.alias ?? ""}
+              />
+              <div className="flex flex-col">
+                <span className="text-muted-foreground">Bank</span>
+                {transaction.transaction.account?.name}
+              </div>
+            </div>
             <div className="flex flex-row gap-4 items-center">
               <div className="rounded bg-neutral-200 text-neutral-500 p-2">
                 <Calendar className="size-4" />
@@ -81,7 +91,7 @@ export const TransactionDetails = ({
                 </Badge>
               </div>
             </div>
-            <div className="flex flex-row gap-4 items-center">
+            {/* <div className="flex flex-row gap-4 items-center">
               <div className="rounded bg-neutral-200 text-neutral-500 p-2">
                 <Banknote className="size-4" />
               </div>
@@ -89,7 +99,7 @@ export const TransactionDetails = ({
                 <span className="text-muted-foreground">Balance After</span>
                 {formatCurrency(transaction.transaction.balance)}
               </div>
-            </div>
+            </div> */}
           </CardContent>
         </div>
         <div className="border-l">

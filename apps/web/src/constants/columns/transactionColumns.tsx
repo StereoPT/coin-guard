@@ -1,16 +1,17 @@
 "use client";
 
 import { AmountBadge } from "@/components/AmountBadge";
+import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { TransactionActions } from "@/components/transactions/TransactionActions";
 import { ROUTES } from "@/constants/routes";
 import { dateBetweenFilterFn } from "@/lib/dataTable";
-import type { TransactionWithCategory } from "@/types/transactions";
+import type { TransactionWithRelations } from "@/types/transactions";
 import { Badge } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";
 
-export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
+export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
   {
     accessorKey: "date",
     filterFn: dateBetweenFilterFn,
@@ -20,14 +21,17 @@ export const transactionColumns: ColumnDef<TransactionWithCategory>[] = [
     header: "Description",
     size: 420,
     cell: ({ row }) => {
-      const { id, description, date } = row.original;
+      const { id, description, date, account } = row.original;
 
       return (
         <Link href={ROUTES.transaction(id)}>
-          <div className="flex flex-col">
-            <div className="font-medium">{description}</div>
-            <div className="text-xs text-muted-foreground">
-              {format(date, "PPP")}
+          <div className="flex items-center gap-4">
+            <BankAccountAvatar alias={account?.alias ?? ""} />
+            <div className="flex flex-col">
+              <div className="font-medium">{description}</div>
+              <div className="text-xs text-muted-foreground">
+                {format(date, "PPP")}
+              </div>
             </div>
           </div>
         </Link>

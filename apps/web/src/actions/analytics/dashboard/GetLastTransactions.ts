@@ -7,6 +7,9 @@ export const GetLastTransactions = async (amount: number) => {
     orderBy: {
       date: "desc",
     },
+    include: {
+      account: true,
+    },
     take: amount,
   });
 

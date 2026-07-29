@@ -7,6 +7,7 @@ export const GetTransactions = async () => {
     orderBy: { date: "desc" },
     include: {
       category: true,
+      account: true,
     },
   });
 

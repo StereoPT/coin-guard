@@ -1,8 +1,9 @@
 "use client";
 
 import { BankAccountActions } from "@/components/bankAccounts/BankAccountActions";
+import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import type { BankAccount } from "@coin-guard/db";
-import { Avatar, AvatarFallback, Badge } from "@coin-guard/ui";
+import { Badge } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 
 export const bankAccountColumns: ColumnDef<BankAccount>[] = [
@@ -15,13 +16,7 @@ export const bankAccountColumns: ColumnDef<BankAccount>[] = [
 
       return (
         <div className="flex items-center gap-4">
-          {alias && (
-            <Avatar>
-              <AvatarFallback className="font-bold text-xs">
-                {alias}
-              </AvatarFallback>
-            </Avatar>
-          )}
+          {alias && <BankAccountAvatar alias={alias} />}
           <div className="flex flex-col">
             <div className="font-medium">{name}</div>
             <div className="text-xs text-muted-foreground">{iban}</div>
