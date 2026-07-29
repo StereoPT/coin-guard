@@ -57,6 +57,7 @@ model BankAccount {
   id            String            @id @default(cuid())
 
   name          String
+  alias         String?
   type          BankAccountType
   iban          String            @unique
 

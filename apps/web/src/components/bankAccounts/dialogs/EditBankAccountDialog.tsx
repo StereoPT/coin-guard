@@ -39,6 +39,7 @@ export const EditBankAccountDialog = ({
     resolver: zodResolver(editBankAccountSchema),
     defaultValues: {
       name: bankAccount.name,
+      alias: bankAccount.alias ?? "",
       type: bankAccount.type,
       iban: bankAccount.iban,
     },

@@ -2,7 +2,7 @@
 
 import { BankAccountActions } from "@/components/bankAccounts/BankAccountActions";
 import type { BankAccount } from "@coin-guard/db";
-import { Badge } from "@coin-guard/ui";
+import { Avatar, AvatarFallback, Badge } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 
 export const bankAccountColumns: ColumnDef<BankAccount>[] = [
@@ -11,12 +11,21 @@ export const bankAccountColumns: ColumnDef<BankAccount>[] = [
     header: "Name",
     size: 510,
     cell: ({ row }) => {
-      const { name, iban } = row.original;
+      const { name, alias, iban } = row.original;
 
       return (
-        <div className="flex flex-col">
-          <div className="font-medium">{name}</div>
-          <div className="text-xs text-muted-foreground">{iban}</div>
+        <div className="flex items-center gap-4">
+          {alias && (
+            <Avatar>
+              <AvatarFallback className="font-bold text-xs">
+                {alias}
+              </AvatarFallback>
+            </Avatar>
+          )}
+          <div className="flex flex-col">
+            <div className="font-medium">{name}</div>
+            <div className="text-xs text-muted-foreground">{iban}</div>
+          </div>
         </div>
       );
     },

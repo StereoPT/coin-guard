@@ -52,6 +52,18 @@ export const BankAccountFormFields = ({
 
       <Controller
         control={control}
+        name="alias"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-alias`}>Alias</FieldLabel>
+            <Input {...field} id={`${formId}-alias`} placeholder="Alias" />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+
+      <Controller
+        control={control}
         name="type"
         render={({ field, fieldState }) => (
           <Field>

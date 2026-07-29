@@ -31,6 +31,7 @@ export const AddBankAccountDialog = () => {
     resolver: zodResolver(addBankAccountSchema),
     defaultValues: {
       name: "",
+      alias: "",
       type: undefined,
       iban: "",
     },
