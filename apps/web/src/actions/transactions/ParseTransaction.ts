@@ -24,6 +24,7 @@ export type ProcessedTransaction = {
   balance: number;
   type: "CREDIT" | "DEBIT";
   categoryId?: string;
+  accountId?: string;
 };
 
 const parseNumbers = (value: string) => {

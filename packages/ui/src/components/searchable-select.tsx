@@ -30,6 +30,7 @@ type SearchableSelectProps = {
   searchPlaceholder: string;
   emptyPlaceholder: string;
   disabled?: boolean;
+  align?: "start" | "center" | "end";
 };
 
 export function SearchableSelect({
@@ -40,6 +41,7 @@ export function SearchableSelect({
   searchPlaceholder,
   emptyPlaceholder,
   disabled = false,
+  align = "center",
 }: SearchableSelectProps) {
   const [open, setOpen] = useState(false);
 
@@ -71,7 +73,7 @@ export function SearchableSelect({
           : placeholder}
         <ChevronsUpDown className="opacity-50" />
       </PopoverTrigger>
-      <PopoverContent className="w-57.5 p-0">
+      <PopoverContent align={align} className="w-57.5 p-0">
         <Command>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
