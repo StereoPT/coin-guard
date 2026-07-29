@@ -16,11 +16,10 @@ const formatBreadcrumbLabel = (segment: string) => {
     return BREADCRUMB_LABELS[segment];
   }
 
-  const camelCaseWithSpaces = segment
+  return segment
     .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/^./, (char) => char.toUpperCase());
-
-  return camelCaseWithSpaces;
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
 export const buildBreadcrumbTrail = (segments: string[]): BreadcrumbTrail => {
