@@ -64,11 +64,11 @@ export const TransactionDetails = ({
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
             <div className="flex flex-row gap-4 items-center">
               <BankAccountAvatar
-                alias={transaction.transaction.account?.alias ?? ""}
+                alias={transaction.transaction.account.alias ?? ""}
               />
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Bank</span>
-                {transaction.transaction.account?.name}
+                {transaction.transaction.account.name}
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">

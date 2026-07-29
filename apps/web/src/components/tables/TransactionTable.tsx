@@ -32,7 +32,7 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
             <TableRow key={t.id}>
               <TableCell className="py-1">
                 <div className="flex items-center gap-4">
-                  <BankAccountAvatar alias={t.account?.alias ?? ""} size="sm" />
+                  <BankAccountAvatar alias={t.account.alias ?? ""} size="sm" />
                   <div className="flex flex-col text-xs">
                     <div className="font-medium">{t.description}</div>
                     <div className="text-muted-foreground">

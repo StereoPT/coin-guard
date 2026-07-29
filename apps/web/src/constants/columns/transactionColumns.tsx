@@ -26,7 +26,7 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
       return (
         <Link href={ROUTES.transaction(id)}>
           <div className="flex items-center gap-4">
-            <BankAccountAvatar alias={account?.alias ?? ""} />
+            <BankAccountAvatar alias={account.alias ?? ""} />
             <div className="flex flex-col">
               <div className="font-medium">{description}</div>
               <div className="text-xs text-muted-foreground">

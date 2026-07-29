@@ -55,7 +55,7 @@ export const DashboardLastTransactions = ({
             >
               <div className="flex flex-1 items-center flex-wrap justify-between gap-1">
                 <div className="flex items-center gap-4">
-                  <BankAccountAvatar alias={transaction.account?.alias ?? ""} />
+                  <BankAccountAvatar alias={transaction.account.alias ?? ""} />
                   <div className="flex items-center space-x-3">
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium truncate">

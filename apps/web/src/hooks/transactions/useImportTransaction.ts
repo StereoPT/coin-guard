@@ -5,18 +5,23 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
 
+type ImportTransactionArgs = {
+  transactions: ProcessedTransaction[];
+  accountId: string;
+};
+
 export const useImportTransaction = () => {
   const queryClient = getQueryClient();
   const toastId = "import-transactions";
 
   return useMutation({
-    mutationFn: async (transactions: ProcessedTransaction[]) => {
+    mutationFn: async ({ transactions, accountId }: ImportTransactionArgs) => {
       toast.loading("Importing transactions...", {
         description: "",
         id: toastId,
       });
 
-      return ImportTransaction(transactions);
+      return ImportTransaction(transactions, accountId);
     },
     onSuccess: () => {
       toast.success("Transactions imported", {

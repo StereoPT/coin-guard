@@ -28,8 +28,8 @@ model Transaction {
   categoryId    String?
   category      Category?         @relation(fields: [categoryId], references: [id])
 
-  accountId     String?
-  account       BankAccount?      @relation(fields: [accountId], references: [id])
+  accountId     String
+  account       BankAccount       @relation(fields: [accountId], references: [id], onDelete: Restrict)
 
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from "@coin-guard/ui";
 
 type BankAccountAvatarProps = {
-  alias?: string;
+  alias: string;
   size?: "default" | "sm" | "lg";
 };
 
