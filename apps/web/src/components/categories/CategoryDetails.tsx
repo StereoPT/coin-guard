@@ -20,6 +20,7 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
     <div className="flex flex-col gap-6">
       <BudgetDetails category={category} />
       <TransactionTabs
+        budgetAmount={category.budgetAmount ?? undefined}
         description="Showing category amount over time"
         title={category.name}
         transactions={category.transactions}

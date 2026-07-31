@@ -7,8 +7,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@coin-guard/ui";
-import { endOfMonth, format, subMonths } from "date-fns";
-import { useMemo } from "react";
 import {
   Bar,
   CartesianGrid,
@@ -16,6 +14,8 @@ import {
   Line,
   XAxis,
 } from "@coin-guard/ui/charts";
+import { endOfMonth, format, subMonths } from "date-fns";
+import { useMemo } from "react";
 
 const chartConfig = {
   amount: {
@@ -26,13 +26,21 @@ const chartConfig = {
     label: "Trend",
     color: "var(--chart-2)",
   },
+  budget: {
+    label: "Budget",
+    color: "var(--chart-3)",
+  },
 } satisfies ChartConfig;
 
 type TransactionsChartProps = {
   transactions: Transaction[];
+  budgetAmount?: number;
 };
 
-export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
+export const TransactionsChart = ({
+  transactions,
+  budgetAmount,
+}: TransactionsChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
 
@@ -63,9 +71,10 @@ export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
       return {
         ...item,
         trend,
+        budget: budgetAmount,
       };
     });
-  }, [transactions]);
+  }, [transactions, budgetAmount]);
 
   return (
     <ChartContainer
@@ -103,6 +112,15 @@ export const TransactionsChart = ({ transactions }: TransactionsChartProps) => {
           strokeWidth={2}
           type="monotone"
         />
+        {budgetAmount !== undefined && (
+          <Line
+            dataKey="budget"
+            dot={false}
+            stroke="var(--color-budget)"
+            strokeWidth={1}
+            type="monotone"
+          />
+        )}
       </ComposedChart>
     </ChartContainer>
   );

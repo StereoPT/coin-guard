@@ -22,12 +22,14 @@ type TransactionTabsProps = {
   transactions: TransactionWithRelations[];
   title: string;
   description: string;
+  budgetAmount?: number;
 };
 
 export const TransactionTabs = ({
   transactions,
   title,
   description,
+  budgetAmount,
 }: TransactionTabsProps) => {
   const sum = transactions.reduce((acc, t) => (acc += t.amount), 0);
   const average = transactions.length === 0 ? 0 : sum / transactions.length;
@@ -66,7 +68,10 @@ export const TransactionTabs = ({
         </CardHeader>
         <CardContent className="p-0">
           <TabsContent value="graph">
-            <TransactionsChart transactions={transactions} />
+            <TransactionsChart
+              budgetAmount={budgetAmount}
+              transactions={transactions}
+            />
           </TabsContent>
           <TabsContent value="table">
             <TransactionTable transactions={transactions} />
