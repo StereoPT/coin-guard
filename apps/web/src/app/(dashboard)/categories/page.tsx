@@ -5,6 +5,8 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 const CategoriesPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(getCategoriesOptions());

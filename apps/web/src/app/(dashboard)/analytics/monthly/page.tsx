@@ -6,6 +6,8 @@ import { monthlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getMonth, subMonths } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 const MonthlyPage = async () => {
   const month = getMonth(subMonths(new Date(), 1));
 

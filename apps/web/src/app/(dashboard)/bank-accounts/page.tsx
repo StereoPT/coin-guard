@@ -5,6 +5,8 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { getBankAccountsOptions } from "@/lib/queryOptions/bankAccounts";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 const BankAccountsPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(getBankAccountsOptions());

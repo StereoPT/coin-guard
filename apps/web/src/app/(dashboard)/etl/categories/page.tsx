@@ -6,6 +6,8 @@ import { getCategoriesOptions } from "@/lib/queryOptions/categories";
 import { getLookupCategoriesOptions } from "@/lib/queryOptions/lookup";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 const LookupCategoriesPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(getCategoriesOptions());

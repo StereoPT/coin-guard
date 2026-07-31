@@ -6,6 +6,8 @@ import { yearlyAnalyticsOptions } from "@/lib/queryOptions/analytics";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getYear } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 const YearlyPage = async () => {
   const year = getYear(new Date());
 

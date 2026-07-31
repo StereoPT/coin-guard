@@ -4,6 +4,8 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { getLookupLogsOptions } from "@/lib/queryOptions/lookup";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 const LookupLogsPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(getLookupLogsOptions());
