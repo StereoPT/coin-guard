@@ -17,7 +17,7 @@ export const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {analytics.stats.TRANSACTIONS.value !== 0 && <MonthlyImportReminder />}
+      {analytics.stats.TRANSACTIONS.value === 0 && <MonthlyImportReminder />}
       <div className="grid gap-4 grid-cols-1 xl:grid-cols-3">
         <StatCard
           countType={CountType.MONEY}
