@@ -2,6 +2,7 @@
 
 import { TransformCategories } from "@/actions/etl/TransformCategories";
 import { TransformDescriptions } from "@/actions/etl/TransformDescriptions";
+import type { TransactionType } from "@coin-guard/db";
 import { format, isValid, parse } from "date-fns";
 import Papa from "papaparse";
 
@@ -22,7 +23,7 @@ export type ProcessedTransaction = {
   description: string;
   amount: number;
   balance: number;
-  type: "CREDIT" | "DEBIT";
+  type: TransactionType;
   categoryId?: string;
   accountId?: string;
 };

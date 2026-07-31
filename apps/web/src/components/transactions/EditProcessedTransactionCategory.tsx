@@ -7,17 +7,17 @@ import { SearchableSelect } from "@coin-guard/ui";
 import { useSetAtom } from "jotai";
 import { useCallback, useMemo } from "react";
 
-type EditProcessedTransactionProps = {
+type EditProcessedTransactionCategoryProps = {
   transaction: ProcessedTransaction;
 };
 
-export const EditProcessedTransaction = ({
+export const EditProcessedTransactionCategory = ({
   transaction,
-}: EditProcessedTransactionProps) => {
+}: EditProcessedTransactionCategoryProps) => {
   const { data: categories } = useGetCategories();
   const setTransactions = useSetAtom(processedTransactionsAtom);
 
-  const handleEditProcessedTransaction = useCallback(
+  const handleEditProcessedTransactionCategory = useCallback(
     (categoryId: string | undefined) => {
       setTransactions((prev) =>
         prev.map((t) => (t === transaction ? { ...t, categoryId } : t)),
@@ -38,7 +38,7 @@ export const EditProcessedTransaction = ({
   return (
     <SearchableSelect
       emptyPlaceholder="No category found."
-      onChange={handleEditProcessedTransaction}
+      onChange={handleEditProcessedTransactionCategory}
       options={categoryOptions}
       placeholder="Select a Category"
       searchPlaceholder="Search a category..."
