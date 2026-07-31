@@ -18,12 +18,19 @@ import {
 } from "@coin-guard/ui";
 import {
   ArrowDownRight,
+  ArrowLeftRight,
   ArrowUpRight,
   Calendar,
   FileText,
   Tag,
 } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
+
+const typeIcons = {
+  [TransactionType.CREDIT]: <ArrowUpRight className="size-4" />,
+  [TransactionType.DEBIT]: <ArrowDownRight className="size-4" />,
+  [TransactionType.TRANSFER]: <ArrowLeftRight className="size-4" />,
+};
 
 type TransactionDetailsProps = {
   transactionId: string;
@@ -44,11 +51,7 @@ export const TransactionDetails = ({
         <div className="col-span-2">
           <CardHeader>
             <CardDescription className="flex items-center gap-2 capitalize">
-              {transaction.transaction.type === TransactionType.CREDIT ? (
-                <ArrowUpRight className="size-4" />
-              ) : (
-                <ArrowDownRight className="size-4" />
-              )}
+              {typeIcons[transaction.transaction.type]}
               {transaction.transaction.type.toLowerCase()}
             </CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums">
