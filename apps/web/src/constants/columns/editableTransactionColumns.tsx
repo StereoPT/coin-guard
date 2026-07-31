@@ -3,8 +3,8 @@
 import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { AmountBadge } from "@/components/AmountBadge";
 import { DeleteProcessedTransaction } from "@/components/transactions/DeleteProcessedTransaction";
-import { EditProcessedTransaction } from "@/components/transactions/EditProcessedTransaction";
-import { formatCurrency } from "@/lib/formatter";
+import { EditProcessedTransactionCategory } from "@/components/transactions/EditProcessedTransactionCategory";
+import { EditProcessedTransactionType } from "@/components/transactions/EditProcessedTransactionType";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 
@@ -37,13 +37,13 @@ export const editableTransactionColumns: ColumnDef<ProcessedTransaction>[] = [
     },
   },
   {
-    accessorKey: "balance",
-    header: "Balance",
+    accessorKey: "type",
+    header: "Type",
     size: 90,
     cell: ({ row }) => {
-      const { balance } = row.original;
+      const transaction = row.original;
 
-      return formatCurrency(balance);
+      return <EditProcessedTransactionType transaction={transaction} />;
     },
   },
   {
@@ -53,7 +53,7 @@ export const editableTransactionColumns: ColumnDef<ProcessedTransaction>[] = [
     cell: ({ row }) => {
       const transaction = row.original;
 
-      return <EditProcessedTransaction transaction={transaction} />;
+      return <EditProcessedTransactionCategory transaction={transaction} />;
     },
   },
   {

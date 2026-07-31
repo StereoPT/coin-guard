@@ -1,32 +1,17 @@
 "use server";
 
-import type { StatCardsType } from "@/types/analytics";
+import { GetTypeSumForDate } from "@/actions/analytics/dashboard/GetTypeSumForDate";
 import { TransactionType } from "@coin-guard/db";
-import { prisma } from "@coin-guard/db/server";
-
-const createEmptyTransactionSummary = (): StatCardsType => {
-  return Object.values(TransactionType).reduce((acc, type) => {
-    acc[type] = 0;
-    return acc;
-  }, {} as StatCardsType);
-};
 
 export const GetStatsForDate = async (dateFilter: { gte: Date; lte: Date }) => {
-  const groupedData = await prisma.transaction.groupBy({
-    by: "type",
-    _sum: { amount: true },
-    where: {
-      date: dateFilter,
-    },
-  });
+  const [credit, debit] = await Promise.all([
+    GetTypeSumForDate(TransactionType.CREDIT, dateFilter),
+    GetTypeSumForDate(TransactionType.DEBIT, dateFilter),
+  ]);
 
-  const summary = createEmptyTransactionSummary();
-
-  groupedData.forEach((item) => {
-    summary[item.type] = item._sum.amount ?? 0;
-  });
-
-  summary.CASH_FLOW = summary.CREDIT - summary.DEBIT;
-
-  return summary;
+  return {
+    CREDIT: credit,
+    DEBIT: debit,
+    CASH_FLOW: credit - debit,
+  };
 };

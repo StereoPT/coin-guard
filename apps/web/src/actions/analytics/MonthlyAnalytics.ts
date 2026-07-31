@@ -2,6 +2,7 @@
 
 import { GetCategoriesForDate } from "@/actions/analytics/GetCategoriesForDate";
 import { GetStatsForDate } from "@/actions/analytics/GetStatsForDate";
+import { TransactionType } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 import { endOfMonth, startOfMonth } from "date-fns";
 
@@ -15,7 +16,7 @@ export const MonthlyAnalytics = async (month: number) => {
 
   const transactions = await prisma.transaction.findMany({
     where: {
-      type: "DEBIT",
+      type: TransactionType.DEBIT,
       date: dateFilter,
     },
   });

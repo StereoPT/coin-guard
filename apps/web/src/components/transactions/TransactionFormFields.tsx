@@ -40,6 +40,7 @@ type TransactionSchema = addTransactionSchemaType | editTransactionSchemaType;
 const transactionTypeItems = [
   { value: "DEBIT", label: "Debit" },
   { value: "CREDIT", label: "Credit" },
+  { value: "TRANSFER", label: "Transfer" },
 ];
 
 type TransactionFormFieldsProps = {
@@ -143,11 +144,7 @@ export const TransactionFormFields = ({
                 onValueChange={field.onChange}
                 value={field.value ?? null}
               >
-                <SelectTrigger
-                  className="w-full"
-                  disabled={formType === "edit"}
-                  id={`${formId}-type`}
-                >
+                <SelectTrigger className="w-full" id={`${formId}-type`}>
                   <SelectValue placeholder="Transaction Type" />
                 </SelectTrigger>
                 <SelectContent alignItemWithTrigger={false}>
@@ -155,6 +152,7 @@ export const TransactionFormFields = ({
                     <SelectLabel>Transaction Type</SelectLabel>
                     <SelectItem value="DEBIT">Debit</SelectItem>
                     <SelectItem value="CREDIT">Credit</SelectItem>
+                    <SelectItem value="TRANSFER">Transfer</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

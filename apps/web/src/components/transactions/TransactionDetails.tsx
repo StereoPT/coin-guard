@@ -18,12 +18,19 @@ import {
 } from "@coin-guard/ui";
 import {
   ArrowDownRight,
+  ArrowLeftRight,
   ArrowUpRight,
   Calendar,
   FileText,
   Tag,
 } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
+
+const typeIcons = {
+  [TransactionType.CREDIT]: <ArrowUpRight className="size-4" />,
+  [TransactionType.DEBIT]: <ArrowDownRight className="size-4" />,
+  [TransactionType.TRANSFER]: <ArrowLeftRight className="size-4" />,
+};
 
 type TransactionDetailsProps = {
   transactionId: string;
@@ -42,25 +49,19 @@ export const TransactionDetails = ({
     <div className="flex flex-col gap-6">
       <Card className="grid grid-cols-3">
         <div className="col-span-2">
-          <div className="flex justify-between items-start">
-            <CardHeader>
-              <CardDescription className="flex items-center gap-2 capitalize">
-                {transaction.transaction.type === TransactionType.CREDIT ? (
-                  <ArrowUpRight className="size-4" />
-                ) : (
-                  <ArrowDownRight className="size-4" />
-                )}
-                {transaction.transaction.type.toLowerCase()}
-              </CardDescription>
-              <CardTitle className="text-2xl font-semibold tabular-nums">
-                <CountUpWrapper
-                  type={CountType.MONEY}
-                  value={transaction.transaction.amount}
-                />
-              </CardTitle>
-              <CardTitle>{transaction.transaction.description}</CardTitle>
-            </CardHeader>
-          </div>
+          <CardHeader>
+            <CardDescription className="flex items-center gap-2 capitalize">
+              {typeIcons[transaction.transaction.type]}
+              {transaction.transaction.type.toLowerCase()}
+            </CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums">
+              <CountUpWrapper
+                type={CountType.MONEY}
+                value={transaction.transaction.amount}
+              />
+            </CardTitle>
+            <CardTitle>{transaction.transaction.description}</CardTitle>
+          </CardHeader>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
             <div className="flex flex-row gap-4 items-center">
               <BankAccountAvatar
