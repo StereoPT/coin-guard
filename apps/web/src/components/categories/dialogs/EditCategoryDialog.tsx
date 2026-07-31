@@ -61,6 +61,7 @@ export const EditCategoryDialog = ({
     resolver: zodResolver(editCategorySchema),
     defaultValues: {
       name: "",
+      budgetAmount: null,
     },
   });
 
@@ -69,6 +70,7 @@ export const EditCategoryDialog = ({
 
     form.reset({
       name: category.name,
+      budgetAmount: category.budgetAmount,
     });
   }, [category, form]);
 
