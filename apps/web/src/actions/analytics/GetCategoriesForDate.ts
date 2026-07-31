@@ -34,18 +34,23 @@ export const GetCategoriesForDate = async (dateFilter: {
     select: {
       id: true,
       name: true,
+      budgetAmount: true,
     },
   });
 
-  const categoryMap = new Map(categories.map((cat) => [cat.id, cat.name]));
+  const categoryMap = new Map(categories.map((cat) => [cat.id, cat]));
 
-  const result = categoryTotals.map((item) => ({
-    categoryId: item.categoryId ?? "-1",
-    categoryName: item.categoryId
-      ? (categoryMap.get(item.categoryId) ?? "")
-      : "Uncategorized",
-    totalAmount: item._sum.amount ?? 0,
-  }));
+  const result = categoryTotals.map((item) => {
+    const categoryId = item.categoryId ?? "-1";
+    const categoryName = categoryMap.get(categoryId)?.name ?? "Uncategorized";
+
+    return {
+      categoryId,
+      categoryName,
+      totalAmount: item._sum.amount ?? 0,
+      budgetAmount: categoryMap.get(categoryId)?.budgetAmount ?? null,
+    };
+  });
 
   return result;
 };

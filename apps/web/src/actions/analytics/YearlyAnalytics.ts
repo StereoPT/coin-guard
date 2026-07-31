@@ -21,7 +21,11 @@ export const YearlyAnalytics = async (year: number) => {
     },
   });
 
-  const categoryStats = await GetCategoriesForDate(dateFilter);
+  const monthlyCategoryStats = await GetCategoriesForDate(dateFilter);
+  const categoryStats = monthlyCategoryStats.map((stat) => ({
+    ...stat,
+    budgetAmount: stat.budgetAmount !== null ? stat.budgetAmount * 12 : null,
+  }));
 
   return { stats, transactions, categoryStats };
 };
