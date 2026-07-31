@@ -42,6 +42,7 @@ model Category {
   id            String            @id @default(cuid())
 
   name          String
+  budgetAmount  Float?
 
   transactions  Transaction[]
   lookups       LookupCategory[]
