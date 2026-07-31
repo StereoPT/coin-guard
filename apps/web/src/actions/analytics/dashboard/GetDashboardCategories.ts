@@ -37,19 +37,21 @@ export const GetDashboardCategories = async () => {
     select: {
       id: true,
       name: true,
+      budgetAmount: true,
     },
   });
 
-  const categoryMap = new Map(categories.map((cat) => [cat.id, cat.name]));
+  const categoryMap = new Map(categories.map((cat) => [cat.id, cat]));
 
   const result = categoryTotals.map((item) => {
     const categoryId = item.categoryId ?? "NoCategory";
-    const categoryName = categoryMap.get(categoryId) ?? "Uncategorized";
+    const categoryName = categoryMap.get(categoryId)?.name ?? "Uncategorized";
 
     return {
       categoryId,
       categoryName,
       totalAmount: item._sum.amount ?? 0,
+      budgetAmount: categoryMap.get(categoryId)?.budgetAmount ?? null,
       fill: `var(--color-${categoryId})`,
     };
   });

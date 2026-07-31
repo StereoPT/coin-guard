@@ -32,6 +32,7 @@ export const AddCategoryDialog = () => {
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
       name: "",
+      budgetAmount: null,
     },
   });
 

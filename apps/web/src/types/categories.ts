@@ -12,4 +12,5 @@ export type CategoryStats = {
   categoryId: string;
   categoryName: string;
   totalAmount: number;
+  budgetAmount: number | null;
 };

@@ -21,8 +21,11 @@ import {
 } from "@coin-guard/ui";
 import { Edit } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
+  type ComponentProps,
   type Dispatch,
+  type ReactNode,
   type SetStateAction,
   useCallback,
   useEffect,
@@ -35,11 +38,17 @@ type EditCategoryDialogProps = {
 } & (
   | {
       trigger: true;
+      triggerVariant?: ComponentProps<typeof Button>["variant"];
+      triggerLabel?: string;
+      triggerIcon?: ReactNode;
       open?: boolean;
       onOpenChange?: Dispatch<SetStateAction<boolean>>;
     }
   | {
       trigger?: never;
+      triggerVariant?: never;
+      triggerLabel?: never;
+      triggerIcon?: never;
       open: boolean;
       onOpenChange: Dispatch<SetStateAction<boolean>>;
     }
@@ -49,6 +58,9 @@ export const EditCategoryDialog = ({
   open,
   onOpenChange,
   trigger,
+  triggerVariant = "default",
+  triggerLabel = "Edit Category",
+  triggerIcon = <Edit />,
   categoryId,
 }: EditCategoryDialogProps) => {
   const formId = "edit-category";
@@ -61,6 +73,7 @@ export const EditCategoryDialog = ({
     resolver: zodResolver(editCategorySchema),
     defaultValues: {
       name: "",
+      budgetAmount: null,
     },
   });
 
@@ -69,6 +82,7 @@ export const EditCategoryDialog = ({
 
     form.reset({
       name: category.name,
+      budgetAmount: category.budgetAmount,
     });
   }, [category, form]);
 
@@ -97,9 +111,9 @@ export const EditCategoryDialog = ({
   return (
     <Dialog onOpenChange={handleOpenChange} open={dialogOpen}>
       {trigger && (
-        <DialogTrigger render={<Button />}>
-          <Edit />
-          Edit Category
+        <DialogTrigger render={<Button variant={triggerVariant} />}>
+          {triggerIcon}
+          {triggerLabel}
         </DialogTrigger>
       )}
       <DialogContent>

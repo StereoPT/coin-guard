@@ -1,5 +1,6 @@
 "use client";
 
+import { BudgetDetails } from "@/components/categories/BudgetDetails";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
@@ -17,7 +18,9 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
 
   return (
     <div className="flex flex-col gap-6">
+      <BudgetDetails category={category} />
       <TransactionTabs
+        budgetAmount={category.budgetAmount ?? undefined}
         description="Showing category amount over time"
         title={category.name}
         transactions={category.transactions}

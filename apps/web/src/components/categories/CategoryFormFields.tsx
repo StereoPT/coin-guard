@@ -35,6 +35,30 @@ export const CategoryFormFields = ({ formId }: CategoryFormFieldsProps) => {
           </Field>
         )}
       />
+      <Controller
+        control={control}
+        name="budgetAmount"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel htmlFor={`${formId}-budgetAmount`}>
+              Monthly Budget
+            </FieldLabel>
+            <Input
+              {...field}
+              id={`${formId}-budgetAmount`}
+              onChange={(e) =>
+                field.onChange(
+                  e.target.value === "" ? null : e.target.valueAsNumber,
+                )
+              }
+              placeholder="No budget set"
+              type="number"
+              value={field.value ?? ""}
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
     </FieldGroup>
   );
 };
