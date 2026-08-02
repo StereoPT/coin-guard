@@ -9,14 +9,10 @@ node_modules
 .env
 .env.*
 !.env.example
-!.env.prod.example
 
 # Symlinks to the root .env.local, tracked on purpose (no secrets, just wiring)
 !apps/web/.env.local
 !packages/db/.env
-
-# Local override for docker-compose.prod.yml's Postgres bind mount
-/postgres-data
 
 # Testing
 coverage
