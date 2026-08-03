@@ -32,9 +32,9 @@
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.1.2",
     "@types/pg": "^8.20.0",
-    "prisma": "^7.9.0",
+    "prisma": "^7.9.1",
     "typescript": "catalog:"
   }
 }
