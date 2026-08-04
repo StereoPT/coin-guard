@@ -15,7 +15,7 @@
   "dependencies": {
     "@coin-guard/db": "workspace:*",
     "@coin-guard/ui": "workspace:*",
-    "@hookform/resolvers": "^5.4.0",
+    "@hookform/resolvers": "^5.6.0",
     "@stereopt/data-table": "^0.2.6",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-query-devtools": "^5.101.4",
@@ -23,13 +23,13 @@
     "@types/papaparse": "^5.5.2",
     "date-fns": "^4.4.0",
     "jotai": "^2.20.2",
-    "next": "^16.2.11",
+    "next": "^16.2.12",
     "nextjs-toploader": "^3.9.17",
     "papaparse": "^5.5.4",
     "react": "^19.2.8",
     "react-countup": "^6.5.3",
     "react-dom": "^19.2.8",
-    "react-hook-form": "^7.78.0",
+    "react-hook-form": "^7.84.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
