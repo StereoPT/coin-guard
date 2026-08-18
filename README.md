@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/StereoPT/coin-guard">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/CoinGuard.png" alt="Logo" width="120" height="120">
   </a>
 
   <h3 align="center">CoinGuard</h3>
@@ -41,6 +41,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#project-structure">Project Structure</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -64,28 +65,50 @@
 
 [![CoinGuard Screen Shot][product-screenshot]](https://github.com/StereoPT/coin-guard)
 
-CoinGuard is a comprehensive web application designed to help you take control of your personal finances. Whether you're looking to track your daily expenses, monitor your income streams, or set ambitious financial goals, CoinGuard provides you with the tools you need to make informed financial decisions.
+CoinGuard is a self-hostable web application for tracking personal finances - transactions, categories, bank accounts, and the analytics that come from them.
 
 Key features include:
 
-- **Income & Expense Tracking** - Monitor all your financial transactions in one place
-- **Savings Management** - Track your savings progress and set realistic targets
-- **Financial Goal Setting** - Define and work towards your financial objectives
-- **Comprehensive Reports** - Generate detailed insights about your financial health
-- **User-friendly Interface** - Clean, intuitive design built with modern web technologies
-
-CoinGuard empowers you to understand your spending patterns, identify areas for improvement, and build a stronger financial future. No more wondering where your money went – with CoinGuard, you're always in control.
+- **Transaction Tracking**: Record income, expenses and transfers, or import them from a bank export
+- **Categories**: Organize transactions into categories
+- **Bank Accounts**: Track balances across multiple accounts
+- **Monthly & Yearly Analytics**: Break down spending and income over time
+- **Import Enrichment**: Attach categories and descriptions to imported transactions before they're saved
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-CoinGuard is built using modern web technologies to ensure a fast, reliable, and user-friendly experience.
+CoinGuard is a pnpm/Turborepo monorepo built with:
 
 - [![Next][Next.js]][Next-url]
-- [![React][React.js]][React-url]
+- [![TypeScript][TypeScript.com]][TypeScript-url]
 - [![TailwindCSS][TailwindCSS.com]][TailwindCSS-url]
 - [![Prisma][Prisma.io]][Prisma-url]
+- [![PostgreSQL][PostgreSQL.com]][PostgreSQL-url]
+- [![Turborepo][Turborepo.com]][Turborepo-url]
+- [![Biome][Biome.dev]][Biome-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- PROJECT STRUCTURE -->
+
+## Project Structure
+
+CoinGuard is a pnpm workspace managed by Turborepo:
+
+```
+coin-guard/
+├── apps/
+│   └── web/           # Next.js app (routes, pages, UI logic)
+├── packages/
+│   ├── db/            # Prisma schema, migrations, and DB client
+│   ├── ui/            # Shared component library (Base UI + shadcn)
+│   ├── biome-config/  # Shared Biome (lint/format) config
+│   └── ts-config/     # Shared TypeScript config
+├── docker-compose.yml # Local PostgreSQL for development
+└── Dockerfile         # Production image for the web app
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,40 +122,47 @@ To get a local copy of CoinGuard up and running, follow these simple steps.
 
 Make sure you have the following installed on your system:
 
-- Node.js (version 18 or higher)
-- npm
+- Node.js (version 20.9 or higher)
+- [pnpm](https://pnpm.io/) (via [corepack](https://pnpm.io/installation#using-corepack), which ships with Node)
   ```sh
-  npm install npm@latest -g
+  corepack enable
   ```
+- [Docker](https://www.docker.com/) (to run the local PostgreSQL database)
 
 ### Installation
 
 1. Clone the repository
    ```sh
    git clone https://github.com/StereoPT/coin-guard.git
-   ```
-2. Navigate to the project directory
-   ```sh
    cd coin-guard
    ```
-3. Install NPM packages
+2. Install dependencies
    ```sh
-   npm install
+   pnpm install
    ```
-4. Create the database environment file
-  ```sh
-  cp packages/db/.env.example packages/db/.env
-  ```
-5. Set up your database with Prisma
+3. Create your root env file and fill in the Postgres credentials and `DATABASE_URL`
    ```sh
-  pnpm db:migrate
-  pnpm db:generate
+   cp .env.example .env.local
    ```
-6. Start the development server
+   > `apps/web/.env.local` and `packages/db/.env` are symlinks to this root file, so this is the only one you need to edit.
+4. Create the web app's env file
    ```sh
-   npm run dev
+   cp apps/web/.env.example apps/web/.env
    ```
-7. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
+5. Start the local PostgreSQL database
+   ```sh
+   docker compose up -d
+   ```
+6. Apply database migrations and generate the Prisma client
+   ```sh
+   pnpm db:migrate
+   pnpm db:generate
+   ```
+7. Start the development server
+   ```sh
+   pnpm dev
+   ```
+8. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -140,29 +170,20 @@ Make sure you have the following installed on your system:
 
 ## Usage
 
-CoinGuard makes personal finance management simple and intuitive:
-
 ### Track Your Finances
 
-- Add or import your transactions from CGD
-- Record expenses across different categories
-  - You can create and manage categories
-- Monitor your account over time
+- Add transactions manually, or import them from a bank export (CSV)
+- Organize transactions into categories you create and manage
+- Track balances across multiple bank accounts
 
-### Generate Reports
+### Import Transactions
 
-- View comprehensive financial reports
-- Analyze spending patterns by category and time period
+- During import, enrich each transaction with a category and description before it's saved
 
-### Dashboard Overview
+### Dashboard & Analytics
 
-- Get a quick snapshot of your financial health
-- See recent transactions at a glance
-- Monitor key financial metrics
-
-### Import Process
-
-- Enhance your transactions with categories and descriptions
+- Get a quick snapshot of your financial health, with recent transactions at a glance
+- Break down spending and income by category over the month or year
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -170,13 +191,24 @@ CoinGuard makes personal finance management simple and intuitive:
 
 ## Roadmap
 
-- [x] Analytics Sections
-- [x] Edit during Import
-- [x] ETL Process
-  - [x] Categories
-  - [x] Description
-  - [x] Logs
-- [ ] Turborepo 
+**Shipped**
+
+- [x] Turborepo monorepo
+- [x] PostgreSQL
+- [x] Bank Accounts
+- [x] Transaction Transfers
+- [x] Budget System
+- [x] Monthly Import Reminder
+- [x] Docker deployment (GHCR)
+
+**Up Next**
+
+- [ ] Unified Analytics page (merge Monthly & Yearly views)
+- [ ] Flexible date filtering, on Analytics and Category Details
+- [ ] Default bank account
+- [ ] Grouped Lookup Descriptions
+- [ ] Delete action for Lookup Logs
+- [ ] Optimistic UI updates
 
 See the [open issues](https://github.com/StereoPT/coin-guard/issues) for a full list of proposed features (and known issues).
 
@@ -209,7 +241,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -246,12 +278,18 @@ Special thanks to the following resources and tools that made CoinGuard possible
 [issues-url]: https://github.com/StereoPT/coin-guard/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/guidosp
-[product-screenshot]: images/banner_02.jpeg
+[product-screenshot]: images/banner_03.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
 [TailwindCSS.com]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
 [TailwindCSS-url]: https://tailwindcss.com/
 [Prisma.io]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
 [Prisma-url]: https://prisma.io/
+[TypeScript.com]: https://img.shields.io/badge/typescript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
+[PostgreSQL.com]: https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white
+[PostgreSQL-url]: https://www.postgresql.org/
+[Turborepo.com]: https://img.shields.io/badge/turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white
+[Turborepo-url]: https://turbo.build/repo
+[Biome.dev]: https://img.shields.io/badge/biome-60A5FA?style=for-the-badge&logo=biome&logoColor=white
+[Biome-url]: https://biomejs.dev/
