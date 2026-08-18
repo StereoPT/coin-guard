@@ -15,6 +15,7 @@ import {
 } from "@coin-guard/ui";
 import {
   CalendarDaysIcon,
+  ChartPieIcon,
   Cog,
   LandmarkIcon,
   LayoutDashboard,
@@ -71,6 +72,11 @@ const groupRoutes: GroupedRoute[] = [
     key: "analytics",
     label: "Analytics",
     items: [
+      {
+        icon: ChartPieIcon,
+        title: "Analytics",
+        url: ROUTES.analytics.root,
+      },
       {
         icon: CalendarDaysIcon,
         title: "Monthly",

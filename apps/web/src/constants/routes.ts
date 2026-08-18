@@ -12,6 +12,7 @@ export const ROUTES = {
   bankAccounts: "/bank-accounts",
 
   analytics: {
+    root: "/analytics",
     monthly: "/analytics/monthly",
     yearly: "/analytics/yearly",
   },
