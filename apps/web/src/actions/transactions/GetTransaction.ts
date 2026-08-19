@@ -18,7 +18,7 @@ export const GetTransaction = async (transactionId: string) => {
 
     const all = await prisma.transaction.findMany({
       where: { description: transaction.description },
-      orderBy: { date: "asc" },
+      orderBy: [{ date: "asc" }, { id: "asc" }],
       include: {
         category: true,
         account: true,
