@@ -79,11 +79,6 @@ const groupRoutes: GroupedRoute[] = [
       },
       {
         icon: CalendarDaysIcon,
-        title: "Monthly",
-        url: ROUTES.analytics.monthly,
-      },
-      {
-        icon: CalendarDaysIcon,
         title: "Yearly",
         url: ROUTES.analytics.yearly,
       },
