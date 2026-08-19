@@ -15,7 +15,6 @@ export const KEYS = {
 
   bankAccounts: [BANK_ACCOUNTS],
 
-  yearlyAnalytics: (year: number) => [ANALYTICS, "yearly", year],
   analyticsRange: (from: Date, to: Date) => [ANALYTICS, { from, to }],
 
   lookupCategories: [LOOKUP, CATEGORIES],

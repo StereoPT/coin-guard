@@ -6,13 +6,11 @@ import {
   eachMonthOfInterval,
   eachYearOfInterval,
   endOfMonth,
-  endOfYear,
   format,
   getDaysInMonth,
   isAfter,
   isBefore,
   startOfMonth,
-  startOfYear,
   subMonths,
 } from "date-fns";
 
@@ -47,17 +45,6 @@ export const generateMonthRange = (
   }
 
   return months;
-};
-
-export const getMonthsOfYear = (year: number) => {
-  const date = new Date(year, 1, 1);
-
-  const start = startOfYear(date);
-  const end = endOfYear(date);
-
-  const months = eachMonthOfInterval({ start, end });
-
-  return months.map((month) => format(month, "yyyy-MM"));
 };
 
 export const getDaysInRange = (from: Date, to: Date): string[] => {
