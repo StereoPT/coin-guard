@@ -4,7 +4,7 @@ import { prisma } from "@coin-guard/db/server";
 
 export const GetLastTransactions = async (amount: number) => {
   const transactions = await prisma.transaction.findMany({
-    orderBy: [{ date: "desc" }, { id: "desc" }],
+    orderBy: [{ date: "desc" }, { description: "asc" }],
     include: {
       account: true,
     },

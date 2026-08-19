@@ -12,6 +12,7 @@ export const GetLookupCategories = async () => {
     include: {
       lookups: true,
     },
+    orderBy: { name: "asc" },
   });
 
   return categoriesWithLookups;
