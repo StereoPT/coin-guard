@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "next dev",
     "build": "next build",
     "format": "biome format ./src",
     "format:fix": "biome format ./src --write",
@@ -23,7 +23,7 @@
     "@types/papaparse": "^5.5.2",
     "date-fns": "^4.4.0",
     "jotai": "^2.20.2",
-    "next": "^16.2.11",
+    "next": "^16.3.1",
     "nextjs-toploader": "^3.9.17",
     "papaparse": "^5.5.4",
     "react": "^19.2.8",

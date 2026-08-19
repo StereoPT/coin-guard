@@ -200,11 +200,11 @@ Make sure you have the following installed on your system:
 - [x] Budget System
 - [x] Monthly Import Reminder
 - [x] Docker deployment (GHCR)
+- [x] Unified Analytics page (merge Monthly & Yearly views, with flexible date filtering)
 
 **Up Next**
 
-- [ ] Unified Analytics page (merge Monthly & Yearly views)
-- [ ] Flexible date filtering, on Analytics and Category Details
+- [ ] Flexible date filtering on Category Details
 - [ ] Default bank account
 - [ ] Grouped Lookup Descriptions
 - [ ] Delete action for Lookup Logs

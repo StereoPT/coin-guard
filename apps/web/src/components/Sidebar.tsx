@@ -14,7 +14,7 @@ import {
   SidebarRail,
 } from "@coin-guard/ui";
 import {
-  CalendarDaysIcon,
+  ChartPieIcon,
   Cog,
   LandmarkIcon,
   LayoutDashboard,
@@ -72,14 +72,9 @@ const groupRoutes: GroupedRoute[] = [
     label: "Analytics",
     items: [
       {
-        icon: CalendarDaysIcon,
-        title: "Monthly",
-        url: ROUTES.analytics.monthly,
-      },
-      {
-        icon: CalendarDaysIcon,
-        title: "Yearly",
-        url: ROUTES.analytics.yearly,
+        icon: ChartPieIcon,
+        title: "Analytics",
+        url: ROUTES.analytics,
       },
     ],
   },

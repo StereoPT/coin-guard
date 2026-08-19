@@ -1,5 +1,12 @@
-import { getMonthsOfYear } from "@/lib/date";
-import { yearlyAnalyticsAtom } from "@/store/analyticsStore";
+"use client";
+
+import {
+  getAnalyticsGranularity,
+  getDaysInRange,
+  getMonthsInRange,
+  getYearsInRange,
+  type AnalyticsGranularity,
+} from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
 import {
   Card,
@@ -13,7 +20,6 @@ import {
   ChartTooltipContent,
 } from "@coin-guard/ui";
 import { format } from "date-fns";
-import { useAtomValue } from "jotai";
 import { useMemo } from "react";
 import {
   Bar,
@@ -34,31 +40,67 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type YearlyChartProps = {
-  transactions: Transaction[];
+const GRANULARITY_CONFIG: Record<
+  AnalyticsGranularity,
+  { dateFormat: string; title: string; description: string }
+> = {
+  day: {
+    dateFormat: "yyyy-MM-dd",
+    title: "Expenses per day",
+    description: "Breakdown of daily expenses for the selected period",
+  },
+  month: {
+    dateFormat: "yyyy-MM",
+    title: "Expenses per month",
+    description: "Breakdown of monthly expenses for the selected period",
+  },
+  year: {
+    dateFormat: "yyyy",
+    title: "Expenses per year",
+    description: "Breakdown of yearly expenses for the selected period",
+  },
 };
 
-export const YearlyChart = ({ transactions }: YearlyChartProps) => {
-  const selectedYear = useAtomValue(yearlyAnalyticsAtom);
+type AnalyticsChartProps = {
+  transactions: Transaction[];
+  from: Date;
+  to: Date;
+};
+
+export const AnalyticsChart = ({
+  transactions,
+  from,
+  to,
+}: AnalyticsChartProps) => {
+  const granularity = useMemo(
+    () => getAnalyticsGranularity(from, to),
+    [from, to],
+  );
+  const { dateFormat, title, description } = GRANULARITY_CONFIG[granularity];
 
   const transactionData = useMemo(() => {
-    const transactionsByMonth = transactions.reduce<Record<string, number>>(
+    const transactionsByBucket = transactions.reduce<Record<string, number>>(
       (acc, t) => {
-        const monthKey = format(t.date, "yyyy-MM");
-        acc[monthKey] = (acc[monthKey] || 0) + t.amount;
+        const bucketKey = format(t.date, dateFormat);
+        acc[bucketKey] = (acc[bucketKey] || 0) + t.amount;
         return acc;
       },
       {},
     );
 
-    const allMonths = getMonthsOfYear(selectedYear);
+    const buckets =
+      granularity === "day"
+        ? getDaysInRange(from, to)
+        : granularity === "month"
+          ? getMonthsInRange(from, to)
+          : getYearsInRange(from, to);
 
-    const yearlyData = allMonths.map((monthKey) => ({
-      date: monthKey,
-      amount: transactionsByMonth[monthKey] || 0,
+    const bucketedData = buckets.map((bucketKey) => ({
+      date: bucketKey,
+      amount: transactionsByBucket[bucketKey] || 0,
     }));
 
-    return yearlyData.map((item, index, arr) => {
+    return bucketedData.map((item, index, arr) => {
       const startIndex = Math.max(0, index - 2);
       const windowSlice = arr.slice(startIndex, index + 1);
       const trend =
@@ -70,16 +112,14 @@ export const YearlyChart = ({ transactions }: YearlyChartProps) => {
         trend,
       };
     });
-  }, [transactions, selectedYear]);
+  }, [transactions, from, to, granularity, dateFormat]);
 
   return (
     <Card>
       <CardHeader className="flex flex-col items-stretch border-b sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1">
-          <CardTitle>Expenses per Month</CardTitle>
-          <CardDescription>
-            Breakdown of expenses for each month
-          </CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="p-0">
@@ -96,7 +136,6 @@ export const YearlyChart = ({ transactions }: YearlyChartProps) => {
             <XAxis
               axisLine={false}
               dataKey="date"
-              tickFormatter={(value) => format(value, "yyyy-MM")}
               tickLine={false}
               tickMargin={8}
             />
