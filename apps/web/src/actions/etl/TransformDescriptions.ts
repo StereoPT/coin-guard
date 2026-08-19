@@ -26,31 +26,26 @@ export const TransformDescriptions = async (
     );
   }
 
-  const enhancedTransactions = processedTransactions.map((transaction) => {
-    const newDescription = descriptionToNewDescriptionMap.get(
-      transaction.description,
-    );
+  const matches = processedTransactions.map((transaction) => ({
+    transaction,
+    newDescription: descriptionToNewDescriptionMap.get(transaction.description),
+  }));
 
-    return {
+  const enhancedTransactions = matches.map(
+    ({ transaction, newDescription }) => ({
       ...transaction,
       description: newDescription || transaction.description,
-    };
-  });
+    }),
+  );
 
   await prisma.lookupLogging.createMany({
-    data: enhancedTransactions.map((transaction) => {
-      const newDescription = descriptionToNewDescriptionMap.get(
-        transaction.description,
-      );
-
-      return {
-        type: newDescription ? LoggingType.INFO : LoggingType.ERROR,
-        lookupField: LookupField.DESCRIPTION,
-        description: newDescription
-          ? `Matched '${transaction.description}' → '${newDescription}'`
-          : `No match for '${transaction.description}'`,
-      };
-    }),
+    data: matches.map(({ transaction, newDescription }) => ({
+      type: newDescription ? LoggingType.INFO : LoggingType.ERROR,
+      lookupField: LookupField.DESCRIPTION,
+      description: newDescription
+        ? `Matched '${transaction.description}' → '${newDescription}'`
+        : `No match for '${transaction.description}'`,
+    })),
   });
 
   return enhancedTransactions;
