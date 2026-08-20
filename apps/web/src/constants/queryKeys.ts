@@ -9,6 +9,12 @@ export const KEYS = {
 
   transactions: [TRANSACTIONS],
   transaction: (transactionId: string) => [TRANSACTIONS, transactionId],
+  relatedTransactions: (description: string, from: Date, to: Date) => [
+    TRANSACTIONS,
+    "related",
+    description,
+    { from, to },
+  ],
 
   categories: [CATEGORIES],
   category: (categoryId: string) => [CATEGORIES, categoryId],

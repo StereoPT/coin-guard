@@ -1,9 +1,15 @@
 import { PageHeader } from "@/components/PageHeader";
 import { EditTransactionDialog } from "@/components/transactions/dialogs/EditTransactionDialog";
 import { TransactionDetails } from "@/components/transactions/TransactionDetails";
+import { getLastMonthRange } from "@/lib/date";
 import { getQueryClient } from "@/lib/getQueryClient";
-import { getTransactionOptions } from "@/lib/queryOptions/transactions";
+import {
+  getRelatedTransactionsOptions,
+  getTransactionOptions,
+} from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+
+export const dynamic = "force-dynamic";
 
 type TransactionDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -15,7 +21,18 @@ const TransactionDetailsPage = async ({
   const { id: transactionId } = await params;
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(getTransactionOptions(transactionId));
+  const transaction = await queryClient.fetchQuery(
+    getTransactionOptions(transactionId),
+  );
+
+  if (transaction) {
+    await queryClient.prefetchQuery(
+      getRelatedTransactionsOptions(
+        transaction.description,
+        getLastMonthRange(),
+      ),
+    );
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
