@@ -12,6 +12,12 @@ export const KEYS = {
 
   categories: [CATEGORIES],
   category: (categoryId: string) => [CATEGORIES, categoryId],
+  categoryTransactions: (categoryId: string, from: Date, to: Date) => [
+    CATEGORIES,
+    categoryId,
+    "transactions",
+    { from, to },
+  ],
 
   bankAccounts: [BANK_ACCOUNTS],
 

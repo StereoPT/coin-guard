@@ -6,6 +6,7 @@ import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
+import { CHART_START_DATE } from "@/constants";
 import { CountType } from "@/types/dashboard";
 import { TransactionType } from "@coin-guard/db";
 import {
@@ -24,7 +25,7 @@ import {
   FileText,
   Tag,
 } from "@coin-guard/ui/icons";
-import { format } from "date-fns";
+import { endOfMonth, format, subMonths } from "date-fns";
 
 const typeIcons = {
   [TransactionType.CREDIT]: <ArrowUpRight className="size-4" />,
@@ -132,6 +133,10 @@ export const TransactionDetails = ({
 
       <TransactionTabs
         description="Showing transaction amount over time"
+        range={{
+          from: CHART_START_DATE,
+          to: endOfMonth(subMonths(new Date(), 1)),
+        }}
         title="Transactions"
         transactions={transaction.all}
       />

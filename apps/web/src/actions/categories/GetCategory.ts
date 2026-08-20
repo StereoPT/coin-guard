@@ -11,11 +11,5 @@ export const GetCategory = async (categoryId: string) => {
     throw new Error(`Category with ID ${categoryId} not found`);
   }
 
-  const transactions = await prisma.transaction.findMany({
-    where: { categoryId },
-    orderBy: [{ date: "asc" }, { description: "asc" }],
-    include: { category: true, account: true },
-  });
-
-  return { ...category, transactions };
+  return category;
 };

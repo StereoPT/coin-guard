@@ -1,6 +1,9 @@
+"use client";
+
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
+import { useGetCategoryTransactions } from "@/hooks/categories/useGetCategoryTransactions";
+import { getLastMonthRange } from "@/lib/date";
 import { formatCurrency } from "@/lib/formatter";
-import type { CategoryWithTransactions } from "@/types/categories";
 import { TransactionType } from "@coin-guard/db";
 import {
   Card,
@@ -12,12 +15,6 @@ import {
   Progress,
 } from "@coin-guard/ui";
 import { PlusCircle } from "@coin-guard/ui/icons";
-import {
-  endOfMonth,
-  isWithinInterval,
-  startOfMonth,
-  subMonths,
-} from "date-fns";
 
 const getIndicatorClassName = (percentage: number) => {
   if (percentage > 100) return "bg-destructive";
@@ -26,36 +23,36 @@ const getIndicatorClassName = (percentage: number) => {
 };
 
 type BudgetDetailsProps = {
-  category: CategoryWithTransactions;
+  categoryId: string;
+  budgetAmount: number | null;
 };
 
-export const BudgetDetails = ({ category }: BudgetDetailsProps) => {
-  const lastMonthRange = {
-    start: startOfMonth(subMonths(new Date(), 1)),
-    end: endOfMonth(subMonths(new Date(), 1)),
-  };
+export const BudgetDetails = ({
+  categoryId,
+  budgetAmount,
+}: BudgetDetailsProps) => {
+  const { data: transactions } = useGetCategoryTransactions(
+    categoryId,
+    getLastMonthRange(),
+  );
 
-  const spent = category.transactions
-    .filter(
-      (transaction) =>
-        transaction.type === TransactionType.DEBIT &&
-        isWithinInterval(transaction.date, lastMonthRange),
-    )
+  const spent = (transactions ?? [])
+    .filter((transaction) => transaction.type === TransactionType.DEBIT)
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-  const budgetAmount = category.budgetAmount ?? 0;
-  const percentage = budgetAmount > 0 ? (spent / budgetAmount) * 100 : 100;
+  const amount = budgetAmount ?? 0;
+  const percentage = amount > 0 ? (spent / amount) * 100 : 100;
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Monthly Budget</CardTitle>
-        {category.budgetAmount === null && (
+        {budgetAmount === null && (
           <>
             <CardDescription>No budget set for this category</CardDescription>
             <CardAction>
               <EditCategoryDialog
-                categoryId={category.id}
+                categoryId={categoryId}
                 trigger
                 triggerIcon={<PlusCircle />}
                 triggerLabel="Set a Budget"
@@ -65,15 +62,15 @@ export const BudgetDetails = ({ category }: BudgetDetailsProps) => {
           </>
         )}
       </CardHeader>
-      {category.budgetAmount !== null && (
+      {budgetAmount !== null && (
         <CardContent className="flex flex-col gap-2">
           <Progress
             indicatorClassName={getIndicatorClassName(percentage)}
             value={Math.min(percentage, 100)}
           />
           <p className="text-sm text-muted-foreground">
-            <b>{formatCurrency(spent)}</b> of{" "}
-            <b>{formatCurrency(budgetAmount)}</b> spent last month
+            <b>{formatCurrency(spent)}</b> of <b>{formatCurrency(amount)}</b>{" "}
+            spent last month
           </p>
         </CardContent>
       )}
