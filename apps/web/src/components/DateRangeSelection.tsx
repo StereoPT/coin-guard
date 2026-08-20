@@ -14,6 +14,7 @@ import {
 } from "@coin-guard/ui";
 import { CalendarIcon } from "@coin-guard/ui/icons";
 import {
+  endOfDay,
   endOfMonth,
   endOfYear,
   format,
@@ -147,7 +148,10 @@ export const DateRangeSelection = ({
               numberOfMonths={2}
               onSelect={(selected) => {
                 if (selected?.from && selected?.to) {
-                  onRangeChange({ from: selected.from, to: selected.to });
+                  onRangeChange({
+                    from: selected.from,
+                    to: endOfDay(selected.to),
+                  });
                 }
               }}
               selected={range}

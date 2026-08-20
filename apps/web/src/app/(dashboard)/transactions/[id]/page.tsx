@@ -21,10 +21,10 @@ const TransactionDetailsPage = async ({
   const { id: transactionId } = await params;
 
   const queryClient = getQueryClient();
-  const transaction = await queryClient.fetchQuery(
-    getTransactionOptions(transactionId),
-  );
+  const transactionOptions = getTransactionOptions(transactionId);
+  await queryClient.prefetchQuery(transactionOptions);
 
+  const transaction = queryClient.getQueryData(transactionOptions.queryKey);
   if (transaction) {
     await queryClient.prefetchQuery(
       getRelatedTransactionsOptions(
