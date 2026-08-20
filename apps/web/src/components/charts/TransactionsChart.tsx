@@ -1,4 +1,4 @@
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { generateMonthRange } from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
 import {
@@ -35,7 +35,7 @@ const chartConfig = {
 type TransactionsChartProps = {
   transactions: Transaction[];
   budgetAmount?: number;
-  range: AnalyticsDateRange;
+  range: DateRange;
 };
 
 export const TransactionsChart = ({

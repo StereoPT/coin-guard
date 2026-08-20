@@ -14,12 +14,12 @@ import {
   subMonths,
 } from "date-fns";
 
-export type AnalyticsDateRange = {
+export type DateRange = {
   from: Date;
   to: Date;
 };
 
-export const getLastMonthRange = (): AnalyticsDateRange => {
+export const getLastMonthRange = (): DateRange => {
   const now = new Date();
 
   return {

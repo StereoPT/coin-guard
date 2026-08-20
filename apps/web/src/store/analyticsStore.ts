@@ -1,5 +1,5 @@
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { getLastMonthRange } from "@/lib/date";
 import { atom } from "jotai";
 
-export const analyticsRangeAtom = atom<AnalyticsDateRange>(getLastMonthRange());
+export const analyticsRangeAtom = atom<DateRange>(getLastMonthRange());

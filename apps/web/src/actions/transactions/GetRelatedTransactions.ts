@@ -1,11 +1,11 @@
 "use server";
 
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { prisma } from "@coin-guard/db/server";
 
 export const GetRelatedTransactions = async (
   description: string,
-  range: AnalyticsDateRange,
+  range: DateRange,
 ) => {
   return prisma.transaction.findMany({
     where: {

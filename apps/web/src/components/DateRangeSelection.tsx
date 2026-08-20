@@ -1,6 +1,6 @@
 "use client";
 
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { getLastMonthRange } from "@/lib/date";
 import {
   Button,
@@ -28,7 +28,7 @@ import { useMemo, useState } from "react";
 type DateRangePreset = {
   key: string;
   label: string;
-  range: AnalyticsDateRange;
+  range: DateRange;
 };
 
 const MIN_DATE_RANGE_SELECTION_DATE = new Date(2024, 0, 1);
@@ -91,8 +91,8 @@ const getDateRangePresets = (): DateRangePreset[] => {
 };
 
 type DateRangeSelectionProps = {
-  range: AnalyticsDateRange;
-  onRangeChange: (range: AnalyticsDateRange) => void;
+  range: DateRange;
+  onRangeChange: (range: DateRange) => void;
 };
 
 export const DateRangeSelection = ({

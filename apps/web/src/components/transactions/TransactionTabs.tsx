@@ -3,7 +3,7 @@
 import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { TransactionTable } from "@/components/tables/TransactionTable";
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { CountType } from "@/types/dashboard";
 import type { TransactionWithRelations } from "@/types/transactions";
 import {
@@ -26,7 +26,7 @@ type TransactionTabsProps = {
   description: string;
   budgetAmount?: number;
   actions?: ReactNode;
-  range: AnalyticsDateRange;
+  range: DateRange;
 };
 
 export const TransactionTabs = ({

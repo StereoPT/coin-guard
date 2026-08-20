@@ -43,14 +43,15 @@ type TransactionDetailsProps = {
 export const TransactionDetails = ({
   transactionId,
 }: TransactionDetailsProps) => {
-  const { data: transaction } = useGetTransaction(transactionId);
   const [range, setRange] = useAtom(relatedTransactionsRangeAtom);
+
+  const { data: transaction } = useGetTransaction(transactionId);
   const { data: relatedTransactions } = useGetRelatedTransactions(
     transaction?.description ?? "",
     range,
   );
 
-  if (!transaction) {
+  if (!transaction || !relatedTransactions) {
     return <ErrorAlert />;
   }
 
@@ -142,7 +143,7 @@ export const TransactionDetails = ({
         description="Showing transaction amount over time"
         range={range}
         title="Transactions"
-        transactions={relatedTransactions ?? []}
+        transactions={relatedTransactions}
       />
     </div>
   );
