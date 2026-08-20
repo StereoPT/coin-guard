@@ -1,9 +1,7 @@
 "use client";
 
-import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { TransactionTable } from "@/components/tables/TransactionTable";
-import type { DateRange } from "@/lib/date";
 import { CountType } from "@/types/dashboard";
 import type { TransactionWithRelations } from "@/types/transactions";
 import {
@@ -24,18 +22,16 @@ type TransactionTabsProps = {
   transactions: TransactionWithRelations[];
   title: string;
   description: string;
-  budgetAmount?: number;
   actions?: ReactNode;
-  range: DateRange;
+  graph: ReactNode;
 };
 
 export const TransactionTabs = ({
   transactions,
   title,
   description,
-  budgetAmount,
   actions,
-  range,
+  graph,
 }: TransactionTabsProps) => {
   const sum = transactions.reduce((acc, t) => (acc += t.amount), 0);
   const average = transactions.length === 0 ? 0 : sum / transactions.length;
@@ -76,13 +72,7 @@ export const TransactionTabs = ({
           </div>
         </CardHeader>
         <CardContent className="p-0">
-          <TabsContent value="graph">
-            <TransactionsChart
-              budgetAmount={budgetAmount}
-              range={range}
-              transactions={transactions}
-            />
-          </TabsContent>
+          <TabsContent value="graph">{graph}</TabsContent>
           <TabsContent value="table">
             <TransactionTable transactions={transactions} />
           </TabsContent>

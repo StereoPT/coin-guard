@@ -1,6 +1,7 @@
 "use client";
 
 import { BudgetDetails } from "@/components/categories/BudgetDetails";
+import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { DateRangeSelection } from "@/components/DateRangeSelection";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
@@ -30,9 +31,14 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
       />
       <TransactionTabs
         actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
-        budgetAmount={category.budgetAmount ?? undefined}
         description="Showing category amount over time"
-        range={range}
+        graph={
+          <TransactionsChart
+            budgetAmount={category.budgetAmount ?? undefined}
+            range={range}
+            transactions={transactions}
+          />
+        }
         title={category.name}
         transactions={transactions}
       />

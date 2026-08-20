@@ -5,6 +5,7 @@ import { useGetRelatedTransactions } from "@/hooks/transactions/useGetRelatedTra
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
+import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
 import { DateRangeSelection } from "@/components/DateRangeSelection";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
@@ -141,7 +142,9 @@ export const TransactionDetails = ({
       <TransactionTabs
         actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
         description="Showing transaction amount over time"
-        range={range}
+        graph={
+          <TransactionsChart range={range} transactions={relatedTransactions} />
+        }
         title="Transactions"
         transactions={relatedTransactions}
       />
