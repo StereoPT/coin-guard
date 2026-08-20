@@ -1,13 +1,13 @@
 "use client";
 
 import { BudgetDetails } from "@/components/categories/BudgetDetails";
-import { CategoryTransactionsDateSelection } from "@/components/categories/CategoryTransactionsDateSelection";
+import { DateRangeSelection } from "@/components/DateRangeSelection";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import { useGetCategoryTransactions } from "@/hooks/categories/useGetCategoryTransactions";
 import { categoryTransactionsRangeAtom } from "@/store/categoryStore";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
 type CategoryDetailsProps = {
   categoryId: string;
@@ -15,7 +15,7 @@ type CategoryDetailsProps = {
 
 export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
   const { data: category } = useGetCategory(categoryId);
-  const range = useAtomValue(categoryTransactionsRangeAtom);
+  const [range, setRange] = useAtom(categoryTransactionsRangeAtom);
   const { data: transactions } = useGetCategoryTransactions(categoryId, range);
 
   if (!category || !transactions) {
@@ -29,7 +29,7 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
         categoryId={category.id}
       />
       <TransactionTabs
-        actions={<CategoryTransactionsDateSelection />}
+        actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
         budgetAmount={category.budgetAmount ?? undefined}
         description="Showing category amount over time"
         range={range}

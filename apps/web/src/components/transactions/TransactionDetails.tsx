@@ -6,7 +6,7 @@ import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
-import { RelatedTransactionsDateSelection } from "@/components/transactions/RelatedTransactionsDateSelection";
+import { DateRangeSelection } from "@/components/DateRangeSelection";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
 import { relatedTransactionsRangeAtom } from "@/store/transactionStore";
 import { CountType } from "@/types/dashboard";
@@ -28,7 +28,7 @@ import {
   Tag,
 } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
 const typeIcons = {
   [TransactionType.CREDIT]: <ArrowUpRight className="size-4" />,
@@ -44,7 +44,7 @@ export const TransactionDetails = ({
   transactionId,
 }: TransactionDetailsProps) => {
   const { data: transaction } = useGetTransaction(transactionId);
-  const range = useAtomValue(relatedTransactionsRangeAtom);
+  const [range, setRange] = useAtom(relatedTransactionsRangeAtom);
   const { data: relatedTransactions } = useGetRelatedTransactions(
     transaction?.description ?? "",
     range,
@@ -138,7 +138,7 @@ export const TransactionDetails = ({
       </Card>
 
       <TransactionTabs
-        actions={<RelatedTransactionsDateSelection />}
+        actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
         description="Showing transaction amount over time"
         range={range}
         title="Transactions"
