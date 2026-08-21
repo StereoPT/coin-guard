@@ -1,7 +1,7 @@
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { analyticsOptions } from "@/lib/queryOptions/analytics";
 import { useQuery } from "@tanstack/react-query";
 
-export const useAnalytics = (range: AnalyticsDateRange) => {
+export const useAnalytics = (range: DateRange) => {
   return useQuery(analyticsOptions(range));
 };

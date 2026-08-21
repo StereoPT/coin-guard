@@ -75,16 +75,15 @@ export const EditTransactionDialog = ({
   useEffect(() => {
     if (!transaction) return;
 
-    const currentTransaction = transaction.transaction;
     form.reset({
-      date: currentTransaction.date,
-      description: currentTransaction.description,
-      type: currentTransaction.type,
-      amount: currentTransaction.amount,
-      balance: currentTransaction.balance,
-      note: currentTransaction.note ?? "",
-      categoryId: currentTransaction.categoryId ?? undefined,
-      accountId: currentTransaction.accountId ?? undefined,
+      date: transaction.date,
+      description: transaction.description,
+      type: transaction.type,
+      amount: transaction.amount,
+      balance: transaction.balance,
+      note: transaction.note ?? "",
+      categoryId: transaction.categoryId ?? undefined,
+      accountId: transaction.accountId ?? undefined,
     });
   }, [transaction, form]);
 

@@ -1,11 +1,15 @@
 "use client";
 
 import { ErrorAlert } from "@/components/ErrorAlert";
+import { useGetRelatedTransactions } from "@/hooks/transactions/useGetRelatedTransactions";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
+import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { CountUpWrapper } from "@/components/CountUpWrapper";
+import { DateRangeSelection } from "@/components/DateRangeSelection";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
+import { relatedTransactionsRangeAtom } from "@/store/transactionStore";
 import { CountType } from "@/types/dashboard";
 import { TransactionType } from "@coin-guard/db";
 import {
@@ -25,6 +29,7 @@ import {
   Tag,
 } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
+import { useAtom } from "jotai";
 
 const typeIcons = {
   [TransactionType.CREDIT]: <ArrowUpRight className="size-4" />,
@@ -39,9 +44,15 @@ type TransactionDetailsProps = {
 export const TransactionDetails = ({
   transactionId,
 }: TransactionDetailsProps) => {
-  const { data: transaction } = useGetTransaction(transactionId);
+  const [range, setRange] = useAtom(relatedTransactionsRangeAtom);
 
-  if (!transaction) {
+  const { data: transaction } = useGetTransaction(transactionId);
+  const { data: relatedTransactions } = useGetRelatedTransactions(
+    transaction?.description ?? "",
+    range,
+  );
+
+  if (!transaction || !relatedTransactions) {
     return <ErrorAlert />;
   }
 
@@ -51,25 +62,23 @@ export const TransactionDetails = ({
         <div className="col-span-2">
           <CardHeader>
             <CardDescription className="flex items-center gap-2 capitalize">
-              {typeIcons[transaction.transaction.type]}
-              {transaction.transaction.type.toLowerCase()}
+              {typeIcons[transaction.type]}
+              {transaction.type.toLowerCase()}
             </CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums">
               <CountUpWrapper
                 type={CountType.MONEY}
-                value={transaction.transaction.amount}
+                value={transaction.amount}
               />
             </CardTitle>
-            <CardTitle>{transaction.transaction.description}</CardTitle>
+            <CardTitle>{transaction.description}</CardTitle>
           </CardHeader>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
             <div className="flex flex-row gap-4 items-center">
-              <BankAccountAvatar
-                alias={transaction.transaction.account.alias ?? ""}
-              />
+              <BankAccountAvatar alias={transaction.account.alias ?? ""} />
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Bank</span>
-                {transaction.transaction.account.name}
+                {transaction.account.name}
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
@@ -78,7 +87,7 @@ export const TransactionDetails = ({
               </div>
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Date</span>
-                {format(transaction.transaction.date, "PPP")}
+                {format(transaction.date, "PPP")}
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
@@ -88,7 +97,7 @@ export const TransactionDetails = ({
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Category</span>
                 <Badge variant="outline">
-                  {transaction.transaction.category?.name || "N/A"}
+                  {transaction.category?.name || "N/A"}
                 </Badge>
               </div>
             </div>
@@ -98,7 +107,7 @@ export const TransactionDetails = ({
               </div>
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Balance After</span>
-                {formatCurrency(transaction.transaction.balance)}
+                {formatCurrency(transaction.balance)}
               </div>
             </div> */}
           </CardContent>
@@ -111,8 +120,8 @@ export const TransactionDetails = ({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {transaction.transaction.note ? (
-              <p className="text-sm">{transaction.transaction.note}</p>
+            {transaction.note ? (
+              <p className="text-sm">{transaction.note}</p>
             ) : (
               <div className="flex flex-col w-full h-full items-center justify-center gap-2 py-4">
                 <div className="rounded bg-neutral-200 text-neutral-500 p-2">
@@ -131,9 +140,13 @@ export const TransactionDetails = ({
       </Card>
 
       <TransactionTabs
+        actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
         description="Showing transaction amount over time"
+        graph={
+          <TransactionsChart range={range} transactions={relatedTransactions} />
+        }
         title="Transactions"
-        transactions={transaction.all}
+        transactions={relatedTransactions}
       />
     </div>
   );

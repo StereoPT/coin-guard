@@ -6,6 +6,7 @@ import {
   getMonthsInRange,
   getYearsInRange,
   type AnalyticsGranularity,
+  type DateRange,
 } from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
 import {
@@ -63,19 +64,14 @@ const GRANULARITY_CONFIG: Record<
 
 type AnalyticsChartProps = {
   transactions: Transaction[];
-  from: Date;
-  to: Date;
+  range: DateRange;
 };
 
 export const AnalyticsChart = ({
   transactions,
-  from,
-  to,
+  range,
 }: AnalyticsChartProps) => {
-  const granularity = useMemo(
-    () => getAnalyticsGranularity(from, to),
-    [from, to],
-  );
+  const granularity = useMemo(() => getAnalyticsGranularity(range), [range]);
   const { dateFormat, title, description } = GRANULARITY_CONFIG[granularity];
 
   const transactionData = useMemo(() => {
@@ -90,10 +86,10 @@ export const AnalyticsChart = ({
 
     const buckets =
       granularity === "day"
-        ? getDaysInRange(from, to)
+        ? getDaysInRange(range)
         : granularity === "month"
-          ? getMonthsInRange(from, to)
-          : getYearsInRange(from, to);
+          ? getMonthsInRange(range)
+          : getYearsInRange(range);
 
     const bucketedData = buckets.map((bucketKey) => ({
       date: bucketKey,
@@ -112,7 +108,7 @@ export const AnalyticsChart = ({
         trend,
       };
     });
-  }, [transactions, from, to, granularity, dateFormat]);
+  }, [transactions, range, granularity, dateFormat]);
 
   return (
     <Card>

@@ -1,3 +1,5 @@
+import type { DateRange } from "@/lib/date";
+
 const TRANSACTIONS = "transactions";
 const CATEGORIES = "categories";
 const BANK_ACCOUNTS = "bankAccounts";
@@ -9,13 +11,25 @@ export const KEYS = {
 
   transactions: [TRANSACTIONS],
   transaction: (transactionId: string) => [TRANSACTIONS, transactionId],
+  relatedTransactions: (description: string, range: DateRange) => [
+    TRANSACTIONS,
+    "related",
+    description,
+    range,
+  ],
 
   categories: [CATEGORIES],
   category: (categoryId: string) => [CATEGORIES, categoryId],
+  categoryTransactions: (categoryId: string, range: DateRange) => [
+    CATEGORIES,
+    categoryId,
+    "transactions",
+    range,
+  ],
 
   bankAccounts: [BANK_ACCOUNTS],
 
-  analyticsRange: (from: Date, to: Date) => [ANALYTICS, { from, to }],
+  analyticsRange: (range: DateRange) => [ANALYTICS, range],
 
   lookupCategories: [LOOKUP, CATEGORIES],
   lookupDescriptions: [LOOKUP, "descriptions"],

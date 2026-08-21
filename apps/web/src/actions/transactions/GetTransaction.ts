@@ -3,29 +3,14 @@
 import { prisma } from "@coin-guard/db/server";
 
 export const GetTransaction = async (transactionId: string) => {
-  return await prisma.$transaction(async (prisma) => {
-    const transaction = await prisma.transaction.findUnique({
-      where: { id: transactionId },
-      include: {
-        category: true,
-        account: true,
-      },
-    });
-
-    if (!transaction) {
-      throw new Error(`Transaction with ID ${transactionId} not found`);
-    }
-
-    const all = await prisma.transaction.findMany({
-      where: { description: transaction.description },
-      // description is constant here (filtered above), so id is the tiebreaker
-      orderBy: [{ date: "asc" }, { id: "asc" }],
-      include: {
-        category: true,
-        account: true,
-      },
-    });
-
-    return { transaction, all };
+  const transaction = await prisma.transaction.findUnique({
+    where: { id: transactionId },
+    include: { category: true, account: true },
   });
+
+  if (!transaction) {
+    throw new Error(`Transaction with ID ${transactionId} not found`);
+  }
+
+  return transaction;
 };

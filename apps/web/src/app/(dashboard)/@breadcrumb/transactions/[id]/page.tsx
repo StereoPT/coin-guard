@@ -15,7 +15,7 @@ const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
 
   return (
     <BreadcrumbShell
-      currentPage={transaction.transaction.description}
+      currentPage={transaction.description}
       trail={[{ label: "Transactions", href: ROUTES.transactions }]}
     />
   );

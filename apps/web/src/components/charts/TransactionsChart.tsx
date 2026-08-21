@@ -1,4 +1,4 @@
-import { CHART_START_DATE } from "@/constants";
+import type { DateRange } from "@/lib/date";
 import { generateMonthRange } from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
 import {
@@ -14,7 +14,7 @@ import {
   Line,
   XAxis,
 } from "@coin-guard/ui/charts";
-import { endOfMonth, format, subMonths } from "date-fns";
+import { format } from "date-fns";
 import { useMemo } from "react";
 
 const chartConfig = {
@@ -35,11 +35,13 @@ const chartConfig = {
 type TransactionsChartProps = {
   transactions: Transaction[];
   budgetAmount?: number;
+  range: DateRange;
 };
 
 export const TransactionsChart = ({
   transactions,
   budgetAmount,
+  range,
 }: TransactionsChartProps) => {
   const transactionData = useMemo(() => {
     if (transactions.length === 0) return [];
@@ -53,8 +55,7 @@ export const TransactionsChart = ({
       {},
     );
 
-    const lastCompletedMonth = endOfMonth(subMonths(new Date(), 1));
-    const allMonths = generateMonthRange(CHART_START_DATE, lastCompletedMonth);
+    const allMonths = generateMonthRange(range);
 
     const monthlyData = allMonths.map((monthKey) => ({
       date: monthKey,
@@ -74,7 +75,7 @@ export const TransactionsChart = ({
         budget: budgetAmount,
       };
     });
-  }, [transactions, budgetAmount]);
+  }, [transactions, budgetAmount, range]);
 
   return (
     <ChartContainer

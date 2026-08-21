@@ -1,7 +1,7 @@
 import { Analytics } from "@/actions/analytics/Analytics";
 import { DashboardAnalytics } from "@/actions/analytics/dashboard/DashboardAnalytics";
 import { KEYS } from "@/constants/queryKeys";
-import type { AnalyticsDateRange } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { queryOptions } from "@tanstack/react-query";
 
 export const dashboardAnalyticsOptions = () => {
@@ -11,9 +11,9 @@ export const dashboardAnalyticsOptions = () => {
   });
 };
 
-export const analyticsOptions = (range: AnalyticsDateRange) => {
+export const analyticsOptions = (range: DateRange) => {
   return queryOptions({
-    queryKey: KEYS.analyticsRange(range.from, range.to),
+    queryKey: KEYS.analyticsRange(range),
     queryFn: () => Analytics(range),
   });
 };
