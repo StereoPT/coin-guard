@@ -193,23 +193,17 @@ Make sure you have the following installed on your system:
 
 **Shipped**
 
-- [x] Turborepo monorepo
-- [x] PostgreSQL
-- [x] Bank Accounts
-- [x] Transaction Transfers
-- [x] Budget System
-- [x] Monthly Import Reminder
-- [x] Docker deployment (GHCR)
 - [x] Unified Analytics page (merge Monthly & Yearly views, with flexible date filtering)
+- [x] Flexible date filtering on Category Details
+- [x] Default bank account
+- [x] Grouped Lookup Descriptions
+- [x] Delete action for Lookup Logs
 
 **Up Next**
 
-- [ ] Flexible date filtering on Category Details
-- [ ] Default bank account
-- [ ] Grouped Lookup Descriptions
-- [ ] Delete action for Lookup Logs
 - [ ] Optimistic UI updates
-
+- [ ] Loading States
+ 
 See the [open issues](https://github.com/StereoPT/coin-guard/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
