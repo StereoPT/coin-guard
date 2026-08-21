@@ -49,9 +49,9 @@
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "shadcn": "^4.14.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "shadcn": "^4.18.0",
     "typescript": "catalog:"
   }
 }
