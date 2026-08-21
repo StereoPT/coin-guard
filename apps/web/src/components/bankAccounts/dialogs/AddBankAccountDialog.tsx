@@ -34,6 +34,7 @@ export const AddBankAccountDialog = () => {
       alias: "",
       type: undefined,
       iban: "",
+      isDefault: false,
     },
   });
 
@@ -54,7 +55,7 @@ export const AddBankAccountDialog = () => {
         <PlusCircle />
         Add Bank Account
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-lg!">
         <DialogHeader>
           <DialogTitle>Create Bank Account</DialogTitle>
           <DialogDescription>Create a new bank account</DialogDescription>

@@ -32,7 +32,7 @@ import {
 } from "@coin-guard/ui";
 import { CalendarIcon } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type TransactionSchema = addTransactionSchemaType | editTransactionSchemaType;
@@ -54,7 +54,21 @@ export const TransactionFormFields = ({
 }: TransactionFormFieldsProps) => {
   const { data: categories } = useGetCategories();
   const { data: bankAccounts } = useGetBankAccounts();
-  const { control } = useFormContext<TransactionSchema>();
+  const { control, getValues, setValue } = useFormContext<TransactionSchema>();
+
+  useEffect(() => {
+    if (formType !== FormType.ADD || !bankAccounts || getValues("accountId")) {
+      return;
+    }
+
+    const defaultBankAccount = bankAccounts.find(
+      (bankAccount) => bankAccount.isDefault,
+    );
+
+    if (defaultBankAccount) {
+      setValue("accountId", defaultBankAccount.id);
+    }
+  }, [bankAccounts, formType, getValues, setValue]);
 
   const categoryOptions = useMemo(() => {
     if (!categories) return [];

@@ -65,6 +65,7 @@ model BankAccount {
   alias         String?
   type          BankAccountType
   iban          String            @unique
+  isDefault     Boolean           @default(false)
 
   transactions  Transaction[]
 

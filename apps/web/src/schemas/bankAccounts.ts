@@ -6,6 +6,7 @@ export const addBankAccountSchema = z.object({
   alias: z.string().trim().optional(),
   type: z.enum(BankAccountType),
   iban: z.string().trim().nonempty(),
+  isDefault: z.boolean(),
 });
 
 export const editBankAccountSchema = addBankAccountSchema.partial();
