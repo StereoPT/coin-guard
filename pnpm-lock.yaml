@@ -36,8 +36,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.78.0(react@19.2.8))
       '@stereopt/data-table':
-        specifier: ^0.2.6
-        version: 0.2.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.101.4(react@19.2.8)
@@ -1112,8 +1112,8 @@ packages:
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
-  '@stereopt/data-table@0.2.6':
-    resolution: {integrity: sha512-EhXdMdC4HhGoaiAAw/xu2QZnlJvTNAFG8L4oolS8qzZrC4fywgaKc9g80g2ImXSfjGJjC2kOcQ7zMnowfp6pFg==}
+  '@stereopt/data-table@0.3.0':
+    resolution: {integrity: sha512-zvafntOit3ZT4iUTxd3Mx4jyRVMDJvu/2bFAcWKfXRFlNKCXUMPziXyeN/fCXAnXV5ucklsqsrp46+x70HMR/Q==}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
@@ -2899,11 +2899,6 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.7.4:
-    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.8.5:
     resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
@@ -4064,14 +4059,14 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
-  '@stereopt/data-table@0.2.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@stereopt/data-table@0.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@tailwindcss/postcss': 4.3.3
       '@tanstack/match-sorter-utils': 8.19.4
       '@tanstack/react-table': 8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
-      postcss: 8.5.22
+      postcss: 8.5.23
       react: 19.2.8
       react-day-picker: 9.14.0(react@19.2.8)
       react-dom: 19.2.8(react@19.2.8)
@@ -5287,7 +5282,7 @@ snapshots:
 
   node-abi@3.89.0:
     dependencies:
-      semver: 7.7.4
+      semver: 7.8.5
     optional: true
 
   node-releases@2.0.38: {}
@@ -5734,9 +5729,6 @@ snapshots:
   scheduler@0.27.0: {}
 
   semver@6.3.1: {}
-
-  semver@7.7.4:
-    optional: true
 
   semver@7.8.5:
     optional: true

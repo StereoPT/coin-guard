@@ -5,24 +5,16 @@ import { Badge } from "@coin-guard/ui";
 import type { LookupDescription } from "@coin-guard/db";
 import { cn } from "@coin-guard/ui";
 import type { ColumnDef } from "@tanstack/react-table";
-import { ArrowRight } from "@coin-guard/ui/icons";
 
 export const lookupDescriptionColumns: ColumnDef<LookupDescription>[] = [
   {
     accessorKey: "description",
     header: "Description",
     size: 520,
-    cell: ({ row }) => {
-      const { description, newDescription } = row.original;
-
-      return (
-        <div className="flex items-center gap-2">
-          {description}
-          <ArrowRight className="text-muted-foreground" size={20} />
-          {newDescription}
-        </div>
-      );
-    },
+  },
+  {
+    accessorKey: "newDescription",
+    header: "New description",
   },
   {
     accessorKey: "enabled",
