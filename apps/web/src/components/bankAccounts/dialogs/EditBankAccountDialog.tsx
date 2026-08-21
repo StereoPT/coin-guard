@@ -42,6 +42,7 @@ export const EditBankAccountDialog = ({
       alias: bankAccount.alias ?? "",
       type: bankAccount.type,
       iban: bankAccount.iban,
+      isDefault: bankAccount.isDefault,
     },
   });
 
@@ -58,7 +59,7 @@ export const EditBankAccountDialog = ({
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent>
+      <DialogContent className="max-w-lg!">
         <DialogHeader>
           <DialogTitle>Edit Bank Account</DialogTitle>
           <DialogDescription>Edit your bank account details</DialogDescription>

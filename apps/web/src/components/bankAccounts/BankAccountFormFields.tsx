@@ -6,6 +6,8 @@ import type {
 } from "@/schemas/bankAccounts";
 import {
   Field,
+  FieldContent,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -17,6 +19,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
+  Switch,
 } from "@coin-guard/ui";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -50,44 +53,46 @@ export const BankAccountFormFields = ({
         )}
       />
 
-      <Controller
-        control={control}
-        name="alias"
-        render={({ field, fieldState }) => (
-          <Field>
-            <FieldLabel htmlFor={`${formId}-alias`}>Alias</FieldLabel>
-            <Input {...field} id={`${formId}-alias`} placeholder="Alias" />
-            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-          </Field>
-        )}
-      />
+      <FieldGroup className="grid grid-cols-2 gap-4">
+        <Controller
+          control={control}
+          name="alias"
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-alias`}>Alias</FieldLabel>
+              <Input {...field} id={`${formId}-alias`} placeholder="Alias" />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
 
-      <Controller
-        control={control}
-        name="type"
-        render={({ field, fieldState }) => (
-          <Field>
-            <FieldLabel htmlFor={`${formId}-type`}>Type</FieldLabel>
-            <Select
-              items={bankAccountTypeItems}
-              onValueChange={field.onChange}
-              value={field.value ?? null}
-            >
-              <SelectTrigger className="w-full" id={`${formId}-type`}>
-                <SelectValue placeholder="Bank Account Type" />
-              </SelectTrigger>
-              <SelectContent alignItemWithTrigger={false}>
-                <SelectGroup>
-                  <SelectLabel>Bank Account Type</SelectLabel>
-                  <SelectItem value="CHECKING">Checking</SelectItem>
-                  <SelectItem value="SAVINGS">Savings</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-          </Field>
-        )}
-      />
+        <Controller
+          control={control}
+          name="type"
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel htmlFor={`${formId}-type`}>Type</FieldLabel>
+              <Select
+                items={bankAccountTypeItems}
+                onValueChange={field.onChange}
+                value={field.value ?? null}
+              >
+                <SelectTrigger className="w-full" id={`${formId}-type`}>
+                  <SelectValue placeholder="Bank Account Type" />
+                </SelectTrigger>
+                <SelectContent alignItemWithTrigger={false}>
+                  <SelectGroup>
+                    <SelectLabel>Bank Account Type</SelectLabel>
+                    <SelectItem value="CHECKING">Checking</SelectItem>
+                    <SelectItem value="SAVINGS">Savings</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+      </FieldGroup>
 
       <Controller
         control={control}
@@ -96,6 +101,29 @@ export const BankAccountFormFields = ({
           <Field>
             <FieldLabel htmlFor={`${formId}-iban`}>IBAN</FieldLabel>
             <Input {...field} id={`${formId}-iban`} placeholder="IBAN" />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="isDefault"
+        render={({ field, fieldState }) => (
+          <Field orientation="horizontal">
+            <FieldContent>
+              <FieldLabel htmlFor={`${formId}-is-default`}>
+                Default account
+              </FieldLabel>
+              <FieldDescription>
+                Pre-selected on new transactions and imports.
+              </FieldDescription>
+            </FieldContent>
+            <Switch
+              checked={field.value ?? false}
+              id={`${formId}-is-default`}
+              onCheckedChange={field.onChange}
+            />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}

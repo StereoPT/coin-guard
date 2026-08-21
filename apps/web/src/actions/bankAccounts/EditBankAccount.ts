@@ -13,8 +13,16 @@ export const EditBankAccount = async (
 ) => {
   const data = await parseOrThrow(editBankAccountSchema, formValues);
 
-  await prisma.bankAccount.update({
-    where: { id: bankAccountId },
-    data,
-  });
+  if (!data.isDefault) {
+    await prisma.bankAccount.update({ where: { id: bankAccountId }, data });
+    return;
+  }
+
+  await prisma.$transaction([
+    prisma.bankAccount.updateMany({
+      data: { isDefault: false },
+      where: { id: { not: bankAccountId }, isDefault: true },
+    }),
+    prisma.bankAccount.update({ where: { id: bankAccountId }, data }),
+  ]);
 };
