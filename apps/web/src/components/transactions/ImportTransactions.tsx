@@ -20,7 +20,7 @@ import {
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const ImportTransactions = () => {
   const router = useRouter();
@@ -30,6 +30,18 @@ export const ImportTransactions = () => {
   const [transactions, setTransactions] = useAtom(processedTransactionsAtom);
 
   const { data: bankAccounts } = useGetBankAccounts();
+
+  useEffect(() => {
+    if (!bankAccounts || accountId) return;
+
+    const defaultBankAccount = bankAccounts.find(
+      (bankAccount) => bankAccount.isDefault,
+    );
+
+    if (defaultBankAccount) {
+      setAccountId(defaultBankAccount.id);
+    }
+  }, [accountId, bankAccounts]);
 
   const { mutateAsync: mutateParse, isPending: parseIsPending } =
     useParseTransaction();
