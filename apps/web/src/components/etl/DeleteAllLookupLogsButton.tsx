@@ -23,10 +23,7 @@ export const DeleteAllLookupLogsButton = () => {
         />
       )}
 
-      <Button
-        onClick={() => setShowDeleteDialog(true)}
-        variant="destructive"
-      >
+      <Button onClick={() => setShowDeleteDialog(true)} variant="destructive">
         <Trash2 /> Delete Logs
       </Button>
     </>
