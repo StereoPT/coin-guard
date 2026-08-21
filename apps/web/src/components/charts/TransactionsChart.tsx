@@ -55,7 +55,7 @@ export const TransactionsChart = ({
       {},
     );
 
-    const allMonths = generateMonthRange(range.from, range.to);
+    const allMonths = generateMonthRange(range);
 
     const monthlyData = allMonths.map((monthKey) => ({
       date: monthKey,

@@ -41,11 +41,7 @@ export const Analytics = () => {
       </div>
       <div className="grid gap-4 grid-cols-5 items-stretch">
         <div className="col-span-5 xl:col-span-3 h-full">
-          <AnalyticsChart
-            from={range.from}
-            to={range.to}
-            transactions={analytics.transactions}
-          />
+          <AnalyticsChart range={range} transactions={analytics.transactions} />
         </div>
         <div className="col-span-5 xl:col-span-2 h-full">
           <CategoryPieChart categoryStats={analytics.categoryStats} />

@@ -41,9 +41,7 @@ export const BudgetDetails = ({
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
   const scaledBudget =
-    budgetAmount !== null
-      ? budgetAmount * getBudgetScaleFactor(range.from, range.to)
-      : null;
+    budgetAmount !== null ? budgetAmount * getBudgetScaleFactor(range) : null;
   const amount = scaledBudget ?? 0;
   const percentage = amount > 0 ? (spent / amount) * 100 : 100;
 

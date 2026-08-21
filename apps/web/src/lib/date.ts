@@ -28,13 +28,10 @@ export const getLastMonthRange = (): DateRange => {
   };
 };
 
-export const generateMonthRange = (
-  startDate: Date,
-  endDate: Date,
-): string[] => {
+export const generateMonthRange = (range: DateRange): string[] => {
   const months: string[] = [];
-  let currentDate = startOfMonth(startDate);
-  const end = startOfMonth(endDate);
+  let currentDate = startOfMonth(range.from);
+  const end = startOfMonth(range.to);
 
   while (
     isBefore(currentDate, end) ||
@@ -47,20 +44,20 @@ export const generateMonthRange = (
   return months;
 };
 
-export const getDaysInRange = (from: Date, to: Date): string[] => {
-  return eachDayOfInterval({ start: from, end: to }).map((day) =>
+export const getDaysInRange = (range: DateRange): string[] => {
+  return eachDayOfInterval({ start: range.from, end: range.to }).map((day) =>
     format(day, "yyyy-MM-dd"),
   );
 };
 
-export const getMonthsInRange = (from: Date, to: Date): string[] => {
-  return eachMonthOfInterval({ start: from, end: to }).map((month) =>
-    format(month, "yyyy-MM"),
+export const getMonthsInRange = (range: DateRange): string[] => {
+  return eachMonthOfInterval({ start: range.from, end: range.to }).map(
+    (month) => format(month, "yyyy-MM"),
   );
 };
 
-export const getYearsInRange = (from: Date, to: Date): string[] => {
-  return eachYearOfInterval({ start: from, end: to }).map((year) =>
+export const getYearsInRange = (range: DateRange): string[] => {
+  return eachYearOfInterval({ start: range.from, end: range.to }).map((year) =>
     format(year, "yyyy"),
   );
 };
@@ -68,17 +65,16 @@ export const getYearsInRange = (from: Date, to: Date): string[] => {
 export type AnalyticsGranularity = "day" | "month" | "year";
 
 export const getAnalyticsGranularity = (
-  from: Date,
-  to: Date,
+  range: DateRange,
 ): AnalyticsGranularity => {
-  const rangeInDays = differenceInCalendarDays(to, from);
+  const rangeInDays = differenceInCalendarDays(range.to, range.from);
   const dayGranularityMaxDays = differenceInCalendarDays(
-    addMonths(from, 2),
-    from,
+    addMonths(range.from, 2),
+    range.from,
   );
   const monthGranularityMaxDays = differenceInCalendarDays(
-    addYears(from, 2),
-    from,
+    addYears(range.from, 2),
+    range.from,
   );
 
   if (rangeInDays <= dayGranularityMaxDays) return "day";
@@ -87,16 +83,16 @@ export const getAnalyticsGranularity = (
   return "year";
 };
 
-export const getBudgetScaleFactor = (from: Date, to: Date): number => {
+export const getBudgetScaleFactor = (range: DateRange): number => {
   let scaleFactor = 0;
-  let cursor = startOfMonth(from);
+  let cursor = startOfMonth(range.from);
 
-  while (!isAfter(cursor, to)) {
+  while (!isAfter(cursor, range.to)) {
     const daysInMonth = getDaysInMonth(cursor);
     const monthEnd = endOfMonth(cursor);
 
-    const segmentStart = isAfter(cursor, from) ? cursor : from;
-    const segmentEnd = isBefore(monthEnd, to) ? monthEnd : to;
+    const segmentStart = isAfter(cursor, range.from) ? cursor : range.from;
+    const segmentEnd = isBefore(monthEnd, range.to) ? monthEnd : range.to;
     const daysInSegment =
       differenceInCalendarDays(segmentEnd, segmentStart) + 1;
 

@@ -2,11 +2,12 @@
 
 import { GetCategoriesForDate } from "@/actions/analytics/GetCategoriesForDate";
 import { GetStatsForDate } from "@/actions/analytics/GetStatsForDate";
+import type { DateRange } from "@/lib/date";
 import { getBudgetScaleFactor } from "@/lib/date";
 import { TransactionType } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 
-export const Analytics = async (range: { from: Date; to: Date }) => {
+export const Analytics = async (range: DateRange) => {
   const dateFilter = {
     gte: range.from,
     lte: range.to,
@@ -22,7 +23,7 @@ export const Analytics = async (range: { from: Date; to: Date }) => {
   });
 
   const rawCategoryStats = await GetCategoriesForDate(dateFilter);
-  const scaleFactor = getBudgetScaleFactor(range.from, range.to);
+  const scaleFactor = getBudgetScaleFactor(range);
   const categoryStats = rawCategoryStats.map((stat) => ({
     ...stat,
     budgetAmount:
