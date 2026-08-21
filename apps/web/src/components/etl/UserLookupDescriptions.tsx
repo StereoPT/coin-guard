@@ -5,8 +5,8 @@ import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupDescriptionDialog } from "@/components/etl/dialogs/AddLookupDescriptionDialog";
 import { lookupDescriptionColumns } from "@/constants/columns/lookupDescriptionColumns";
 import { useGetLookupDescriptions } from "@/hooks/etl/descriptions/useGetLookupDescriptions";
-import { DataTable } from "@stereopt/data-table";
 import { TextInitialIcon } from "@coin-guard/ui/icons";
+import { DataTable } from "@stereopt/data-table";
 
 export const UserLookupDescriptions = () => {
   const { data: lookupDescriptions } = useGetLookupDescriptions();
@@ -27,6 +27,17 @@ export const UserLookupDescriptions = () => {
   }
 
   return (
-    <DataTable columns={lookupDescriptionColumns} data={lookupDescriptions} />
+    <DataTable
+      columns={lookupDescriptionColumns}
+      config={{
+        groupBy: "newDescription",
+        columnVisibility: { newDescription: false },
+        search: {
+          filterFields: ["description", "newDescription"],
+          placeholder: "Search lookup descriptions...",
+        },
+      }}
+      data={lookupDescriptions}
+    />
   );
 };
