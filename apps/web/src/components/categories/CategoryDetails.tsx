@@ -28,6 +28,8 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
       <BudgetDetails
         budgetAmount={category.budgetAmount}
         categoryId={category.id}
+        range={range}
+        transactions={transactions}
       />
       <TransactionTabs
         actions={<DateRangeSelection onRangeChange={setRange} range={range} />}

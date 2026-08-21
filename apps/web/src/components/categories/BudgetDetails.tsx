@@ -1,9 +1,10 @@
 "use client";
 
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
-import { useGetCategoryTransactions } from "@/hooks/categories/useGetCategoryTransactions";
-import { getLastMonthRange } from "@/lib/date";
+import { getBudgetScaleFactor } from "@/lib/date";
+import type { DateRange } from "@/lib/date";
 import { formatCurrency } from "@/lib/formatter";
+import type { Transaction } from "@coin-guard/db";
 import { TransactionType } from "@coin-guard/db";
 import {
   Card,
@@ -25,29 +26,32 @@ const getIndicatorClassName = (percentage: number) => {
 type BudgetDetailsProps = {
   categoryId: string;
   budgetAmount: number | null;
+  transactions: Transaction[];
+  range: DateRange;
 };
 
 export const BudgetDetails = ({
   categoryId,
   budgetAmount,
+  transactions,
+  range,
 }: BudgetDetailsProps) => {
-  const { data: transactions } = useGetCategoryTransactions(
-    categoryId,
-    getLastMonthRange(),
-  );
-
-  const spent = (transactions ?? [])
+  const spent = transactions
     .filter((transaction) => transaction.type === TransactionType.DEBIT)
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-  const amount = budgetAmount ?? 0;
+  const scaledBudget =
+    budgetAmount !== null
+      ? budgetAmount * getBudgetScaleFactor(range.from, range.to)
+      : null;
+  const amount = scaledBudget ?? 0;
   const percentage = amount > 0 ? (spent / amount) * 100 : 100;
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Monthly Budget</CardTitle>
-        {budgetAmount === null && (
+        <CardTitle>Budget</CardTitle>
+        {budgetAmount === null ? (
           <>
             <CardDescription>No budget set for this category</CardDescription>
             <CardAction>
@@ -60,6 +64,10 @@ export const BudgetDetails = ({
               />
             </CardAction>
           </>
+        ) : (
+          <CardDescription>
+            {formatCurrency(budgetAmount)} / month
+          </CardDescription>
         )}
       </CardHeader>
       {budgetAmount !== null && (
@@ -70,7 +78,7 @@ export const BudgetDetails = ({
           />
           <p className="text-sm text-muted-foreground">
             <b>{formatCurrency(spent)}</b> of <b>{formatCurrency(amount)}</b>{" "}
-            spent last month
+            spent in the selected period
           </p>
         </CardContent>
       )}
