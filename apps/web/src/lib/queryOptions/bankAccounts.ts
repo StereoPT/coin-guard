@@ -6,5 +6,6 @@ export const getBankAccountsOptions = () => {
   return queryOptions({
     queryKey: KEYS.bankAccounts,
     queryFn: () => GetBankAccounts(),
+    throwOnError: true,
   });
 };
