@@ -3,7 +3,7 @@
 import { BudgetDetails } from "@/components/categories/BudgetDetails";
 import { TransactionsChart } from "@/components/charts/TransactionsChart";
 import { DateRangeSelection } from "@/components/DateRangeSelection";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { TransactionTabs } from "@/components/transactions/TransactionTabs";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import { useGetCategoryTransactions } from "@/hooks/categories/useGetCategoryTransactions";
@@ -15,15 +15,19 @@ type CategoryDetailsProps = {
 };
 
 export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
-  const { data: category } = useGetCategory(categoryId);
+  const { data: category, isPending: isCategoryPending } =
+    useGetCategory(categoryId);
   const [range, setRange] = useAtom(categoryTransactionsRangeAtom);
-  const { data: transactions, isFetching } = useGetCategoryTransactions(
-    categoryId,
-    range,
-  );
+  const {
+    data: transactions,
+    isFetching,
+    isPending: isTransactionsPending,
+  } = useGetCategoryTransactions(categoryId, range);
 
-  if (!category || !transactions) {
-    return <ErrorAlert />;
+  const isPending = isCategoryPending || isTransactionsPending;
+
+  if (isPending || !category || !transactions) {
+    return <LoadingState />;
   }
 
   return (

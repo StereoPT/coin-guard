@@ -9,6 +9,7 @@ export const getCategoriesOptions = () => {
   return queryOptions({
     queryKey: KEYS.categories,
     queryFn: () => GetCategories(),
+    throwOnError: true,
   });
 };
 
@@ -16,6 +17,7 @@ export const getCategoryOptions = (categoryId: string) => {
   return queryOptions({
     queryKey: KEYS.category(categoryId),
     queryFn: () => GetCategory(categoryId),
+    throwOnError: true,
   });
 };
 
@@ -27,5 +29,6 @@ export const getCategoryTransactionsOptions = (
     queryKey: KEYS.categoryTransactions(categoryId, range),
     queryFn: () => GetCategoryTransactions(categoryId, range),
     placeholderData: keepPreviousData,
+    throwOnError: true,
   });
 };
