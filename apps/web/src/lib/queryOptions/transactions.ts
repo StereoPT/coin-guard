@@ -9,6 +9,7 @@ export const getTransactionsOptions = () => {
   return queryOptions({
     queryKey: KEYS.transactions,
     queryFn: () => GetTransactions(),
+    throwOnError: true,
   });
 };
 
@@ -16,6 +17,7 @@ export const getTransactionOptions = (transactionId: string) => {
   return queryOptions({
     queryKey: KEYS.transaction(transactionId),
     queryFn: () => GetTransaction(transactionId),
+    throwOnError: true,
   });
 };
 
@@ -28,5 +30,6 @@ export const getRelatedTransactionsOptions = (
     queryFn: () => GetRelatedTransactions(description, range),
     enabled: description.length > 0,
     placeholderData: keepPreviousData,
+    throwOnError: true,
   });
 };
