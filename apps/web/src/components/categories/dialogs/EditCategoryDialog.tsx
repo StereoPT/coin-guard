@@ -5,6 +5,7 @@ import { LoadingState } from "@/components/LoadingState";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import {
+  defaultCategoryValues,
   editCategorySchema,
   type editCategorySchemaType,
 } from "@/schemas/categories";
@@ -30,11 +31,6 @@ import { FormProvider, useForm } from "react-hook-form";
 type EditCategoryDialogProps = {
   categoryId: string;
 } & WithTrigger;
-
-const defaultCategoryValues = {
-  name: "",
-  budgetAmount: null,
-};
 
 export const EditCategoryDialog = ({
   open,

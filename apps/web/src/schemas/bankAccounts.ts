@@ -1,6 +1,14 @@
 import { BankAccountType } from "@coin-guard/db";
 import { z } from "zod";
 
+export const defaultBankAccountValues = {
+  name: "",
+  alias: "",
+  type: undefined,
+  iban: "",
+  isDefault: false,
+};
+
 export const addBankAccountSchema = z.object({
   name: z.string().trim().nonempty(),
   alias: z.string().trim().optional(),

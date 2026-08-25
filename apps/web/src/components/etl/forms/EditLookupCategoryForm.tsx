@@ -3,6 +3,7 @@
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
+  defaultLookupCategoryValues,
   editLookupCategorySchema,
   type editLookupCategorySchemaType,
 } from "@/schemas/lookup";
@@ -23,12 +24,6 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 type EditLookupCategoryFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   lookupCategory: LookupCategory;
-};
-
-const defaultLookupCategoryValues = {
-  description: "",
-  categoryId: undefined,
-  enabled: false,
 };
 
 export const EditLookupCategoryForm = ({

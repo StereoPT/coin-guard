@@ -6,6 +6,7 @@ import { FormType } from "@/constants/forms";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import {
+  defaultTransactionValues,
   editTransactionSchema,
   type editTransactionSchemaType,
 } from "@/schemas/transactions";
@@ -30,17 +31,6 @@ import { FormProvider, useForm } from "react-hook-form";
 type EditTransactionDialogProps = {
   transactionId: string;
 } & WithTrigger;
-
-const defaultTransactionValues = {
-  date: undefined,
-  description: "",
-  type: undefined,
-  amount: 0,
-  balance: 0,
-  note: "",
-  categoryId: undefined,
-  accountId: undefined,
-};
 
 export const EditTransactionDialog = ({
   open,

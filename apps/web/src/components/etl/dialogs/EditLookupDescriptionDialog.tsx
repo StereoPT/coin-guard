@@ -3,6 +3,7 @@
 import { LookupDescriptionFormField } from "@/components/etl/LookupDescriptionFormField";
 import { useEditLookupDescription } from "@/hooks/etl/descriptions/useEditLookupDescription";
 import {
+  defaultLookupDescriptionValues,
   editLookupDescriptionSchema,
   type editLookupDescriptionSchemaType,
 } from "@/schemas/lookup";
@@ -26,12 +27,6 @@ type EditLookupDescriptionDialogProps = {
   lookupDescription: LookupDescription;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
   open: boolean;
-};
-
-const defaultLookupDescriptionValues = {
-  description: "",
-  newDescription: "",
-  enabled: false,
 };
 
 export const EditLookupDescriptionDialog = ({

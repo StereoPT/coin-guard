@@ -19,6 +19,7 @@ import { FormType } from "@/constants/forms";
 import { useAddTransaction } from "@/hooks/transactions/useAddTransaction";
 import {
   addTransactionSchema,
+  defaultTransactionValues,
   type addTransactionSchemaType,
 } from "@/schemas/transactions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,16 +38,7 @@ export const AddTransactionDialog = ({
 
   const form = useForm<addTransactionSchemaType>({
     resolver: zodResolver(addTransactionSchema),
-    defaultValues: {
-      date: undefined,
-      description: "",
-      type: undefined,
-      amount: 0,
-      balance: 0,
-      note: "",
-      categoryId: undefined,
-      accountId: undefined,
-    },
+    defaultValues: defaultTransactionValues,
   });
 
   const { mutateAsync, isPending } = useAddTransaction();

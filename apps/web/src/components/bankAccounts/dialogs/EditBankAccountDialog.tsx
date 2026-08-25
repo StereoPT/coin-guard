@@ -3,6 +3,7 @@
 import { BankAccountFormFields } from "@/components/bankAccounts/BankAccountFormFields";
 import { useEditBankAccount } from "@/hooks/bankAccounts/useEditBankAccount";
 import {
+  defaultBankAccountValues,
   editBankAccountSchema,
   type editBankAccountSchemaType,
 } from "@/schemas/bankAccounts";
@@ -26,14 +27,6 @@ type EditBankAccountDialogProps = {
   bankAccount: BankAccount;
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
-};
-
-const defaultBankAccountValues = {
-  name: "",
-  alias: "",
-  type: undefined,
-  iban: "",
-  isDefault: false,
 };
 
 export const EditBankAccountDialog = ({

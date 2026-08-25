@@ -1,6 +1,17 @@
 import { TransactionType } from "@coin-guard/db";
 import { z } from "zod";
 
+export const defaultTransactionValues = {
+  date: undefined,
+  description: "",
+  type: undefined,
+  amount: 0,
+  balance: 0,
+  note: "",
+  categoryId: undefined,
+  accountId: undefined,
+};
+
 export const addTransactionSchema = z.object({
   date: z.date(),
   description: z.string().trim().nonempty(),

@@ -4,8 +4,10 @@ import { LookupDescriptionFormField } from "@/components/etl/LookupDescriptionFo
 import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
 import {
   addLookupDescriptionSchema,
+  defaultLookupDescriptionValues,
   type addLookupDescriptionSchemaType,
 } from "@/schemas/lookup";
+import type { WithTrigger } from "@/types/dialogs";
 import {
   Button,
   Dialog,
@@ -20,44 +22,22 @@ import {
 } from "@coin-guard/ui";
 import { PlusCircle } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useCallback,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-type AddLookupDescriptionDialogProps =
-  | {
-      trigger: true;
-      open?: boolean;
-      onOpenChange?: Dispatch<SetStateAction<boolean>>;
-      description?: never;
-    }
-  | {
-      trigger?: never;
-      description: string;
-      open: boolean;
-      onOpenChange: Dispatch<SetStateAction<boolean>>;
-    };
+type AddLookupDescriptionDialogProps = WithTrigger;
 
 export const AddLookupDescriptionDialog = ({
   open,
   onOpenChange,
   trigger,
-  description,
 }: AddLookupDescriptionDialogProps) => {
   const formId = "add-lookup-description";
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
 
   const form = useForm<addLookupDescriptionSchemaType>({
     resolver: zodResolver(addLookupDescriptionSchema),
-    defaultValues: {
-      description: description ?? "",
-      newDescription: "",
-      enabled: true,
-    },
+    defaultValues: defaultLookupDescriptionValues,
   });
 
   const { mutateAsync, isPending } = useAddLookupDescription();

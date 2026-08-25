@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+export const defaultLookupCategoryValues = {
+  description: "",
+  categoryId: undefined,
+  enabled: true,
+};
+
 export const addLookupCategorySchema = z.object({
   description: z.string().trim().nonempty(),
   categoryId: z.string().trim(),
@@ -14,6 +20,12 @@ export type addLookupCategorySchemaType = z.infer<
 export type editLookupCategorySchemaType = z.infer<
   typeof editLookupCategorySchema
 >;
+
+export const defaultLookupDescriptionValues = {
+  description: "",
+  newDescription: "",
+  enabled: false,
+};
 
 export const addLookupDescriptionSchema = z.object({
   description: z.string().trim().nonempty(),
