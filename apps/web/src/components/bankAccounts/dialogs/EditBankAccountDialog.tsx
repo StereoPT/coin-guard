@@ -28,6 +28,14 @@ type EditBankAccountDialogProps = {
   onOpenChange: Dispatch<SetStateAction<boolean>>;
 };
 
+const defaultBankAccountValues = {
+  name: "",
+  alias: "",
+  type: undefined,
+  iban: "",
+  isDefault: false,
+};
+
 export const EditBankAccountDialog = ({
   bankAccount,
   open,
@@ -37,13 +45,15 @@ export const EditBankAccountDialog = ({
 
   const form = useForm<editBankAccountSchemaType>({
     resolver: zodResolver(editBankAccountSchema),
-    defaultValues: {
+    defaultValues: defaultBankAccountValues,
+    values: {
       name: bankAccount.name,
       alias: bankAccount.alias ?? "",
       type: bankAccount.type,
       iban: bankAccount.iban,
       isDefault: bankAccount.isDefault,
     },
+    resetOptions: { keepDirtyValues: true },
   });
 
   const { mutateAsync, isPending } = useEditBankAccount(bankAccount.id);
@@ -51,10 +61,9 @@ export const EditBankAccountDialog = ({
   const onSubmit = useCallback(
     async (values: editBankAccountSchemaType) => {
       await mutateAsync(values);
-      form.reset();
       onOpenChange(false);
     },
-    [form, mutateAsync, onOpenChange],
+    [mutateAsync, onOpenChange],
   );
 
   return (

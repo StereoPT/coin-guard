@@ -22,39 +22,47 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 
 type EditLookupCategoryFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  initialValues: LookupCategory;
+  lookupCategory: LookupCategory;
+};
+
+const defaultLookupCategoryValues = {
+  description: "",
+  categoryId: undefined,
+  enabled: false,
 };
 
 export const EditLookupCategoryForm = ({
   setOpen,
-  initialValues,
+  lookupCategory,
 }: EditLookupCategoryFormProps) => {
   const form = useForm<editLookupCategorySchemaType>({
     resolver: zodResolver(editLookupCategorySchema),
-    defaultValues: {
-      ...initialValues,
+    defaultValues: defaultLookupCategoryValues,
+    values: {
+      description: lookupCategory.description,
+      categoryId: lookupCategory.categoryId,
+      enabled: lookupCategory.enabled,
     },
+    resetOptions: { keepDirtyValues: true },
   });
 
   const { mutateAsync: mutateAsyncEdit, isPending: isPendingEdit } =
-    useEditLookupCategory(initialValues.id);
+    useEditLookupCategory(lookupCategory.id);
   const { mutateAsync: mutateAsyncDelete, isPending: isPendingDelete } =
-    useDeleteLookupCategory(initialValues.id);
+    useDeleteLookupCategory(lookupCategory.id);
 
   const onSubmit = useCallback(
     async (values: editLookupCategorySchemaType) => {
       await mutateAsyncEdit(values);
-      form.reset();
       setOpen(false);
     },
-    [form, mutateAsyncEdit, setOpen],
+    [mutateAsyncEdit, setOpen],
   );
 
   const onDelete = useCallback(async () => {
     await mutateAsyncDelete();
-    form.reset();
     setOpen(false);
-  }, [form, mutateAsyncDelete, setOpen]);
+  }, [mutateAsyncDelete, setOpen]);
 
   const isPending = isPendingEdit || isPendingDelete;
 
