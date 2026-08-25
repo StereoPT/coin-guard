@@ -1,19 +1,19 @@
 "use client";
 
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
+import { LoadingState } from "@/components/LoadingState";
 import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
 import { DataGrid } from "@stereopt/data-table";
 import { TagsIcon } from "@coin-guard/ui/icons";
 
 export const UserLookupCategories = () => {
-  const { data: lookupCategories } = useGetLookupCategories();
+  const { data: lookupCategories, isPending } = useGetLookupCategories();
 
-  if (!lookupCategories) {
-    return <ErrorAlert />;
+  if (isPending || !lookupCategories) {
+    return <LoadingState />;
   }
 
   if (lookupCategories.length <= 0) {

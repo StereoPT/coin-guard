@@ -1,18 +1,18 @@
 "use client";
 
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorAlert } from "@/components/ErrorAlert";
 import { AddLookupDescriptionDialog } from "@/components/etl/dialogs/AddLookupDescriptionDialog";
+import { LoadingState } from "@/components/LoadingState";
 import { lookupDescriptionColumns } from "@/constants/columns/lookupDescriptionColumns";
 import { useGetLookupDescriptions } from "@/hooks/etl/descriptions/useGetLookupDescriptions";
 import { TextInitialIcon } from "@coin-guard/ui/icons";
 import { DataTable } from "@stereopt/data-table";
 
 export const UserLookupDescriptions = () => {
-  const { data: lookupDescriptions } = useGetLookupDescriptions();
+  const { data: lookupDescriptions, isPending } = useGetLookupDescriptions();
 
-  if (!lookupDescriptions) {
-    return <ErrorAlert />;
+  if (isPending || !lookupDescriptions) {
+    return <LoadingState />;
   }
 
   if (lookupDescriptions.length <= 0) {

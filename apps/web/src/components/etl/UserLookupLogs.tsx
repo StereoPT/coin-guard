@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { Badge } from "@coin-guard/ui";
 import {
   Table,
@@ -16,10 +16,10 @@ import { cn } from "@coin-guard/ui";
 import { format } from "date-fns";
 
 export const UserLookupLogs = () => {
-  const { data: lookupLogs } = useGetLookupLogs();
+  const { data: lookupLogs, isPending } = useGetLookupLogs();
 
-  if (!lookupLogs) {
-    return <ErrorAlert />;
+  if (isPending || !lookupLogs) {
+    return <LoadingState />;
   }
 
   return (
