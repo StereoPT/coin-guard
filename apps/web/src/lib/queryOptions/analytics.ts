@@ -2,7 +2,7 @@ import { Analytics } from "@/actions/analytics/Analytics";
 import { DashboardAnalytics } from "@/actions/analytics/dashboard/DashboardAnalytics";
 import { KEYS } from "@/constants/queryKeys";
 import type { DateRange } from "@/lib/date";
-import { queryOptions } from "@tanstack/react-query";
+import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
 export const dashboardAnalyticsOptions = () => {
   return queryOptions({
@@ -15,5 +15,6 @@ export const analyticsOptions = (range: DateRange) => {
   return queryOptions({
     queryKey: KEYS.analyticsRange(range),
     queryFn: () => Analytics(range),
+    placeholderData: keepPreviousData,
   });
 };

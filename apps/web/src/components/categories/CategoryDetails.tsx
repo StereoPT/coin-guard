@@ -17,7 +17,10 @@ type CategoryDetailsProps = {
 export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
   const { data: category } = useGetCategory(categoryId);
   const [range, setRange] = useAtom(categoryTransactionsRangeAtom);
-  const { data: transactions } = useGetCategoryTransactions(categoryId, range);
+  const { data: transactions, isFetching } = useGetCategoryTransactions(
+    categoryId,
+    range,
+  );
 
   if (!category || !transactions) {
     return <ErrorAlert />;
@@ -32,7 +35,13 @@ export const CategoryDetails = ({ categoryId }: CategoryDetailsProps) => {
         transactions={transactions}
       />
       <TransactionTabs
-        actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
+        actions={
+          <DateRangeSelection
+            isFetching={isFetching}
+            onRangeChange={setRange}
+            range={range}
+          />
+        }
         description="Showing category amount over time"
         graph={
           <TransactionsChart

@@ -3,7 +3,7 @@ import { GetTransaction } from "@/actions/transactions/GetTransaction";
 import { GetTransactions } from "@/actions/transactions/GetTransactions";
 import { KEYS } from "@/constants/queryKeys";
 import type { DateRange } from "@/lib/date";
-import { queryOptions } from "@tanstack/react-query";
+import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
 export const getTransactionsOptions = () => {
   return queryOptions({
@@ -27,5 +27,6 @@ export const getRelatedTransactionsOptions = (
     queryKey: KEYS.relatedTransactions(description, range),
     queryFn: () => GetRelatedTransactions(description, range),
     enabled: description.length > 0,
+    placeholderData: keepPreviousData,
   });
 };

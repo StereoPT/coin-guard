@@ -11,6 +11,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Spinner,
 } from "@coin-guard/ui";
 import { CalendarIcon } from "@coin-guard/ui/icons";
 import {
@@ -94,11 +95,13 @@ const getDateRangePresets = (): DateRangePreset[] => {
 type DateRangeSelectionProps = {
   range: DateRange;
   onRangeChange: (range: DateRange) => void;
+  isFetching?: boolean;
 };
 
 export const DateRangeSelection = ({
   range,
   onRangeChange,
+  isFetching = false,
 }: DateRangeSelectionProps) => {
   const [open, setOpen] = useState(false);
 
@@ -129,7 +132,11 @@ export const DateRangeSelection = ({
       <PopoverTrigger
         render={
           <Button className="font-normal" variant="outline">
-            <CalendarIcon className="opacity-50" />
+            {isFetching ? (
+              <Spinner className="opacity-50" />
+            ) : (
+              <CalendarIcon className="opacity-50" />
+            )}
             {triggerLabel}
           </Button>
         }
