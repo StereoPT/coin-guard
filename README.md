@@ -198,11 +198,10 @@ Make sure you have the following installed on your system:
 - [x] Default bank account
 - [x] Grouped Lookup Descriptions
 - [x] Delete action for Lookup Logs
+- [x] Loading States
 
 **Up Next**
 
-- [ ] Optimistic UI updates
-- [ ] Loading States
  
 See the [open issues](https://github.com/StereoPT/coin-guard/issues) for a full list of proposed features (and known issues).
 
