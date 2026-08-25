@@ -17,5 +17,6 @@ export const analyticsOptions = (range: DateRange) => {
     queryKey: KEYS.analyticsRange(range),
     queryFn: () => Analytics(range),
     placeholderData: keepPreviousData,
+    throwOnError: true,
   });
 };
