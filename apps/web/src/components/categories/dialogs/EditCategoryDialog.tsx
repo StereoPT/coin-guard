@@ -1,12 +1,15 @@
 "use client";
 
 import { CategoryFormFields } from "@/components/categories/CategoryFormFields";
+import { LoadingState } from "@/components/LoadingState";
 import { useEditCategory } from "@/hooks/categories/useEditCategory";
 import { useGetCategory } from "@/hooks/categories/useGetCategory";
 import {
+  defaultCategoryValues,
   editCategorySchema,
   type editCategorySchemaType,
 } from "@/schemas/categories";
+import type { WithTrigger } from "@/types/dialogs";
 import {
   Button,
   Dialog,
@@ -22,37 +25,12 @@ import {
 import { Edit } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  type ComponentProps,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 type EditCategoryDialogProps = {
   categoryId: string;
-} & (
-  | {
-      trigger: true;
-      triggerVariant?: ComponentProps<typeof Button>["variant"];
-      triggerLabel?: string;
-      triggerIcon?: ReactNode;
-      open?: boolean;
-      onOpenChange?: Dispatch<SetStateAction<boolean>>;
-    }
-  | {
-      trigger?: never;
-      triggerVariant?: never;
-      triggerLabel?: never;
-      triggerIcon?: never;
-      open: boolean;
-      onOpenChange: Dispatch<SetStateAction<boolean>>;
-    }
-);
+} & WithTrigger;
 
 export const EditCategoryDialog = ({
   open,
@@ -71,20 +49,15 @@ export const EditCategoryDialog = ({
 
   const form = useForm<editCategorySchemaType>({
     resolver: zodResolver(editCategorySchema),
-    defaultValues: {
-      name: "",
-      budgetAmount: null,
-    },
+    defaultValues: defaultCategoryValues,
+    values: category
+      ? {
+          name: category.name,
+          budgetAmount: category.budgetAmount,
+        }
+      : undefined,
+    resetOptions: { keepDirtyValues: true },
   });
-
-  useEffect(() => {
-    if (!category) return;
-
-    form.reset({
-      name: category.name,
-      budgetAmount: category.budgetAmount,
-    });
-  }, [category, form]);
 
   const { mutateAsync, isPending } = useEditCategory(categoryId);
 
@@ -102,10 +75,9 @@ export const EditCategoryDialog = ({
   const onSubmit = useCallback(
     async (values: editCategorySchemaType) => {
       await mutateAsync(values);
-      form.reset();
       handleOpenChange(false);
     },
-    [form, mutateAsync, handleOpenChange],
+    [mutateAsync, handleOpenChange],
   );
 
   return (
@@ -125,7 +97,7 @@ export const EditCategoryDialog = ({
         <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingCategory ? (
-              <Spinner />
+              <LoadingState />
             ) : (
               <CategoryFormFields formId={formId} />
             )}

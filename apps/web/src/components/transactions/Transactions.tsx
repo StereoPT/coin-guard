@@ -1,7 +1,7 @@
 "use client";
 
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { transactionColumns } from "@/constants/columns/transactionColumns";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
@@ -9,10 +9,10 @@ import { DataTable } from "@stereopt/data-table";
 import { ArrowLeftRight } from "@coin-guard/ui/icons";
 
 export const Transactions = () => {
-  const { data: transactions } = useGetTransactions();
+  const { data: transactions, isPending } = useGetTransactions();
 
-  if (!transactions) {
-    return <ErrorAlert />;
+  if (isPending || !transactions) {
+    return <LoadingState />;
   }
 
   if (transactions.length <= 0) {

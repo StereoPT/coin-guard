@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { useGetRelatedTransactions } from "@/hooks/transactions/useGetRelatedTransactions";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 
@@ -46,14 +46,18 @@ export const TransactionDetails = ({
 }: TransactionDetailsProps) => {
   const [range, setRange] = useAtom(relatedTransactionsRangeAtom);
 
-  const { data: transaction } = useGetTransaction(transactionId);
-  const { data: relatedTransactions } = useGetRelatedTransactions(
-    transaction?.description ?? "",
-    range,
-  );
+  const { data: transaction, isPending: isTransactionPending } =
+    useGetTransaction(transactionId);
+  const {
+    data: relatedTransactions,
+    isFetching,
+    isPending: isRelatedTransactionsPending,
+  } = useGetRelatedTransactions(transaction?.description ?? "", range);
 
-  if (!transaction || !relatedTransactions) {
-    return <ErrorAlert />;
+  const isPending = isTransactionPending || isRelatedTransactionsPending;
+
+  if (isPending || !transaction || !relatedTransactions) {
+    return <LoadingState />;
   }
 
   return (
@@ -140,7 +144,13 @@ export const TransactionDetails = ({
       </Card>
 
       <TransactionTabs
-        actions={<DateRangeSelection onRangeChange={setRange} range={range} />}
+        actions={
+          <DateRangeSelection
+            isFetching={isFetching}
+            onRangeChange={setRange}
+            range={range}
+          />
+        }
         description="Showing transaction amount over time"
         graph={
           <TransactionsChart range={range} transactions={relatedTransactions} />

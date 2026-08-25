@@ -2,7 +2,7 @@
 
 import { AnalyticsChart } from "@/components/charts/AnalyticsChart";
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { StatCard } from "@/components/StatCard";
 import { useAnalytics } from "@/hooks/analytics/useAnalytics";
 import { analyticsRangeAtom } from "@/store/analyticsStore";
@@ -11,10 +11,10 @@ import { useAtomValue } from "jotai";
 
 export const Analytics = () => {
   const range = useAtomValue(analyticsRangeAtom);
-  const { data: analytics } = useAnalytics(range);
+  const { data: analytics, isPending } = useAnalytics(range);
 
-  if (!analytics) {
-    return <ErrorAlert />;
+  if (isPending || !analytics) {
+    return <LoadingState />;
   }
 
   return (

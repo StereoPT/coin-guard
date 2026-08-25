@@ -4,6 +4,7 @@ import { BankAccountFormFields } from "@/components/bankAccounts/BankAccountForm
 import { useAddBankAccount } from "@/hooks/bankAccounts/useAddBankAccount";
 import {
   addBankAccountSchema,
+  defaultBankAccountValues,
   type addBankAccountSchemaType,
 } from "@/schemas/bankAccounts";
 import {
@@ -29,13 +30,7 @@ export const AddBankAccountDialog = () => {
 
   const form = useForm<addBankAccountSchemaType>({
     resolver: zodResolver(addBankAccountSchema),
-    defaultValues: {
-      name: "",
-      alias: "",
-      type: undefined,
-      iban: "",
-      isDefault: false,
-    },
+    defaultValues: defaultBankAccountValues,
   });
 
   const { mutateAsync, isPending } = useAddBankAccount();

@@ -3,6 +3,7 @@
 import { LookupDescriptionFormField } from "@/components/etl/LookupDescriptionFormField";
 import { useEditLookupDescription } from "@/hooks/etl/descriptions/useEditLookupDescription";
 import {
+  defaultLookupDescriptionValues,
   editLookupDescriptionSchema,
   type editLookupDescriptionSchemaType,
 } from "@/schemas/lookup";
@@ -37,9 +38,13 @@ export const EditLookupDescriptionDialog = ({
 
   const form = useForm<editLookupDescriptionSchemaType>({
     resolver: zodResolver(editLookupDescriptionSchema),
-    defaultValues: {
-      ...lookupDescription,
+    defaultValues: defaultLookupDescriptionValues,
+    values: {
+      description: lookupDescription.description,
+      newDescription: lookupDescription.newDescription,
+      enabled: lookupDescription.enabled,
     },
+    resetOptions: { keepDirtyValues: true },
   });
 
   const { mutateAsync, isPending } = useEditLookupDescription(
@@ -49,10 +54,9 @@ export const EditLookupDescriptionDialog = ({
   const onSubmit = useCallback(
     async (values: editLookupDescriptionSchemaType) => {
       await mutateAsync(values);
-      form.reset();
       onOpenChange(false);
     },
-    [form, mutateAsync, onOpenChange],
+    [mutateAsync, onOpenChange],
   );
 
   return (

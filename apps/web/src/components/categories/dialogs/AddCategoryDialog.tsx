@@ -4,6 +4,7 @@ import { CategoryFormFields } from "@/components/categories/CategoryFormFields";
 import { useAddCategory } from "@/hooks/categories/useAddCategory";
 import {
   addCategorySchema,
+  defaultCategoryValues,
   type addCategorySchemaType,
 } from "@/schemas/categories";
 import {
@@ -30,10 +31,7 @@ export const AddCategoryDialog = () => {
 
   const form = useForm<addCategorySchemaType>({
     resolver: zodResolver(addCategorySchema),
-    defaultValues: {
-      name: "",
-      budgetAmount: null,
-    },
+    defaultValues: defaultCategoryValues,
   });
 
   const { mutateAsync, isPending } = useAddCategory();

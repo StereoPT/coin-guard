@@ -2,17 +2,17 @@
 
 import { AddBankAccountDialog } from "@/components/bankAccounts/dialogs/AddBankAccountDialog";
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { bankAccountColumns } from "@/constants/columns/bankAccountColumns";
 import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
 import { LandmarkIcon } from "@coin-guard/ui/icons";
 import { DataTable } from "@stereopt/data-table";
 
 export const BankAccounts = () => {
-  const { data: bankAccounts } = useGetBankAccounts();
+  const { data: bankAccounts, isPending } = useGetBankAccounts();
 
-  if (!bankAccounts) {
-    return <ErrorAlert />;
+  if (isPending || !bankAccounts) {
+    return <LoadingState />;
   }
 
   if (bankAccounts.length <= 0) {

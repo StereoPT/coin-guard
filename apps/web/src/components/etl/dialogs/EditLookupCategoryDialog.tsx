@@ -34,10 +34,10 @@ export const EditLookupCategoryDialog = ({
         </DialogHeader>
 
         <div className="flex flex-col gap-4">
-          {categoryWithLookups.lookups.map((lookup) => (
+          {categoryWithLookups.lookups.map((lookupCategory) => (
             <EditLookupCategoryForm
-              initialValues={lookup}
-              key={lookup.id}
+              key={lookupCategory.id}
+              lookupCategory={lookupCategory}
               setOpen={onOpenChange}
             />
           ))}

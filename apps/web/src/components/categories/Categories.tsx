@@ -2,17 +2,17 @@
 
 import { AddCategoryDialog } from "@/components/categories/dialogs/AddCategoryDialog";
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { categoryColumns } from "@/constants/columns/categoryColumns";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { DataTable } from "@stereopt/data-table";
 import { TagsIcon } from "@coin-guard/ui/icons";
 
 export const Categories = () => {
-  const { data: categories } = useGetCategories();
+  const { data: categories, isPending } = useGetCategories();
 
-  if (!categories) {
-    return <ErrorAlert />;
+  if (isPending || !categories) {
+    return <LoadingState />;
   }
 
   if (categories.length <= 0) {

@@ -3,16 +3,16 @@
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DashboardLastTransactions } from "@/components/dashboard/DashboardLastTransactions";
 import { MonthlyImportReminder } from "@/components/dashboard/MonthlyImportReminder";
-import { ErrorAlert } from "@/components/ErrorAlert";
+import { LoadingState } from "@/components/LoadingState";
 import { StatCard } from "@/components/StatCard";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
 import { CountType } from "@/types/dashboard";
 
 export const Dashboard = () => {
-  const { data: analytics } = useDashboardAnalytics();
+  const { data: analytics, isPending } = useDashboardAnalytics();
 
-  if (!analytics) {
-    return <ErrorAlert />;
+  if (isPending || !analytics) {
+    return <LoadingState />;
   }
 
   return (

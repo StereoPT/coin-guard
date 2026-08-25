@@ -4,6 +4,7 @@ import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { useAddLookupCategory } from "@/hooks/etl/categories/useAddLookupCategory";
 import {
   addLookupCategorySchema,
+  defaultLookupCategoryValues,
   type addLookupCategorySchemaType,
 } from "@/schemas/lookup";
 import {
@@ -30,11 +31,11 @@ import {
 import { PlusCircle } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  type Dispatch,
-  type SetStateAction,
   useCallback,
   useMemo,
   useState,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 
@@ -66,9 +67,8 @@ export const AddLookupCategoryDialog = ({
   const form = useForm<addLookupCategorySchemaType>({
     resolver: zodResolver(addLookupCategorySchema),
     defaultValues: {
-      description: "",
+      ...defaultLookupCategoryValues,
       categoryId,
-      enabled: true,
     },
   });
 

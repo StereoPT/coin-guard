@@ -8,6 +8,7 @@ export const getLookupCategoriesOptions = () => {
   return queryOptions({
     queryKey: KEYS.lookupCategories,
     queryFn: () => GetLookupCategories(),
+    throwOnError: true,
   });
 };
 
@@ -15,6 +16,7 @@ export const getLookupLogsOptions = () => {
   return queryOptions({
     queryKey: KEYS.lookupLogs,
     queryFn: () => GetLookupLogs(),
+    throwOnError: true,
   });
 };
 
@@ -22,5 +24,6 @@ export const getLookupDescriptionsOptions = () => {
   return queryOptions({
     queryKey: KEYS.lookupDescriptions,
     queryFn: () => GetLookupDescriptions(),
+    throwOnError: true,
   });
 };

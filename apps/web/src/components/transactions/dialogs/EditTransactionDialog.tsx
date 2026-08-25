@@ -1,13 +1,16 @@
 "use client";
 
+import { LoadingState } from "@/components/LoadingState";
 import { TransactionFormFields } from "@/components/transactions/TransactionFormFields";
 import { FormType } from "@/constants/forms";
 import { useEditTransaction } from "@/hooks/transactions/useEditTransaction";
 import { useGetTransaction } from "@/hooks/transactions/useGetTransaction";
 import {
+  defaultTransactionValues,
   editTransactionSchema,
   type editTransactionSchemaType,
 } from "@/schemas/transactions";
+import type { WithTrigger } from "@/types/dialogs";
 import {
   Button,
   Dialog,
@@ -22,29 +25,12 @@ import {
 } from "@coin-guard/ui";
 import { Edit } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  type Dispatch,
-  type SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 type EditTransactionDialogProps = {
   transactionId: string;
-} & (
-  | {
-      trigger: true;
-      open?: boolean;
-      onOpenChange?: Dispatch<SetStateAction<boolean>>;
-    }
-  | {
-      trigger?: never;
-      open: boolean;
-      onOpenChange: Dispatch<SetStateAction<boolean>>;
-    }
-);
+} & WithTrigger;
 
 export const EditTransactionDialog = ({
   open,
@@ -60,32 +46,21 @@ export const EditTransactionDialog = ({
 
   const form = useForm<editTransactionSchemaType>({
     resolver: zodResolver(editTransactionSchema),
-    defaultValues: {
-      date: undefined,
-      description: "",
-      type: undefined,
-      amount: 0,
-      balance: 0,
-      note: "",
-      categoryId: undefined,
-      accountId: undefined,
-    },
+    defaultValues: defaultTransactionValues,
+    values: transaction
+      ? {
+          date: transaction.date,
+          description: transaction.description,
+          type: transaction.type,
+          amount: transaction.amount,
+          balance: transaction.balance,
+          note: transaction.note ?? "",
+          categoryId: transaction.categoryId ?? undefined,
+          accountId: transaction.accountId ?? undefined,
+        }
+      : undefined,
+    resetOptions: { keepDirtyValues: true },
   });
-
-  useEffect(() => {
-    if (!transaction) return;
-
-    form.reset({
-      date: transaction.date,
-      description: transaction.description,
-      type: transaction.type,
-      amount: transaction.amount,
-      balance: transaction.balance,
-      note: transaction.note ?? "",
-      categoryId: transaction.categoryId ?? undefined,
-      accountId: transaction.accountId ?? undefined,
-    });
-  }, [transaction, form]);
 
   const { mutateAsync, isPending } = useEditTransaction(transactionId);
 
@@ -103,10 +78,9 @@ export const EditTransactionDialog = ({
   const onSubmit = useCallback(
     async (values: editTransactionSchemaType) => {
       await mutateAsync(values);
-      form.reset();
       handleOpenChange(false);
     },
-    [form, mutateAsync, handleOpenChange],
+    [mutateAsync, handleOpenChange],
   );
 
   return (
@@ -126,7 +100,7 @@ export const EditTransactionDialog = ({
         <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
             {isLoadingTransaction ? (
-              <Spinner />
+              <LoadingState />
             ) : (
               <TransactionFormFields formId={formId} formType={FormType.EDIT} />
             )}

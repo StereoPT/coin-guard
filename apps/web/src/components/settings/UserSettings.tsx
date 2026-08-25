@@ -1,8 +1,8 @@
 "use client";
 
 import { useExportDatabase } from "@/hooks/settings/useExportDatabase";
-import { Button } from "@coin-guard/ui";
-import { DatabaseBackup, Loader2 } from "@coin-guard/ui/icons";
+import { Button, Spinner } from "@coin-guard/ui";
+import { DatabaseBackup } from "@coin-guard/ui/icons";
 
 export const UserSettings = () => {
   const { mutateAsync, isPending } = useExportDatabase();
@@ -25,7 +25,7 @@ export const UserSettings = () => {
   return (
     <div className="flex gap-4">
       <Button disabled={isPending} onClick={handleExport}>
-        {isPending ? <Loader2 className="animate-spin" /> : <DatabaseBackup />}
+        {isPending ? <Spinner /> : <DatabaseBackup />}
         Export Database
       </Button>
     </div>

@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export const defaultCategoryValues = {
+  name: "",
+  budgetAmount: null,
+};
+
 export const addCategorySchema = z.object({
   name: z.string().trim().nonempty(),
   budgetAmount: z.number().nonnegative().nullable(),
