@@ -8,6 +8,7 @@ export const dashboardAnalyticsOptions = () => {
   return queryOptions({
     queryKey: KEYS.analytics,
     queryFn: () => DashboardAnalytics(),
+    throwOnError: true,
   });
 };
 
