@@ -42,3 +42,6 @@ yarn-error.log*
 *.pem
 
 .claude
+
+# Personal bank statement PDFs/CSVs used for historical import
+/transactions

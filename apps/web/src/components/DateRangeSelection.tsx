@@ -33,7 +33,7 @@ type DateRangePreset = {
   range: DateRange;
 };
 
-const MIN_DATE_RANGE_SELECTION_DATE = new Date(2024, 0, 1);
+const MIN_DATE_RANGE_SELECTION_DATE = new Date(2020, 0, 1);
 
 const getDateRangePresets = (): DateRangePreset[] => {
   const now = new Date();
