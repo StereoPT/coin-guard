@@ -27,17 +27,21 @@ export const UserLookupLogs = () => {
       <Table className="h-full">
         <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead>Time</TableHead>
+            <TableHead>Last Seen</TableHead>
             <TableHead>Type</TableHead>
             <TableHead>Field</TableHead>
             <TableHead>Description</TableHead>
+            <TableHead>Count</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="gap-2 h-full overflow-auto">
           {lookupLogs.map((log) => (
-            <TableRow className="text-muted-foreground" key={log.id}>
+            <TableRow
+              className="text-muted-foreground"
+              key={`${log.type}-${log.lookupField}-${log.description}`}
+            >
               <TableCell className="text-xs text-muted-foreground p-0.75">
-                {format(log.createdAt, "PPP")}
+                {format(log.lastSeenAt, "PPP")}
               </TableCell>
               <TableCell
                 className={cn(
@@ -53,6 +57,11 @@ export const UserLookupLogs = () => {
               </TableCell>
               <TableCell className="text-sm flex-1 p-0.75">
                 {log.description}
+              </TableCell>
+              <TableCell className="text-sm p-0.75">
+                {log.count > 1 && (
+                  <Badge variant="outline">×{log.count}</Badge>
+                )}
               </TableCell>
             </TableRow>
           ))}

@@ -3,9 +3,18 @@
 import { prisma } from "@coin-guard/db/server";
 
 export const GetLookupLogs = async () => {
-  const lookupLogs = await prisma.lookupLogging.findMany({
-    orderBy: [{ createdAt: "desc" }, { description: "asc" }],
+  const groupedLogs = await prisma.lookupLogging.groupBy({
+    by: ["type", "lookupField", "description"],
+    _count: { _all: true },
+    _max: { createdAt: true },
+    orderBy: [{ _max: { createdAt: "desc" } }, { description: "asc" }],
   });
 
-  return lookupLogs;
+  return groupedLogs.map(({ type, lookupField, description, _count, _max }) => ({
+    type,
+    lookupField,
+    description,
+    count: _count._all,
+    lastSeenAt: _max.createdAt ?? new Date(),
+  }));
 };
