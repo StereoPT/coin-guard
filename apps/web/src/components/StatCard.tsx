@@ -10,7 +10,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@coin-guard/ui";
-import { TrendingDown, TrendingUp } from "@coin-guard/ui/icons";
+import {
+  EqualApproximately,
+  TrendingDown,
+  TrendingUp,
+} from "@coin-guard/ui/icons";
 
 type StatCardProps = {
   title: string;
@@ -19,13 +23,26 @@ type StatCardProps = {
   countType: CountType;
 };
 
+const TREND_ICON = {
+  up: TrendingUp,
+  down: TrendingDown,
+  flat: EqualApproximately,
+} as const;
+
+const TREND_LABEL = {
+  up: "Trending up",
+  down: "Trending down",
+  flat: "No trend",
+} as const;
+
 export const StatCard = ({
   title,
   stat,
   subfooter,
   countType,
 }: StatCardProps) => {
-  const isNegativePercentage = Math.sign(stat?.percentage ?? 0) < 1;
+  const { trend } = stat;
+  const TrendIcon = trend ? TREND_ICON[trend] : null;
 
   return (
     <Card className="from-primary/5 to-card bg-linear-to-t">
@@ -35,24 +52,20 @@ export const StatCard = ({
           <CountUpWrapper type={countType} value={stat.value} />
         </CardTitle>
         <CardAction>
-          {stat.percentage && (
+          {TrendIcon && stat.percentage != null && (
             <Badge variant="outline">
-              {!isNegativePercentage && "+"}
-              {stat?.percentage?.toFixed(2)}%
-              {isNegativePercentage ? <TrendingDown /> : <TrendingUp />}
+              {trend === "up" && "+"}
+              {stat.percentage.toFixed(2)}%
+              <TrendIcon />
             </Badge>
           )}
         </CardAction>
       </CardHeader>
       <CardFooter className="flex-col items-start gap-1.5 text-sm">
-        {stat.percentage && (
+        {TrendIcon && trend && (
           <div className="line-clamp-1 flex gap-2 font-medium items-center">
-            Trending {isNegativePercentage ? "down" : "up"}
-            {isNegativePercentage ? (
-              <TrendingDown className="size-4" />
-            ) : (
-              <TrendingUp className="size-4" />
-            )}
+            {TREND_LABEL[trend]}
+            <TrendIcon className="size-4" />
           </div>
         )}
         <div className="text-muted-foreground">{subfooter}</div>
