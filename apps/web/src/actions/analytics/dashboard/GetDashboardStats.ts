@@ -3,7 +3,7 @@
 import { GetTransactionCountForDate } from "@/actions/analytics/dashboard/GetTransactionCountForDate";
 import { GetTypeSumForDate } from "@/actions/analytics/dashboard/GetTypeSumForDate";
 
-import type { TransactionStat } from "@/types/analytics";
+import type { Trend, TransactionStat } from "@/types/analytics";
 import { TransactionType } from "@coin-guard/db";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
@@ -12,9 +12,22 @@ type GetStatsReturnValue = Record<
   TransactionStat
 >;
 
+const getTrend = (newVal: number, oldVal: number): Trend => {
+  if (newVal === oldVal) return "flat";
+  return newVal > oldVal ? "up" : "down";
+};
+
 const calculatePercentageChange = (newVal: number, oldVal: number) => {
+  if (newVal === oldVal) return 0;
+  if (oldVal === 0) return null;
   return ((newVal - oldVal) / oldVal) * 100;
 };
+
+const buildStat = (newVal: number, oldVal: number): TransactionStat => ({
+  value: newVal,
+  percentage: calculatePercentageChange(newVal, oldVal),
+  trend: getTrend(newVal, oldVal),
+});
 
 export const GetDashboardStats = async (): Promise<GetStatsReturnValue> => {
   const dateFilterCurrentMonth = {
@@ -43,21 +56,9 @@ export const GetDashboardStats = async (): Promise<GetStatsReturnValue> => {
   ]);
 
   const result: GetStatsReturnValue = {
-    CREDIT: {
-      value: currentIncome,
-      percentage: calculatePercentageChange(currentIncome, previousIncome),
-    },
-    DEBIT: {
-      value: currentExpense,
-      percentage: calculatePercentageChange(currentExpense, previousExpense),
-    },
-    TRANSACTIONS: {
-      value: currentTransactions,
-      percentage: calculatePercentageChange(
-        currentTransactions,
-        previousTransactions,
-      ),
-    },
+    CREDIT: buildStat(currentIncome, previousIncome),
+    DEBIT: buildStat(currentExpense, previousExpense),
+    TRANSACTIONS: buildStat(currentTransactions, previousTransactions),
   };
 
   return result;
