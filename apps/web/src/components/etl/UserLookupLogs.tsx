@@ -1,8 +1,11 @@
 "use client";
 
 import { LoadingState } from "@/components/LoadingState";
-import { Badge } from "@coin-guard/ui";
+import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
+import { LoggingType } from "@coin-guard/db";
 import {
+  Badge,
+  cn,
   Table,
   TableBody,
   TableCell,
@@ -10,9 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "@coin-guard/ui";
-import { LoggingType } from "@coin-guard/db";
-import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
-import { cn } from "@coin-guard/ui";
 import { format } from "date-fns";
 
 export const UserLookupLogs = () => {
@@ -59,9 +59,7 @@ export const UserLookupLogs = () => {
                 {log.description}
               </TableCell>
               <TableCell className="text-sm p-0.75">
-                {log.count > 1 && (
-                  <Badge variant="outline">×{log.count}</Badge>
-                )}
+                {log.count > 1 && <Badge variant="outline">×{log.count}</Badge>}
               </TableCell>
             </TableRow>
           ))}

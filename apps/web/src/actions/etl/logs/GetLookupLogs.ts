@@ -10,11 +10,13 @@ export const GetLookupLogs = async () => {
     orderBy: [{ _max: { createdAt: "desc" } }, { description: "asc" }],
   });
 
-  return groupedLogs.map(({ type, lookupField, description, _count, _max }) => ({
-    type,
-    lookupField,
-    description,
-    count: _count._all,
-    lastSeenAt: _max.createdAt ?? new Date(),
-  }));
+  return groupedLogs.map(
+    ({ type, lookupField, description, _count, _max }) => ({
+      type,
+      lookupField,
+      description,
+      count: _count._all,
+      lastSeenAt: _max.createdAt ?? new Date(),
+    }),
+  );
 };
