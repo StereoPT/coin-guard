@@ -1,0 +1,12 @@
+{
+  "extends": "@coin-guard/ts-config/base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@coin-guard/parser/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

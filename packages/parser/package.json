@@ -1,0 +1,17 @@
+{
+  "name": "@coin-guard/parser",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "date-fns": "^4.4.0",
+    "papaparse": "^5.7.0"
+  },
+  "devDependencies": {
+    "@coin-guard/biome-config": "workspace:^",
+    "@coin-guard/ts-config": "workspace:*",
+    "@types/papaparse": "^5.5.2",
+    "typescript": "catalog:"
+  }
+}

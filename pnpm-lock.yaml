@@ -29,6 +29,9 @@ importers:
       '@coin-guard/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@coin-guard/parser':
+        specifier: workspace:*
+        version: link:../../packages/parser
       '@coin-guard/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -138,6 +141,28 @@ importers:
       prisma:
         specifier: ^7.9.0
         version: 7.9.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(better-sqlite3@12.9.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+
+  packages/parser:
+    dependencies:
+      date-fns:
+        specifier: ^4.4.0
+        version: 4.4.0
+      papaparse:
+        specifier: ^5.7.0
+        version: 5.7.0
+    devDependencies:
+      '@coin-guard/biome-config':
+        specifier: workspace:^
+        version: link:../biome-config
+      '@coin-guard/ts-config':
+        specifier: workspace:*
+        version: link:../ts-config
+      '@types/papaparse':
+        specifier: ^5.5.2
+        version: 5.5.2
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -2513,6 +2538,9 @@ packages:
 
   papaparse@5.5.4:
     resolution: {integrity: sha512-SwzWD9gl/ElwYLCI0nUja1mFJzjq2D8ziShfNBa7zCHzkOozeOGDwHWQ+tvCzEZcewecWZ5U7kUopDnG+DFYEQ==}
+
+  papaparse@5.7.0:
+    resolution: {integrity: sha512-qBGxg/7Q3Kl9Wfhrz2Z74UnvnHTXLNG6jmKJFeBvP2+y4lV7So+7SR62+Zd47JvdrCkX+nDcnr0ObPzek/+6RA==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -5344,6 +5372,8 @@ snapshots:
       strip-ansi: 7.2.0
 
   papaparse@5.5.4: {}
+
+  papaparse@5.7.0: {}
 
   parent-module@1.0.1:
     dependencies:
