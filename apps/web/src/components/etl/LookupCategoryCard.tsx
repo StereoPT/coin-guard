@@ -1,12 +1,9 @@
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
-import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
-import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
 import type { CategoryWithLookups } from "@/types/categories";
 import {
   Button,
   Card,
-  CardContent,
   CardHeader,
   CardTitle,
   DropdownMenu,
@@ -16,12 +13,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@coin-guard/ui";
-import {
-  Edit,
-  Maximize,
-  MoreHorizontal,
-  PlusCircle,
-} from "@coin-guard/ui/icons";
+import { Edit, MoreHorizontal, PlusCircle } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type LookupCategoryCardProps = {
@@ -33,22 +25,9 @@ export const LookupCategoryCard = ({
 }: LookupCategoryCardProps) => {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
-  const [showDetailsDialog, setShowDetailsDialog] = useState(false);
-
-  const visibleLookups = categoryWithLookups.lookups.slice(0, 4);
-  const remainingCount =
-    categoryWithLookups.lookups.length - visibleLookups.length;
 
   return (
     <>
-      {showDetailsDialog && (
-        <LookupCategoryDetailsDialog
-          categoryWithLookups={categoryWithLookups}
-          onOpenChange={setShowDetailsDialog}
-          open={showDetailsDialog}
-        />
-      )}
-
       {showAddDialog && (
         <AddLookupCategoryDialog
           categoryId={categoryWithLookups.id}
@@ -77,9 +56,6 @@ export const LookupCategoryCard = ({
             <DropdownMenuContent align="end">
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => setShowDetailsDialog(true)}>
-                  <Maximize /> Details
-                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setShowAddDialog(true)}>
                   <PlusCircle /> Add
                 </DropdownMenuItem>
@@ -90,20 +66,6 @@ export const LookupCategoryCard = ({
             </DropdownMenuContent>
           </DropdownMenu>
         </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-2">
-            <ul className="flex flex-col gap-2">
-              {visibleLookups.map((lookup) => (
-                <LookupCategoryItem key={lookup.id} lookup={lookup} />
-              ))}
-            </ul>
-            {remainingCount > 0 && (
-              <div className="text-xs text-muted-foreground">
-                +{remainingCount} more
-              </div>
-            )}
-          </div>
-        </CardContent>
       </Card>
     </>
   );
