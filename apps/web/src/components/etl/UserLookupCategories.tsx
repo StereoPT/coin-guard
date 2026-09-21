@@ -2,12 +2,11 @@
 
 import { EmptyState } from "@/components/EmptyState";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
-import { LookupCategoryCard } from "@/components/etl/LookupCategoryCard";
 import { LoadingState } from "@/components/LoadingState";
 import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
-import { DataGrid } from "@stereopt/data-table";
 import { TagsIcon } from "@coin-guard/ui/icons";
+import { DataTable } from "@stereopt/data-table";
 
 export const UserLookupCategories = () => {
   const { data: lookupCategories, isPending } = useGetLookupCategories();
@@ -28,21 +27,17 @@ export const UserLookupCategories = () => {
   }
 
   return (
-    <DataGrid
+    <DataTable
       columns={lookupCategoryColumns}
       config={{
+        groupBy: "categoryName",
+        columnVisibility: { categoryName: false },
         search: {
-          filterFields: ["name"],
+          filterFields: ["description", "categoryName"],
           placeholder: "Search lookup categories...",
         },
       }}
       data={lookupCategories}
-      render={(index, categoryWithLookups) => (
-        <LookupCategoryCard
-          categoryWithLookups={categoryWithLookups}
-          key={index}
-        />
-      )}
     />
   );
 };

@@ -1,8 +1,8 @@
-import type { Prisma } from "@coin-guard/db";
+import type { LookupCategory } from "@coin-guard/db";
 
-export type CategoryWithLookups = Prisma.CategoryGetPayload<{
-  include: { lookups: true };
-}>;
+export type LookupCategoryWithCategoryName = LookupCategory & {
+  categoryName: string;
+};
 
 export type CategoryStats = {
   categoryId: string;
