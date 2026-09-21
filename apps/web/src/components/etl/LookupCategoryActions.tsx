@@ -1,6 +1,7 @@
 "use client";
 
 import { DeleteDialog } from "@/components/DeleteDialog";
+import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import type { LookupCategoryWithCategoryName } from "@/types/categories";
 import {
@@ -23,11 +24,20 @@ export const LookupCategoryActions = ({
   lookupCategory,
 }: LookupCategoryActionsProps) => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
 
   const { isPending, mutateAsync } = useDeleteLookupCategory(lookupCategory.id);
 
   return (
     <>
+      {showEditDialog && (
+        <EditLookupCategoryDialog
+          lookupCategory={lookupCategory}
+          onOpenChange={setShowEditDialog}
+          open={showEditDialog}
+        />
+      )}
+
       {showDeleteAlert && (
         <DeleteDialog
           description={
@@ -50,7 +60,7 @@ export const LookupCategoryActions = ({
         <DropdownMenuContent align="end">
           <DropdownMenuGroup>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
               <Edit />
               Edit
             </DropdownMenuItem>

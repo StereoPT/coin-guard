@@ -1,6 +1,6 @@
 "use client";
 
-import { LookupDescriptionFormField } from "@/components/etl/LookupDescriptionFormField";
+import { LookupDescriptionFormFields } from "@/components/etl/LookupDescriptionFormFields";
 import { useAddLookupDescription } from "@/hooks/etl/descriptions/useAddLookupDescription";
 import {
   addLookupDescriptionSchema,
@@ -78,7 +78,7 @@ export const AddLookupDescriptionDialog = ({
 
         <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
-            <LookupDescriptionFormField formId={formId} />
+            <LookupDescriptionFormFields formId={formId} />
           </form>
         </FormProvider>
 
