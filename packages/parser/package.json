@@ -6,14 +6,20 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "scripts": {},
+  "scripts": {
+    "format": "biome format .",
+    "format:fix": "biome format . --write",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
+    "@coin-guard/db": "workspace:^",
     "date-fns": "^4.4.0",
     "papaparse": "^5.7.0"
   },
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
-    "@coin-guard/db": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
     "@types/node": "^26.1.1",
     "@types/papaparse": "^5.5.2",

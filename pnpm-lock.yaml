@@ -141,6 +141,9 @@ importers:
 
   packages/parser:
     dependencies:
+      '@coin-guard/db':
+        specifier: workspace:^
+        version: link:../db
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
@@ -151,9 +154,6 @@ importers:
       '@coin-guard/biome-config':
         specifier: workspace:^
         version: link:../biome-config
-      '@coin-guard/db':
-        specifier: workspace:^
-        version: link:../db
       '@coin-guard/ts-config':
         specifier: workspace:*
         version: link:../ts-config
