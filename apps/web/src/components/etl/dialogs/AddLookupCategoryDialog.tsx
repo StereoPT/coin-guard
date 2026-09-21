@@ -1,12 +1,14 @@
 "use client";
 
-import { useGetCategories } from "@/hooks/categories/useGetCategories";
+import { LookupCategoryFormFields } from "@/components/etl/LookupCategoryFormFields";
+import { FormType } from "@/constants/forms";
 import { useAddLookupCategory } from "@/hooks/etl/categories/useAddLookupCategory";
 import {
   addLookupCategorySchema,
   defaultLookupCategoryValues,
   type addLookupCategorySchemaType,
 } from "@/schemas/lookup";
+import type { WithTrigger } from "@/types/dialogs";
 import {
   Button,
   Dialog,
@@ -17,71 +19,29 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  Input,
-  SearchableSelect,
   Spinner,
-  Switch,
 } from "@coin-guard/ui";
 import { PlusCircle } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useCallback,
-  useMemo,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { useCallback, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
-type AddLookupCategoryDialogProps =
-  | {
-      trigger: true;
-      open?: boolean;
-      onOpenChange?: Dispatch<SetStateAction<boolean>>;
-      categoryId?: never;
-    }
-  | {
-      trigger?: never;
-      categoryId: string;
-      open: boolean;
-      onOpenChange: Dispatch<SetStateAction<boolean>>;
-    };
+type AddLookupCategoryDialogProps = WithTrigger;
 
 export const AddLookupCategoryDialog = ({
   open,
   onOpenChange,
   trigger,
-  categoryId,
 }: AddLookupCategoryDialogProps) => {
   const formId = "add-lookup-category";
   const [dialogOpen, setDialogOpen] = useState(open ?? false);
 
-  const { data: categories } = useGetCategories();
-
   const form = useForm<addLookupCategorySchemaType>({
     resolver: zodResolver(addLookupCategorySchema),
-    defaultValues: {
-      ...defaultLookupCategoryValues,
-      categoryId,
-    },
+    defaultValues: defaultLookupCategoryValues,
   });
 
   const { mutateAsync, isPending } = useAddLookupCategory();
-
-  const categoryOptions = useMemo(() => {
-    if (!categories) return [];
-
-    return categories.map((category) => ({
-      value: category.id,
-      label: category.name,
-    }));
-  }, [categories]);
 
   const handleOnOpenChange = useCallback(
     (prevOpen: boolean) => {
@@ -119,78 +79,7 @@ export const AddLookupCategoryDialog = ({
 
         <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              <Controller
-                control={form.control}
-                name="categoryId"
-                render={({ field, fieldState }) => (
-                  <Field>
-                    <FieldLabel>Category</FieldLabel>
-                    <SearchableSelect
-                      emptyPlaceholder="No category found."
-                      onChange={field.onChange}
-                      options={categoryOptions}
-                      placeholder="Select a Category"
-                      searchPlaceholder="Search a category..."
-                      value={field.value}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-
-              <Controller
-                control={form.control}
-                name="description"
-                render={({ field, fieldState }) => (
-                  <Field>
-                    <FieldLabel htmlFor={`${formId}-description`}>
-                      Description
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id={`${formId}-description`}
-                      placeholder="Description"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-
-              <FieldGroup>
-                <Controller
-                  control={form.control}
-                  name="enabled"
-                  render={({ field, fieldState }) => (
-                    <Field
-                      data-invalid={fieldState.invalid}
-                      orientation="horizontal"
-                    >
-                      <FieldContent>
-                        <FieldLabel htmlFor="enable-switch">Enable</FieldLabel>
-                        <FieldDescription className="text-xs">
-                          Enable to add this category to the transaction.
-                        </FieldDescription>
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </FieldContent>
-                      <Switch
-                        aria-invalid={fieldState.invalid}
-                        checked={field.value}
-                        id="enable-switch"
-                        name={field.name}
-                        onCheckedChange={field.onChange}
-                      />
-                    </Field>
-                  )}
-                />
-              </FieldGroup>
-            </FieldGroup>
+            <LookupCategoryFormFields formId={formId} formType={FormType.ADD} />
           </form>
         </FormProvider>
 

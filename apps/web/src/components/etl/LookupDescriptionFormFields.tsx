@@ -20,13 +20,13 @@ type LookupDescriptionSchema =
   | addLookupDescriptionSchemaType
   | editLookupDescriptionSchemaType;
 
-type LookupDescriptionFormFieldProps = {
+type LookupDescriptionFormFieldsProps = {
   formId: string;
 };
 
-export const LookupDescriptionFormField = ({
+export const LookupDescriptionFormFields = ({
   formId,
-}: LookupDescriptionFormFieldProps) => {
+}: LookupDescriptionFormFieldsProps) => {
   const { control } = useFormContext<LookupDescriptionSchema>();
 
   return (

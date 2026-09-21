@@ -3,17 +3,15 @@
 import { prisma } from "@coin-guard/db/server";
 
 export const GetLookupCategories = async () => {
-  const categoriesWithLookups = await prisma.category.findMany({
-    where: {
-      lookups: {
-        some: {},
-      },
-    },
+  const lookupCategories = await prisma.lookupCategory.findMany({
     include: {
-      lookups: true,
+      category: { select: { name: true } },
     },
-    orderBy: { name: "asc" },
+    orderBy: [{ category: { name: "asc" } }, { description: "asc" }],
   });
 
-  return categoriesWithLookups;
+  return lookupCategories.map(({ category, ...lookupCategory }) => ({
+    ...lookupCategory,
+    categoryName: category.name,
+  }));
 };
