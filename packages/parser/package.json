@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {},
   "dependencies": {
     "date-fns": "^4.4.0",
@@ -10,7 +13,9 @@
   },
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
+    "@coin-guard/db": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
+    "@types/node": "^26.1.1",
     "@types/papaparse": "^5.5.2",
     "typescript": "catalog:"
   }

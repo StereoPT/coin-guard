@@ -4,6 +4,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
+    "types": ["node"],
     "paths": {
       "@coin-guard/parser/*": ["./src/*"]
     }

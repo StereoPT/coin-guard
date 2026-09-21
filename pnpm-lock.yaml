@@ -50,9 +50,6 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@types/papaparse':
-        specifier: ^5.5.2
-        version: 5.5.2
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
@@ -65,9 +62,6 @@ importers:
       nextjs-toploader:
         specifier: ^3.9.17
         version: 3.9.17(next@16.3.2(@babel/core@7.29.0)(@types/node@26.1.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      papaparse:
-        specifier: ^5.5.4
-        version: 5.5.4
       react:
         specifier: ^19.2.8
         version: 19.2.8
@@ -157,9 +151,15 @@ importers:
       '@coin-guard/biome-config':
         specifier: workspace:^
         version: link:../biome-config
+      '@coin-guard/db':
+        specifier: workspace:^
+        version: link:../db
       '@coin-guard/ts-config':
         specifier: workspace:*
         version: link:../ts-config
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
       '@types/papaparse':
         specifier: ^5.5.2
         version: 5.5.2
@@ -2535,9 +2535,6 @@ packages:
   ora@8.2.0:
     resolution: {integrity: sha512-weP+BZ8MVNnlCm8c0Qdc1WSWq4Qn7I+9CJGm7Qali6g44e/PUzbjNqJX5NJ9ljlNMosfJvg1fKEGILklK9cwnw==}
     engines: {node: '>=18'}
-
-  papaparse@5.5.4:
-    resolution: {integrity: sha512-SwzWD9gl/ElwYLCI0nUja1mFJzjq2D8ziShfNBa7zCHzkOozeOGDwHWQ+tvCzEZcewecWZ5U7kUopDnG+DFYEQ==}
 
   papaparse@5.7.0:
     resolution: {integrity: sha512-qBGxg/7Q3Kl9Wfhrz2Z74UnvnHTXLNG6jmKJFeBvP2+y4lV7So+7SR62+Zd47JvdrCkX+nDcnr0ObPzek/+6RA==}
@@ -5370,8 +5367,6 @@ snapshots:
       stdin-discarder: 0.2.2
       string-width: 7.2.0
       strip-ansi: 7.2.0
-
-  papaparse@5.5.4: {}
 
   papaparse@5.7.0: {}
 
