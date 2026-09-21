@@ -1,6 +1,5 @@
 "use client";
 
-import { useDeleteLookupCategory } from "@/hooks/etl/categories/useDeleteLookupCategory";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
   defaultLookupCategoryValues,
@@ -16,7 +15,7 @@ import {
   Input,
   Switch,
 } from "@coin-guard/ui";
-import { Check, Trash2 } from "@coin-guard/ui/icons";
+import { Check } from "@coin-guard/ui/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
@@ -41,10 +40,9 @@ export const EditLookupCategoryForm = ({
     resetOptions: { keepDirtyValues: true },
   });
 
-  const { mutateAsync: mutateAsyncEdit, isPending: isPendingEdit } =
-    useEditLookupCategory(lookupCategory.id);
-  const { mutateAsync: mutateAsyncDelete, isPending: isPendingDelete } =
-    useDeleteLookupCategory(lookupCategory.id);
+  const { mutateAsync: mutateAsyncEdit, isPending } = useEditLookupCategory(
+    lookupCategory.id,
+  );
 
   const onSubmit = useCallback(
     async (values: editLookupCategorySchemaType) => {
@@ -53,13 +51,6 @@ export const EditLookupCategoryForm = ({
     },
     [mutateAsyncEdit, setOpen],
   );
-
-  const onDelete = useCallback(async () => {
-    await mutateAsyncDelete();
-    setOpen(false);
-  }, [mutateAsyncDelete, setOpen]);
-
-  const isPending = isPendingEdit || isPendingDelete;
 
   return (
     <FormProvider {...form}>
@@ -94,25 +85,14 @@ export const EditLookupCategoryForm = ({
             )}
           />
 
-          <div className="flex flex-row gap-2">
-            <Button
-              disabled={isPending}
-              onClick={onDelete}
-              size="icon"
-              type="button"
-              variant="destructive"
-            >
-              <Trash2 />
-            </Button>
-            <Button
-              disabled={isPending}
-              size="icon"
-              type="submit"
-              variant="outline"
-            >
-              <Check />
-            </Button>
-          </div>
+          <Button
+            disabled={isPending}
+            size="icon"
+            type="submit"
+            variant="outline"
+          >
+            <Check />
+          </Button>
         </FieldGroup>
       </form>
     </FormProvider>
