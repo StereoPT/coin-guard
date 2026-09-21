@@ -1,8 +1,8 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
+import type { ProcessedTransaction } from "@coin-guard/parser";
 import { SearchableSelect } from "@coin-guard/ui";
 import { useSetAtom } from "jotai";
 import { useCallback, useMemo } from "react";

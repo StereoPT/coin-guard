@@ -2,18 +2,7 @@
 
 import { TransformCategories } from "@/actions/etl/TransformCategories";
 import { TransformDescriptions } from "@/actions/etl/TransformDescriptions";
-import type { TransactionType } from "@coin-guard/db";
 import { ParseTransactionFile } from "@coin-guard/parser";
-
-export type ProcessedTransaction = {
-  date: string;
-  description: string;
-  amount: number;
-  balance: number;
-  type: TransactionType;
-  categoryId?: string;
-  accountId?: string;
-};
 
 export const ParseTransaction = async (formValues: FormData) => {
   try {

@@ -1,10 +1,10 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
+import type { ProcessedTransaction } from "@coin-guard/parser";
 import { Button } from "@coin-guard/ui";
-import { useSetAtom } from "jotai";
 import { Trash2 } from "@coin-guard/ui/icons";
+import { useSetAtom } from "jotai";
 import { useCallback } from "react";
 
 type DeleteProcessedTransactionProps = {
