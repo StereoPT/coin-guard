@@ -1,9 +1,7 @@
-import { DeleteDialog } from "@/components/DeleteDialog";
 import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCategoryDialog";
 import { EditLookupCategoryDialog } from "@/components/etl/dialogs/EditLookupCategoryDialog";
 import { LookupCategoryDetailsDialog } from "@/components/etl/dialogs/LookupCategoryDetailsDialog";
 import { LookupCategoryItem } from "@/components/etl/LookupCategoryItem";
-import { useDeleteAllLookupCategories } from "@/hooks/etl/categories/useDeleteAllLookupCategories";
 import type { CategoryWithLookups } from "@/types/categories";
 import {
   Button,
@@ -23,7 +21,6 @@ import {
   Maximize,
   MoreHorizontal,
   PlusCircle,
-  Trash2,
 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
@@ -34,14 +31,9 @@ type LookupCategoryCardProps = {
 export const LookupCategoryCard = ({
   categoryWithLookups,
 }: LookupCategoryCardProps) => {
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
-
-  const { isPending, mutateAsync } = useDeleteAllLookupCategories(
-    categoryWithLookups.id,
-  );
 
   const visibleLookups = categoryWithLookups.lookups.slice(0, 4);
   const remainingCount =
@@ -73,21 +65,6 @@ export const LookupCategoryCard = ({
         />
       )}
 
-      {showDeleteDialog && (
-        <DeleteDialog
-          description={
-            <span>
-              This will permanently delete all lookups in{" "}
-              <b>{categoryWithLookups.name}</b>. This action cannot be undone.
-            </span>
-          }
-          isPending={isPending}
-          onDelete={mutateAsync}
-          onOpenChange={setShowDeleteDialog}
-          open={showDeleteDialog}
-        />
-      )}
-
       <Card className="h-full">
         <CardHeader className="flex justify-between items-center">
           <CardTitle>{categoryWithLookups.name}</CardTitle>
@@ -108,12 +85,6 @@ export const LookupCategoryCard = ({
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
                   <Edit /> Edit
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setShowDeleteDialog(true)}
-                  variant="destructive"
-                >
-                  <Trash2 /> Delete
                 </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
