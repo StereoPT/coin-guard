@@ -5,6 +5,7 @@ const CATEGORIES = "categories";
 const BANK_ACCOUNTS = "bankAccounts";
 const ANALYTICS = "analytics";
 const LOOKUP = "lookup";
+const NOTIFICATIONS = "notifications";
 
 export const KEYS = {
   analytics: [ANALYTICS],
@@ -34,4 +35,6 @@ export const KEYS = {
   lookupCategories: [LOOKUP, CATEGORIES],
   lookupDescriptions: [LOOKUP, "descriptions"],
   lookupLogs: [LOOKUP, "logs"],
+
+  notifications: [NOTIFICATIONS],
 };

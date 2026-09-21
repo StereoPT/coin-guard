@@ -1,3 +1,4 @@
+import { NotificationsMenu } from "@/components/notifications/NotificationsMenu";
 import { Sidebar } from "@/components/Sidebar";
 import { Separator, SidebarTrigger } from "@coin-guard/ui";
 import type { ReactNode } from "react";
@@ -13,10 +14,11 @@ const DashboardLayout = ({ children, breadcrumb }: DashboardLayoutProps) => {
       <Sidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between pl-2 pr-6 py-4 h-12.5">
-          <div className="flex items-center gap-8 w-full">
+          <div className="flex items-center gap-8">
             <SidebarTrigger />
             {breadcrumb}
           </div>
+          <NotificationsMenu />
         </header>
         <Separator />
         <div className="overflow-auto">

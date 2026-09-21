@@ -2,7 +2,6 @@
 
 import { CategoryPieChart } from "@/components/charts/CategoryPieChart";
 import { DashboardLastTransactions } from "@/components/dashboard/DashboardLastTransactions";
-import { MonthlyImportReminder } from "@/components/dashboard/MonthlyImportReminder";
 import { LoadingState } from "@/components/LoadingState";
 import { StatCard } from "@/components/StatCard";
 import { useDashboardAnalytics } from "@/hooks/analytics/useDashboardAnalytics";
@@ -17,7 +16,6 @@ export const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {analytics.stats.TRANSACTIONS.value === 0 && <MonthlyImportReminder />}
       <div className="grid gap-4 grid-cols-1 xl:grid-cols-3">
         <StatCard
           countType={CountType.MONEY}
