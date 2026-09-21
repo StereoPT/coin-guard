@@ -1,6 +1,7 @@
 "use client";
 
 import { LookupCategoryFormFields } from "@/components/etl/LookupCategoryFormFields";
+import { FormType } from "@/constants/forms";
 import { useEditLookupCategory } from "@/hooks/etl/categories/useEditLookupCategory";
 import {
   defaultLookupCategoryValues,
@@ -67,7 +68,10 @@ export const EditLookupCategoryDialog = ({
 
         <FormProvider {...form}>
           <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
-            <LookupCategoryFormFields formId={formId} />
+            <LookupCategoryFormFields
+              formId={formId}
+              formType={FormType.EDIT}
+            />
           </form>
         </FormProvider>
 

@@ -1,5 +1,5 @@
 import { CategoryDetails } from "@/components/categories/CategoryDetails";
-import { EditCategory } from "@/components/categories/EditCategory";
+import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
 import { PageHeader } from "@/components/PageHeader";
 import { getLastMonthRange } from "@/lib/date";
 import { getQueryClient } from "@/lib/getQueryClient";
@@ -32,7 +32,7 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
       <div className="flex flex-1 flex-col h-full">
         <div className="flex justify-between">
           <PageHeader goBack title="Category Details" />
-          <EditCategory categoryId={categoryId} />
+          <EditCategoryDialog categoryId={categoryId} trigger />
         </div>
         <div className="h-full py-6">
           <CategoryDetails categoryId={categoryId} />
