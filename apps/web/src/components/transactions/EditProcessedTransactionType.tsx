@@ -1,8 +1,8 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import type { TransactionType } from "@coin-guard/db";
+import type { ProcessedTransaction } from "@coin-guard/parser";
 import {
   Select,
   SelectContent,

@@ -1,7 +1,7 @@
 import { ImportTransaction } from "@/actions/transactions/ImportTransaction";
-import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { KEYS } from "@/constants/queryKeys";
 import { getQueryClient } from "@/lib/getQueryClient";
+import type { ProcessedTransaction } from "@coin-guard/parser";
 import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
 

@@ -1,10 +1,10 @@
 "use client";
 
-import type { ProcessedTransaction } from "@/actions/transactions/ParseTransaction";
 import { AmountBadge } from "@/components/AmountBadge";
 import { DeleteProcessedTransaction } from "@/components/transactions/DeleteProcessedTransaction";
 import { EditProcessedTransactionCategory } from "@/components/transactions/EditProcessedTransactionCategory";
 import { EditProcessedTransactionType } from "@/components/transactions/EditProcessedTransactionType";
+import type { ProcessedTransaction } from "@coin-guard/parser";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 
