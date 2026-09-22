@@ -25,15 +25,17 @@ export const categoryColumns: ColumnDef<Category>[] = [
   },
   {
     accessorKey: "budgetAmount",
-    header: "Budget Amount",
+    header: () => <div className="text-right">Budget Amount</div>,
     size: 100,
     cell: ({ row }) => {
       const { budgetAmount } = row.original;
 
       return (
-        <Badge variant="outline">
-          {budgetAmount !== null ? formatCurrency(budgetAmount) : "N/A"}
-        </Badge>
+        <div className="flex justify-end">
+          <Badge className="tabular-nums" variant="outline">
+            {budgetAmount !== null ? formatCurrency(budgetAmount) : "N/A"}
+          </Badge>
+        </div>
       );
     },
   },

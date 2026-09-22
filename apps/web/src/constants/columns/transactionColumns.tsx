@@ -42,7 +42,7 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
   {
     accessorKey: "category.name",
     header: "Category",
-    size: 110,
+    size: 120,
     cell: ({ row }) => {
       const { category } = row.original;
 
@@ -51,12 +51,16 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
   },
   {
     accessorKey: "amount",
-    header: "Amount",
-    size: 90,
+    header: () => <div className="text-right">Amount</div>,
+    size: 80,
     cell: ({ row }) => {
       const { type, amount } = row.original;
 
-      return <AmountText amount={amount} type={type} />;
+      return (
+        <div className="flex justify-end">
+          <AmountText amount={amount} type={type} />
+        </div>
+      );
     },
   },
   {

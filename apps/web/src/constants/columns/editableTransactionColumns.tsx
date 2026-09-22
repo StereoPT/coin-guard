@@ -28,12 +28,16 @@ export const editableTransactionColumns: ColumnDef<ProcessedTransaction>[] = [
   },
   {
     accessorKey: "amount",
-    header: "Amount",
+    header: () => <div className="text-right">Amount</div>,
     size: 90,
     cell: ({ row }) => {
       const { type, amount } = row.original;
 
-      return <AmountText amount={amount} type={type} />;
+      return (
+        <div className="flex justify-end">
+          <AmountText amount={amount} type={type} />
+        </div>
+      );
     },
   },
   {
