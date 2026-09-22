@@ -1,6 +1,7 @@
 "use client";
 
 import { NotificationList } from "@/components/notifications/NotificationList";
+import { useDismissNotifications } from "@/hooks/notifications/useDismissNotifications";
 import { useNotifications } from "@/hooks/notifications/useNotifications";
 import {
   Button,
@@ -15,6 +16,7 @@ import { Bell } from "@coin-guard/ui/icons";
 
 export const NotificationsMenu = () => {
   const { data: notifications, isPending } = useNotifications();
+  const { dismiss, clearAll } = useDismissNotifications();
   const hasNotifications = (notifications?.length ?? 0) > 0;
 
   return (
@@ -35,13 +37,23 @@ export const NotificationsMenu = () => {
         )}
       </PopoverTrigger>
       <PopoverContent align="end" className="w-md gap-0 p-0">
-        <PopoverHeader className="px-4 py-3">
+        <PopoverHeader className="flex-row items-center justify-between px-4 py-3">
           <PopoverTitle>Notifications</PopoverTitle>
+          {hasNotifications && (
+            <Button
+              className="h-auto p-0 text-xs"
+              onClick={clearAll}
+              variant="link"
+            >
+              Clear all
+            </Button>
+          )}
         </PopoverHeader>
         <Separator />
         <NotificationList
           isPending={isPending}
           notifications={notifications ?? []}
+          onDismiss={dismiss}
         />
       </PopoverContent>
     </Popover>

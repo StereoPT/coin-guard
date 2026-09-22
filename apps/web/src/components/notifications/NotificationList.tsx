@@ -2,7 +2,9 @@ import { NOTIFICATION_ICONS } from "@/components/notifications/notificationIcons
 
 import type { Notification } from "@/types/notifications";
 import {
+  Button,
   Item,
+  ItemActions,
   ItemContent,
   ItemDescription,
   ItemGroup,
@@ -10,17 +12,20 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@coin-guard/ui";
+import { X } from "@coin-guard/ui/icons";
 import { cn } from "@coin-guard/ui/lib/utils";
 import { Fragment } from "react";
 
 type NotificationListProps = {
   notifications: Notification[];
   isPending: boolean;
+  onDismiss: (id: string) => void;
 };
 
 export const NotificationList = ({
   notifications,
   isPending,
+  onDismiss,
 }: NotificationListProps) => {
   if (isPending) {
     return (
@@ -59,6 +64,16 @@ export const NotificationList = ({
                   {notification.description}
                 </ItemDescription>
               </ItemContent>
+              <ItemActions>
+                <Button
+                  aria-label="Dismiss notification"
+                  onClick={() => onDismiss(notification.id)}
+                  size="icon-xs"
+                  variant="ghost"
+                >
+                  <X />
+                </Button>
+              </ItemActions>
             </Item>
           </Fragment>
         );
