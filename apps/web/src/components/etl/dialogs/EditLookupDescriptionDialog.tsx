@@ -61,7 +61,7 @@ export const EditLookupDescriptionDialog = ({
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent>
+      <DialogContent finalFocus={false}>
         <DialogHeader>
           <DialogTitle>Edit Lookup Description</DialogTitle>
           <DialogDescription>Edit your lookup description</DialogDescription>

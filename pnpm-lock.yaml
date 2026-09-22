@@ -39,8 +39,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.78.0(react@19.2.8))
       '@stereopt/data-table':
-        specifier: ^0.3.0
-        version: 0.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^0.3.2
+        version: 0.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.101.4(react@19.2.8)
@@ -1137,8 +1137,8 @@ packages:
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
-  '@stereopt/data-table@0.3.0':
-    resolution: {integrity: sha512-zvafntOit3ZT4iUTxd3Mx4jyRVMDJvu/2bFAcWKfXRFlNKCXUMPziXyeN/fCXAnXV5ucklsqsrp46+x70HMR/Q==}
+  '@stereopt/data-table@0.3.2':
+    resolution: {integrity: sha512-lVGIhmvqggiRJzZqfscXnrK3oM3DHLlTI8IXkUVwCRvwo5ixmwe6d8CQFkk30X0bYIuKY4NgiVsvZklikt96qw==}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
@@ -4084,7 +4084,7 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
-  '@stereopt/data-table@0.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@stereopt/data-table@0.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@tailwindcss/postcss': 4.3.3
       '@tanstack/match-sorter-utils': 8.19.4

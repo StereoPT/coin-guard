@@ -41,7 +41,7 @@ export const DeleteDialog = ({
 
   return (
     <AlertDialog onOpenChange={onOpenChange} open={open}>
-      <AlertDialogContent>
+      <AlertDialogContent finalFocus={false}>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>

@@ -65,7 +65,7 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
   },
   {
     accessorKey: "actions",
-    header: "Actions",
+    header: () => null,
     size: 50,
     cell: ({ row }) => {
       const transaction = row.original;

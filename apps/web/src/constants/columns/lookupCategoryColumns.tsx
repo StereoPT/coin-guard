@@ -35,7 +35,7 @@ export const lookupCategoryColumns: ColumnDef<LookupCategoryWithCategoryName>[] 
     },
     {
       accessorKey: "actions",
-      header: "Actions",
+      header: () => null,
       size: 50,
       cell: ({ row }) => {
         const lookupCategory = row.original;

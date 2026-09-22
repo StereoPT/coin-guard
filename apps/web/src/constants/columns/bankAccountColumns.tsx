@@ -41,7 +41,7 @@ export const bankAccountColumns: ColumnDef<BankAccount>[] = [
   },
   {
     accessorKey: "actions",
-    header: "Actions",
+    header: () => null,
     size: 50,
     cell: ({ row }) => {
       const bankAccount = row.original;

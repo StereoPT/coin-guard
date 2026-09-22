@@ -3,16 +3,8 @@ import { DeleteDialog } from "@/components/DeleteDialog";
 import { useDeleteCategory } from "@/hooks/categories/useDeleteCategory";
 import type { Category } from "@coin-guard/db";
 
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@coin-guard/ui";
-import { Edit, MoreHorizontal, Trash2 } from "@coin-guard/ui/icons";
+import { Button } from "@coin-guard/ui";
+import { Edit, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type CategoryActionsProps = {
@@ -50,27 +42,22 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
         />
       )}
 
-      <DropdownMenu>
-        <DropdownMenuTrigger render={<Button size="icon" variant="ghost" />}>
-          <MoreHorizontal />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-              <Edit />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setShowDeleteAlert(true)}
-              variant="destructive"
-            >
-              <Trash2 />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
+        <Button
+          onClick={() => setShowEditDialog(true)}
+          size="icon"
+          variant="ghost"
+        >
+          <Edit />
+        </Button>
+        <Button
+          onClick={() => setShowDeleteAlert(true)}
+          size="icon"
+          variant="destructive"
+        >
+          <Trash2 />
+        </Button>
+      </div>
     </>
   );
 };

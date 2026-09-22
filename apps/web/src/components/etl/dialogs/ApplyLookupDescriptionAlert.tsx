@@ -37,7 +37,7 @@ export const ApplyLookupDescriptionAlert = ({
 
   return (
     <AlertDialog onOpenChange={onOpenChange} open={open}>
-      <AlertDialogContent>
+      <AlertDialogContent finalFocus={false}>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>

@@ -41,7 +41,7 @@ export const categoryColumns: ColumnDef<Category>[] = [
   },
   {
     accessorKey: "actions",
-    header: "Actions",
+    header: () => null,
     size: 50,
     cell: ({ row }) => {
       const category = row.original;
