@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@coin-guard/ui";
+import Link from "next/link";
 
 type BreadcrumbShellProps = {
   trail: BreadcrumbTrailItem[];
@@ -22,14 +23,18 @@ export const BreadcrumbShell = ({
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
+          <BreadcrumbLink render={<Link href={ROUTES.home} />}>
+            Dashboard
+          </BreadcrumbLink>
         </BreadcrumbItem>
         {trail.map(({ label, href }) => (
           <span className="contents" key={`${href ?? label}`}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               {href ? (
-                <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
+                <BreadcrumbLink render={<Link href={href} />}>
+                  {label}
+                </BreadcrumbLink>
               ) : (
                 label
               )}

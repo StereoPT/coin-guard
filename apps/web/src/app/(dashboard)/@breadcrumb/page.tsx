@@ -5,13 +5,16 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
 } from "@coin-guard/ui";
+import Link from "next/link";
 
 const BreadcrumbSlot = () => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={ROUTES.home}>Dashboard</BreadcrumbLink>
+          <BreadcrumbLink render={<Link href={ROUTES.home} />}>
+            Dashboard
+          </BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
