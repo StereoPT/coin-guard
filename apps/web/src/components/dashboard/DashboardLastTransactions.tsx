@@ -1,4 +1,4 @@
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { ROUTES } from "@/constants/routes";
 import type { Prisma } from "@coin-guard/db";
@@ -67,7 +67,7 @@ export const DashboardLastTransactions = ({
                     </div>
                   </div>
                 </div>
-                <AmountBadge
+                <AmountText
                   amount={transaction.amount}
                   type={transaction.type}
                 />

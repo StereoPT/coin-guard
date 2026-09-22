@@ -1,6 +1,6 @@
 "use client";
 
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { DeleteProcessedTransaction } from "@/components/transactions/DeleteProcessedTransaction";
 import { EditProcessedTransactionCategory } from "@/components/transactions/EditProcessedTransactionCategory";
 import { EditProcessedTransactionType } from "@/components/transactions/EditProcessedTransactionType";
@@ -33,7 +33,7 @@ export const editableTransactionColumns: ColumnDef<ProcessedTransaction>[] = [
     cell: ({ row }) => {
       const { type, amount } = row.original;
 
-      return <AmountBadge amount={amount} type={type} />;
+      return <AmountText amount={amount} type={type} />;
     },
   },
   {

@@ -1,6 +1,6 @@
 "use client";
 
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { TransactionActions } from "@/components/transactions/TransactionActions";
 import { ROUTES } from "@/constants/routes";
@@ -56,7 +56,7 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
     cell: ({ row }) => {
       const { type, amount } = row.original;
 
-      return <AmountBadge amount={amount} type={type} />;
+      return <AmountText amount={amount} type={type} />;
     },
   },
   {

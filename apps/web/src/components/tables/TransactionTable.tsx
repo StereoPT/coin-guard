@@ -1,4 +1,4 @@
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import type { TransactionWithRelations } from "@/types/transactions";
 import {
@@ -47,7 +47,7 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
                 )}
               </TableCell>
               <TableCell className="text-right py-1">
-                <AmountBadge amount={t.amount} type={t.type} />
+                <AmountText amount={t.amount} type={t.type} />
               </TableCell>
             </TableRow>
           );
