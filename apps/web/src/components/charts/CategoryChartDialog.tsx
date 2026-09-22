@@ -50,7 +50,7 @@ export const CategoryChartDialog = ({
               <Field className="w-full my-6" key={stat.categoryId}>
                 <FieldLabel htmlFor={`progress-upload-${stat.categoryId}`}>
                   <span>{stat.categoryName}</span>
-                  <span className="ml-auto">
+                  <span className="ml-auto tabular-nums">
                     {formatCurrency(stat.totalAmount)}
                   </span>
                 </FieldLabel>

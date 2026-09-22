@@ -48,12 +48,12 @@ export const StatCard = ({
     <Card className="from-primary/5 to-card bg-linear-to-t">
       <CardHeader>
         <CardDescription>{title}</CardDescription>
-        <CardTitle className="text-2xl font-semibold tabular-nums">
+        <CardTitle className="text-2xl font-semibold">
           <CountUpWrapper type={countType} value={stat.value} />
         </CardTitle>
         <CardAction>
           {TrendIcon && stat.percentage != null && (
-            <Badge variant="outline">
+            <Badge className="tabular-nums" variant="outline">
               {trend === "up" && "+"}
               {stat.percentage.toFixed(2)}%
               <TrendIcon />

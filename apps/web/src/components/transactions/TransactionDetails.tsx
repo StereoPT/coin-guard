@@ -69,7 +69,7 @@ export const TransactionDetails = ({
               {typeIcons[transaction.type]}
               {transaction.type.toLowerCase()}
             </CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
+            <CardTitle className="text-2xl font-semibold">
               <CountUpWrapper
                 type={CountType.MONEY}
                 value={transaction.amount}

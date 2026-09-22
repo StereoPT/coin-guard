@@ -11,12 +11,27 @@ type CountUpWrapperProps = {
 
 const MoneyCountUp = ({ value }: Pick<CountUpWrapperProps, "value">) => {
   return (
-    <CountUp decimals={2} duration={1} end={value} preserveValue suffix="€" />
+    <CountUp
+      className="tabular-nums"
+      decimals={2}
+      duration={1}
+      end={value}
+      preserveValue
+      suffix="€"
+    />
   );
 };
 
 const NumberCountUp = ({ value }: Pick<CountUpWrapperProps, "value">) => {
-  return <CountUp decimals={0} duration={1} end={value} preserveValue />;
+  return (
+    <CountUp
+      className="tabular-nums"
+      decimals={0}
+      duration={1}
+      end={value}
+      preserveValue
+    />
+  );
 };
 
 export const CountUpWrapper = ({ value, type }: CountUpWrapperProps) => {
