@@ -9,10 +9,9 @@ export const GetRelatedTransactions = async (
 ) => {
   return prisma.transaction.findMany({
     where: {
-      description,
+      description: { equals: description, mode: "insensitive" },
       date: { gte: range.from, lte: range.to },
     },
-    // description is constant here (filtered above), so id is the tiebreaker
     orderBy: [{ date: "asc" }, { id: "asc" }],
     include: { category: true, account: true },
   });
