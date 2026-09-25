@@ -24,6 +24,8 @@ export const ParseTransaction = async (formValues: FormData) => {
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Failed to process CSV file:", error);
-    throw new Error("Failed to process CSV file!");
+    throw error instanceof Error
+      ? error
+      : new Error("Failed to process CSV file!");
   }
 };

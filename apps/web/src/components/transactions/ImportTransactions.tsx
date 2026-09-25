@@ -72,9 +72,13 @@ export const ImportTransactions = () => {
   const handleDrop = async (files: File[]) => {
     setFiles(files);
 
-    if (files[0]) {
+    if (!files[0]) return;
+
+    try {
       const fileTransactions = await mutateParse(files[0]);
       setTransactions(fileTransactions);
+    } catch {
+      setFiles(undefined);
     }
   };
 
