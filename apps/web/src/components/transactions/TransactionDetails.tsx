@@ -89,7 +89,7 @@ export const TransactionDetails = ({
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+              <div className="rounded bg-muted text-muted-foreground p-2">
                 <Calendar className="size-4" />
               </div>
               <div className="flex flex-col">
@@ -98,7 +98,7 @@ export const TransactionDetails = ({
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+              <div className="rounded bg-muted text-muted-foreground p-2">
                 <Tag className="size-4" />
               </div>
               <div className="flex flex-col">
@@ -122,7 +122,7 @@ export const TransactionDetails = ({
               <p className="text-sm">{transaction.note}</p>
             ) : (
               <div className="flex flex-col w-full h-full items-center justify-center gap-2 py-4">
-                <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+                <div className="rounded bg-muted text-muted-foreground p-2">
                   <FileText className="size-4" />
                 </div>
                 <div className="text-center text-sm">

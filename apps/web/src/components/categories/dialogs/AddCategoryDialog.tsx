@@ -46,7 +46,7 @@ export const AddCategoryDialog = () => {
   );
 
   return (
-    <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger render={<Button />}>
         <PlusCircle />
         Add Category

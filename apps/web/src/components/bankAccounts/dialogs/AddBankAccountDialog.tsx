@@ -45,7 +45,7 @@ export const AddBankAccountDialog = () => {
   );
 
   return (
-    <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger render={<Button />}>
         <PlusCircle />
         Add Bank Account
