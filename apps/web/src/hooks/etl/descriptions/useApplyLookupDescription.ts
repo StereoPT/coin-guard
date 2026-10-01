@@ -3,13 +3,13 @@ import { toast } from "@coin-guard/ui";
 import { useMutation } from "@tanstack/react-query";
 
 export const useApplyLookupDescription = (lookupDescriptionId: string) => {
-  const toastID = `apply-lookup-description-${lookupDescriptionId}`;
+  const toastId = `apply-lookup-description-${lookupDescriptionId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Applying lookup description...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return ApplyLookupDescription(lookupDescriptionId);
@@ -17,13 +17,13 @@ export const useApplyLookupDescription = (lookupDescriptionId: string) => {
     onSuccess: () => {
       toast.success("Lookup description applied", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
     },
     onError: ({ message }) => {
       toast.error("Failed to apply lookup description", {
         description: message ?? "Please try again later",
-        id: toastID,
+        id: toastId,
       });
     },
   });

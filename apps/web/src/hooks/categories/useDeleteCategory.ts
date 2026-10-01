@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteCategory = (categoryId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-category-${categoryId}`;
+  const toastId = `delete-category-${categoryId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting category...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return DeleteCategory(categoryId);
@@ -20,7 +20,7 @@ export const useDeleteCategory = (categoryId: string) => {
     onSuccess: () => {
       toast.success("Category deleted", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       queryClient.invalidateQueries({ queryKey: KEYS.categories });
@@ -28,7 +28,7 @@ export const useDeleteCategory = (categoryId: string) => {
     onError: ({ message }) => {
       toast.error("Failed to delete category", {
         description: message ?? "Please try again later",
-        id: toastID,
+        id: toastId,
       });
     },
   });

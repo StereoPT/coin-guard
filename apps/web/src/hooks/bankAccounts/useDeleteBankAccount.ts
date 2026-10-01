@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteBankAccount = (bankAccountId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-bank-account-${bankAccountId}`;
+  const toastId = `delete-bank-account-${bankAccountId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting bank account...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return DeleteBankAccount(bankAccountId);
@@ -20,7 +20,7 @@ export const useDeleteBankAccount = (bankAccountId: string) => {
     onSuccess: () => {
       toast.success("Bank account deleted", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       queryClient.invalidateQueries({ queryKey: KEYS.bankAccounts });
@@ -28,7 +28,7 @@ export const useDeleteBankAccount = (bankAccountId: string) => {
     onError: ({ message }) => {
       toast.error("Failed to delete bank account", {
         description: message ?? "Please try again later",
-        id: toastID,
+        id: toastId,
       });
     },
   });

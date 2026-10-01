@@ -1,3 +1,5 @@
+"use client";
+
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { ApplyLookupDescriptionAlert } from "@/components/etl/dialogs/ApplyLookupDescriptionAlert";
 import { EditLookupDescriptionDialog } from "@/components/etl/dialogs/EditLookupDescriptionDialog";

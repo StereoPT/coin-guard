@@ -18,7 +18,7 @@ const LookupCategoriesPage = async () => {
       <div className="flex flex-1 flex-col h-full">
         <PageHeader
           actions={<AddLookupCategoryDialog trigger />}
-          description="Enhance you data with categories"
+          description="Enhance your data with categories"
           title="Lookup Categories"
         />
         <div className="h-full py-6">

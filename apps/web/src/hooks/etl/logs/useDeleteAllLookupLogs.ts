@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteAllLookupLogs = () => {
   const queryClient = getQueryClient();
-  const toastID = "delete-all-lookup-logs";
+  const toastId = "delete-all-lookup-logs";
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting all logs...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return DeleteAllLookupLogs();
@@ -20,7 +20,7 @@ export const useDeleteAllLookupLogs = () => {
     onSuccess: () => {
       toast.success("All logs deleted", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       queryClient.invalidateQueries({ queryKey: KEYS.lookupLogs });
@@ -28,7 +28,7 @@ export const useDeleteAllLookupLogs = () => {
     onError: ({ message }) => {
       toast.error("Failed to delete all logs", {
         description: message ?? "Please try again later",
-        id: toastID,
+        id: toastId,
       });
     },
   });
