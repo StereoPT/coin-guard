@@ -103,20 +103,11 @@ export const TransactionDetails = ({
               </div>
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Category</span>
-                <Badge variant="outline">
-                  {transaction.category?.name || "N/A"}
+                <Badge variant={transaction.category ? "outline" : "secondary"}>
+                  {transaction.category?.name ?? "Uncategorized"}
                 </Badge>
               </div>
             </div>
-            {/* <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
-                <Banknote className="size-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-muted-foreground">Balance After</span>
-                {formatCurrency(transaction.balance)}
-              </div>
-            </div> */}
           </CardContent>
         </div>
         <div className="border-l">

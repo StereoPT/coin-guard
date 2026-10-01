@@ -46,7 +46,11 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
     cell: ({ row }) => {
       const { category } = row.original;
 
-      return category && <Badge variant="outline">{category.name}</Badge>;
+      return (
+        <Badge variant={category ? "outline" : "secondary"}>
+          {category?.name ?? "Uncategorized"}
+        </Badge>
+      );
     },
   },
   {

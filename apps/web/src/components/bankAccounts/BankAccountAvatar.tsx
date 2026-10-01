@@ -18,9 +18,7 @@ export const BankAccountAvatar = ({
 
   return (
     <Avatar size={size}>
-      <AvatarFallback className="font-bold text-xs">
-        {fallback}
-      </AvatarFallback>
+      <AvatarFallback className="font-bold text-xs">{fallback}</AvatarFallback>
       {isDefault && <AvatarBadge />}
     </Avatar>
   );
