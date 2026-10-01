@@ -46,6 +46,11 @@ export const DashboardLastTransactions = ({
         </CardAction>
       </CardHeader>
       <CardContent className="flex-1 space-y-4">
+        {transactions.length === 0 && (
+          <p className="py-6 text-center text-sm text-muted-foreground">
+            No transactions yet.
+          </p>
+        )}
         {transactions.map((transaction) => {
           return (
             <Link
