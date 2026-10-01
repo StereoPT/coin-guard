@@ -25,13 +25,15 @@ export const DeleteProcessedTransaction = ({
   }, [setTransactions, transaction]);
 
   return (
-    <Button
-      aria-label={`Delete ${transaction.description}`}
-      onClick={handleDeleteProcessedTransaction}
-      size="icon"
-      variant="destructive"
-    >
-      <Trash2 />
-    </Button>
+    <div className="flex items-center justify-end opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
+      <Button
+        aria-label={`Delete ${transaction.description}`}
+        onClick={handleDeleteProcessedTransaction}
+        size="icon"
+        variant="destructive"
+      >
+        <Trash2 />
+      </Button>
+    </div>
   );
 };

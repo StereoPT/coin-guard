@@ -64,6 +64,7 @@ export function EditableDataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="group/row"
                   data-state={row.getIsSelected() && "selected"}
                   key={row.id}
                 >
