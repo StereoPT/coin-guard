@@ -47,6 +47,7 @@ export const LookupCategoryActions = ({
 
       <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
         <Button
+          aria-label={`Edit ${lookupCategory.description}`}
           onClick={() => setShowEditDialog(true)}
           size="icon"
           variant="ghost"
@@ -54,6 +55,7 @@ export const LookupCategoryActions = ({
           <Edit />
         </Button>
         <Button
+          aria-label={`Delete ${lookupCategory.description}`}
           onClick={() => setShowDeleteAlert(true)}
           size="icon"
           variant="destructive"

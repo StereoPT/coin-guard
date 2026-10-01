@@ -58,6 +58,7 @@ export const LookupDescriptionActions = ({
 
       <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
         <Button
+          aria-label={`Apply ${lookupDescription.description}`}
           onClick={() => setShowApplyAlert(true)}
           size="icon"
           variant="ghost"
@@ -65,6 +66,7 @@ export const LookupDescriptionActions = ({
           <RefreshCw />
         </Button>
         <Button
+          aria-label={`Edit ${lookupDescription.description}`}
           onClick={() => setShowEditDialog(true)}
           size="icon"
           variant="ghost"
@@ -72,6 +74,7 @@ export const LookupDescriptionActions = ({
           <Edit />
         </Button>
         <Button
+          aria-label={`Delete ${lookupDescription.description}`}
           onClick={() => setShowDeleteAlert(true)}
           size="icon"
           variant="destructive"

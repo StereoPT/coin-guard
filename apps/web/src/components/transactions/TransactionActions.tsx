@@ -45,6 +45,7 @@ export const TransactionActions = ({
 
       <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
         <Button
+          aria-label={`Edit ${transaction.description}`}
           onClick={() => setShowEditDialog(true)}
           size="icon"
           variant="ghost"
@@ -52,6 +53,7 @@ export const TransactionActions = ({
           <Edit />
         </Button>
         <Button
+          aria-label={`Delete ${transaction.description}`}
           onClick={() => setShowDeleteAlert(true)}
           size="icon"
           variant="destructive"

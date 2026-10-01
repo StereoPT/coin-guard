@@ -26,6 +26,7 @@ export const DeleteProcessedTransaction = ({
 
   return (
     <Button
+      aria-label={`Delete ${transaction.description}`}
       onClick={handleDeleteProcessedTransaction}
       size="icon"
       variant="destructive"

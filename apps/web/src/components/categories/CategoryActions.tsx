@@ -45,6 +45,7 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
 
       <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
         <Button
+          aria-label={`Edit ${category.name}`}
           onClick={() => setShowEditDialog(true)}
           size="icon"
           variant="ghost"
@@ -52,6 +53,7 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
           <Edit />
         </Button>
         <Button
+          aria-label={`Delete ${category.name}`}
           onClick={() => setShowDeleteAlert(true)}
           size="icon"
           variant="destructive"
