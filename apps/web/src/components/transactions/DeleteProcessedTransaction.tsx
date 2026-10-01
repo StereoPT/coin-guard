@@ -19,7 +19,7 @@ export const DeleteProcessedTransaction = ({
   const handleDeleteProcessedTransaction = useCallback(() => {
     setTransactions((prevTransactions) => {
       return prevTransactions.filter(
-        (transactionItem) => transactionItem !== transaction,
+        (transactionItem) => transactionItem.id !== transaction.id,
       );
     });
   }, [setTransactions, transaction]);

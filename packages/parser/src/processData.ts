@@ -1,5 +1,6 @@
 import { TransactionType } from "@coin-guard/db";
 import { format, isValid, parse } from "date-fns";
+import crypto from "node:crypto";
 import type { ProcessedTransaction, RawTransactionData } from "./types";
 
 const parseNumbers = (value: string) => {
@@ -56,6 +57,7 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
     if (!date) return null;
 
     return {
+      id: crypto.randomUUID(),
       date,
       description,
       amount,

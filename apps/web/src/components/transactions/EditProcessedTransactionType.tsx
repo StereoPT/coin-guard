@@ -34,7 +34,7 @@ export const EditProcessedTransactionType = ({
       if (!type) return;
 
       setTransactions((prev) =>
-        prev.map((t) => (t === transaction ? { ...t, type } : t)),
+        prev.map((t) => (t.id === transaction.id ? { ...t, type } : t)),
       );
     },
     [setTransactions, transaction],

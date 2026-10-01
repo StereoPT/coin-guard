@@ -126,6 +126,7 @@ export const ImportTransactions = () => {
       <EditableDataTable
         columns={editableTransactionColumns}
         data={transactions ?? []}
+        getRowId={(transaction) => transaction.id}
       />
 
       <div className="flex justify-end gap-2">

@@ -20,7 +20,7 @@ export const EditProcessedTransactionCategory = ({
   const handleEditProcessedTransactionCategory = useCallback(
     (categoryId: string | undefined) => {
       setTransactions((prev) =>
-        prev.map((t) => (t === transaction ? { ...t, categoryId } : t)),
+        prev.map((t) => (t.id === transaction.id ? { ...t, categoryId } : t)),
       );
     },
     [setTransactions, transaction],
