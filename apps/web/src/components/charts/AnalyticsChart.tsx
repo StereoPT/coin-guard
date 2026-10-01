@@ -1,5 +1,6 @@
 "use client";
 
+import { CurrencyTooltipContent } from "@/components/charts/CurrencyTooltipContent";
 import {
   getAnalyticsGranularity,
   getDaysInRange,
@@ -15,13 +16,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  type ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
+  type ChartConfig,
 } from "@coin-guard/ui";
-import { format } from "date-fns";
-import { useMemo } from "react";
 import {
   Bar,
   CartesianGrid,
@@ -29,6 +27,8 @@ import {
   Line,
   XAxis,
 } from "@coin-guard/ui/charts";
+import { format } from "date-fns";
+import { useMemo } from "react";
 
 const chartConfig = {
   amount: {
@@ -43,20 +43,28 @@ const chartConfig = {
 
 const GRANULARITY_CONFIG: Record<
   AnalyticsGranularity,
-  { dateFormat: string; title: string; description: string }
+  {
+    dateFormat: string;
+    tooltipDateFormat: string;
+    title: string;
+    description: string;
+  }
 > = {
   day: {
     dateFormat: "yyyy-MM-dd",
+    tooltipDateFormat: "PPP",
     title: "Expenses per day",
     description: "Breakdown of daily expenses for the selected period",
   },
   month: {
     dateFormat: "yyyy-MM",
+    tooltipDateFormat: "MMMM yyyy",
     title: "Expenses per month",
     description: "Breakdown of monthly expenses for the selected period",
   },
   year: {
     dateFormat: "yyyy",
+    tooltipDateFormat: "yyyy",
     title: "Expenses per year",
     description: "Breakdown of yearly expenses for the selected period",
   },
@@ -72,7 +80,8 @@ export const AnalyticsChart = ({
   range,
 }: AnalyticsChartProps) => {
   const granularity = useMemo(() => getAnalyticsGranularity(range), [range]);
-  const { dateFormat, title, description } = GRANULARITY_CONFIG[granularity];
+  const { dateFormat, tooltipDateFormat, title, description } =
+    GRANULARITY_CONFIG[granularity];
 
   const transactionData = useMemo(() => {
     const transactionsByBucket = transactions.reduce<Record<string, number>>(
@@ -136,7 +145,14 @@ export const AnalyticsChart = ({
               tickMargin={8}
             />
             <ChartTooltip
-              content={<ChartTooltipContent indicator="dot" />}
+              content={
+                <CurrencyTooltipContent
+                  indicator="dot"
+                  labelFormatter={(value) =>
+                    format(String(value), tooltipDateFormat)
+                  }
+                />
+              }
               cursor={false}
             />
             <Bar

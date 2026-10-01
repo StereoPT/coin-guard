@@ -16,13 +16,11 @@ const LookupCategoriesPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader
-            description="Enhance you data with categories"
-            title="Lookup Categories"
-          />
-          <AddLookupCategoryDialog trigger />
-        </div>
+        <PageHeader
+          actions={<AddLookupCategoryDialog trigger />}
+          description="Enhance you data with categories"
+          title="Lookup Categories"
+        />
         <div className="h-full py-6">
           <UserLookupCategories />
         </div>

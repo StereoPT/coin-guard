@@ -15,9 +15,7 @@ const TransactionsImportPage = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ImportTransactionsProvider>
         <div className="flex flex-1 flex-col h-full">
-          <div className="flex justify-between">
-            <PageHeader goBack title="Import Transactions" />
-          </div>
+          <PageHeader goBack title="Import Transactions" />
 
           <div className="h-full py-6">
             <ImportTransactions />

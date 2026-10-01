@@ -14,13 +14,11 @@ const TransactionsPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader
-            description="Transactions overview"
-            title="Transactions"
-          />
-          <AddTransaction />
-        </div>
+        <PageHeader
+          actions={<AddTransaction />}
+          description="Transactions overview"
+          title="Transactions"
+        />
 
         <div className="h-full py-6">
           <Transactions />

@@ -1,7 +1,7 @@
 "use client";
 
 import { CategoryChartDialog } from "@/components/charts/CategoryChartDialog";
-import { formatCurrency } from "@/lib/formatter";
+import { CurrencyTooltipContent } from "@/components/charts/CurrencyTooltipContent";
 import type { CategoryStats } from "@/types/categories";
 import {
   Button,
@@ -14,10 +14,7 @@ import {
   ChartContainer,
   ChartStyle,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@coin-guard/ui";
-import { Eye } from "@coin-guard/ui/icons";
-import { useMemo, useState } from "react";
 import {
   Cell,
   Pie,
@@ -25,6 +22,8 @@ import {
   type PieSectorDataItem,
   Sector,
 } from "@coin-guard/ui/charts";
+import { Eye } from "@coin-guard/ui/icons";
+import { useMemo, useState } from "react";
 
 type CategoryPieChartProps = {
   categoryStats: CategoryStats[];
@@ -104,23 +103,7 @@ export const CategoryPieChart = ({ categoryStats }: CategoryPieChartProps) => {
               >
                 <PieChart>
                   <ChartTooltip
-                    content={
-                      <ChartTooltipContent
-                        formatter={(value, _name, item) => {
-                          return (
-                            <div className="flex flex-col gap-1" key="tooltip">
-                              <span className="text-foreground text-xs font-bold">
-                                {item.payload.categoryName}
-                              </span>
-                              <span className="text-foreground font-medium">
-                                {formatCurrency(Number(value))}
-                              </span>
-                            </div>
-                          );
-                        }}
-                        hideLabel
-                      />
-                    }
+                    content={<CurrencyTooltipContent hideLabel />}
                     cursor={false}
                   />
                   <Pie
@@ -140,7 +123,7 @@ export const CategoryPieChart = ({ categoryStats }: CategoryPieChartProps) => {
                     data={pieData}
                     dataKey="totalAmount"
                     innerRadius={75}
-                    nameKey="categoryId"
+                    nameKey="categoryName"
                     strokeWidth={5}
                   >
                     {pieData.map((entry) => (

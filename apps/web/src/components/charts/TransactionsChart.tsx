@@ -1,3 +1,4 @@
+import { CurrencyTooltipContent } from "@/components/charts/CurrencyTooltipContent";
 import type { DateRange } from "@/lib/date";
 import { generateMonthRange } from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
@@ -5,7 +6,6 @@ import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@coin-guard/ui";
 import {
   Bar,
@@ -91,12 +91,17 @@ export const TransactionsChart = ({
         <XAxis
           axisLine={false}
           dataKey="date"
-          tickFormatter={(value) => format(value, "yyyy-MM")}
+          tickFormatter={(value) => format(value, "MMM yyyy")}
           tickLine={false}
           tickMargin={8}
         />
         <ChartTooltip
-          content={<ChartTooltipContent indicator="dot" />}
+          content={
+            <CurrencyTooltipContent
+              indicator="dot"
+              labelFormatter={(value) => format(String(value), "MMMM yyyy")}
+            />
+          }
           cursor={false}
         />
         <Bar

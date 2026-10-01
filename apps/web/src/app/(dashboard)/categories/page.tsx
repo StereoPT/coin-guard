@@ -14,10 +14,11 @@ const CategoriesPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader description="Categories overview" title="Categories" />
-          <AddCategoryDialog />
-        </div>
+        <PageHeader
+          actions={<AddCategoryDialog />}
+          description="Categories overview"
+          title="Categories"
+        />
 
         <div className="h-full py-6">
           <Categories />
