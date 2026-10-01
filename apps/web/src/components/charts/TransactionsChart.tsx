@@ -2,11 +2,7 @@ import { CurrencyTooltipContent } from "@/components/charts/CurrencyTooltipConte
 import type { DateRange } from "@/lib/date";
 import { generateMonthRange } from "@/lib/date";
 import type { Transaction } from "@coin-guard/db";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-} from "@coin-guard/ui";
+import { type ChartConfig, ChartContainer, ChartTooltip } from "@coin-guard/ui";
 import {
   Bar,
   CartesianGrid,
