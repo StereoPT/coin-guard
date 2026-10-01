@@ -24,7 +24,8 @@ export const CategoryActions = ({ category }: CategoryActionsProps) => {
           description={
             <span>
               This will permanently delete <b>{category.name}</b>. This action
-              cannot be undone.
+              cannot be undone. Transactions using this category will become
+              uncategorized.
             </span>
           }
           isPending={isPending}

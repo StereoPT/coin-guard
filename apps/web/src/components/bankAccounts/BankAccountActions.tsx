@@ -26,6 +26,8 @@ export const BankAccountActions = ({
             <span>
               This will permanently delete <b>{bankAccount.name}</b> with the
               IBAN <b>{bankAccount.iban}</b>. This action cannot be undone.
+              Accounts with existing transactions can't be deleted — move or
+              delete those transactions first.
             </span>
           }
           isPending={isPending}
