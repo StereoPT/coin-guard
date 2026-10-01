@@ -1,5 +1,6 @@
 "use client";
 
+import { formatCurrency } from "@/lib/formatter";
 import { CountType } from "@/types/dashboard";
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
@@ -16,8 +17,8 @@ const MoneyCountUp = ({ value }: Pick<CountUpWrapperProps, "value">) => {
       decimals={2}
       duration={1}
       end={value}
+      formattingFn={formatCurrency}
       preserveValue
-      suffix="€"
     />
   );
 };
