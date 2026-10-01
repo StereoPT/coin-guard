@@ -13,7 +13,11 @@ export const addBankAccountSchema = z.object({
   name: z.string().trim().nonempty(),
   alias: z.string().trim().optional(),
   type: z.enum(BankAccountType),
-  iban: z.string().trim().nonempty(),
+  iban: z
+    .string()
+    .trim()
+    .transform((value) => value.replace(/\s+/g, "").toUpperCase())
+    .pipe(z.string().regex(/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/, "Invalid IBAN")),
   isDefault: z.boolean(),
 });
 

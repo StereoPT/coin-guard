@@ -1,8 +1,8 @@
 "use client";
 
 import { EditCategoryDialog } from "@/components/categories/dialogs/EditCategoryDialog";
-import { getBudgetScaleFactor } from "@/lib/date";
 import type { DateRange } from "@/lib/date";
+import { getBudgetScaleFactor } from "@/lib/date";
 import { formatCurrency } from "@/lib/formatter";
 import type { Transaction } from "@coin-guard/db";
 import { TransactionType } from "@coin-guard/db";
@@ -43,7 +43,7 @@ export const BudgetDetails = ({
   const scaledBudget =
     budgetAmount !== null ? budgetAmount * getBudgetScaleFactor(range) : null;
   const amount = scaledBudget ?? 0;
-  const percentage = amount > 0 ? (spent / amount) * 100 : 100;
+  const percentage = amount > 0 ? (spent / amount) * 100 : spent > 0 ? 100 : 0;
 
   return (
     <Card>
