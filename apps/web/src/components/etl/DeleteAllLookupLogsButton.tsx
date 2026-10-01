@@ -2,12 +2,14 @@
 
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { useDeleteAllLookupLogs } from "@/hooks/etl/logs/useDeleteAllLookupLogs";
+import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
 import { Button } from "@coin-guard/ui";
 import { Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 export const DeleteAllLookupLogsButton = () => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const { data: lookupLogs } = useGetLookupLogs();
   const { isPending, mutateAsync } = useDeleteAllLookupLogs();
 
   return (
@@ -23,7 +25,11 @@ export const DeleteAllLookupLogsButton = () => {
         />
       )}
 
-      <Button onClick={() => setShowDeleteDialog(true)} variant="destructive">
+      <Button
+        disabled={!lookupLogs?.length}
+        onClick={() => setShowDeleteDialog(true)}
+        variant="destructive"
+      >
         <Trash2 /> Delete Logs
       </Button>
     </>
