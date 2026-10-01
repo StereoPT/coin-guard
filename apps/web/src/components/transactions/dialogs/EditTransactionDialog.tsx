@@ -91,7 +91,7 @@ export const EditTransactionDialog = ({
           Edit Transaction
         </DialogTrigger>
       )}
-      <DialogContent className="max-w-2xl!">
+      <DialogContent className="max-w-2xl!" finalFocus={false}>
         <DialogHeader>
           <DialogTitle>Edit Transaction</DialogTitle>
           <DialogDescription>Edit your transaction</DialogDescription>

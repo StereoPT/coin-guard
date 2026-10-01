@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteLookupDescription = (lookupDescriptionId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-lookup-description-${lookupDescriptionId}`;
+  const toastId = `delete-lookup-description-${lookupDescriptionId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting lookup description...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return DeleteLookupDescription(lookupDescriptionId);
@@ -20,7 +20,7 @@ export const useDeleteLookupDescription = (lookupDescriptionId: string) => {
     onSuccess: () => {
       toast.success("Lookup description deleted", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       queryClient.invalidateQueries({ queryKey: KEYS.lookupDescriptions });
@@ -28,7 +28,7 @@ export const useDeleteLookupDescription = (lookupDescriptionId: string) => {
     onError: () => {
       toast.error("Failed to delete lookup description", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
     },
   });

@@ -17,10 +17,11 @@ const AnalyticsPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex items-center justify-between">
-          <PageHeader description="Your analytics overview" title="Analytics" />
-          <AnalyticsDateSelection />
-        </div>
+        <PageHeader
+          actions={<AnalyticsDateSelection />}
+          description="Your analytics overview"
+          title="Analytics"
+        />
         <div className="h-full py-6">
           <Analytics />
         </div>

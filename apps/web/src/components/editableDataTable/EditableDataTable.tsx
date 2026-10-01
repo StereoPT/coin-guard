@@ -19,16 +19,19 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  getRowId?: (row: TData) => string;
 }
 
 export function EditableDataTable<TData, TValue>({
   columns,
   data,
+  getRowId,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getRowId,
   });
 
   return (
@@ -61,6 +64,7 @@ export function EditableDataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="group/row"
                   data-state={row.getIsSelected() && "selected"}
                   key={row.id}
                 >

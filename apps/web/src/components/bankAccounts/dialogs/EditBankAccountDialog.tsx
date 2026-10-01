@@ -61,7 +61,7 @@ export const EditBankAccountDialog = ({
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent className="max-w-lg!">
+      <DialogContent className="max-w-lg!" finalFocus={false}>
         <DialogHeader>
           <DialogTitle>Edit Bank Account</DialogTitle>
           <DialogDescription>Edit your bank account details</DialogDescription>

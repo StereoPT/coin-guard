@@ -19,18 +19,21 @@ export const DeleteProcessedTransaction = ({
   const handleDeleteProcessedTransaction = useCallback(() => {
     setTransactions((prevTransactions) => {
       return prevTransactions.filter(
-        (transactionItem) => transactionItem !== transaction,
+        (transactionItem) => transactionItem.id !== transaction.id,
       );
     });
   }, [setTransactions, transaction]);
 
   return (
-    <Button
-      onClick={handleDeleteProcessedTransaction}
-      size="icon"
-      variant="destructive"
-    >
-      <Trash2 />
-    </Button>
+    <div className="flex items-center justify-end opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
+      <Button
+        aria-label={`Delete ${transaction.description}`}
+        onClick={handleDeleteProcessedTransaction}
+        size="icon"
+        variant="destructive"
+      >
+        <Trash2 />
+      </Button>
+    </div>
   );
 };

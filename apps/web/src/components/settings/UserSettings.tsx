@@ -8,17 +8,19 @@ export const UserSettings = () => {
   const { mutateAsync, isPending } = useExportDatabase();
 
   const handleExport = async () => {
-    const result = await mutateAsync();
+    try {
+      const { downloadToken, filename } = await mutateAsync();
 
-    if (result.success && "downloadToken" in result && "filename" in result) {
       const link = document.createElement("a");
 
-      link.href = `/api/export-database?token=${result.downloadToken}`;
-      link.download = result.filename;
+      link.href = `/api/export-database?token=${downloadToken}`;
+      link.download = filename;
 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    } catch {
+      // Error toast is already shown by useExportDatabase's onError.
     }
   };
 

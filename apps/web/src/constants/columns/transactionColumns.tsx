@@ -1,6 +1,6 @@
 "use client";
 
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { TransactionActions } from "@/components/transactions/TransactionActions";
 import { ROUTES } from "@/constants/routes";
@@ -26,7 +26,7 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
       return (
         <Link href={ROUTES.transaction(id)}>
           <div className="flex items-center gap-4">
-            <BankAccountAvatar alias={account.alias ?? ""} />
+            <BankAccountAvatar alias={account.alias} name={account.name} />
             <div className="flex flex-col">
               <div className="font-medium">{description}</div>
               <div className="text-xs text-muted-foreground">
@@ -42,26 +42,34 @@ export const transactionColumns: ColumnDef<TransactionWithRelations>[] = [
   {
     accessorKey: "category.name",
     header: "Category",
-    size: 110,
+    size: 120,
     cell: ({ row }) => {
       const { category } = row.original;
 
-      return category && <Badge variant="outline">{category.name}</Badge>;
+      return (
+        <Badge variant={category ? "outline" : "secondary"}>
+          {category?.name ?? "Uncategorized"}
+        </Badge>
+      );
     },
   },
   {
     accessorKey: "amount",
-    header: "Amount",
-    size: 90,
+    header: () => <div className="text-right">Amount</div>,
+    size: 80,
     cell: ({ row }) => {
       const { type, amount } = row.original;
 
-      return <AmountBadge amount={amount} type={type} />;
+      return (
+        <div className="flex justify-end">
+          <AmountText amount={amount} type={type} />
+        </div>
+      );
     },
   },
   {
     accessorKey: "actions",
-    header: "Actions",
+    header: () => null,
     size: 50,
     cell: ({ row }) => {
       const transaction = row.original;

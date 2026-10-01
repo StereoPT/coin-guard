@@ -88,7 +88,7 @@ export const EditCategoryDialog = ({
           {triggerLabel}
         </DialogTrigger>
       )}
-      <DialogContent>
+      <DialogContent finalFocus={false}>
         <DialogHeader>
           <DialogTitle>Edit Category</DialogTitle>
           <DialogDescription>Edit your category details</DialogDescription>

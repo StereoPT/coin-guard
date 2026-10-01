@@ -8,6 +8,9 @@ export const ImportTransaction = async (
   accountId: string,
 ) => {
   await prisma.transaction.createMany({
-    data: transactions.map((transaction) => ({ ...transaction, accountId })),
+    data: transactions.map(({ id: _id, ...transaction }) => ({
+      ...transaction,
+      accountId,
+    })),
   });
 };

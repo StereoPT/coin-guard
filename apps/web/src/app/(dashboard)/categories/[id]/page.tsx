@@ -30,10 +30,11 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader goBack title="Category Details" />
-          <EditCategoryDialog categoryId={categoryId} trigger />
-        </div>
+        <PageHeader
+          actions={<EditCategoryDialog categoryId={categoryId} trigger />}
+          goBack
+          title="Category Details"
+        />
         <div className="h-full py-6">
           <CategoryDetails categoryId={categoryId} />
         </div>

@@ -72,9 +72,13 @@ export const ImportTransactions = () => {
   const handleDrop = async (files: File[]) => {
     setFiles(files);
 
-    if (files[0]) {
+    if (!files[0]) return;
+
+    try {
       const fileTransactions = await mutateParse(files[0]);
       setTransactions(fileTransactions);
+    } catch {
+      setFiles(undefined);
     }
   };
 
@@ -122,6 +126,7 @@ export const ImportTransactions = () => {
       <EditableDataTable
         columns={editableTransactionColumns}
         data={transactions ?? []}
+        getRowId={(transaction) => transaction.id}
       />
 
       <div className="flex justify-end gap-2">

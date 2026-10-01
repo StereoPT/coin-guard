@@ -60,7 +60,7 @@ export const EditLookupCategoryDialog = ({
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent>
+      <DialogContent finalFocus={false}>
         <DialogHeader>
           <DialogTitle>Edit Lookup Category</DialogTitle>
           <DialogDescription>Edit your lookup category</DialogDescription>

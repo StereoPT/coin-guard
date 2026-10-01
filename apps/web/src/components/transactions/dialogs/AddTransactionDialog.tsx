@@ -53,7 +53,7 @@ export const AddTransactionDialog = ({
   );
 
   return (
-    <Dialog onOpenChange={(prevOpen) => setOpen(prevOpen)} open={open}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent className="max-w-2xl!">
         <DialogHeader>
           <DialogTitle>Create Transaction</DialogTitle>

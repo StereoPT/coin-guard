@@ -1,18 +1,12 @@
+"use client";
+
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { ApplyLookupDescriptionAlert } from "@/components/etl/dialogs/ApplyLookupDescriptionAlert";
 import { EditLookupDescriptionDialog } from "@/components/etl/dialogs/EditLookupDescriptionDialog";
 import { useDeleteLookupDescription } from "@/hooks/etl/descriptions/useDeleteLookupDescription";
 import type { LookupDescription } from "@coin-guard/db";
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@coin-guard/ui";
-import { Edit, MoreHorizontal, RefreshCw, Trash2 } from "@coin-guard/ui/icons";
+import { Button } from "@coin-guard/ui";
+import { Edit, RefreshCw, Trash2 } from "@coin-guard/ui/icons";
 import { useState } from "react";
 
 type LookupDescriptionActionsProps = {
@@ -64,31 +58,32 @@ export const LookupDescriptionActions = ({
         />
       )}
 
-      <DropdownMenu>
-        <DropdownMenuTrigger render={<Button size="icon" variant="ghost" />}>
-          <MoreHorizontal />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setShowApplyAlert(true)}>
-              <RefreshCw />
-              Apply
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-              <Edit />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setShowDeleteAlert(true)}
-              variant="destructive"
-            >
-              <Trash2 />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center justify-end gap-2 opacity-0 transition-opacity focus-within:opacity-100 group-hover/row:opacity-100">
+        <Button
+          aria-label={`Apply ${lookupDescription.description}`}
+          onClick={() => setShowApplyAlert(true)}
+          size="icon"
+          variant="ghost"
+        >
+          <RefreshCw />
+        </Button>
+        <Button
+          aria-label={`Edit ${lookupDescription.description}`}
+          onClick={() => setShowEditDialog(true)}
+          size="icon"
+          variant="ghost"
+        >
+          <Edit />
+        </Button>
+        <Button
+          aria-label={`Delete ${lookupDescription.description}`}
+          onClick={() => setShowDeleteAlert(true)}
+          size="icon"
+          variant="destructive"
+        >
+          <Trash2 />
+        </Button>
+      </div>
     </>
   );
 };

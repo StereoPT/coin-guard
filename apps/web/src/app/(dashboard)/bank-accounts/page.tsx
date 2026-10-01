@@ -14,13 +14,11 @@ const BankAccountsPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader
-            description="Bank Accounts overview"
-            title="Bank Accounts"
-          />
-          <AddBankAccountDialog />
-        </div>
+        <PageHeader
+          actions={<AddBankAccountDialog />}
+          description="Bank Accounts overview"
+          title="Bank Accounts"
+        />
 
         <div className="h-full py-6">
           <BankAccounts />

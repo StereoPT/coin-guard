@@ -15,7 +15,7 @@ type EmptyStateProps = {
   icon: LucideIcon;
   title: string;
   description: string;
-  action: ReactNode;
+  action?: ReactNode;
 };
 
 export const EmptyState = ({
@@ -33,7 +33,7 @@ export const EmptyState = ({
         <EmptyTitle>{title}</EmptyTitle>
         <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>{action}</EmptyContent>
+      {action && <EmptyContent>{action}</EmptyContent>}
     </Empty>
   );
 };

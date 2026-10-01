@@ -1,4 +1,4 @@
-import { AmountBadge } from "@/components/AmountBadge";
+import { AmountText } from "@/components/AmountText";
 import { BankAccountAvatar } from "@/components/bankAccounts/BankAccountAvatar";
 import { ROUTES } from "@/constants/routes";
 import type { Prisma } from "@coin-guard/db";
@@ -46,6 +46,11 @@ export const DashboardLastTransactions = ({
         </CardAction>
       </CardHeader>
       <CardContent className="flex-1 space-y-4">
+        {transactions.length === 0 && (
+          <p className="py-6 text-center text-sm text-muted-foreground">
+            No transactions yet.
+          </p>
+        )}
         {transactions.map((transaction) => {
           return (
             <Link
@@ -55,7 +60,10 @@ export const DashboardLastTransactions = ({
             >
               <div className="flex flex-1 items-center flex-wrap justify-between gap-1">
                 <div className="flex items-center gap-4">
-                  <BankAccountAvatar alias={transaction.account.alias ?? ""} />
+                  <BankAccountAvatar
+                    alias={transaction.account.alias}
+                    name={transaction.account.name}
+                  />
                   <div className="flex items-center space-x-3">
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium truncate">
@@ -67,7 +75,7 @@ export const DashboardLastTransactions = ({
                     </div>
                   </div>
                 </div>
-                <AmountBadge
+                <AmountText
                   amount={transaction.amount}
                   type={transaction.type}
                 />

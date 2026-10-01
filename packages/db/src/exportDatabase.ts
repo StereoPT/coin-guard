@@ -38,7 +38,6 @@ export const exportDatabase = async () => {
   );
 
   return {
-    success: true,
     downloadToken,
     filename,
   };

@@ -12,6 +12,7 @@ export type RawTransactionData = {
 };
 
 export type ProcessedTransaction = {
+  id: string;
   date: string;
   description: string;
   amount: number;

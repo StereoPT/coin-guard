@@ -37,10 +37,13 @@ const TransactionDetailsPage = async ({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-1 flex-col h-full">
-        <div className="flex justify-between">
-          <PageHeader goBack title="Transaction Details" />
-          <EditTransactionDialog transactionId={transactionId} trigger />
-        </div>
+        <PageHeader
+          actions={
+            <EditTransactionDialog transactionId={transactionId} trigger />
+          }
+          goBack
+          title="Transaction Details"
+        />
 
         <div className="h-full py-6">
           <TransactionDetails transactionId={transactionId} />

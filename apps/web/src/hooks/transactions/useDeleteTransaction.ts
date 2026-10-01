@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteTransaction = (transactionId: string) => {
   const queryClient = getQueryClient();
-  const toastID = `delete-transaction-${transactionId}`;
+  const toastId = `delete-transaction-${transactionId}`;
 
   return useMutation({
     mutationFn: () => {
       toast.loading("Deleting transaction...", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       return DeleteTransaction(transactionId);
@@ -20,7 +20,7 @@ export const useDeleteTransaction = (transactionId: string) => {
     onSuccess: () => {
       toast.success("Transaction deleted", {
         description: "",
-        id: toastID,
+        id: toastId,
       });
 
       queryClient.invalidateQueries({ queryKey: KEYS.transactions });
@@ -28,7 +28,7 @@ export const useDeleteTransaction = (transactionId: string) => {
     onError: ({ message }) => {
       toast.error("Failed to delete transaction", {
         description: message ?? "Please try again later",
-        id: toastID,
+        id: toastId,
       });
     },
   });

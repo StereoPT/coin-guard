@@ -69,7 +69,7 @@ export const TransactionDetails = ({
               {typeIcons[transaction.type]}
               {transaction.type.toLowerCase()}
             </CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
+            <CardTitle className="text-2xl font-semibold">
               <CountUpWrapper
                 type={CountType.MONEY}
                 value={transaction.amount}
@@ -79,14 +79,17 @@ export const TransactionDetails = ({
           </CardHeader>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
             <div className="flex flex-row gap-4 items-center">
-              <BankAccountAvatar alias={transaction.account.alias ?? ""} />
+              <BankAccountAvatar
+                alias={transaction.account.alias}
+                name={transaction.account.name}
+              />
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Bank</span>
                 {transaction.account.name}
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+              <div className="rounded bg-muted text-muted-foreground p-2">
                 <Calendar className="size-4" />
               </div>
               <div className="flex flex-col">
@@ -95,25 +98,16 @@ export const TransactionDetails = ({
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+              <div className="rounded bg-muted text-muted-foreground p-2">
                 <Tag className="size-4" />
               </div>
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Category</span>
-                <Badge variant="outline">
-                  {transaction.category?.name || "N/A"}
+                <Badge variant={transaction.category ? "outline" : "secondary"}>
+                  {transaction.category?.name ?? "Uncategorized"}
                 </Badge>
               </div>
             </div>
-            {/* <div className="flex flex-row gap-4 items-center">
-              <div className="rounded bg-neutral-200 text-neutral-500 p-2">
-                <Banknote className="size-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-muted-foreground">Balance After</span>
-                {formatCurrency(transaction.balance)}
-              </div>
-            </div> */}
           </CardContent>
         </div>
         <div className="border-l">
@@ -128,7 +122,7 @@ export const TransactionDetails = ({
               <p className="text-sm">{transaction.note}</p>
             ) : (
               <div className="flex flex-col w-full h-full items-center justify-center gap-2 py-4">
-                <div className="rounded bg-neutral-200 text-neutral-500 p-2">
+                <div className="rounded bg-muted text-muted-foreground p-2">
                   <FileText className="size-4" />
                 </div>
                 <div className="text-center text-sm">
