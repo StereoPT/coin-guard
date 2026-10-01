@@ -117,7 +117,6 @@ export const TransactionFormFields = ({
                         "pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground",
                       )}
-                      disabled={formType === FormType.EDIT}
                       id={`${formId}-date`}
                       variant="outline"
                     >
