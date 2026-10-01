@@ -79,7 +79,10 @@ export const TransactionDetails = ({
           </CardHeader>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 text-sm">
             <div className="flex flex-row gap-4 items-center">
-              <BankAccountAvatar alias={transaction.account.alias ?? ""} />
+              <BankAccountAvatar
+                alias={transaction.account.alias}
+                name={transaction.account.name}
+              />
               <div className="flex flex-col">
                 <span className="text-muted-foreground">Bank</span>
                 {transaction.account.name}
