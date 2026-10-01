@@ -25,10 +25,11 @@ export const CategoryChartDialog = ({
   onOpenChange,
   categoryStats,
 }: CategoryChartDialogProps) => {
-  const maxValue = Math.max(
-    ...categoryStats.map((stat) => stat.totalAmount),
-    ...categoryStats.map((stat) => stat.budgetAmount ?? 0),
-  );
+  const maxValue =
+    Math.max(
+      ...categoryStats.map((stat) => stat.totalAmount),
+      ...categoryStats.map((stat) => stat.budgetAmount ?? 0),
+    ) || 1;
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
@@ -40,6 +41,11 @@ export const CategoryChartDialog = ({
           </DialogDescription>
         </DialogHeader>
         <div className="max-h-[50vh] overflow-y-auto pr-3">
+          {categoryStats.length === 0 && (
+            <p className="py-6 text-center text-sm text-muted-foreground">
+              No expenses in this period.
+            </p>
+          )}
           {categoryStats.map((stat) => {
             const budgetPosition =
               stat.budgetAmount !== null
