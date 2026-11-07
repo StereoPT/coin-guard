@@ -1,6 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import fs from "node:fs";
 
+// Tokens are 32 random bytes, hex-encoded (see exportDatabase in @coin-guard/db)
+const TOKEN_PATTERN = /^[a-f0-9]{64}$/;
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -8,6 +11,10 @@ export async function GET(request: NextRequest) {
 
     if (!token) {
       return new NextResponse("Token required", { status: 400 });
+    }
+
+    if (!TOKEN_PATTERN.test(token)) {
+      return new NextResponse("Invalid token", { status: 400 });
     }
 
     const tokenPath = `/tmp/token_${token}.json`;
