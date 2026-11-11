@@ -3,10 +3,8 @@
 import { EmptyState } from "@/components/EmptyState";
 import { LoadingState } from "@/components/LoadingState";
 import { useGetLookupLogs } from "@/hooks/etl/logs/useGetLookupLogs";
-import { LoggingType } from "@coin-guard/db";
 import {
   Badge,
-  cn,
   Table,
   TableBody,
   TableCell,
@@ -55,13 +53,7 @@ export const UserLookupLogs = () => {
               <TableCell className="text-xs text-muted-foreground p-0.75">
                 {format(log.lastSeenAt, "PPP")}
               </TableCell>
-              <TableCell
-                className={cn(
-                  "uppercase text-xs font-bold p-0.75",
-                  log.type === LoggingType.ERROR && "text-destructive",
-                  log.type === LoggingType.INFO && "text-primary",
-                )}
-              >
+              <TableCell className="text-destructive uppercase text-xs font-bold p-0.75">
                 {log.type}
               </TableCell>
               <TableCell className="text-sm flex-1 p-0.75">

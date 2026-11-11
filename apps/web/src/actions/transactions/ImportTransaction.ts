@@ -2,11 +2,19 @@
 
 import { importTransactionsSchema } from "@/schemas/transactions";
 import type { ImportTransactionResult } from "@/types/transactions";
+import { LoggingType, LookupField, type Prisma } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 import type { ProcessedTransaction } from "@coin-guard/parser";
 
-// Returns a result instead of throwing: messages thrown from a server action
-// are masked in production builds, so they would never reach the import page.
+const buildMissLog = (
+  lookupField: LookupField,
+  description: string,
+): Prisma.LookupLoggingCreateManyInput => ({
+  type: LoggingType.ERROR,
+  lookupField,
+  description: `No match for '${description}'`,
+});
+
 export const ImportTransaction = async (
   transactions: ProcessedTransaction[],
   accountId: string,
@@ -38,12 +46,31 @@ export const ImportTransaction = async (
     };
   }
 
-  await prisma.transaction.createMany({
-    data: parsedTransactions.map((transaction) => ({
-      ...transaction,
-      accountId,
-    })),
-  });
+  const lookupLogs: Prisma.LookupLoggingCreateManyInput[] = [];
+
+  for (const transaction of transactions) {
+    if (transaction.descriptionMatched === false) {
+      lookupLogs.push(
+        buildMissLog(LookupField.DESCRIPTION, transaction.description),
+      );
+    }
+
+    if (transaction.categoryMatched === false) {
+      lookupLogs.push(
+        buildMissLog(LookupField.CATEGORY, transaction.description),
+      );
+    }
+  }
+
+  await prisma.$transaction([
+    prisma.transaction.createMany({
+      data: parsedTransactions.map((transaction) => ({
+        ...transaction,
+        accountId,
+      })),
+    }),
+    prisma.lookupLogging.createMany({ data: lookupLogs }),
+  ]);
 
   return { success: true };
 };

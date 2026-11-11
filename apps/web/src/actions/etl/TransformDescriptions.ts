@@ -1,6 +1,5 @@
 "use server";
 
-import { LoggingType, LookupField } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 import type { ProcessedTransaction } from "@coin-guard/parser";
 
@@ -35,18 +34,9 @@ export const TransformDescriptions = async (
     ({ transaction, newDescription }) => ({
       ...transaction,
       description: newDescription || transaction.description,
+      descriptionMatched: Boolean(newDescription),
     }),
   );
-
-  await prisma.lookupLogging.createMany({
-    data: matches.map(({ transaction, newDescription }) => ({
-      type: newDescription ? LoggingType.INFO : LoggingType.ERROR,
-      lookupField: LookupField.DESCRIPTION,
-      description: newDescription
-        ? `Matched '${transaction.description}' → '${newDescription}'`
-        : `No match for '${transaction.description}'`,
-    })),
-  });
 
   return enhancedTransactions;
 };

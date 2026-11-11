@@ -20,4 +20,7 @@ export type ProcessedTransaction = {
   type: TransactionType;
   categoryId?: string;
   accountId?: string;
+
+  descriptionMatched?: boolean;
+  categoryMatched?: boolean;
 };
