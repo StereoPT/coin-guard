@@ -35,7 +35,9 @@ model Transaction {
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
-  @@unique([id])
+  @@index([date])
+  @@index([accountId, date])
+  @@index([categoryId, date])
 }
 
 model Category {

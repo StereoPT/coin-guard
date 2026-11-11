@@ -21,7 +21,13 @@ export const useImportTransaction = () => {
         id: toastId,
       });
 
-      return ImportTransaction(transactions, accountId);
+      const result = await ImportTransaction(transactions, accountId);
+
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+
+      return result;
     },
     onSuccess: () => {
       toast.success("Transactions imported", {

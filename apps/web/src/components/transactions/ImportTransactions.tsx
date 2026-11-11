@@ -84,8 +84,10 @@ export const ImportTransactions = () => {
 
   const handleImport = async () => {
     if (transactions.length > 0 && accountId) {
-      await mutateImport({ accountId, transactions });
-      router.push(ROUTES.transactions);
+      try {
+        await mutateImport({ accountId, transactions });
+        router.push(ROUTES.transactions);
+      } catch {}
     }
   };
 

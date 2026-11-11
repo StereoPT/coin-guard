@@ -6,3 +6,7 @@ export type TransactionWithRelations = Prisma.TransactionGetPayload<{
 }>;
 
 export type TransactionValue = Record<TransactionType, number>;
+
+export type ImportTransactionResult =
+  | { success: true }
+  | { success: false; message: string };

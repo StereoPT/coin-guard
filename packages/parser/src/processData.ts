@@ -1,5 +1,5 @@
 import { TransactionType } from "@coin-guard/db";
-import { format, isValid, parse } from "date-fns";
+import { isValid, parse } from "date-fns";
 import crypto from "node:crypto";
 import type { ProcessedTransaction, RawTransactionData } from "./types";
 
@@ -10,6 +10,9 @@ const parseNumbers = (value: string) => {
   return Math.round(number * 100) / 100;
 };
 
+const toUTCMidnight = (date: Date) =>
+  new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+
 const parseDates = (dateString: string) => {
   if (!dateString || typeof dateString !== "string") return null;
 
@@ -18,7 +21,7 @@ const parseDates = (dateString: string) => {
 
     if (!isValid(parsedDate)) return null;
 
-    return format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'");
+    return toUTCMidnight(parsedDate);
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
     console.warn("Error parsing date:", dateString, error);

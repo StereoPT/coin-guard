@@ -1,6 +1,5 @@
 "use server";
 
-import { LoggingType, LookupField } from "@coin-guard/db";
 import { prisma } from "@coin-guard/db/server";
 import type { ProcessedTransaction } from "@coin-guard/parser";
 
@@ -40,23 +39,8 @@ export const TransformCategories = async (
     return {
       ...transaction,
       categoryId: category?.categoryId,
+      categoryMatched: category !== undefined,
     };
-  });
-
-  await prisma.lookupLogging.createMany({
-    data: enhancedTransactions.map((transaction) => {
-      const categoryName = descriptionToCategoryMap.get(
-        transaction.description,
-      )?.categoryName;
-
-      return {
-        type: transaction.categoryId ? LoggingType.INFO : LoggingType.ERROR,
-        lookupField: LookupField.CATEGORY,
-        description: transaction.categoryId
-          ? `Matched '${transaction.description}' → ${categoryName}`
-          : `No match for '${transaction.description}'`,
-      };
-    }),
   });
 
   return enhancedTransactions;
