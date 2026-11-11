@@ -21,7 +21,8 @@ export const exportDatabase = async () => {
     { maxBuffer: 1024 * 1024 * 1024 },
   );
 
-  fs.writeFileSync(filePath, dump);
+  // The dump contains the full database: keep it readable by the owner only
+  fs.writeFileSync(filePath, dump, { mode: 0o600 });
   const filename = `database_backup_${timestamp}.sql`;
 
   const downloadToken = crypto.randomBytes(32).toString("hex");
@@ -35,6 +36,7 @@ export const exportDatabase = async () => {
       contentType: "application/sql",
       timestamp: Date.now(),
     }),
+    { mode: 0o600 },
   );
 
   return {
