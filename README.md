@@ -47,6 +47,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#running-e2e-tests">Running E2E Tests</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -100,7 +101,8 @@ CoinGuard is a pnpm workspace managed by Turborepo:
 ```
 coin-guard/
 ├── apps/
-│   └── web/           # Next.js app (routes, pages, UI logic)
+│   ├── web/           # Next.js app (routes, pages, UI logic)
+│   └── e2e/           # Playwright end-to-end tests (local only)
 ├── packages/
 │   ├── db/            # Prisma schema, migrations, and DB client
 │   ├── ui/            # Shared component library (Base UI + shadcn)
@@ -163,6 +165,36 @@ Make sure you have the following installed on your system:
    pnpm dev
    ```
 8. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
+
+### Running E2E Tests
+
+End-to-end tests use [Playwright](https://playwright.dev) and live in `apps/e2e`. They are **local only**: there is no CI job for them, and they refuse to run when `CI` is set.
+
+They never touch your development data. The tests run against their own `coin_guard_e2e` database in the same Postgres container, and a guard aborts the run unless the database host is local (`localhost` / `127.0.0.1`) and the database name ends in `_e2e`. Each test starts from an empty database.
+
+1. Make sure the local PostgreSQL database is running
+   ```sh
+   docker compose up -d
+   ```
+2. Create the e2e env file and fill in the same user and password as your root `.env.local`
+   ```sh
+   cp apps/e2e/.env.example apps/e2e/.env.e2e
+   ```
+3. Install the Playwright browser (once)
+   ```sh
+   pnpm --filter @coin-guard/e2e e2e:install
+   ```
+4. Run the tests
+   ```sh
+   pnpm e2e
+   ```
+
+Playwright creates the `coin_guard_e2e` database if it doesn't exist, applies the migrations and starts its own dev server on port `3100`, so it can run next to your normal `pnpm dev`.
+
+Other useful commands:
+
+- `pnpm e2e:ui` opens Playwright's interactive UI
+- `pnpm --filter @coin-guard/e2e e2e:report` opens the HTML report from the last run
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

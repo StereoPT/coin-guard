@@ -21,11 +21,11 @@ Coin Guard is a monthly-close tool, not a live app. At the start of each month t
 - Notifications
 - Audit log
 - Month-over-month comparison on the Dashboard
+- Playwright end-to-end tests for the Transactions flows
 
 ## Already planned for v1.5.0 (do not duplicate)
 
 - Data layer hardening: `Float` to `Decimal` for money fields, new indexes, import validation with zod, Lookup Logs trimmed to errors only and written when an import is confirmed
-- Playwright end-to-end tests for the Transactions flows
 - Dashboard polish pass (no new widgets)
 - Post-Import Summary step between review and commit, including a parsing issues list
 - Mascot images on empty states and on the 404 and error screens
