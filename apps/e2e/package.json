@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",
+    "@coin-guard/db": "workspace:*",
     "@coin-guard/ts-config": "workspace:*",
     "@playwright/test": "^1.65.0",
     "@types/node": "^26.6.3",

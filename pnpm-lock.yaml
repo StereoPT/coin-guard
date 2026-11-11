@@ -29,6 +29,9 @@ importers:
       '@coin-guard/biome-config':
         specifier: workspace:^
         version: link:../../packages/biome-config
+      '@coin-guard/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@coin-guard/ts-config':
         specifier: workspace:*
         version: link:../../packages/ts-config
