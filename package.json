@@ -13,6 +13,8 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
+    "e2e": "pnpm --filter @coin-guard/e2e e2e",
+    "e2e:ui": "pnpm --filter @coin-guard/e2e e2e:ui",
     "db:generate": "turbo run db:generate --filter=@coin-guard/db",
     "db:migrate": "turbo run db:migrate --filter=@coin-guard/db --",
     "shadcn": "turbo run shadcn --filter=@coin-guard/ui --",
