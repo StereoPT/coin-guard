@@ -13,7 +13,7 @@ export type RawTransactionData = {
 
 export type ProcessedTransaction = {
   id: string;
-  date: string;
+  date: Date;
   description: string;
   amount: number;
   balance: number;

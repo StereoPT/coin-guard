@@ -23,6 +23,10 @@ export const addTransactionSchema = z.object({
   accountId: z.string().trim().nonempty(),
 });
 
+export const importTransactionsSchema = z.array(
+  addTransactionSchema.omit({ accountId: true }),
+);
+
 export const editTransactionSchema = addTransactionSchema.partial();
 
 export type addTransactionSchemaType = z.infer<typeof addTransactionSchema>;
