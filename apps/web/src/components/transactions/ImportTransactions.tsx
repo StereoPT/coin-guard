@@ -136,8 +136,8 @@ export const ImportTransactions = () => {
       </div>
 
       <ConfirmImportDialog
+        account={selectedAccount}
         accountId={accountId}
-        accountLabel={selectedAccount?.alias ?? selectedAccount?.name}
         open={confirmOpen}
         setOpen={setConfirmOpen}
         transactions={transactions}
