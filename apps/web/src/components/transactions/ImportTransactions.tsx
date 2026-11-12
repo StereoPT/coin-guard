@@ -1,10 +1,10 @@
 "use client";
 
 import { EditableDataTable } from "@/components/editableDataTable/EditableDataTable";
+import { ConfirmImportDialog } from "@/components/transactions/dialogs/ConfirmImportDialog";
 import { editableTransactionColumns } from "@/constants/columns/editableTransactionColumns";
 import { ROUTES } from "@/constants/routes";
 import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
-import { useImportTransaction } from "@/hooks/transactions/useImportTransaction";
 import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import {
@@ -15,18 +15,16 @@ import {
   DropzoneEmptyState,
   FieldLabel,
   SearchableSelect,
-  Spinner,
 } from "@coin-guard/ui";
 import { useAtom } from "jotai";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export const ImportTransactions = () => {
-  const router = useRouter();
-
   const [files, setFiles] = useState<File[] | undefined>();
   const [accountId, setAccountId] = useState<string | undefined>();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
   const [transactions, setTransactions] = useAtom(processedTransactionsAtom);
 
   const { data: bankAccounts } = useGetBankAccounts();
@@ -43,10 +41,7 @@ export const ImportTransactions = () => {
     }
   }, [accountId, bankAccounts]);
 
-  const { mutateAsync: mutateParse, isPending: parseIsPending } =
-    useParseTransaction();
-  const { mutateAsync: mutateImport, isPending: importIsPending } =
-    useImportTransaction();
+  const { mutateAsync: mutateParse, isPending } = useParseTransaction();
 
   const bankAccountOptions = useMemo(() => {
     if (!bankAccounts) return [];
@@ -82,16 +77,9 @@ export const ImportTransactions = () => {
     }
   };
 
-  const handleImport = async () => {
-    if (transactions.length > 0 && accountId) {
-      try {
-        await mutateImport({ accountId, transactions });
-        router.push(ROUTES.transactions);
-      } catch {}
-    }
-  };
-
-  const isPending = parseIsPending || importIsPending;
+  const selectedAccount = bankAccounts?.find(
+    (bankAccount) => bankAccount.id === accountId,
+  );
 
   return (
     <div className="flex flex-col gap-4">
@@ -140,13 +128,20 @@ export const ImportTransactions = () => {
           Back
         </Button>
         <Button
-          disabled={isPending || transactions.length <= 0 || !accountId}
-          onClick={handleImport}
+          disabled={transactions.length <= 0 || !accountId}
+          onClick={() => setConfirmOpen(true)}
         >
-          {isPending && <Spinner />}
           Import
         </Button>
       </div>
+
+      <ConfirmImportDialog
+        account={selectedAccount}
+        accountId={accountId}
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        transactions={transactions}
+      />
     </div>
   );
 };
