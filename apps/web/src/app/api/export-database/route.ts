@@ -42,6 +42,8 @@ export async function GET(request: NextRequest) {
       headers: {
         "Content-Type": tokenData.contentType,
         "Content-Disposition": `attachment; filename="${tokenData.filename}"`,
+        // The body is a full database dump: never let a browser or proxy cache it
+        "Cache-Control": "no-store",
       },
     });
   } catch (error) {
