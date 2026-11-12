@@ -2,6 +2,7 @@
 
 # Next.js artifacts
 .next/
+.next-e2e/
 out/
 
 # vercel
