@@ -6,7 +6,6 @@ import { LoadingState } from "@/components/LoadingState";
 import { categoryColumns } from "@/constants/columns/categoryColumns";
 import { useGetCategories } from "@/hooks/categories/useGetCategories";
 import { DataTable } from "@stereopt/data-table";
-import { TagsIcon } from "@coin-guard/ui/icons";
 
 export const Categories = () => {
   const { data: categories, isPending } = useGetCategories();
@@ -20,7 +19,6 @@ export const Categories = () => {
       <EmptyState
         action={<AddCategoryDialog />}
         description="Click the button below to add your first category"
-        icon={TagsIcon}
         title="No categories added yet"
       />
     );

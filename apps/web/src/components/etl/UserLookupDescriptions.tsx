@@ -5,7 +5,6 @@ import { AddLookupDescriptionDialog } from "@/components/etl/dialogs/AddLookupDe
 import { LoadingState } from "@/components/LoadingState";
 import { lookupDescriptionColumns } from "@/constants/columns/lookupDescriptionColumns";
 import { useGetLookupDescriptions } from "@/hooks/etl/descriptions/useGetLookupDescriptions";
-import { TextInitialIcon } from "@coin-guard/ui/icons";
 import { DataTable } from "@stereopt/data-table";
 
 export const UserLookupDescriptions = () => {
@@ -20,7 +19,6 @@ export const UserLookupDescriptions = () => {
       <EmptyState
         action={<AddLookupDescriptionDialog trigger />}
         description="Click the button below to add your first lookup description"
-        icon={TextInitialIcon}
         title="No lookup descriptions added yet"
       />
     );
