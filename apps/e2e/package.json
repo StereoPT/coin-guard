@@ -19,7 +19,7 @@
     "@coin-guard/db": "workspace:*",
     "@coin-guard/ts-config": "workspace:*",
     "@playwright/test": "^1.65.0",
-    "@types/node": "^26.6.3",
+    "@types/node": "^26.6.6",
     "@types/pg": "^8.23.1",
     "pg": "^8.23.1",
     "typescript": "catalog:"
