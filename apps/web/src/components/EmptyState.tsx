@@ -17,11 +17,7 @@ type EmptyStateProps = {
   action?: ReactNode;
 };
 
-export const EmptyState = ({
-  title,
-  description,
-  action,
-}: EmptyStateProps) => {
+export const EmptyState = ({ title, description, action }: EmptyStateProps) => {
   return (
     <Empty className="border border-dashed max-w-2xl mx-auto">
       <EmptyHeader>

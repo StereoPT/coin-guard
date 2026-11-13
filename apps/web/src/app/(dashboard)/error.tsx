@@ -19,18 +19,17 @@ const ErrorPage = ({ error, reset }: ErrorPageProps) => {
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full p-4">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-7.25rem)] w-full p-4">
       <div className="flex flex-col items-center text-center">
         <Image
-          alt="CoinGuard mascot"
-          className="mb-6 h-auto w-40"
-          height={540}
+          alt="CoinGuard mascot holding an error sign"
+          className="mb-6 h-auto w-48"
+          height={539}
           priority
-          src="/CoinGuard-small.png"
+          src="/CoinGuard-error-small.png"
           width={512}
         />
-        <h1 className="text-6xl font-bold text-primary mb-4">Error</h1>
-        <h2 className="text-2xl font-semibold mb-4">Something went wrong</h2>
+        <h1 className="text-2xl font-semibold mb-4">Something went wrong</h1>
         <p className="text-muted-foreground mb-8 max-w-md">
           Something hit a snag, but it wasn&apos;t your budget.
         </p>
