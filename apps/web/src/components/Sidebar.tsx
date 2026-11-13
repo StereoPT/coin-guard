@@ -24,8 +24,8 @@ import {
   TagIcon,
   TagsIcon,
   TextInitialIcon,
-  Triangle,
 } from "@coin-guard/ui/icons";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -118,8 +118,15 @@ export const Sidebar = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton render={<Link href={ROUTES.home} />} size="lg">
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground bg-linear-to-r from-teal-600 to-teal-700">
-                <Triangle className="stroke-white" size={16} />
+              <div className="flex aspect-square size-8 items-center justify-center">
+                <Image
+                  alt="CoinGuard mascot"
+                  className="size-full object-contain"
+                  height={540}
+                  priority
+                  src="/CoinGuard-small.png"
+                  width={512}
+                />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-semibold">CoinGuard</span>

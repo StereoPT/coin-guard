@@ -5,7 +5,6 @@ import { AddLookupCategoryDialog } from "@/components/etl/dialogs/AddLookupCateg
 import { LoadingState } from "@/components/LoadingState";
 import { lookupCategoryColumns } from "@/constants/columns/lookupCategoryColumns";
 import { useGetLookupCategories } from "@/hooks/etl/categories/useGetLookupCategories";
-import { TagsIcon } from "@coin-guard/ui/icons";
 import { DataTable } from "@stereopt/data-table";
 
 export const UserLookupCategories = () => {
@@ -20,7 +19,6 @@ export const UserLookupCategories = () => {
       <EmptyState
         action={<AddLookupCategoryDialog trigger />}
         description="Click the button below to add your first lookup category"
-        icon={TagsIcon}
         title="No lookup categories added yet"
       />
     );
