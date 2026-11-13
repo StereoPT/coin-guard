@@ -4,6 +4,9 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
 import { ImportTransactionsProvider } from "@/providers/ImportTransactionsProvider";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Import Transactions" };
 
 export const dynamic = "force-dynamic";
 

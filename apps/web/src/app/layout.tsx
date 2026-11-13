@@ -9,7 +9,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Coin Guard",
+  title: { default: "Coin Guard", template: "%s | Coin Guard" },
 };
 
 type RootLayoutProps = Readonly<{
