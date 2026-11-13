@@ -4,6 +4,9 @@ import { Transactions } from "@/components/transactions/Transactions";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getTransactionsOptions } from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Transactions" };
 
 export const dynamic = "force-dynamic";
 

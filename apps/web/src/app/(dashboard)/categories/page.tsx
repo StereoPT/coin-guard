@@ -4,6 +4,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Categories" };
 
 export const dynamic = "force-dynamic";
 
