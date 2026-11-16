@@ -7,8 +7,9 @@ import { ParseTransactionFile } from "@coin-guard/parser";
 export const ParseTransaction = async (formValues: FormData) => {
   try {
     const file = formValues.get("file") as File;
+    const alias = formValues.get("alias") as string;
 
-    const processedData = await ParseTransactionFile(file);
+    const processedData = await ParseTransactionFile(file, alias);
 
     // ***** ***** ***** ETL Process ***** ***** ***** //
 

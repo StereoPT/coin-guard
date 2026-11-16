@@ -2,7 +2,7 @@ import { CSV_EXTENSION, CSV_TYPE, FIVE_MEGABYTES } from "./constants";
 import { parseCsv } from "./csv";
 import { processTransactionData } from "./processData";
 
-export const ParseTransactionFile = async (file: File) => {
+export const ParseTransactionFile = async (file: File, alias: string) => {
   try {
     if (!file) {
       throw new Error("No file uploaded!");
@@ -17,6 +17,10 @@ export const ParseTransactionFile = async (file: File) => {
       !file.name.toLowerCase().endsWith(CSV_EXTENSION)
     ) {
       throw new Error("Only CSV files are allowed");
+    }
+
+    if (!alias) {
+      throw new Error("Bank alias is required");
     }
 
     const arrayBuffer = await file.arrayBuffer();

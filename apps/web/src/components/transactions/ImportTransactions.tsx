@@ -64,22 +64,26 @@ export const ImportTransactions = () => {
     });
   }, [bankAccounts]);
 
+  const selectedAccount = bankAccounts?.find(
+    (bankAccount) => bankAccount.id === accountId,
+  );
+
   const handleDrop = async (files: File[]) => {
     setFiles(files);
 
     if (!files[0]) return;
+    if (!selectedAccount?.alias) return;
 
     try {
-      const fileTransactions = await mutateParse(files[0]);
+      const fileTransactions = await mutateParse({
+        file: files[0],
+        alias: selectedAccount.alias,
+      });
       setTransactions(fileTransactions);
     } catch {
       setFiles(undefined);
     }
   };
-
-  const selectedAccount = bankAccounts?.find(
-    (bankAccount) => bankAccount.id === accountId,
-  );
 
   return (
     <div className="flex flex-col gap-4">
