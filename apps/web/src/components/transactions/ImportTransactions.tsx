@@ -68,15 +68,24 @@ export const ImportTransactions = () => {
     (bankAccount) => bankAccount.id === accountId,
   );
 
-  const handleDrop = async (files: File[]) => {
-    setFiles(files);
+  const handleAccountChange = (newAccountId?: string) => {
+    if (newAccountId === accountId) return;
 
-    if (!files[0]) return;
-    if (!selectedAccount?.alias) return;
+    setAccountId(newAccountId);
+    setFiles(undefined);
+    setTransactions([]);
+  };
+
+  const handleDrop = async (files: File[]) => {
+    const file = files[0];
+
+    if (!file || !selectedAccount) return;
+
+    setFiles(files);
 
     try {
       const fileTransactions = await mutateParse({
-        file: files[0],
+        file,
         alias: selectedAccount.alias,
       });
       setTransactions(fileTransactions);
@@ -95,8 +104,9 @@ export const ImportTransactions = () => {
           <div className="min-w-0 flex-1">
             <SearchableSelect
               align="start"
+              disabled={isPending}
               emptyPlaceholder="No bank account found."
-              onChange={setAccountId}
+              onChange={handleAccountChange}
               options={bankAccountOptions}
               placeholder="Select a Bank Account"
               searchPlaceholder="Search a bank account..."
@@ -107,7 +117,7 @@ export const ImportTransactions = () => {
 
         <Dropzone
           accept={{ "text/csv": [] }}
-          disabled={isPending}
+          disabled={isPending || !selectedAccount}
           multiple={false}
           onDrop={handleDrop}
           src={files}
