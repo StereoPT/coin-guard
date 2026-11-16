@@ -4,6 +4,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getLookupDescriptionsOptions } from "@/lib/queryOptions/lookup";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Lookup Descriptions" };
 
 export const dynamic = "force-dynamic";
 

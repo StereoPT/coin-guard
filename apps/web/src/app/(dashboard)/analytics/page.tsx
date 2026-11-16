@@ -5,6 +5,9 @@ import { getLastMonthRange } from "@/lib/date";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { analyticsOptions } from "@/lib/queryOptions/analytics";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Analytics" };
 
 export const dynamic = "force-dynamic";
 

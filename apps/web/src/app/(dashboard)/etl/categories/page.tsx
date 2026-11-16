@@ -5,6 +5,9 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { getCategoriesOptions } from "@/lib/queryOptions/categories";
 import { getLookupCategoriesOptions } from "@/lib/queryOptions/lookup";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Lookup Categories" };
 
 export const dynamic = "force-dynamic";
 

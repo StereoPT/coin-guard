@@ -1,5 +1,8 @@
 import { PageHeader } from "@/components/PageHeader";
 import { UserSettings } from "@/components/settings/UserSettings";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Settings" };
 
 const SettingsPage = async () => {
   return (

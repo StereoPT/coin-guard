@@ -4,6 +4,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getBankAccountsOptions } from "@/lib/queryOptions/bankAccounts";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Bank Accounts" };
 
 export const dynamic = "force-dynamic";
 
