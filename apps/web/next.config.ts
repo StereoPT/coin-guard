@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(dirname, "../.."),
   transpilePackages: ["@coin-guard/parser", "@coin-guard/ui"],
   serverExternalPackages: ["@coin-guard/db", "@prisma/client"],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "5mb",
+    },
+  },
   env: {
     NEXT_PUBLIC_APP_VERSION: pkg.version,
   },
