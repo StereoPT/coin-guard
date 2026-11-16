@@ -1,5 +1,6 @@
 import { parseCsv } from "../csv";
-import { processTransactionData } from "../processData";
+import { processCgdTransactionData } from "../processCgdData";
+import { assertTransactions } from "../transactions";
 import type { BankParser } from "./types";
 
 export const cgdParser: BankParser = async (buffer) => {
@@ -13,11 +14,5 @@ export const cgdParser: BankParser = async (buffer) => {
 
   const rawData = await parseCsv(fileContents);
 
-  const transactions = processTransactionData(rawData);
-
-  if (transactions.length === 0) {
-    throw new Error("No transactions found in the CGD file");
-  }
-
-  return transactions;
+  return assertTransactions(processCgdTransactionData(rawData), "CGD");
 };
