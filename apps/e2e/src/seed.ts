@@ -17,7 +17,7 @@ export async function createBankAccount(account: SeedBankAccount = {}) {
   const { id } = await prisma.bankAccount.create({
     data: {
       name: account.name ?? "Main Account",
-      alias: account.alias === undefined ? "Main" : account.alias,
+      alias: account.alias ?? "Main",
       type: account.type ?? "CHECKING",
       iban: `PT50${randomUUID().replace(/-/g, "").slice(0, 21)}`,
       isDefault: account.isDefault ?? true,

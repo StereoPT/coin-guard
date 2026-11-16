@@ -11,7 +11,7 @@ export const defaultBankAccountValues = {
 
 export const addBankAccountSchema = z.object({
   name: z.string().trim().nonempty(),
-  alias: z.string().trim().optional(),
+  alias: z.string().trim().nonempty(),
   type: z.enum(BankAccountType),
   iban: z
     .string()

@@ -2,7 +2,7 @@ import type { TransactionType } from "@coin-guard/db";
 
 export type SeedBankAccount = {
   name?: string;
-  alias?: string | null;
+  alias?: string;
   type?: "CHECKING" | "SAVINGS";
   isDefault?: boolean;
 };

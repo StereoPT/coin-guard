@@ -83,7 +83,7 @@ export const TransactionFormFields = ({
     if (!bankAccounts) return [];
 
     return bankAccounts.map((bankAccount) => {
-      const label = bankAccount.alias ?? bankAccount.name;
+      const label = bankAccount.alias;
 
       return {
         value: bankAccount.id,

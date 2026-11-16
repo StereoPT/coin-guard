@@ -86,12 +86,9 @@ export const ConfirmImportDialog = ({
               <BankAccountAvatar
                 alias={account.alias}
                 isDefault={account.isDefault}
-                name={account.name}
               />
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium">
-                  {account.alias ?? account.name}
-                </p>
+                <p className="truncate font-medium">{account.alias}</p>
                 <p className="text-xs text-muted-foreground">
                   Importing into this account
                 </p>
