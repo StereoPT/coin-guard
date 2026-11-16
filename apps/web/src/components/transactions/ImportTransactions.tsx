@@ -6,6 +6,10 @@ import { editableTransactionColumns } from "@/constants/columns/editableTransact
 import { ROUTES } from "@/constants/routes";
 import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
 import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
+import {
+  getBankFileAccept,
+  toDropzoneAccept,
+} from "@coin-guard/parser/bank-accept";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import {
   Badge,
@@ -68,6 +72,9 @@ export const ImportTransactions = () => {
     (bankAccount) => bankAccount.id === accountId,
   );
 
+  const accept = selectedAccount && getBankFileAccept(selectedAccount.alias);
+  const dropzoneAccept = accept ? toDropzoneAccept(accept) : undefined;
+
   const handleAccountChange = (newAccountId?: string) => {
     if (newAccountId === accountId) return;
 
@@ -116,7 +123,7 @@ export const ImportTransactions = () => {
         </div>
 
         <Dropzone
-          accept={{ "text/csv": [] }}
+          accept={dropzoneAccept}
           disabled={isPending || !selectedAccount}
           multiple={false}
           onDrop={handleDrop}

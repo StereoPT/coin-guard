@@ -20,7 +20,7 @@ export const useParseTransaction = () => {
       return ParseTransaction(formData);
     },
     onError: ({ message }) => {
-      toast.error("Failed to parse CSV file", {
+      toast.error("Failed to parse file", {
         description: message ?? "Please try again later",
         id: toastId,
       });
