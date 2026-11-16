@@ -6,7 +6,6 @@ import { AddTransaction } from "@/components/transactions/AddTransaction";
 import { transactionColumns } from "@/constants/columns/transactionColumns";
 import { useGetTransactions } from "@/hooks/transactions/useGetTransactions";
 import { DataTable } from "@stereopt/data-table";
-import { ArrowLeftRight } from "@coin-guard/ui/icons";
 
 export const Transactions = () => {
   const { data: transactions, isPending } = useGetTransactions();
@@ -20,7 +19,6 @@ export const Transactions = () => {
       <EmptyState
         action={<AddTransaction />}
         description="Click the button below to add or import your first transaction"
-        icon={ArrowLeftRight}
         title="No transactions added yet"
       />
     );

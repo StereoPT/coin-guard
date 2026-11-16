@@ -5,7 +5,6 @@ import { EmptyState } from "@/components/EmptyState";
 import { LoadingState } from "@/components/LoadingState";
 import { bankAccountColumns } from "@/constants/columns/bankAccountColumns";
 import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
-import { LandmarkIcon } from "@coin-guard/ui/icons";
 import { DataTable } from "@stereopt/data-table";
 
 export const BankAccounts = () => {
@@ -20,7 +19,6 @@ export const BankAccounts = () => {
       <EmptyState
         action={<AddBankAccountDialog />}
         description="Click the button below to add a new bank account."
-        icon={LandmarkIcon}
         title="No bank accounts added yet"
       />
     );

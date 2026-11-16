@@ -8,27 +8,27 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@coin-guard/ui";
-import type { LucideIcon } from "@coin-guard/ui/icons";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type EmptyStateProps = {
-  icon: LucideIcon;
   title: string;
   description: string;
   action?: ReactNode;
 };
 
-export const EmptyState = ({
-  icon: Icon,
-  title,
-  description,
-  action,
-}: EmptyStateProps) => {
+export const EmptyState = ({ title, description, action }: EmptyStateProps) => {
   return (
     <Empty className="border border-dashed max-w-2xl mx-auto">
       <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <Icon />
+        <EmptyMedia>
+          <Image
+            alt="CoinGuard mascot"
+            className="h-auto w-20"
+            height={540}
+            src="/CoinGuard-small.png"
+            width={512}
+          />
         </EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
         <EmptyDescription>{description}</EmptyDescription>

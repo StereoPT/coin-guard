@@ -12,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@coin-guard/ui";
-import { ScrollText } from "@coin-guard/ui/icons";
 import { format } from "date-fns";
 
 export const UserLookupLogs = () => {
@@ -26,7 +25,6 @@ export const UserLookupLogs = () => {
     return (
       <EmptyState
         description="Logs will appear here as transactions are imported and matched against your lookup rules."
-        icon={ScrollText}
         title="No lookup logs yet"
       />
     );
