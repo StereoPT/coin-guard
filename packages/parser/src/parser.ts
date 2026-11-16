@@ -1,6 +1,5 @@
+import { getBankParser } from "./banks";
 import { CSV_EXTENSION, CSV_TYPE, FIVE_MEGABYTES } from "./constants";
-import { parseCsv } from "./csv";
-import { processTransactionData } from "./processData";
 
 export const ParseTransactionFile = async (file: File, alias: string) => {
   try {
@@ -23,23 +22,11 @@ export const ParseTransactionFile = async (file: File, alias: string) => {
       throw new Error("Bank alias is required");
     }
 
+    const parseBank = getBankParser(alias);
+
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
 
-    // TODO: This works for CGD
-    // Need a system for other banks
-    const fileContents = buffer
-      .toString("latin1")
-      .replace(/\r\n/g, "\n")
-      .split("\n")
-      .slice(6, -2)
-      .map((line) => line.replace(/;$/, ""))
-      .join("\n");
-
-    const rawData = await parseCsv(fileContents);
-    const processedData = processTransactionData(rawData);
-
-    return processedData;
+    return await parseBank(Buffer.from(arrayBuffer));
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
     console.error("Failed to process CSV file:", error);
