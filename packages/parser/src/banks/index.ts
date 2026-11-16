@@ -3,7 +3,6 @@ import { caParser } from "./ca";
 import { cgdParser } from "./cgd";
 import type { BankParser } from "./types";
 
-// Typed on BankAlias so every bank in accept.ts must have a parser here
 const bankParsers: Record<BankAlias, BankParser> = {
   cgd: cgdParser,
   ca: caParser,

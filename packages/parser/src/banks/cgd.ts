@@ -13,5 +13,11 @@ export const cgdParser: BankParser = async (buffer) => {
 
   const rawData = await parseCsv(fileContents);
 
-  return processTransactionData(rawData);
+  const transactions = processTransactionData(rawData);
+
+  if (transactions.length === 0) {
+    throw new Error("No transactions found in the CGD file");
+  }
+
+  return transactions;
 };

@@ -1,35 +1,11 @@
 import { TransactionType } from "@coin-guard/db";
-import { isValid, parse } from "date-fns";
 import crypto from "node:crypto";
-import type { ProcessedTransaction, RawTransactionData } from "./types";
+import type { ProcessedTransaction, RawCgdTransactionData } from "./types";
+import { parseDates, parseNumbers } from "./utils";
 
-const parseNumbers = (value: string) => {
-  const cleanValue = value.replace(/\./g, "").replace(",", ".");
-
-  const number = parseFloat(cleanValue);
-  return Math.round(number * 100) / 100;
-};
-
-const toUTCMidnight = (date: Date) =>
-  new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-
-const parseDates = (dateString: string) => {
-  if (!dateString || typeof dateString !== "string") return null;
-
-  try {
-    const parsedDate = parse(dateString, "dd-MM-yyyy", new Date());
-
-    if (!isValid(parsedDate)) return null;
-
-    return toUTCMidnight(parsedDate);
-  } catch (error) {
-    // biome-ignore lint/suspicious/noConsole: error logging
-    console.warn("Error parsing date:", dateString, error);
-    return null;
-  }
-};
-
-const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
+const processRow = (
+  row: RawCgdTransactionData,
+): ProcessedTransaction | null => {
   try {
     const description =
       row.Descrição?.trim().toLowerCase().replace(/\s+/g, " ") || "";
@@ -56,7 +32,7 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
     const dateString = row["Data valor"];
     if (!dateString) return null;
 
-    const date = parseDates(dateString);
+    const date = parseDates(dateString, "dd-MM-yyyy");
     if (!date) return null;
 
     return {
@@ -74,7 +50,7 @@ const processRow = (row: RawTransactionData): ProcessedTransaction | null => {
   }
 };
 
-export const processTransactionData = (rawData: RawTransactionData[]) => {
+export const processTransactionData = (rawData: RawCgdTransactionData[]) => {
   const processedTransactions = rawData
     .map(processRow)
     .filter((transaction) => transaction != null);
