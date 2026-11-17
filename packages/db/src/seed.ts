@@ -1,8 +1,7 @@
 /** biome-ignore-all lint/suspicious/noConsole: Required for Logging */
 
-import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
-import { PrismaClient } from "./generated/prisma/client";
+import { prisma } from "./prisma";
 import { CreateBankAccounts } from "./seeds/SeedBankAccounts";
 import { CreateCategories } from "./seeds/SeedCategories";
 import { CreateLookupCategories } from "./seeds/SeedLookupCategories";
@@ -12,8 +11,23 @@ import { CreateTransactions } from "./seeds/SeedTransactions";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
+const LOCAL_HOSTS = ["localhost", "127.0.0.1", "::1", "[::1]"];
+
+const assertSafeToSeed = () => {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Refusing to seed: NODE_ENV is 'production'");
+  }
+
+  const { hostname } = new URL(connectionString);
+
+  if (!LOCAL_HOSTS.includes(hostname)) {
+    throw new Error(
+      `Refusing to seed: DATABASE_URL points at '${hostname}', not a local database`,
+    );
+  }
+};
+
+assertSafeToSeed();
 
 async function main() {
   console.log("🌱 Starting database seeding...");

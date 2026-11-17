@@ -27,7 +27,6 @@ export const TransactionFactory = buildFactory<FactoryTransaction>(() => {
     description: faker.company.name(),
     type,
     amount: AMOUNT_RANGE[type](),
-    // Placeholder: the seed should compute a consistent running balance per account
     balance: money(0, 10000),
     note:
       faker.helpers.maybe(() => faker.lorem.sentence(), {
