@@ -172,7 +172,11 @@ export const DropzoneEmptyState = ({
 
   if (accept) {
     caption += "Accepts ";
-    caption += new Intl.ListFormat("en").format(Object.keys(accept));
+    
+    const extensions = Object.values(accept).flat();
+    caption += new Intl.ListFormat("en").format(
+      extensions.length > 0 ? extensions : Object.keys(accept),
+    );
   }
 
   if (minSize && maxSize) {

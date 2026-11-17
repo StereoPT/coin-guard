@@ -6,6 +6,10 @@ import { editableTransactionColumns } from "@/constants/columns/editableTransact
 import { ROUTES } from "@/constants/routes";
 import { useGetBankAccounts } from "@/hooks/bankAccounts/useGetBankAccounts";
 import { useParseTransaction } from "@/hooks/transactions/useParseTransaction";
+import {
+  getBankFileAccept,
+  toDropzoneAccept,
+} from "@coin-guard/parser/bank-accept";
 import { processedTransactionsAtom } from "@/store/transactionsStore";
 import {
   Badge,
@@ -47,7 +51,7 @@ export const ImportTransactions = () => {
     if (!bankAccounts) return [];
 
     return bankAccounts.map((bankAccount) => {
-      const label = bankAccount.alias ?? bankAccount.name;
+      const label = bankAccount.alias;
 
       return {
         value: bankAccount.id,
@@ -64,22 +68,38 @@ export const ImportTransactions = () => {
     });
   }, [bankAccounts]);
 
+  const selectedAccount = bankAccounts?.find(
+    (bankAccount) => bankAccount.id === accountId,
+  );
+
+  const accept = selectedAccount && getBankFileAccept(selectedAccount.alias);
+  const dropzoneAccept = accept ? toDropzoneAccept(accept) : undefined;
+
+  const handleAccountChange = (newAccountId?: string) => {
+    if (newAccountId === accountId) return;
+
+    setAccountId(newAccountId);
+    setFiles(undefined);
+    setTransactions([]);
+  };
+
   const handleDrop = async (files: File[]) => {
+    const file = files[0];
+
+    if (!file || !selectedAccount) return;
+
     setFiles(files);
 
-    if (!files[0]) return;
-
     try {
-      const fileTransactions = await mutateParse(files[0]);
+      const fileTransactions = await mutateParse({
+        file,
+        alias: selectedAccount.alias,
+      });
       setTransactions(fileTransactions);
     } catch {
       setFiles(undefined);
     }
   };
-
-  const selectedAccount = bankAccounts?.find(
-    (bankAccount) => bankAccount.id === accountId,
-  );
 
   return (
     <div className="flex flex-col gap-4">
@@ -91,8 +111,9 @@ export const ImportTransactions = () => {
           <div className="min-w-0 flex-1">
             <SearchableSelect
               align="start"
+              disabled={isPending}
               emptyPlaceholder="No bank account found."
-              onChange={setAccountId}
+              onChange={handleAccountChange}
               options={bankAccountOptions}
               placeholder="Select a Bank Account"
               searchPlaceholder="Search a bank account..."
@@ -102,8 +123,8 @@ export const ImportTransactions = () => {
         </div>
 
         <Dropzone
-          accept={{ "text/csv": [] }}
-          disabled={isPending}
+          accept={dropzoneAccept}
+          disabled={isPending || !selectedAccount}
           multiple={false}
           onDrop={handleDrop}
           src={files}

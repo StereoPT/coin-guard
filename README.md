@@ -204,12 +204,13 @@ Other useful commands:
 
 ### Track Your Finances
 
-- Add transactions manually, or import them from a bank export (CSV)
+- Add transactions manually, or import them from a bank export (CGD as CSV, CA as XLSX)
 - Organize transactions into categories you create and manage
 - Track balances across multiple bank accounts
 
 ### Import Transactions
 
+- Pick the bank account first: its alias (`CGD` or `CA`) selects the file format to parse
 - During import, enrich each transaction with a category and description before it's saved
 
 ### Dashboard & Analytics
@@ -228,6 +229,7 @@ Other useful commands:
 - [x] Unified Analytics page (merge Monthly & Yearly views, with flexible date filtering)
 - [x] Flexible date filtering on Category Details
 - [x] Default bank account
+- [x] Multi-bank import (CGD CSV, CA XLSX)
 - [x] Grouped Lookup Descriptions
 - [x] Delete action for Lookup Logs
 - [x] Loading States

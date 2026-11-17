@@ -1,7 +1,7 @@
 import Papa from "papaparse";
-import type { RawTransactionData } from "./types";
+import type { RawCgdTransactionData } from "./types";
 
-export const parseCsv = (csv: string): Promise<RawTransactionData[]> => {
+export const parseCsv = (csv: string): Promise<RawCgdTransactionData[]> => {
   return new Promise((resolve, reject) => {
     Papa.parse(csv, {
       header: true,
@@ -18,7 +18,7 @@ export const parseCsv = (csv: string): Promise<RawTransactionData[]> => {
             ),
           );
         } else {
-          resolve(results.data as RawTransactionData[]);
+          resolve(results.data as RawCgdTransactionData[]);
         }
       },
       error: (error: Error) => {

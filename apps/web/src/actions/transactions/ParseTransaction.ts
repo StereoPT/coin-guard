@@ -7,8 +7,9 @@ import { ParseTransactionFile } from "@coin-guard/parser";
 export const ParseTransaction = async (formValues: FormData) => {
   try {
     const file = formValues.get("file") as File;
+    const alias = formValues.get("alias") as string;
 
-    const processedData = await ParseTransactionFile(file);
+    const processedData = await ParseTransactionFile(file, alias);
 
     // ***** ***** ***** ETL Process ***** ***** ***** //
 
@@ -23,9 +24,7 @@ export const ParseTransaction = async (formValues: FormData) => {
     return enhancedTransactions_final;
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: error logging
-    console.error("Failed to process CSV file:", error);
-    throw error instanceof Error
-      ? error
-      : new Error("Failed to process CSV file!");
+    console.error("Failed to process file:", error);
+    throw error instanceof Error ? error : new Error("Failed to process file!");
   }
 };

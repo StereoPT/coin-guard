@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./bank-accept": "./src/banks/accept.ts"
   },
   "scripts": {
     "format": "biome format .",
@@ -16,7 +17,8 @@
   "dependencies": {
     "@coin-guard/db": "workspace:^",
     "date-fns": "^4.4.0",
-    "papaparse": "^5.7.0"
+    "papaparse": "^5.7.0",
+    "read-excel-file": "^9.3.17"
   },
   "devDependencies": {
     "@coin-guard/biome-config": "workspace:^",

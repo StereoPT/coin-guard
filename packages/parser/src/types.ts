@@ -1,6 +1,6 @@
 import type { TransactionType } from "@coin-guard/db";
 
-export type RawTransactionData = {
+export type RawCgdTransactionData = {
   "Data mov.": string;
   "Data valor": string;
   Descrição: string;
@@ -9,6 +9,15 @@ export type RawTransactionData = {
   "Saldo contabilístico": string;
   "Saldo disponível": string;
   Categoria: string;
+};
+
+export type RawCaTransactionData = {
+  "Data Movimento": string;
+  "Data Valor": string;
+  Descrição: string;
+  Valor: string;
+  "Saldo após movimento": string;
+  Tipo: string;
 };
 
 export type ProcessedTransaction = {

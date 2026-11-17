@@ -41,7 +41,7 @@ export const EditBankAccountDialog = ({
     defaultValues: defaultBankAccountValues,
     values: {
       name: bankAccount.name,
-      alias: bankAccount.alias ?? "",
+      alias: bankAccount.alias,
       type: bankAccount.type,
       iban: bankAccount.iban,
       isDefault: bankAccount.isDefault,

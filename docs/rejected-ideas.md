@@ -4,13 +4,12 @@ Read this before proposing any change. It lists ideas that were considered and r
 
 ## How Coin Guard is used
 
-Coin Guard is a monthly-close tool, not a live app. At the start of each month the previous month's bank CSV is imported manually, then reviewed and categorized. Improvements should fit that workflow (post-import review, data hygiene, reliability, polish). Real-time features do not fit.
+Coin Guard is a monthly-close tool, not a live app. At the start of each month the previous month's bank export (CSV or XLSX) is imported manually, then reviewed and categorized. Improvements should fit that workflow (post-import review, data hygiene, reliability, polish). Real-time features do not fit.
 
 ## Rejected
 
 - **Duplicate transaction detection.** Not wanted.
 - **Dependency maintenance rounds.** Dependabot already handles this, and a full update round was done in v1.4.0. Do not open dependency bump PRs.
-- **A second bank importer.** The second bank has no CSV export. The `packages/parser` package is ready if that ever changes, but do not build an importer speculatively.
 - **Real-time features.** Budget alerts, forecasting and recurring-transaction prediction do not fit a monthly workflow.
 
 ## Already built (do not re-propose)
@@ -18,6 +17,7 @@ Coin Guard is a monthly-close tool, not a live app. At the start of each month t
 - Lookups for categories and descriptions, with Lookup Logs
 - Database backup export
 - Budgets per category
+- Multi-bank import: CGD (CSV) and CA (XLSX), selected by the bank account's alias. Do not build importers for further banks speculatively
 - Notifications
 - Audit log
 - Month-over-month comparison on the Dashboard
