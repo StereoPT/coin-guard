@@ -8,6 +8,7 @@ import {
   getTransactionOptions,
 } from "@/lib/queryOptions/transactions";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -25,14 +26,11 @@ const TransactionDetailsPage = async ({
   await queryClient.prefetchQuery(transactionOptions);
 
   const transaction = queryClient.getQueryData(transactionOptions.queryKey);
-  if (transaction) {
-    await queryClient.prefetchQuery(
-      getRelatedTransactionsOptions(
-        transaction.description,
-        getLastMonthRange(),
-      ),
-    );
-  }
+  if (!transaction) notFound();
+
+  await queryClient.prefetchQuery(
+    getRelatedTransactionsOptions(transaction.description, getLastMonthRange()),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
