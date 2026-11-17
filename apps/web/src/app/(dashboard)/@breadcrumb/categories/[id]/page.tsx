@@ -1,7 +1,6 @@
 import { GetCategory } from "@/actions/categories/GetCategory";
 import { BreadcrumbShell } from "@/components/BreadcrumbShell";
 import { ROUTES } from "@/constants/routes";
-import { notFound } from "next/navigation";
 
 type BreadcrumbSlotProps = {
   params: Promise<{ id: string }>;
@@ -9,13 +8,11 @@ type BreadcrumbSlotProps = {
 
 const BreadcrumbSlot = async ({ params }: BreadcrumbSlotProps) => {
   const { id: categoryId } = await params;
-  const category = await GetCategory(categoryId);
-
-  if (!category) notFound();
+  const category = await GetCategory(categoryId).catch(() => null);
 
   return (
     <BreadcrumbShell
-      currentPage={category.name}
+      currentPage={category?.name ?? "Not found"}
       trail={[{ label: "Categories", href: ROUTES.categories }]}
     />
   );
