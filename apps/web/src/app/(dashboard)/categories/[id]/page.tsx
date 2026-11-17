@@ -8,6 +8,7 @@ import {
   getCategoryTransactionsOptions,
 } from "@/lib/queryOptions/categories";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -20,12 +21,15 @@ const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
   const lastMonthRange = getLastMonthRange();
 
   const queryClient = getQueryClient();
+  const categoryOptions = getCategoryOptions(categoryId);
   await Promise.all([
-    queryClient.prefetchQuery(getCategoryOptions(categoryId)),
+    queryClient.prefetchQuery(categoryOptions),
     queryClient.prefetchQuery(
       getCategoryTransactionsOptions(categoryId, lastMonthRange),
     ),
   ]);
+
+  if (!queryClient.getQueryData(categoryOptions.queryKey)) notFound();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
