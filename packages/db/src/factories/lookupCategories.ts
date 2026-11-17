@@ -9,7 +9,7 @@ type FactoryLookupCategory = Omit<
 
 export const LookupCategoryFactory = buildFactory<FactoryLookupCategory>(
   () => ({
-    description: faker.company.name().toUpperCase(),
+    description: faker.company.name().toLowerCase(),
     categoryId: faker.string.uuid(),
     enabled: true,
   }),

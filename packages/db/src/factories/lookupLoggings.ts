@@ -14,5 +14,5 @@ type FactoryLookupLogging = Omit<
 export const LookupLoggingFactory = buildFactory<FactoryLookupLogging>(() => ({
   type: LoggingType.ERROR,
   lookupField: faker.helpers.enumValue(LookupField),
-  description: faker.company.name().toUpperCase(),
+  description: faker.company.name().toLowerCase(),
 }));

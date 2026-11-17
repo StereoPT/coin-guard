@@ -12,7 +12,7 @@ export const LookupDescriptionFactory = buildFactory<FactoryLookupDescription>(
     const company = faker.company.name();
 
     return {
-      description: company.toUpperCase(),
+      description: company.toLowerCase(),
       newDescription: company,
       enabled: true,
     };
