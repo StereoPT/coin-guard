@@ -5,6 +5,7 @@ import "dotenv/config";
 import { PrismaClient } from "./generated/prisma/client";
 import { CreateBankAccounts } from "./seeds/SeedBankAccounts";
 import { CreateCategories } from "./seeds/SeedCategories";
+import { CreateTransactions } from "./seeds/SeedTransactions";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
@@ -17,10 +18,13 @@ async function main() {
 
   try {
     // Create Categories
-    await CreateCategories();
+    const categories = await CreateCategories();
 
     // Create Bank Accounts
-    await CreateBankAccounts();
+    const bankAccounts = await CreateBankAccounts();
+
+    // Create Transactions
+    await CreateTransactions(categories, bankAccounts);
 
     console.log("🎉 Database seeding completed successfully!");
     console.log();
@@ -30,6 +34,7 @@ async function main() {
     const summary = {
       categories: await prisma.category.count(),
       bankAccounts: await prisma.bankAccount.count(),
+      transactions: await prisma.transaction.count(),
     };
 
     console.log("📊 Database summary:");

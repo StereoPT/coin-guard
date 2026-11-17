@@ -7,17 +7,23 @@ type FactoryTransaction = Omit<Transaction, "id" | "createdAt" | "updatedAt">;
 const money = (min: number, max: number) =>
   faker.number.float({ min, max, fractionDigits: 2 });
 
+const TYPE_WEIGHTS = [
+  { value: TransactionType.DEBIT, weight: 85 },
+  { value: TransactionType.CREDIT, weight: 5 },
+  { value: TransactionType.TRANSFER, weight: 10 },
+];
+
 const AMOUNT_RANGE: Record<TransactionType, () => number> = {
-  [TransactionType.CREDIT]: () => money(50, 3000),
-  [TransactionType.DEBIT]: () => money(1, 300),
-  [TransactionType.TRANSFER]: () => money(20, 1000),
+  [TransactionType.CREDIT]: () => money(800, 2500),
+  [TransactionType.DEBIT]: () => money(1, 150),
+  [TransactionType.TRANSFER]: () => money(20, 500),
 };
 
 export const TransactionFactory = buildFactory<FactoryTransaction>(() => {
-  const type = faker.helpers.enumValue(TransactionType);
+  const type = faker.helpers.weightedArrayElement(TYPE_WEIGHTS);
 
   return {
-    date: faker.date.recent({ days: 90 }),
+    date: faker.date.recent({ days: 180 }),
     description: faker.company.name(),
     type,
     amount: AMOUNT_RANGE[type](),
