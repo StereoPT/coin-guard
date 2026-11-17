@@ -3,6 +3,7 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 import { PrismaClient } from "./generated/prisma/client";
+import { CreateBankAccounts } from "./seeds/SeedBankAccounts";
 import { CreateCategories } from "./seeds/SeedCategories";
 
 const connectionString = `${process.env.DATABASE_URL}`;
@@ -18,6 +19,9 @@ async function main() {
     // Create Categories
     await CreateCategories();
 
+    // Create Bank Accounts
+    await CreateBankAccounts();
+
     console.log("🎉 Database seeding completed successfully!");
     console.log();
     console.log();
@@ -25,6 +29,7 @@ async function main() {
     // Print summary
     const summary = {
       categories: await prisma.category.count(),
+      bankAccounts: await prisma.bankAccount.count(),
     };
 
     console.log("📊 Database summary:");
