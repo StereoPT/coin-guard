@@ -17,6 +17,7 @@
     "build": "pnpm db:generate && tsc",
     "db:generate": "prisma generate --config prisma.config.ts",
     "db:migrate": "prisma migrate dev --config prisma.config.ts",
+    "db:seed": "prisma db seed --config prisma.config.ts",
     "format": "biome format .",
     "format:fix": "biome format . --write",
     "lint": "biome lint .",
@@ -36,6 +37,7 @@
     "@types/node": "^26.6.3",
     "@types/pg": "^8.23.1",
     "prisma": "^7.10.0",
+    "tsx": "^4.23.15",
     "typescript": "catalog:"
   }
 }
