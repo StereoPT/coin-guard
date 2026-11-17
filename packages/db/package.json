@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "build": "pnpm db:generate && tsc",
+    "build": "pnpm db:generate && tsc -p tsconfig.build.json",
     "db:generate": "prisma generate --config prisma.config.ts",
     "db:migrate": "prisma migrate dev --config prisma.config.ts",
     "db:seed": "prisma db seed --config prisma.config.ts",
