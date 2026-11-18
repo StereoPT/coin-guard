@@ -17,7 +17,7 @@
   "dependencies": {
     "@coin-guard/db": "workspace:^",
     "date-fns": "^4.4.0",
-    "papaparse": "^5.7.0",
+    "papaparse": "^5.7.1",
     "read-excel-file": "^9.3.17"
   },
   "devDependencies": {
