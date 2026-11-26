@@ -34,9 +34,9 @@
     "@coin-guard/biome-config": "workspace:^",
     "@coin-guard/ts-config": "workspace:*",
     "@faker-js/faker": "^10.6.0",
-    "@types/node": "^26.6.3",
+    "@types/node": "^26.6.6",
     "@types/pg": "^8.23.1",
-    "prisma": "^7.10.0",
+    "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "catalog:"
   }
