@@ -70,8 +70,13 @@ export const ConfirmImportDialog = ({
     }
   };
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (isPending) return;
+    setOpen(nextOpen);
+  };
+
   return (
-    <Dialog onOpenChange={setOpen} open={open}>
+    <Dialog onOpenChange={handleOpenChange} open={open}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Import Transactions</DialogTitle>
