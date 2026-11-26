@@ -12,6 +12,7 @@ Coin Guard is a monthly-close tool, not a live app. At the start of each month t
 - **Dependency maintenance rounds.** Dependabot already handles this, and a full update round was done in v1.4.0. Do not open dependency bump PRs.
 - **Real-time features.** Budget alerts, forecasting and recurring-transaction prediction do not fit a monthly workflow.
 - **Export temp-file cleanup (PR #176).** Deleting stale `backup_*.sql` / `token_*.json` files from `/tmp` on the next export. Not wanted, and the database export has already been hardened in #161, #163 and #167. Do not propose further hardening or housekeeping of the database export flow.
+- **Route-level loading spinner (PR #178).** A `loading.tsx` in `(dashboard)` showing a centered spinner during navigation. Not wanted: on normal connections it flickers, and it appears alongside the spinners the breadcrumb and pages already show. Do not propose global or route-level loading indicators.
 
 ## Already built (do not re-propose)
 
