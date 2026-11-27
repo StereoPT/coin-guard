@@ -39,8 +39,16 @@ export const DeleteDialog = ({
     onOpenChange(false);
   }, [onDelete, onOpenChange]);
 
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      if (isPending) return;
+      onOpenChange(nextOpen);
+    },
+    [isPending, onOpenChange],
+  );
+
   return (
-    <AlertDialog onOpenChange={onOpenChange} open={open}>
+    <AlertDialog onOpenChange={handleOpenChange} open={open}>
       <AlertDialogContent finalFocus={false}>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
