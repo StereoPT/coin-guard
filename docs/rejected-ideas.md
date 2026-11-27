@@ -14,6 +14,11 @@ Coin Guard is a monthly-close tool, not a live app. At the start of each month t
 - **Export temp-file cleanup (PR #176).** Deleting stale `backup_*.sql` / `token_*.json` files from `/tmp` on the next export. Not wanted, and the database export has already been hardened in #161, #163 and #167. Do not propose further hardening or housekeeping of the database export flow.
 - **Route-level loading spinner (PR #178).** A `loading.tsx` in `(dashboard)` showing a centered spinner during navigation. Not wanted: on normal connections it flickers, and it appears alongside the spinners the breadcrumb and pages already show. Do not propose global or route-level loading indicators.
 
+## Off limits for the automation
+
+- **The database schema and migrations** (`packages/db/prisma/`). Nothing in an automated run can verify a migration. Do not edit the schema or add a migration. Schema changes, such as the planned `Float` to `Decimal` work, are done by hand.
+- **Real financial data.** This repository is public. Never read, copy, quote or commit bank exports (CSV or XLSX), statements, account numbers, names or any real transaction, not even as test data, fixtures, screenshots or examples. Use obviously fake data instead.
+
 ## Already built (do not re-propose)
 
 - Lookups for categories and descriptions, with Lookup Logs
